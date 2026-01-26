@@ -138,6 +138,16 @@
         }
       }
     },
+    "Open Main Window" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Открыть основное окно"
+          }
+        }
+      }
+    },
     "Profile" : {
       "localizations" : {
         "ru" : {

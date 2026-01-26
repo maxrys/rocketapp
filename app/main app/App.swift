@@ -16,6 +16,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 @main struct ThisApp: App {
 
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @Environment(\.openWindow) private var openWindow
 
     static let NOT_APPLICABLE = "—"
     static let CONTAINER_PATH = "~/Library/Containers/maxrys.rocketapp"
@@ -97,6 +98,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         .onChange(of: self.profiles.current.isShowWinTitleButtons) { _, value in
             if let window = NSWindow.get(ID: Self.MAIN_WINDOW_ID) {
                 window.hideTitleButtons(isVisible: value)
+            }
+        }
+        .commands {
+            CommandGroup(after: .singleWindowList) {
+                Button("Open Main Window") {
+                    openWindow(id: Self.MAIN_WINDOW_ID)
+                }
             }
         }
     }
