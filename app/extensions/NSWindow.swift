@@ -37,4 +37,10 @@ extension NSWindow {
         }
     }
 
+    func hideTitleButtons(isVisible: Bool = true) {
+        self.standardWindowButton(.closeButton)?.isHidden       = !isVisible
+        self.standardWindowButton(.miniaturizeButton)?.isHidden = !isVisible
+        self.standardWindowButton(.zoomButton)?.isHidden        = !isVisible
+    }
+
 }

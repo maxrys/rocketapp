@@ -19,9 +19,10 @@ import SwiftData
     public var zoom: Decimal
     public var spacing: UInt
     public var iconOnHoverZoom: Decimal
-    public var isShowTitle: Bool
+    public var isShowIconTitle: Bool
     public var isHideOnMisclick: Bool
     public var isStickyGrid: Bool
+    public var isShowWinTitleButtons: Bool
     public var background: String
     public var backgroundDark: String
 
@@ -31,9 +32,10 @@ import SwiftData
         zoom: Decimal,
         spacing: UInt,
         iconOnHoverZoom: Decimal,
-        isShowTitle: Bool,
+        isShowIconTitle: Bool,
         isHideOnMisclick: Bool,
         isStickyGrid: Bool,
+        isShowWinTitleButtons: Bool,
         background: String,
         backgroundDark: String
     ) {
@@ -42,9 +44,10 @@ import SwiftData
         self.zoom = zoom
         self.spacing = spacing
         self.iconOnHoverZoom = iconOnHoverZoom
-        self.isShowTitle = isShowTitle
+        self.isShowIconTitle = isShowIconTitle
         self.isHideOnMisclick = isHideOnMisclick
         self.isStickyGrid = isStickyGrid
+        self.isShowWinTitleButtons = isShowWinTitleButtons
         self.background = background
         self.backgroundDark = backgroundDark
     }
@@ -98,15 +101,16 @@ import SwiftData
             let modelContext = ModelContainer.shared.mainContext
             let fetchRequest = FetchDescriptor<SELF>(predicate: self.predicate(ID: item.id))
             if let itemToUpdate = try modelContext.fetch(fetchRequest).first {
-                itemToUpdate.title            = item.title
-                itemToUpdate.zoom             = item.zoom
-                itemToUpdate.spacing          = item.spacing
-                itemToUpdate.iconOnHoverZoom  = item.iconOnHoverZoom
-                itemToUpdate.isShowTitle      = item.isShowTitle
-                itemToUpdate.isHideOnMisclick = item.isHideOnMisclick
-                itemToUpdate.isStickyGrid     = item.isStickyGrid
-                itemToUpdate.background       = item.background
-                itemToUpdate.backgroundDark   = item.backgroundDark
+                itemToUpdate.title                 = item.title
+                itemToUpdate.zoom                  = item.zoom
+                itemToUpdate.spacing               = item.spacing
+                itemToUpdate.iconOnHoverZoom       = item.iconOnHoverZoom
+                itemToUpdate.isShowIconTitle       = item.isShowIconTitle
+                itemToUpdate.isHideOnMisclick      = item.isHideOnMisclick
+                itemToUpdate.isStickyGrid          = item.isStickyGrid
+                itemToUpdate.isShowWinTitleButtons = item.isShowWinTitleButtons
+                itemToUpdate.background            = item.background
+                itemToUpdate.backgroundDark        = item.backgroundDark
                 try modelContext.save()
                 return true
             } else if (autoInsert) {

@@ -38,7 +38,7 @@ struct AppIcon: View, BackgroundColorResolvingProtocol {
             .aspectRatio(contentMode: .fit)
             .contentShape(.focusEffect, RoundedRectangle(cornerRadius: self.cellSize / 8))
             .overlay(alignment: .bottom) {
-                if (self.profiles.current.isShowTitle) {
+                if (self.profiles.current.isShowIconTitle) {
                     if (self.isHovering) {
                         self.title.scaleEffect(self.isMiniGrid ? 0.9 : 1.0)
                     }

@@ -21,13 +21,20 @@ struct ControlPanel: View {
 
     public var body: some View {
         LazyVGrid(columns: [
-            GridItem(.fixed(30) , spacing: self.elementSpacing),
+            GridItem(.fixed(100), spacing: self.elementSpacing, alignment: .leading),
             GridItem(.flexible(), spacing: self.elementSpacing),
-            GridItem(.fixed(30) , spacing: self.elementSpacing)
+            GridItem(.fixed(100), spacing: self.elementSpacing, alignment: .trailing)
         ], spacing: self.elementSpacing) {
-            self.buttonAudit
+            HStack(spacing: self.elementSpacing) {
+                if (!profiles.current.isShowWinTitleButtons) {
+                    self.buttonAudit
+                }
+            }
             ProfilePanel()
-            self.buttonCloseSettings
+            HStack(spacing: self.elementSpacing) {
+                if (profiles.current.isShowWinTitleButtons) { self.buttonAudit }
+                self.buttonCloseSettings
+            }
         }
         .padding(.horizontal, 15)
         .padding(.vertical  , 12)

@@ -151,17 +151,17 @@ struct ProfilePanelForChange: View {
                 .padding(.horizontal, -18)
                 .padding(.vertical  , -10)
 
-                /* MARK: "Show Title" */
+                /* MARK: "Show Icon Title" */
 
                 self.title(
-                    NSLocalizedString("Show Title", comment: "")
+                    NSLocalizedString("Show Icon Title", comment: "")
                 )
 
                 ToggleCustom(
                     isFlexible: true,
                     isOn: Binding<Bool>(
-                        get: {             self.profiles.current.isShowTitle },
-                        set: { newValue in self.profiles.current.isShowTitle = newValue }
+                        get: {             self.profiles.current.isShowIconTitle },
+                        set: { newValue in self.profiles.current.isShowIconTitle = newValue }
                     )
                 )
 
@@ -190,6 +190,20 @@ struct ProfilePanelForChange: View {
                     isOn: Binding<Bool>(
                         get: {             self.profiles.current.isStickyGrid },
                         set: { newValue in self.profiles.current.isStickyGrid = newValue }
+                    )
+                )
+
+                /* MARK: "Show Window Title Buttons" */
+
+                self.title(
+                    NSLocalizedString("Show Window Title Buttons", comment: "")
+                )
+
+                ToggleCustom(
+                    isFlexible: true,
+                    isOn: Binding<Bool>(
+                        get: {             self.profiles.current.isShowWinTitleButtons },
+                        set: { newValue in self.profiles.current.isShowWinTitleButtons = newValue }
                     )
                 )
 

@@ -168,12 +168,22 @@
         }
       }
     },
-    "Show Title" : {
+    "Show Icon Title" : {
       "localizations" : {
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Показывать заголовок"
+            "value" : "Показать название значка"
+          }
+        }
+      }
+    },
+    "Show Window Title Buttons" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показать кнопки окна"
           }
         }
       }
