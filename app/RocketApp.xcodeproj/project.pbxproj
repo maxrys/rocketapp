@@ -32,7 +32,6 @@
 		5075014E2EF7FDCC00624409 /* ProfilePanelForAppend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075014D2EF7FDCC00624409 /* ProfilePanelForAppend.swift */; };
 		507501602EF9593400624409 /* ResultBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075015F2EF9593400624409 /* ResultBuilder.swift */; };
 		507501622EF9645700624409 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507501612EF9645700624409 /* Array.swift */; };
-		507501642EF9647000624409 /* TabCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507501632EF9647000624409 /* TabCustom.swift */; };
 		508150722E81334600E12175 /* MainGrid_vm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508150702E81334600E12175 /* MainGrid_vm.swift */; };
 		508150732E81334600E12175 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508150712E81334600E12175 /* App.swift */; };
 		508150792E81448100E12175 /* Cell_vm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508150782E81448100E12175 /* Cell_vm.swift */; };
@@ -45,6 +44,9 @@
 		508D6D0C2EB3597000885E95 /* TextFieldCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508D6D0B2EB3596D00885E95 /* TextFieldCustom.swift */; };
 		508D6D152EB551A800885E95 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508D6D132EB551A800885E95 /* Dictionary.swift */; };
 		50AFE98C2EB7730100815152 /* ProfileValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AFE98A2EB772FC00815152 /* ProfileValue.swift */; };
+		50C06AF02F23E467008EE619 /* TabCustom_spacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C06AEF2F23E467008EE619 /* TabCustom_spacer.swift */; };
+		50C06AF12F23E467008EE619 /* TabCustom_item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C06AEE2F23E467008EE619 /* TabCustom_item.swift */; };
+		50C06AF22F23E467008EE619 /* TabCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C06AED2F23E467008EE619 /* TabCustom.swift */; };
 		50CE72272EE0542300FE3282 /* info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 50CE72262EE0542300FE3282 /* info.plist */; };
 		50CE72292EE0561B00FE3282 /* UTType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE72282EE0561900FE3282 /* UTType.swift */; };
 		50CE722B2EE0E97F00FE3282 /* AppDragValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE722A2EE0E97F00FE3282 /* AppDragValue.swift */; };
@@ -68,8 +70,6 @@
 		50EE8BB42ED5C3D3002DFEA5 /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8BB32ED5C3CD002DFEA5 /* NSImage.swift */; };
 		50EE8BB62ED79177002DFEA5 /* CellModelID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8BB52ED79176002DFEA5 /* CellModelID.swift */; };
 		50EE8BB72ED79177002DFEA5 /* CellModelID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8BB52ED79176002DFEA5 /* CellModelID.swift */; };
-		50FEAD022EFDE55700B9CAD3 /* TabItemCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FEAD012EFDE55600B9CAD3 /* TabItemCustom.swift */; };
-		50FEAD082F06938D00B9CAD3 /* TabItemSpacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FEAD072F06938D00B9CAD3 /* TabItemSpacer.swift */; };
 		50FEAD1E2F0D208600B9CAD3 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 50FEAD1D2F0D208600B9CAD3 /* Credits.html */; };
 /* End PBXBuildFile section */
 
@@ -110,7 +110,6 @@
 		5075014D2EF7FDCC00624409 /* ProfilePanelForAppend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePanelForAppend.swift; sourceTree = "<group>"; };
 		5075015F2EF9593400624409 /* ResultBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultBuilder.swift; sourceTree = "<group>"; };
 		507501612EF9645700624409 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
-		507501632EF9647000624409 /* TabCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCustom.swift; sourceTree = "<group>"; };
 		508150702E81334600E12175 /* MainGrid_vm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGrid_vm.swift; sourceTree = "<group>"; };
 		508150712E81334600E12175 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		508150782E81448100E12175 /* Cell_vm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell_vm.swift; sourceTree = "<group>"; };
@@ -123,6 +122,9 @@
 		508D6D0B2EB3596D00885E95 /* TextFieldCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCustom.swift; sourceTree = "<group>"; };
 		508D6D132EB551A800885E95 /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		50AFE98A2EB772FC00815152 /* ProfileValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileValue.swift; sourceTree = "<group>"; };
+		50C06AED2F23E467008EE619 /* TabCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCustom.swift; sourceTree = "<group>"; };
+		50C06AEE2F23E467008EE619 /* TabCustom_item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCustom_item.swift; sourceTree = "<group>"; };
+		50C06AEF2F23E467008EE619 /* TabCustom_spacer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCustom_spacer.swift; sourceTree = "<group>"; };
 		50CE72262EE0542300FE3282 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
 		50CE72282EE0561900FE3282 /* UTType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTType.swift; sourceTree = "<group>"; };
 		50CE722A2EE0E97F00FE3282 /* AppDragValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDragValue.swift; sourceTree = "<group>"; };
@@ -143,8 +145,6 @@
 		50EE8BAF2ED5A4B3002DFEA5 /* Bool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bool.swift; sourceTree = "<group>"; };
 		50EE8BB32ED5C3CD002DFEA5 /* NSImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImage.swift; sourceTree = "<group>"; };
 		50EE8BB52ED79176002DFEA5 /* CellModelID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModelID.swift; sourceTree = "<group>"; };
-		50FEAD012EFDE55600B9CAD3 /* TabItemCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemCustom.swift; sourceTree = "<group>"; };
-		50FEAD072F06938D00B9CAD3 /* TabItemSpacer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemSpacer.swift; sourceTree = "<group>"; };
 		50FEAD1D2F0D208600B9CAD3 /* Credits.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -222,9 +222,9 @@
 				5013DB722E9E6EDA00BEDC5E /* PickerCustom.swift */,
 				507501402EF2117100624409 /* ProgressCustom.swift */,
 				5013DB682E9D827800BEDC5E /* StepperCustom.swift */,
-				507501632EF9647000624409 /* TabCustom.swift */,
-				50FEAD012EFDE55600B9CAD3 /* TabItemCustom.swift */,
-				50FEAD072F06938D00B9CAD3 /* TabItemSpacer.swift */,
+				50C06AED2F23E467008EE619 /* TabCustom.swift */,
+				50C06AEE2F23E467008EE619 /* TabCustom_item.swift */,
+				50C06AEF2F23E467008EE619 /* TabCustom_spacer.swift */,
 				508D6D0B2EB3596D00885E95 /* TextFieldCustom.swift */,
 				501D4DEC2EBFC84B00919AB9 /* ToggleCustom.swift */,
 			);
@@ -429,7 +429,6 @@
 				500A69C42F1671AE00C3CCE7 /* DictionaryMatrix.swift in Sources */,
 				507501602EF9593400624409 /* ResultBuilder.swift in Sources */,
 				50EE8B952ECDDCDD002DFEA5 /* EnvironmentValues.swift in Sources */,
-				50FEAD022EFDE55700B9CAD3 /* TabItemCustom.swift in Sources */,
 				501D4DED2EBFC84B00919AB9 /* ToggleCustom.swift in Sources */,
 				507501622EF9645700624409 /* Array.swift in Sources */,
 				50EE8B9E2ED1756E002DFEA5 /* AppValue.swift in Sources */,
@@ -440,10 +439,12 @@
 				5013DB6D2E9D892800BEDC5E /* Numeric.swift in Sources */,
 				50447F692EEE9A5700C9B8D1 /* ProfilePanelForChange.swift in Sources */,
 				507501412EF2117100624409 /* ProgressCustom.swift in Sources */,
-				50FEAD082F06938D00B9CAD3 /* TabItemSpacer.swift in Sources */,
 				508D6D152EB551A800885E95 /* Dictionary.swift in Sources */,
 				50EE8BB02ED5A4B4002DFEA5 /* Bool.swift in Sources */,
 				508D6D0C2EB3597000885E95 /* TextFieldCustom.swift in Sources */,
+				50C06AF02F23E467008EE619 /* TabCustom_spacer.swift in Sources */,
+				50C06AF12F23E467008EE619 /* TabCustom_item.swift in Sources */,
+				50C06AF22F23E467008EE619 /* TabCustom.swift in Sources */,
 				50CE72342EE62E8F00FE3282 /* Logger.swift in Sources */,
 				508150792E81448100E12175 /* Cell_vm.swift in Sources */,
 				507501472EF54D8200624409 /* CellID.swift in Sources */,
@@ -457,7 +458,6 @@
 				5013DB732E9E6EDA00BEDC5E /* PickerCustom.swift in Sources */,
 				50CE72452EEAC80000FE3282 /* MainGrid_em.swift in Sources */,
 				508150722E81334600E12175 /* MainGrid_vm.swift in Sources */,
-				507501642EF9647000624409 /* TabCustom.swift in Sources */,
 				501D4DEB2EB9FB6000919AB9 /* CellValue.swift in Sources */,
 				508D6CF12EA8D22700885E95 /* NSWindow.swift in Sources */,
 				501D4DF12EC120CC00919AB9 /* Timer.swift in Sources */,

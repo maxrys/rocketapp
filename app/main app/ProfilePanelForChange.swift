@@ -41,15 +41,15 @@ struct ProfilePanelForChange: View {
     }
 
     public var body: some View {
-        TabsCustom {
-            TabItemCustom(
+        TabCustom {
+            TabCustom_item(
                 title: NSLocalizedString("Profile Settings", comment: ""),
-                systemIcon: "switch.2",
+                icon: Image(systemName: "switch.2"),
                 view: { self.changeProfile })
-            TabItemSpacer()
-            TabItemCustom(
+            TabCustom_spacer()
+            TabCustom_item(
                 title: NSLocalizedString("Delete", comment: ""),
-                systemIcon: "trash",
+                icon: Image(systemName: "trash"),
                 view: { self.deleteProfile }
             )
         }.frame(width: 450)

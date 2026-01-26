@@ -5,19 +5,19 @@
 
 import SwiftUI
 
-struct TabItemCustom: TabItemProtocol {
+struct TabCustom_item: TabCustom_item_Protocol {
 
-    var title: String
-    var systemIcon: String?
-    var view: any View
+    let title: String
+    let icon: Image?
+    let view: any View
 
     init(
         title: String,
-        systemIcon: String?,
+        icon: Image?,
         @ViewBuilder view: () -> any View
     ) {
         self.title = title
-        self.systemIcon = systemIcon
+        self.icon = icon
         self.view = view()
     }
 

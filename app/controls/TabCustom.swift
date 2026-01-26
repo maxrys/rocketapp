@@ -5,31 +5,33 @@
 
 import SwiftUI
 
-protocol TabItemProtocol: View {
+protocol TabCustom_item_Protocol: View {
 }
 
-struct TabsCustom: View {
+struct TabCustom: View {
 
     @Environment(\.colorScheme) private var colorScheme
 
     @State private var selected: Int = 0
 
-    private let contents: [any TabItemProtocol]
+    private let contents: [any TabCustom_item_Protocol]
 
-    init(@ViewBuilderArray<TabItemProtocol> content: () -> [any TabItemProtocol]) {
+    init(@ViewBuilderArray<TabCustom_item_Protocol> content: () -> [any TabCustom_item_Protocol]) {
         self.contents = content()
     }
 
     public var body: some View {
         VStack(spacing: 0) {
 
+            /* MARK: Tab Header */
+
             HStack(spacing: 10) {
                 ForEach(0 ..< self.contents.count, id: \.self) { index in
-                    if let tabItemSpacer = self.contents[safe: index] as? TabItemSpacer { tabItemSpacer }
-                    if let tabItemCustom = self.contents[safe: index] as? TabItemCustom {
-                        TabsCustom_header(
-                            title: tabItemCustom.title,
-                            icon: tabItemCustom.systemIcon,
+                    if let tatSpacer = self.contents[safe: index] as? TabCustom_spacer { tatSpacer }
+                    if let tabItem   = self.contents[safe: index] as? TabCustom_item {
+                        TabCustom_header(
+                            title: tabItem.title,
+                            icon: tabItem.icon,
                             index: index,
                             isSelected: self.selected == index) { index in
                                 self.selected = index
@@ -49,8 +51,10 @@ struct TabsCustom: View {
                 self.shadow
             }
 
+            /* MARK: Tab Body */
+
             VStack {
-                if let tabItem = self.contents[safe: self.selected] as? TabItemCustom {
+                if let tabItem = self.contents[safe: self.selected] as? TabCustom_item {
                     tabItem.frame(maxWidth: .infinity)
                 }
             }.frame(maxWidth: .infinity)
@@ -75,17 +79,17 @@ struct TabsCustom: View {
 
 }
 
-fileprivate struct TabsCustom_header: View {
+fileprivate struct TabCustom_header: View {
 
     @Environment(\.colorScheme) fileprivate var colorScheme
 
     @State fileprivate var isHovering = false
 
-    fileprivate var title: String
-    fileprivate var icon: String?
-    fileprivate var index: Int
-    fileprivate var isSelected: Bool
-    fileprivate var onClick: (Int) -> Void
+    fileprivate let title: String
+    fileprivate let icon: Image?
+    fileprivate let index: Int
+    fileprivate let isSelected: Bool
+    fileprivate let onClick: (Int) -> Void
 
     public var body: some View {
         Button {
@@ -93,8 +97,7 @@ fileprivate struct TabsCustom_header: View {
         } label: {
             HStack(spacing: 7) {
                 if let icon {
-                    Image(systemName: icon)
-                        .resizable()
+                    icon.resizable()
                         .frame(width: 15, height: 15)
                 }
                 if (!title.isEmpty) {
@@ -103,37 +106,37 @@ fileprivate struct TabsCustom_header: View {
                         .fixedSize(horizontal: true, vertical: false)
                 }
             }
-            .padding(.horizontal, 7)
-            .padding(.vertical  , 5)
-            .contentShape(.focusEffect, RoundedRectangle(cornerRadius: 5))
-            .padding(5)
+            .padding(.horizontal, 12)
+            .padding(.vertical  , 10)
+            .foregroundStyle(
+                self.isSelected ? Color.white :
+                    (self.colorScheme == .dark ?
+                        Color.white :
+                        Color.black
+                    )
+            )
+            .background {
+                if (self.isSelected) {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.accentColor)
+                } else {
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(style: StrokeStyle(lineWidth: 1))
+                        .contentShape(RoundedRectangle(cornerRadius: 10))
+                        .foregroundStyle({
+                            if (self.isHovering) {
+                                return Color.accentColor } else {
+                                return self.colorScheme == .dark ?
+                                    Color.white.opacity(0.1) :
+                                    Color.black.opacity(0.1)
+                            }
+                        }())
+                }
+            }
+            .contentShape(.focusEffect, RoundedRectangle(cornerRadius: 10))
         }
         .buttonStyle(.plain)
         .pointerStyle(.link)
-        .foregroundStyle(
-            self.isSelected ? Color.white :
-                (self.colorScheme == .dark ?
-                    Color.white :
-                    Color.black
-                )
-        )
-        .background {
-            if (self.isSelected) {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.accentColor)
-            } else {
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(style: StrokeStyle(lineWidth: 1))
-                    .foregroundStyle({
-                        if (self.isHovering) {
-                            return Color.accentColor } else {
-                            return self.colorScheme == .dark ?
-                                Color.white.opacity(0.1) :
-                                Color.black.opacity(0.1)
-                        }
-                    }())
-            }
-        }
         .onHover { isHovering in
             withAnimation(.easeInOut(duration: 0.3)) {
                 self.isHovering = isHovering
@@ -150,9 +153,9 @@ fileprivate struct TabsCustom_header: View {
 /* ############################################################# */
 
 #Preview {
-    TabsCustom {
-        TabItemCustom(title: "Update", systemIcon: "pencil.tip.crop.circle") { Text("Tab Update content").padding(20) }
-        TabItemCustom(title: "Insert", systemIcon: "plus.circle"           ) { Text("Tab Insert content").padding(20) }; TabItemSpacer()
-        TabItemCustom(title: "Delete", systemIcon: "trash"                 ) { Text("Tab Delete content").padding(20) }
+    TabCustom {
+        TabCustom_item(title: NSLocalizedString("Title 1", comment: ""), icon: Image(systemName: "1.square")) { Text("Tab 1 Content").padding(20) }
+        TabCustom_item(title: NSLocalizedString("Title 2", comment: ""), icon: Image(systemName: "2.square")) { Text("Tab 2 Content").padding(20) }; TabCustom_spacer()
+        TabCustom_item(title: NSLocalizedString("Title 3", comment: ""), icon: Image(systemName: "3.square")) { Text("Tab 3 Content").padding(20) }
     }.frame(maxWidth: 350)
 }

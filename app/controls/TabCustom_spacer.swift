@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-struct TabItemSpacer: TabItemProtocol {
+struct TabCustom_spacer: TabCustom_item_Protocol {
 
     public var body: some View {
         Spacer()
