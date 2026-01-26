@@ -5,7 +5,7 @@
 
 extension Dictionary {
 
-    final class Matrix where Key: UnsignedInteger & Comparable {
+    struct Matrix where Key: UnsignedInteger & Comparable {
 
         typealias Index = CellID.Index
 
@@ -23,7 +23,11 @@ extension Dictionary {
 
         private var data: [Key: Value] = [:]
 
-        public var matrix: [Index: [Index: Value]] {
+        public var flat: [Key: Value] {
+            return self.data
+        }
+        
+        public var multidimensional: [Index: [Index: Value]] {
             var result: [Index: [Index: Value]] = [:]
             for (localKey, value) in self.data {
                 let globalKey = self.toGlobalKey(localKey)
@@ -56,7 +60,7 @@ extension Dictionary {
             return result
         }
 
-        private func toGlobalKey(_ local: Key) -> GlobalKey {
+        private let toGlobalKey: (Key) -> GlobalKey = { local in
             let key = CellID(decodeFrom: CellID.Value(local))
             return GlobalKey(
                 y: key.rowNum,
@@ -64,13 +68,18 @@ extension Dictionary {
             )
         }
 
-        private func toLocalKey(y: Index, x: Index) -> Key {
+        private let toLocalKey: (Index, Index) -> Key = { (y, x) in
             Key(CellID(rowNum: y, colNum: x).value)
         }
 
         subscript(y: Index, x: Index) -> Value? {
-            get { self.data[self.toLocalKey(y: y, x: x)] }
-            set { self.data[self.toLocalKey(y: y, x: x)] = newValue }
+            get { self.data[self.toLocalKey(y, x)] }
+            set { self.data[self.toLocalKey(y, x)] = newValue }
+        }
+
+        subscript(ID: Key) -> Value? {
+            get { self.data[ID] }
+            set { self.data[ID] = newValue }
         }
 
     }

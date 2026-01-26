@@ -124,9 +124,9 @@ import AppKit
 
     static func modelSelectAll() -> [ProfileID: ProfileValue] {
         var result: [ProfileID: ProfileValue] = [:]
-        ModelProfile.selectAll().forEach { (ID: ProfileID, modelProfile: ModelProfile) in
-            result[ID] = ProfileValue(
-                ID              : ID,
+        for (modelProfileID, modelProfile) in ModelProfile.selectAll() {
+            result[modelProfileID] = ProfileValue(
+                ID              : modelProfileID,
                 title           : modelProfile.title,
                 zoom            : modelProfile.zoom,
                 spacing         : modelProfile.spacing,

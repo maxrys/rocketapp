@@ -17,13 +17,10 @@ import SwiftData
     public private(set) var auditReport: [String] = []
 
     private var profileID: ProfileID
-    private var cache: [
-        CellID.Value: CellValue
-    ] = [:]
+    private var cache = CellsDataSource()
 
-    @ObservationIgnored var isEmpty: Bool {
-        self.cache.isEmpty
-    }
+    @ObservationIgnored public var data: CellsDataSource { self.cache }
+    @ObservationIgnored public var isEmpty: Bool { self.cache.isEmpty }
 
     private init(profileID: ProfileID) {
         self.profileID = profileID
@@ -44,7 +41,7 @@ import SwiftData
     }
 
     func reloadCache() {
-        self.cache = CellValue.modelSelectAll(
+        self.cache = CellValue.modelSelectMatrix(
             profileID: self.profileID
         )
     }
@@ -60,10 +57,6 @@ import SwiftData
 
     func select(_ ID: CellID.Value) -> CellValue? {
         self.cache[ID]
-    }
-
-    func selectAll() -> [CellID.Value: CellValue] {
-        self.cache
     }
 
     func insert(_ ID: CellID.Value, _ cellValue: CellValue) {
@@ -142,10 +135,10 @@ struct AuditSequence: AsyncSequence {
 
     init(profileID: ProfileID) {
         self.profileID = profileID
-        CellValue.modelSelectAll(profileID: profileID).forEach { (cellID: CellID.Value, cellValue: CellValue) in
+        for (cellIDValue, cellValue) in CellValue.modelSelectMatrix(profileID: profileID).flat {
             self.data.append(
                 CellID_CellValue_Pair(
-                    cellID   : cellID,
+                    cellID   : cellIDValue,
                     cellValue: cellValue
                 )
             )

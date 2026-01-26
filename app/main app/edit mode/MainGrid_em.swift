@@ -22,7 +22,7 @@ struct MainGrid_editMode: View {
     }
 
     private var gridSource: GridCustom.DataSource {
-        let result = GridCustom.DataSource()
+        var result = GridCustom.DataSource()
         for rowNum in 0 ... ThisApp.GRID_ROWS - 1 {
         for colNum in 0 ... ThisApp.GRID_COLS - 1 {
             let rowNum = CellID.Index(rowNum)

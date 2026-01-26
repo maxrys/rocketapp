@@ -5,6 +5,7 @@
 
 struct CellModelID: Equatable {
 
+    typealias CellSector = UInt8
     typealias Value = UInt64
 
     var ID: CellID.Value
@@ -16,12 +17,12 @@ struct CellModelID: Equatable {
     }
 
     init(decodeFrom modelID: Value) {
-        self.ID     = CellID.Value(modelID >> 8 & 0xffff)
-        self.sector = CellSector  (modelID      & 0x00ff)
+        self.ID     = CellID.Value(modelID >> CellSector.bitWidth & Value(CellID.Value.max))
+        self.sector = CellSector  (modelID                        & Value(CellSector  .max))
     }
 
     var value: Value {
-        (Value(self.ID) << 8) | Value(self.sector)
+        (Value(self.ID) << CellSector.bitWidth) | Value(self.sector)
     }
 
 }

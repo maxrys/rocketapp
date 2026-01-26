@@ -22,10 +22,9 @@ struct MainGrid_viewMode: View {
     }
 
     private var gridSource: GridCustom.DataSource {
-        let result = GridCustom.DataSource()
-        for (cellIDValue, _) in self.cells.selectAll() {
-            let cellID = CellID(decodeFrom: cellIDValue)
-            result[cellID.rowNum, cellID.colNum] = Cell_viewMode(
+        var result = GridCustom.DataSource()
+        for (cellIDValue, _) in self.cells.data.flat {
+            result[cellIDValue] = Cell_viewMode(
                 ID: cellIDValue,
                 size: self.cellSize
             )

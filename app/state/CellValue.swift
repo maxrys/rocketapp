@@ -52,16 +52,16 @@ enum CellValue {
         ], profileID: profileID)
     }
 
-    static func modelSelectAll(profileID: ProfileID) -> [CellID.Value: CellValue] {
-        var result: [CellID.Value: CellValue] = [:]
-        ModelCell.selectAll(profileID: profileID).forEach { (cellModelIDValue: CellModelID.Value, item: ModelCell) in
+    static func modelSelectMatrix(profileID: ProfileID) -> CellsDataSource {
+        var result = CellsDataSource()
+        for (cellModelIDValue, cellValue) in ModelCell.selectAll(profileID: profileID) {
 
             let cellModelID = CellModelID(decodeFrom: cellModelIDValue)
             let appValue = AppValue(
-                bundleID: item.bundleID,
-                name: item.name,
-                path: item.path,
-                icon: item.icon
+                bundleID: cellValue.bundleID,
+                name: cellValue.name,
+                path: cellValue.path,
+                icon: cellValue.icon
             )
 
             switch cellModelID.sector {

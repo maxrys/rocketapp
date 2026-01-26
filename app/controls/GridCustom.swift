@@ -226,7 +226,7 @@ struct GridCustom: View {
     let cellSize: CGFloat = 100
     let cellSpacing: CGFloat = 20
     let source: GridCustom.DataSource = {
-        let result = GridCustom.DataSource()
+        var result = GridCustom.DataSource()
         for rowNum in 0 ..< rowsCount {
         for colNum in 0 ..< colsCount {
             let rowNum = CellID.Index(rowNum)
