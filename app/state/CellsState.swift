@@ -101,7 +101,7 @@ import SwiftData
                             if let appValue = miniGrid.cell4 { appNames.append(appValue.name) }
                             if (!appNames.isEmpty) {
                                 self.auditReport.insert(
-                                    "#\(result.pair.cellID): \(appNames.joined(separator: ","))", at: 0
+                                    "#\(result.pair.cellID): \(appNames.joined(separator: ", "))", at: 0
                                 )
                             }
 

@@ -41,8 +41,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     static let NEW_PROFILE_BACKGROUND_DARK_ENCODED = Self.NEW_PROFILE_BACKGROUND_DARK.encode()!
     static let PROFILE_ICON_ON_HOVER_ZOOM_MIN: Decimal = 1.0
     static let PROFILE_ICON_ON_HOVER_ZOOM_MAX: Decimal = 1.5
-    static let GRID_COLS: CellsByAxisCount = 30
-    static let GRID_ROWS: CellsByAxisCount = 30
+    static let GRID_COLS_MAX: CellsByAxisCount = 30
+    static let GRID_ROWS_MAX: CellsByAxisCount = 30
     static let CELL_SIZE: CGFloat = 100
 
     private let profiles = EnvironmentValues().profilesState

@@ -42,6 +42,7 @@ struct GridCustom: View {
         self.cellSpacing = cellSpacing
         self.isSticky = isSticky
         self.gridType = gridType
+        self.cellsVisibilityUpdate()
     }
 
     private var gridBounds: CGSize {
@@ -90,14 +91,16 @@ struct GridCustom: View {
                 if (oldPhase != newPhase) {
                     self.scrollPhase = newPhase
                     self.visibleFrame = CGRect(origin: context.geometry.contentOffset, size: context.geometry.visibleRect.size)
-                    self.cellsVisibilityUpdate()
+                    if (self.scrollPhase == .idle) {
+                        self.cellsVisibilityUpdate()
+                    }
                     if (self.isSticky) {
                         self.makeSticky()
                     }
                 }
             }
-            .onGeometryChange(for: CGSize.self) { geometry in geometry.size } action: { size in
-                self.visibleFrame.size = size
+            .onScrollGeometryChange(for: ScrollGeometry.self) { geometry in geometry } action: { _, geometry in
+                self.visibleFrame = CGRect(origin: geometry.contentOffset, size: geometry.visibleRect.size)
                 self.cellsVisibilityUpdate()
             }
     }
@@ -172,17 +175,16 @@ struct GridCustom: View {
 
     private func cellsVisibilityUpdate() {
         self.cellsVisibilityDelayTimer?.stopAndReset()
-        if (self.scrollPhase == .idle) {
-            self.cellsVisibilityDelayTimer = Timer.Custom(
-                count: 1,
-                interval: 0.1,
-                onExpire: {
-                    for (cellIDValue, cellFrame) in self.cellsFrame {
-                        self.cellsVisibility[cellIDValue] = self.visibleFrame.intersects(cellFrame)
-                    }
+        self.cellsVisibilityDelayTimer = Timer.Custom(
+            count: 1,
+            interval: 0.1,
+            onExpire: {
+                self.cellsVisibility = [:]
+                for (cellIDValue, cellFrame) in self.cellsFrame {
+                    self.cellsVisibility[cellIDValue] = cellFrame.intersects(self.visibleFrame)
                 }
-            )
-        }
+            }
+        )
     }
 
     private func makeSticky() {

@@ -23,17 +23,25 @@ struct MainGrid_editMode: View {
 
     private var gridSource: GridCustom.DataSource {
         var result = GridCustom.DataSource()
-        for rowNum in 0 ... ThisApp.GRID_ROWS - 1 {
-        for colNum in 0 ... ThisApp.GRID_COLS - 1 {
-            let rowNum = CellID.Index(rowNum)
-            let colNum = CellID.Index(colNum)
-            let cellID = CellID(rowNum: rowNum, colNum: colNum)
-            result[rowNum, colNum] = Cell_editMode(
-                ID: cellID.value,
+        if let bounds = self.cells.data.bounds {
+            for rowNum in 0 ... (bounds.maxY + 3).fixBounds(max: ThisApp.GRID_ROWS_MAX - 1) {
+            for colNum in 0 ... (bounds.maxX + 3).fixBounds(max: ThisApp.GRID_COLS_MAX - 1) {
+                let rowNum = CellID.Index(rowNum)
+                let colNum = CellID.Index(colNum)
+                let cellID = CellID(rowNum: rowNum, colNum: colNum)
+                result[rowNum, colNum] = Cell_editMode(
+                    ID: cellID.value,
+                    size: self.cellSize,
+                    isVisible: true
+                )
+            }}
+        } else {
+            result[0] = Cell_editMode(
+                ID: 0,
                 size: self.cellSize,
                 isVisible: true
             )
-        }}
+        }
         return result
     }
 

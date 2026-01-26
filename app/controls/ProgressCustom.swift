@@ -42,7 +42,7 @@ struct ProgressCustom: View {
         let value = self.value.fixBounds(max: 1.0)
         ZStack {
             Rectangle()
-                .fill(Color.blue.gradient)
+                .fill(Color.accentColor.gradient)
                 .animation(.linear, value: value)
             Rectangle()
                 .fill(Color.white.opacity(0.1))
