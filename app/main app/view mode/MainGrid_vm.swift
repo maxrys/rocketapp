@@ -22,18 +22,13 @@ struct MainGrid_viewMode: View {
     }
 
     private var gridSource: GridCustom.DataSource {
-        var result: GridCustom.DataSource = [:]
-        if let bounds = self.cells.bounds {
-            for rowNum in bounds.minRowNum ... bounds.maxRowNum {
-            for colNum in bounds.minColNum ... bounds.maxColNum {
-                let rowNumFinal = rowNum - bounds.minRowNum
-                let colNumFinal = colNum - bounds.minColNum
-                if (result[rowNumFinal] == nil) { result[rowNumFinal] = [:] }
-                result[rowNumFinal]![colNumFinal] = Cell_viewMode(
-                    ID: CellID(rowNum: rowNum, colNum: colNum).value,
-                    size: self.cellSize
-                )
-            }}
+        let result = GridCustom.DataSource()
+        for (cellIDValue, _) in self.cells.selectAll() {
+            let cellID = CellID(decodeFrom: cellIDValue)
+            result[cellID.rowNum, cellID.colNum] = Cell_viewMode(
+                ID: cellIDValue,
+                size: self.cellSize
+            )
         }
         return result
     }

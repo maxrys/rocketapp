@@ -128,6 +128,16 @@
         }
       }
     },
+    "no items" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "нет элементов"
+          }
+        }
+      }
+    },
     "Profile" : {
       "localizations" : {
         "ru" : {

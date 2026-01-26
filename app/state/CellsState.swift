@@ -11,13 +11,6 @@ import SwiftData
 
     typealias SELF = CellsState
 
-    struct Bounds {
-        var minRowNum: GridAxisIndex
-        var maxRowNum: GridAxisIndex
-        var minColNum: GridAxisIndex
-        var maxColNum: GridAxisIndex
-    }
-
     public static var shared: CellsState!
     public private(set) var isAuditInProgress = false
     public private(set) var auditProgress: Double = 0
@@ -50,25 +43,6 @@ import SwiftData
         SELF(profileID: profileID)
     }
 
-    var bounds: Bounds? {
-        guard let firstCellIDValue = self.cache.first?.key else { return nil }
-        let firstCellID = CellID(decodeFrom: firstCellIDValue)
-        var result = Self.Bounds(
-            minRowNum: firstCellID.rowNum,
-            maxRowNum: firstCellID.rowNum,
-            minColNum: firstCellID.colNum,
-            maxColNum: firstCellID.colNum,
-        )
-        for (cellIDValue, _) in self.cache {
-            let cellID = CellID(decodeFrom: cellIDValue)
-            result.minRowNum = min(result.minRowNum, cellID.rowNum)
-            result.maxRowNum = max(result.maxRowNum, cellID.rowNum)
-            result.minColNum = min(result.minColNum, cellID.colNum)
-            result.maxColNum = max(result.maxColNum, cellID.colNum)
-        }
-        return result
-    }
-
     func reloadCache() {
         self.cache = CellValue.modelSelectAll(
             profileID: self.profileID
@@ -86,6 +60,10 @@ import SwiftData
 
     func select(_ ID: CellID.Value) -> CellValue? {
         self.cache[ID]
+    }
+
+    func selectAll() -> [CellID.Value: CellValue] {
+        self.cache
     }
 
     func insert(_ ID: CellID.Value, _ cellValue: CellValue) {

@@ -22,30 +22,17 @@ struct Tests {
     }
 
     @Test func test_CellID() async throws {
-        #expect( CellID(rowNum: 0, colNum: 0b0000).value == 0b0_00000000 + 0b0000 )
-        #expect( CellID(rowNum: 0, colNum: 0b0001).value == 0b0_00000000 + 0b0001 )
-        #expect( CellID(rowNum: 0, colNum: 0b0010).value == 0b0_00000000 + 0b0010 )
-        #expect( CellID(rowNum: 0, colNum: 0b0011).value == 0b0_00000000 + 0b0011 )
-        #expect( CellID(rowNum: 0, colNum: 0b0100).value == 0b0_00000000 + 0b0100 )
-        #expect( CellID(rowNum: 0, colNum: 0b0101).value == 0b0_00000000 + 0b0101 )
-        #expect( CellID(rowNum: 0, colNum: 0b0110).value == 0b0_00000000 + 0b0110 )
-        #expect( CellID(rowNum: 0, colNum: 0b0111).value == 0b0_00000000 + 0b0111 )
-        #expect( CellID(rowNum: 0, colNum: 0b1000).value == 0b0_00000000 + 0b1000 )
+        #expect( CellID(rowNum: 0x00, colNum: 0x00).value == 0x0000 )
+        #expect( CellID(rowNum: 0x00, colNum: 0x0f).value == 0x000f )
+        #expect( CellID(rowNum: 0x00, colNum: 0xf0).value == 0x00f0 )
+        #expect( CellID(rowNum: 0x0f, colNum: 0x00).value == 0x0f00 )
+        #expect( CellID(rowNum: 0xf0, colNum: 0x00).value == 0xf000 )
 
-        #expect( CellID(rowNum: 1, colNum: 0b0000).value == 0b1_00000000 + 0b0000 )
-        #expect( CellID(rowNum: 1, colNum: 0b0001).value == 0b1_00000000 + 0b0001 )
-        #expect( CellID(rowNum: 1, colNum: 0b0010).value == 0b1_00000000 + 0b0010 )
-        #expect( CellID(rowNum: 1, colNum: 0b0011).value == 0b1_00000000 + 0b0011 )
-        #expect( CellID(rowNum: 1, colNum: 0b0100).value == 0b1_00000000 + 0b0100 )
-        #expect( CellID(rowNum: 1, colNum: 0b0101).value == 0b1_00000000 + 0b0101 )
-        #expect( CellID(rowNum: 1, colNum: 0b0110).value == 0b1_00000000 + 0b0110 )
-        #expect( CellID(rowNum: 1, colNum: 0b0111).value == 0b1_00000000 + 0b0111 )
-        #expect( CellID(rowNum: 1, colNum: 0b1000).value == 0b1_00000000 + 0b1000 )
-
-        #expect( CellID(rowNum: 0b0000_0000, colNum: 0b0000_0000).value == 0b0000_0000_0000_0000 + 0b0000_0000 )
-        #expect( CellID(rowNum: 0b1111_1111, colNum: 0b0000_0000).value == 0b1111_1111_0000_0000 + 0b0000_0000 )
-        #expect( CellID(rowNum: 0b0000_0000, colNum: 0b1111_1111).value == 0b0000_0000_0000_0000 + 0b1111_1111 )
-        #expect( CellID(rowNum: 0b1111_1111, colNum: 0b1111_1111).value == 0b1111_1111_0000_0000 + 0b1111_1111 )
+        #expect( CellID(rowNum: 0xff, colNum: 0xff).value == 0xffff )
+        #expect( CellID(rowNum: 0xff, colNum: 0xf0).value == 0xfff0 )
+        #expect( CellID(rowNum: 0xff, colNum: 0x0f).value == 0xff0f )
+        #expect( CellID(rowNum: 0xf0, colNum: 0xff).value == 0xf0ff )
+        #expect( CellID(rowNum: 0x0f, colNum: 0xff).value == 0x0fff )
     }
 
     @Test func test_cellModelID() async throws {

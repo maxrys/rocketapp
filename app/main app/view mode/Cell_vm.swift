@@ -45,15 +45,10 @@ struct Cell_viewMode: View, CellProtocol {
                         }
                     }
                 case .none:
-                    self.emptyCell
+                    Color.clear
             }
 
         }.frame(width: self.size, height: self.size)
-    }
-
-    @ViewBuilder private var emptyCell: some View {
-        Color.clear
-            .frame(width: self.size, height: self.size)
     }
 
     @ViewBuilder private var mainCell: some View {

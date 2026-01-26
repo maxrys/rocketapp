@@ -5,23 +5,24 @@
 
 struct CellID: Equatable {
 
+    typealias Index = UInt8
     typealias Value = UInt16
 
-    var rowNum: GridAxisIndex
-    var colNum: GridAxisIndex
+    var rowNum: Index
+    var colNum: Index
 
-    init(rowNum: GridAxisIndex, colNum: GridAxisIndex) {
+    init(rowNum: Index, colNum: Index) {
         self.rowNum = rowNum
         self.colNum = colNum
     }
 
     init(decodeFrom value: Value) {
-        self.rowNum = GridAxisIndex(value >> 8 & 0xff)
-        self.colNum = GridAxisIndex(value      & 0xff)
+        self.rowNum = Index(value >> Index.bitWidth & Value(Index.max))
+        self.colNum = Index(value                   & Value(Index.max))
     }
 
     var value: Value {
-        (Value(self.rowNum) << 8) | Value(self.colNum)
+        (Value(self.rowNum) << Index.bitWidth) | Value(self.colNum)
     }
 
 }

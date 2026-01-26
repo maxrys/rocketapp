@@ -22,12 +22,14 @@ struct MainGrid_editMode: View {
     }
 
     private var gridSource: GridCustom.DataSource {
-        var result: GridCustom.DataSource = [:]
-        for rowNum in 0 ..< ThisApp.GRID_ROWS {
-        for colNum in 0 ..< ThisApp.GRID_COLS {
-            if (result[rowNum] == nil) { result[rowNum] = [:] }
-            result[rowNum]![colNum] = Cell_editMode(
-                ID: CellID(rowNum: rowNum, colNum: colNum).value,
+        let result = GridCustom.DataSource()
+        for rowNum in 0 ... ThisApp.GRID_ROWS - 1 {
+        for colNum in 0 ... ThisApp.GRID_COLS - 1 {
+            let rowNum = CellID.Index(rowNum)
+            let colNum = CellID.Index(colNum)
+            let cellID = CellID(rowNum: rowNum, colNum: colNum)
+            result[rowNum, colNum] = Cell_editMode(
+                ID: cellID.value,
                 size: self.cellSize,
                 isVisible: true
             )

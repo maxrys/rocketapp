@@ -6,5 +6,4 @@
 typealias ProfileID = UInt16
 typealias ProfileTitle = String
 typealias CellSector = UInt8
-typealias GridAxisIndex = UInt8
-typealias GridCellsByAxisCount = UInt8
+typealias CellsByAxisCount = UInt8

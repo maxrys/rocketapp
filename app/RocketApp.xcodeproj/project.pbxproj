@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		500A69C42F1671AE00C3CCE7 /* DictionaryMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500A69C32F1671AE00C3CCE7 /* DictionaryMatrix.swift */; };
 		5013DB5D2E9D092900BEDC5E /* ModelProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5013DB5C2E9D092900BEDC5E /* ModelProfile.swift */; };
 		5013DB5F2E9D525E00BEDC5E /* ProfilesState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5013DB5E2E9D525E00BEDC5E /* ProfilesState.swift */; };
 		5013DB692E9D827800BEDC5E /* StepperCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5013DB682E9D827800BEDC5E /* StepperCustom.swift */; };
@@ -83,6 +84,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		500A69C32F1671AE00C3CCE7 /* DictionaryMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryMatrix.swift; sourceTree = "<group>"; };
 		5013DB5C2E9D092900BEDC5E /* ModelProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelProfile.swift; sourceTree = "<group>"; };
 		5013DB5E2E9D525E00BEDC5E /* ProfilesState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesState.swift; sourceTree = "<group>"; };
 		5013DB682E9D827800BEDC5E /* StepperCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperCustom.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				5013DB852EA56D2800BEDC5E /* Color.swift */,
 				507501492EF6A70300624409 /* Date.swift */,
 				508D6D132EB551A800885E95 /* Dictionary.swift */,
+				500A69C32F1671AE00C3CCE7 /* DictionaryMatrix.swift */,
 				50EE8B8A2ECC8953002DFEA5 /* GraphicsContext.swift */,
 				50CE72332EE62E8F00FE3282 /* Logger.swift */,
 				50CE72372EE6B9D400FE3282 /* NSApplication.swift */,
@@ -423,6 +426,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				500A69C42F1671AE00C3CCE7 /* DictionaryMatrix.swift in Sources */,
 				507501602EF9593400624409 /* ResultBuilder.swift in Sources */,
 				50EE8B952ECDDCDD002DFEA5 /* EnvironmentValues.swift in Sources */,
 				50FEAD022EFDE55700B9CAD3 /* TabItemCustom.swift in Sources */,
