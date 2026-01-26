@@ -56,9 +56,9 @@ fileprivate struct ToggleCustom_switcher: View {
 
     @Binding fileprivate var isOn: Bool
 
-    fileprivate var size = CGSize(width: 40, height: 16)
-    fileprivate var innerPadding: CGFloat = 3
-    fileprivate var onChange: (Bool) -> Void
+    fileprivate let size = CGSize(width: 40, height: 16)
+    fileprivate let innerPadding: CGFloat = 3
+    fileprivate let onChange: (Bool) -> Void
 
     init(isOn: Binding<Bool>, onChange: @escaping (Bool) -> Void = { isOn in }) {
         self._isOn = isOn

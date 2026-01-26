@@ -75,17 +75,16 @@ struct GridCustom: View {
         return result
     }
 
+    private var isScrollDisabled: Bool {
+        let gridBounds = self.gridBounds;
+        return gridBounds.width  < self.visibleFrame.size.width &&
+               gridBounds.height < self.visibleFrame.size.height
+    }
+
     public var body: some View {
-
-        let isScrollDisabled: Bool = {
-            let gridBounds = self.gridBounds;
-            return gridBounds.width  < self.visibleFrame.size.width &&
-                   gridBounds.height < self.visibleFrame.size.height
-        }()
-
         ScrollView([.horizontal, .vertical]) { self.grid }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .scrollDisabled(isScrollDisabled)
+            .scrollDisabled(self.isScrollDisabled)
             .scrollPosition(self.$scrollPosition)
             .onScrollPhaseChange { oldPhase, newPhase, context in
                 if (oldPhase != newPhase) {
