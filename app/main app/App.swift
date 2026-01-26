@@ -26,8 +26,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     static let DEMO_ICON = NSImage(named: "AppIcon")!
     static let MAIN_WINDOW_TITLE = "RocketApp"
     static let MAIN_WINDOW_ID = "mainGrid"
-    static let MESSAGE_IF_NO_APPLICATIONS = NSLocalizedString("No Applications", comment: "")
-    static let MESSAGE_IN_OPEN_DIALOG = NSLocalizedString("Select this application", comment: "")
+    static let MESSAGE_NO_APPLICATIONS = NSLocalizedString("No Applications", comment: "")
+    static let MESSAGE_ADD_NEW_APPLICATIONS_THROUGH = NSLocalizedString("Add new applications through the", comment: "")
+    static let MESSAGE_SETTINGS = NSLocalizedString("Settings", comment: "")
+    static let MESSAGE_SELECT_THIS_APPLICATION = NSLocalizedString("Select this application", comment: "")
     static let PREVIEW_PROFILE_ID: ProfileID = ProfileID.max
     static let EMBEDDED_PROFILE_ID: ProfileID = 0
     static let NEW_PROFILE_TITLE: ProfileTitle = "My Profile"

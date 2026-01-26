@@ -30,10 +30,22 @@ struct MainScene: View, BackgroundColorResolvingProtocol {
 
             if (self.isEditMode == false) {
                 if (self.cells.isEmpty) {
-                    Text(ThisApp.MESSAGE_IF_NO_APPLICATIONS)
-                        .font(.system(size: 14, weight: .bold))
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .foregroundStyle(self.colorBackgroundAccentResolve(minOpacity: 0.7))
+                    VStack(spacing: 10) {
+                        Text(ThisApp.MESSAGE_NO_APPLICATIONS)
+                        HStack {
+                            Text(ThisApp.MESSAGE_ADD_NEW_APPLICATIONS_THROUGH)
+                            Button(ThisApp.MESSAGE_SETTINGS) {
+                                self.isEditMode = true
+                            }
+                            .underline()
+                            .foregroundColor(.blue)
+                            .buttonStyle(.plain)
+                            .pointerStyle(.link)
+                        }
+                    }
+                    .font(.system(size: 14, weight: .bold))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .foregroundStyle(self.colorBackgroundAccentResolve(minOpacity: 0.9))
                 } else {
                     MainGrid_viewMode(
                         cellSize: self.cellSizeFinal,

@@ -76,7 +76,7 @@ nonisolated struct AppValue: Equatable, Codable {
             openPanel.canChooseDirectories = false
             openPanel.canCreateDirectories = false
             openPanel.allowedContentTypes = [.application]
-            openPanel.prompt = NSLocalizedString(ThisApp.MESSAGE_IN_OPEN_DIALOG, comment: "")
+            openPanel.prompt = NSLocalizedString(ThisApp.MESSAGE_SELECT_THIS_APPLICATION, comment: "")
         if (openPanel.runModal() == .OK) {
             if let appURL = openPanel.url {
                 return Self(appURL)

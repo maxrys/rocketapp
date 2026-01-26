@@ -7,6 +7,16 @@
     "%lld %%" : {
       "shouldTranslate" : false
     },
+    "Add new applications through the" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавьте новые приложения через"
+          }
+        }
+      }
+    },
     "append profile" : {
       "localizations" : {
         "ru" : {
@@ -174,6 +184,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Выбрать это приложение"
+          }
+        }
+      }
+    },
+    "Settings" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Настройки"
           }
         }
       }
