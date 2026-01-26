@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="1024px" height="1024px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <bx:export>
+      <bx:file format="png" path="icon_16x16.png" width="16" height="16"/>
+      <bx:file format="png" path="icon_16x16@2x.png" width="32" height="32"/>
+      <bx:file format="png" path="icon_32x32.png" width="32" height="32"/>
+      <bx:file format="png" path="icon_32x32@2x.png" width="64" height="64"/>
+      <bx:file format="png" path="icon_128x128.png" width="128" height="128"/>
+      <bx:file format="png" path="icon_128x128@2x.png" width="256" height="256"/>
+      <bx:file format="png" path="icon_256x256.png" width="256" height="256"/>
+      <bx:file format="png" path="icon_256x256@2x.png" width="512" height="512"/>
+      <bx:file format="png" path="icon_512x512.png" width="512" height="512"/>
+      <bx:file format="png" path="icon_512x512@2x.png" width="1024" height="1024"/>
+    </bx:export>
+    <filter id="drop-shadow-filter-1" bx:preset="drop-shadow 1 0 10 8 0.53 #00000067" color-interpolation-filters="sRGB" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="8"/>
+      <feOffset dx="0" dy="10"/>
+      <feComponentTransfer result="offsetblur">
+        <feFuncA id="spread-ctrl" type="linear" slope="1.06"/>
+      </feComponentTransfer>
+      <feFlood flood-color="#00000067"/>
+      <feComposite in2="offsetblur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <bx:guide x="0" y="100" angle="90"/>
+    <bx:guide x="0" y="920" angle="90"/>
+    <bx:guide x="100" y="0" angle="0"/>
+    <bx:guide x="920" y="0" angle="0"/>
+    <bx:guide x="0" y="362" angle="90"/>
+    <bx:guide x="0" y="512" angle="90"/>
+    <bx:guide x="0" y="662" angle="90"/>
+    <bx:guide x="362" y="0" angle="0"/>
+    <bx:guide x="512" y="0" angle="0"/>
+    <bx:guide x="662" y="0" angle="0"/>
+    <bx:guide x="157" y="0" angle="0"/>
+    <bx:guide x="867" y="0" angle="0"/>
+    <bx:guide x="0.022" y="157" angle="90"/>
+    <bx:guide x="0" y="867" angle="90"/>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="512" y1="157" x2="512" y2="867" id="gradient-0">
+      <stop offset="0" style="stop-color: rgb(47, 149, 255);"/>
+      <stop offset="1" style="stop-color: rgb(0, 113, 245);"/>
+    </linearGradient>
+  </defs>
+  <path style="filter: url(&quot;#drop-shadow-filter-1&quot;); fill: white;" d="M 227.5 100 H 792.5 A 127.5 127.5 0 0 1 920 227.5 V 792.5 A 127.5 127.5 0 0 1 792.5 920 H 227.5 A 127.5 127.5 0 0 1 100 792.5 V 227.5 A 127.5 127.5 0 0 1 227.5 100 Z" bx:shape="rect 100 100 820 820 0 127.5 127.5 0 127.5 127.5 0 127.5 127.5 0 127.5 127.5 2@fddafcd4"/>
+  <rect style="filter: none; fill: url(&quot;#gradient-0&quot;);" x="157" y="157" width="710" height="710" rx="90" ry="90"/>
+  <g>
+    <ellipse style="stroke: white; stroke-width: 4px; fill: none;" cx="512" cy="512" rx="353" ry="353"/>
+    <ellipse style="stroke: white; stroke-width: 4px; fill: none;" cx="512" cy="512" rx="215" ry="215"/>
+    <ellipse style="stroke: white; stroke-width: 4px; transform-box: fill-box; transform-origin: 50% 50%; fill: none;" cx="512" cy="512" rx="150" ry="150"/>
+  </g>
+  <g>
+    <line style="stroke: white; stroke-width: 4px;" x1="183.5" y1="183.5" x2="840.5" y2="840.5"/>
+    <line style="stroke: white; stroke-width: 4; transform-box: fill-box; transform-origin: 50% 50%;" x1="183.5" y1="840.498" x2="840.498" y2="183.5" transform="matrix(-1, 0, 0, -1, -0.000045, 0.000013)"/>
+  </g>
+  <g>
+    <line style="stroke: white; stroke-width: 4px;" x1="362" y1="157" x2="362" y2="867"/>
+    <line style="stroke: white; stroke-width: 4px;" x1="512" y1="157" x2="512" y2="867"/>
+    <line style="stroke: white; stroke-width: 4px;" x1="662.002" y1="157" x2="662.001" y2="867"/>
+  </g>
+  <g>
+    <line style="stroke: white; stroke-width: 4px;" x1="157" y1="362" x2="867" y2="362"/>
+    <line style="stroke: white; stroke-width: 4px;" x1="157" y1="512" x2="867" y2="512"/>
+    <line style="stroke: white; stroke-width: 4px;" x1="157" y1="662" x2="867" y2="662"/>
+  </g>
+</svg>

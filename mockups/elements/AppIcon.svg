@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="1024px" height="1024px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <bx:export>
+      <bx:file format="png" path="AppIcon-16x16.png" width="16" height="16"/>
+      <bx:file format="png" path="AppIcon-16x16@2x.png" width="32" height="32"/>
+      <bx:file format="png" path="AppIcon-32x32.png" width="32" height="32"/>
+      <bx:file format="png" path="AppIcon-32x32@2x.png" width="64" height="64"/>
+      <bx:file format="png" path="AppIcon-128x128.png" width="128" height="128"/>
+      <bx:file format="png" path="AppIcon-128x128@2x.png" width="256" height="256"/>
+      <bx:file format="png" path="AppIcon-256x256.png" width="256" height="256"/>
+      <bx:file format="png" path="AppIcon-256x256@2x.png" width="512" height="512"/>
+      <bx:file format="png" path="AppIcon-512x512.png" width="512" height="512"/>
+      <bx:file format="png" path="AppIcon-512x512@2x.png" width="1024" height="1024"/>
+    </bx:export>
+    <filter id="drop-shadow-filter-1" bx:preset="drop-shadow 1 0 10 8 0.53 #00000067" color-interpolation-filters="sRGB" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="8"/>
+      <feOffset dx="0" dy="10"/>
+      <feComponentTransfer result="offsetblur">
+        <feFuncA id="spread-ctrl" type="linear" slope="1.06"/>
+      </feComponentTransfer>
+      <feFlood flood-color="#00000067"/>
+      <feComposite in2="offsetblur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <bx:guide x="0" y="100" angle="90"/>
+    <bx:guide x="0" y="920" angle="90"/>
+    <bx:guide x="100" y="0" angle="0"/>
+    <bx:guide x="920" y="0" angle="0"/>
+    <bx:guide x="512" y="0" angle="0"/>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="510" y1="100" x2="510" y2="920" id="gradient-0">
+      <stop offset="0" style="stop-color: rgb(219, 236, 247);"/>
+      <stop offset="1" style="stop-color: rgb(247, 201, 171);"/>
+    </linearGradient>
+    <filter id="motion-blur-filter-0" bx:preset="motion-blur 1 32 vertical" color-interpolation-filters="sRGB" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="0 32" edgeMode="none"/>
+    </filter>
+  </defs>
+  <rect style="stroke-width: 21.333; filter: url(&quot;#drop-shadow-filter-1&quot;); fill: url(&quot;#gradient-0&quot;);" x="100" y="100" width="820" height="820" rx="127.5" ry="127.5"/>
+  <g style="transform-origin: 512.001px 512px;" transform="matrix(1.279244, 0, 0, 1.279244, 0.000135, -39.735382)">
+    <g>
+      <path style="stroke-linecap: round; stroke-linejoin: round; stroke-width: 20; fill: rgb(246, 94, 73); stroke: rgb(0, 0, 0);" d="M 411.124 717.226 L 326.133 787.365 C 318.048 793.728 311.232 790.343 312.07 773.75 L 312.998 663.559 C 314.085 647.722 319.43 632.877 327.061 621.717 C 334.852 610.297 373.327 567.91 396.653 549.457 L 411.124 717.226 Z"/>
+      <path style="stroke-linecap: round; stroke-linejoin: round; stroke-width: 20; fill: rgb(209, 78, 65); transform-box: fill-box; transform-origin: 50% 50%; stroke: rgb(0, 0, 0);" d="M 712.001 622.599 L 627.01 552.46 C 618.925 546.097 612.109 549.482 612.947 566.075 L 613.875 676.266 C 614.962 692.103 620.307 706.948 627.938 718.108 C 635.729 729.528 674.204 771.915 697.53 790.368 L 712.001 622.599 Z" transform="matrix(-1, 0, 0, -1, -0.000052, 0.000096)"/>
+    </g>
+    <g style="filter: url(&quot;#motion-blur-filter-0&quot;);">
+      <path style="fill: rgb(246, 94, 73);" d="M 512.344 754.986 C 512.344 788.9 512.344 827.314 512.344 862 C 498.003 862 448.91 807.723 432.54 749.317 C 451.834 750.625 485.325 754.986 512.344 754.986 Z"/>
+      <path style="fill: rgb(210, 79, 65);" d="M 592.17 749.317 C 575.423 807.446 526.686 862 512.344 862 C 512.344 807.898 512.344 785.355 512.344 755.289 C 539.364 755.289 572.864 750.625 592.17 749.317 Z"/>
+      <path style="stroke-linecap: round; stroke-linejoin: round; fill: none; stroke: rgb(0, 0, 0); stroke-width: 0.926677px;" d="M 592.17 749.317 C 575.423 807.446 526.686 862 512.344 862 C 498.003 862 448.91 807.723 432.54 749.317 C 451.834 750.625 485.325 754.986 512.344 754.986 C 539.364 754.986 572.864 750.625 592.17 749.317 Z"/>
+    </g>
+    <g>
+      <path style="fill: rgb(255, 255, 255);" d="M 405.93 720.335 C 386.885 521.665 376.83 399.079 399.023 311.256 C 415.736 245.089 480.604 162 512.344 162 C 544.085 162 610.11 244.601 625.666 311.27 C 646.249 399.492 637.781 521.679 618.713 720.335 C 605.234 722.619 558.787 730.762 512.344 730.748 C 465.7 730.737 419.061 722.561 405.93 720.335 Z"/>
+      <path style="fill: rgb(194, 203, 225);" d="M 512.344 731.107 C 512.344 720.306 512.344 632.891 512.344 600.321 C 619.474 463.941 596.819 327.192 512.344 162 C 544.094 162 610.13 244.605 625.688 311.27 C 646.251 399.492 637.804 521.679 618.736 720.335 C 593.365 725.633 529.026 731.206 512.344 731.107 Z"/>
+      <path style="stroke-width: 20; stroke-linecap: round; stroke-linejoin: round; fill: none; stroke: rgb(0, 0, 0);" d="M 405.93 720.335 C 386.885 521.665 376.83 399.079 399.023 311.256 C 415.736 245.089 480.604 162 512.344 162 C 544.085 162 610.11 244.601 625.666 311.27 C 646.249 399.492 637.781 521.679 618.713 720.335 C 605.234 722.619 558.787 730.762 512.344 730.748 C 465.7 730.737 419.061 722.561 405.93 720.335 Z"/>
+    </g>
+    <g>
+      <polygon style="fill: rgb(246, 94, 73);" points="512 590.078 487.089 618.669 487.089 706.99 512 739.61"/>
+      <polygon style="fill: rgb(210, 79, 65); transform-box: fill-box; transform-origin: 50% 50%;" points="536.911 739.61 512 711.019 512 622.698 536.911 590.078" transform="matrix(-1, 0, 0, -1, -0.00005, 0.000049)"/>
+    </g>
+    <ellipse style="fill: rgb(85, 117, 195);" cx="512.005" cy="426.765" rx="65.674" ry="66.784"/>
+  </g>
+</svg>
