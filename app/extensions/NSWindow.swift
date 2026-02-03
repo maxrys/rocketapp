@@ -21,15 +21,15 @@ extension NSWindow {
     static func hideWithAnimation(windowId: String) {
         if let window = Self.get(ID: windowId) {
             if (window.isVisible) {
-                let steps: UInt16 = 10
+                let steps: UInt = 10
                 _ = Timer.Custom(
-                    count: steps,
-                    interval: 0.01,
-                    onTick: { i in
-                        let opacity = CGFloat(steps - i) * 0.1
+                    repeats: .count(steps),
+                    delay: 0.01,
+                    onTick: { timer in
+                        let opacity = CGFloat(steps - timer.i - 1) * 0.1
                         window.alphaValue = opacity
                     },
-                    onExpire: {
+                    onExpire: { _ in
                         window.close()
                     }
                 )
