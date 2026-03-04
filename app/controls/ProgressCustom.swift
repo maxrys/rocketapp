@@ -19,13 +19,13 @@ struct ProgressCustom: View {
         self.height = height
     }
 
-    var body: some View {
+    public var body: some View {
         let value = self.value.fixBounds(max: 1.0)
         let formattedValue = Int(value * 100)
         let width: CGFloat = visibleFrame.width * CGFloat(value)
         Color(self.colorScheme == .dark ? .black : .white).frame(height: self.height)
             .overlay(alignment: .leading) {
-                self.indicator(width)
+                self.IndicatorView(width)
             }.overlay(alignment: .center) {
                 Text("\(formattedValue) %")
                     .font(.system(size: 14, weight: .bold))
@@ -38,7 +38,7 @@ struct ProgressCustom: View {
         }
     }
 
-    @ViewBuilder private func indicator(_ width: CGFloat, zebraSize: CGFloat = 30.0) -> some View {
+    @ViewBuilder private func IndicatorView(_ width: CGFloat, zebraSize: CGFloat = 30.0) -> some View {
         let value = self.value.fixBounds(max: 1.0)
         ZStack {
             Rectangle()

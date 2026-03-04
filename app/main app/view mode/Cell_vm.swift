@@ -32,16 +32,16 @@ struct Cell_viewMode: View, CellProtocol {
 
             switch self.value {
                 case .main:
-                    self.mainCell
+                    self.MainCellView()
                 case .mini:
                     Grid(alignment: .center, horizontalSpacing: 0, verticalSpacing: 0) {
                         GridRow {
-                            self.miniCell(keyPath: \.cell1)
-                            self.miniCell(keyPath: \.cell2)
+                            self.MiniCellView(keyPath: \.cell1)
+                            self.MiniCellView(keyPath: \.cell2)
                         }
                         GridRow {
-                            self.miniCell(keyPath: \.cell3)
-                            self.miniCell(keyPath: \.cell4)
+                            self.MiniCellView(keyPath: \.cell3)
+                            self.MiniCellView(keyPath: \.cell4)
                         }
                     }
                 case .none:
@@ -51,7 +51,7 @@ struct Cell_viewMode: View, CellProtocol {
         }.frame(width: self.size, height: self.size)
     }
 
-    @ViewBuilder private var mainCell: some View {
+    @ViewBuilder private func MainCellView() -> some View {
         ZStack {
             if case .main(let cell) = self.value {
                 if let appURL = URL(string: cell.path) {
@@ -75,7 +75,7 @@ struct Cell_viewMode: View, CellProtocol {
         )
     }
 
-    @ViewBuilder private func miniCell(keyPath: CellValuePath) -> some View {
+    @ViewBuilder private func MiniCellView(keyPath: CellValuePath) -> some View {
         ZStack {
             if case .mini(let miniGrid) = self.value {
                 if let cell = miniGrid[keyPath: keyPath] {

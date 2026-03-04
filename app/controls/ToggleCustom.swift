@@ -9,9 +9,9 @@ struct ToggleCustom: View {
 
     @Binding private var isOn: Bool
 
-    private var text: String
-    private var isFlexible: Bool
-    private var onChange: (Bool) -> Void
+    private let text: String
+    private let isFlexible: Bool
+    private let onChange: (Bool) -> Void
 
     init(text: String = "", isFlexible: Bool = false, isOn: Binding<Bool>, onChange: @escaping (Bool) -> Void = { isOn in }) {
         self.text = text
@@ -20,14 +20,14 @@ struct ToggleCustom: View {
         self.onChange = onChange
     }
 
-    var body: some View {
+    public var body: some View {
         if (self.text.count > 0) {
             if (self.isFlexible) {
                 HStack {
                     Text(self.text)
                         .font(.headline)
                     Spacer()
-                    ToggleCustom_switcher(
+                    ToggleCustom_Switcher(
                         isOn: self.$isOn,
                         onChange: self.onChange
                     )
@@ -36,14 +36,14 @@ struct ToggleCustom: View {
                 HStack {
                     Text(self.text)
                         .font(.headline)
-                    ToggleCustom_switcher(
+                    ToggleCustom_Switcher(
                         isOn: self.$isOn,
                         onChange: self.onChange
                     )
                 }
             }
         } else {
-            ToggleCustom_switcher(
+            ToggleCustom_Switcher(
                 isOn: self.$isOn,
                 onChange: self.onChange
             )
@@ -52,7 +52,7 @@ struct ToggleCustom: View {
 
 }
 
-fileprivate struct ToggleCustom_switcher: View {
+fileprivate struct ToggleCustom_Switcher: View {
 
     @Binding fileprivate var isOn: Bool
 
@@ -65,7 +65,7 @@ fileprivate struct ToggleCustom_switcher: View {
         self.onChange = onChange
     }
 
-    var body: some View {
+    public var body: some View {
         Button {
             self.onChange(!self.isOn)
             withAnimation(.easeInOut(duration: 0.1)) {

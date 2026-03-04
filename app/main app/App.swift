@@ -28,7 +28,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     static let MAIN_WINDOW_ID = "mainGrid"
     static let MESSAGE_NO_APPLICATIONS = NSLocalizedString("No Applications", comment: "")
     static let MESSAGE_ADD_NEW_APPLICATIONS_THROUGH = NSLocalizedString("Add new applications through the", comment: "")
-    static let MESSAGE_SETTINGS = NSLocalizedString("Settings", comment: "")
+    static let MESSAGE_SETTINGS = NSLocalizedString("settings", comment: "")
     static let MESSAGE_SELECT_THIS_APPLICATION = NSLocalizedString("Select this application", comment: "")
     static let PREVIEW_PROFILE_ID: ProfileID = ProfileID.max
     static let EMBEDDED_PROFILE_ID: ProfileID = 0
@@ -53,6 +53,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private let profiles = EnvironmentValues().profilesState
     private let cells    = EnvironmentValues().cellsState
 
+    @State private var isEditMode = false
+
     init() {
         if let url = ModelContainer.shared.configurations.first?.url.path(percentEncoded: false) {
             Logger.customLog("Storage path: \(url)")
@@ -61,30 +63,23 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     public var body: some Scene {
         Window(Self.MAIN_WINDOW_TITLE, id: Self.MAIN_WINDOW_ID) {
-            MainScene()
+            MainScene(isEditMode: self.$isEditMode)
                 .ignoresSafeArea(.all)
                 .gesture(WindowDragGesture())
                 .onAppear {
-
                     /* hide window control buttons */
-
                     if let window = NSWindow.get(ID: Self.MAIN_WINDOW_ID) {
                         window.hideTitleButtons(isVisible: self.profiles.current.isShowWinTitleButtons)
                         window.backgroundColor = .clear
                         window.alphaValue = 1.0
                     }
-
-                    /* add observer for the window focus lost event */
-
-                    NotificationCenter.default.addObserver(forName: NSApplication.didResignActiveNotification, object: nil, queue: .main) { _ in
+                }
+                .onAppBecomeBackground {
+                    if (!self.isEditMode) {
                         NSWindow.hideWithAnimation(
                             windowId: Self.MAIN_WINDOW_ID
                         )
                     }
-
-                }
-                .onDisappear {
-                    NotificationCenter.default.removeObserver(self)
                 }
         }
         .windowStyle(.hiddenTitleBar)

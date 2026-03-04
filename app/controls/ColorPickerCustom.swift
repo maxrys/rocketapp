@@ -24,15 +24,6 @@ struct ColorPickerCustom: View {
     let openerRadius: CGFloat
     let isInstantUpdate: Bool
 
-    private var colorView: Color {
-        Color(
-            hue       : self.colorInternal.hue,
-            saturation: self.colorInternal.saturation,
-            brightness: self.colorInternal.brightness,
-            opacity   : self.colorInternal.opacity
-        )
-    }
-
     init(
         _ value: Binding<ColorHSBValue>,
         openerSize: CGSize = CGSize(width: 20, height: 20),
@@ -50,9 +41,9 @@ struct ColorPickerCustom: View {
         Button {
             self.isShowPopover = true
         } label: {
-            self.colorView
+            self.ColorView()
                 .frame(width: openerSize.width, height: openerSize.height)
-                .overlay { self.zebraStroke }
+                .overlay { self.ZebraStrokeView() }
                 .clipShape(                 RoundedRectangle(cornerRadius: self.openerRadius))
                 .contentShape(              RoundedRectangle(cornerRadius: self.openerRadius))
                 .contentShape(.focusEffect, RoundedRectangle(cornerRadius: self.openerRadius))
@@ -61,11 +52,20 @@ struct ColorPickerCustom: View {
         .buttonStyle(.plain)
         .pointerStyle(.link)
         .popover(isPresented: self.$isShowPopover) {
-            self.popover
+            self.PopoverView()
         }
     }
 
-    @ViewBuilder private var zebraStroke: some View {
+    @ViewBuilder private func ColorView() -> some View {
+        Color(
+            hue       : self.colorInternal.hue,
+            saturation: self.colorInternal.saturation,
+            brightness: self.colorInternal.brightness,
+            opacity   : self.colorInternal.opacity
+        )
+    }
+
+    @ViewBuilder private func ZebraStrokeView() -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: self.openerRadius)
                 .stroke(.black, lineWidth: 1)
@@ -75,32 +75,32 @@ struct ColorPickerCustom: View {
         }
     }
 
-    @ViewBuilder private var popover: some View {
+    @ViewBuilder private func PopoverView() -> some View {
         VStack(spacing: 20) {
 
             ZStack(alignment: .leading) {
-                self.palette  (component: .H)
-                self.indicator(component: .H)
-                self.touchpad (component: .H)
+                self.PaletteView  (component: .H)
+                self.IndicatorView(component: .H)
+                self.TouchpadView (component: .H)
             }.frame(height: 30)
 
             ZStack(alignment: .leading) {
-                self.palette  (component: .S)
-                self.indicator(component: .S)
-                self.touchpad (component: .S)
+                self.PaletteView  (component: .S)
+                self.IndicatorView(component: .S)
+                self.TouchpadView (component: .S)
             }.frame(height: 30)
 
             ZStack(alignment: .leading) {
-                self.palette  (component: .B)
-                self.indicator(component: .B)
-                self.touchpad (component: .B)
+                self.PaletteView  (component: .B)
+                self.IndicatorView(component: .B)
+                self.TouchpadView (component: .B)
             }.frame(height: 30)
 
             ZStack(alignment: .leading) {
-                self.chessboard
-                self.colorView
-                self.indicator(component: .O)
-                self.touchpad (component: .O)
+                self.ChessboardView()
+                self.ColorView()
+                self.IndicatorView(component: .O)
+                self.TouchpadView (component: .O)
             }.frame(height: 30)
 
         }
@@ -108,7 +108,7 @@ struct ColorPickerCustom: View {
         .padding(20)
     }
 
-    @ViewBuilder private var chessboard: some View {
+    @ViewBuilder private func ChessboardView() -> some View {
         let cellSize: CGFloat = 10
         Canvas { context, size in
             context.drawRectangle(x: 0, y: 0, w: size.width, h: size.height, colorFill: .white)
@@ -128,7 +128,7 @@ struct ColorPickerCustom: View {
         }
     }
 
-    @ViewBuilder private func palette(component: ColorComponent) -> some View {
+    @ViewBuilder private func PaletteView(component: ColorComponent) -> some View {
         Canvas { context, size in
             for i in 0 ... Int(size.width) {
                 context.drawRectangle(
@@ -146,7 +146,7 @@ struct ColorPickerCustom: View {
         }
     }
 
-    @ViewBuilder private func indicator(component: ColorComponent) -> some View {
+    @ViewBuilder private func IndicatorView(component: ColorComponent) -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: 0)
                 .stroke(.white, lineWidth: 3)
@@ -181,7 +181,7 @@ struct ColorPickerCustom: View {
         }())
     }
 
-    @ViewBuilder private func touchpad(component: ColorComponent) -> some View {
+    @ViewBuilder private func TouchpadView(component: ColorComponent) -> some View {
         let setComponentValue: (ColorComponent, Double) -> Void = { component, x in
             switch component {
                 case .H: self.colorInternal.hue        = x / self.width

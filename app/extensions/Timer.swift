@@ -24,6 +24,10 @@ extension Timer {
         private let onExpire: (Timer.Custom) -> Void
         private var timer: Cancellable?
 
+        public var isStoped: Bool {
+            self.timer == nil
+        }
+
         init(
             tag: UInt = 0,
             immediately: Bool = true,
@@ -42,7 +46,7 @@ extension Timer {
             }
         }
 
-        func startOrRenew() {
+        public func startOrRenew() {
             self.i = 0
             self.timer?.cancel()
             self.timer = Timer.publish(
@@ -67,8 +71,9 @@ extension Timer {
             })
         }
 
-        func stopAndReset() {
+        public func stopAndReset() {
             self.timer?.cancel()
+            self.timer = nil
         }
 
     }

@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-protocol TabCustom_item_Protocol: View {
+protocol TabCustom_Item_Protocol: View {
 }
 
 struct TabCustom: View {
@@ -14,9 +14,9 @@ struct TabCustom: View {
 
     @State private var selected: Int = 0
 
-    private let contents: [any TabCustom_item_Protocol]
+    private let contents: [any TabCustom_Item_Protocol]
 
-    init(@ViewBuilderArray<TabCustom_item_Protocol> content: () -> [any TabCustom_item_Protocol]) {
+    init(@ViewBuilderArray<TabCustom_Item_Protocol> content: () -> [any TabCustom_Item_Protocol]) {
         self.contents = content()
     }
 
@@ -27,9 +27,9 @@ struct TabCustom: View {
 
             HStack(spacing: 10) {
                 ForEach(0 ..< self.contents.count, id: \.self) { index in
-                    if let tatSpacer = self.contents[safe: index] as? TabCustom_spacer { tatSpacer }
-                    if let tabItem   = self.contents[safe: index] as? TabCustom_item {
-                        TabCustom_header(
+                    if let tatSpacer = self.contents[safe: index] as? TabCustom_Spacer { tatSpacer }
+                    if let tabItem   = self.contents[safe: index] as? TabCustom_Item {
+                        TabCustom_Header(
                             title: tabItem.title,
                             icon: tabItem.icon,
                             index: index,
@@ -48,13 +48,13 @@ struct TabCustom: View {
                     .white.opacity(0.5)
             )
             .overlay(alignment: .bottom) {
-                self.shadow
+                self.ShadowView()
             }
 
             /* MARK: Tab Body */
 
             VStack {
-                if let tabItem = self.contents[safe: self.selected] as? TabCustom_item {
+                if let tabItem = self.contents[safe: self.selected] as? TabCustom_Item {
                     tabItem.frame(maxWidth: .infinity)
                 }
             }.frame(maxWidth: .infinity)
@@ -62,7 +62,7 @@ struct TabCustom: View {
         }.frame(maxWidth: .infinity)
     }
 
-    @ViewBuilder private var shadow: some View {
+    @ViewBuilder private func ShadowView() -> some View {
         Rectangle()
             .fill(
                 LinearGradient(
@@ -79,7 +79,7 @@ struct TabCustom: View {
 
 }
 
-fileprivate struct TabCustom_header: View {
+fileprivate struct TabCustom_Header: View {
 
     @Environment(\.colorScheme) fileprivate var colorScheme
 
@@ -154,8 +154,8 @@ fileprivate struct TabCustom_header: View {
 
 #Preview {
     TabCustom {
-        TabCustom_item(title: NSLocalizedString("Title 1", comment: ""), icon: Image(systemName: "1.square")) { Text("Tab 1 Content").padding(20) }
-        TabCustom_item(title: NSLocalizedString("Title 2", comment: ""), icon: Image(systemName: "2.square")) { Text("Tab 2 Content").padding(20) }; TabCustom_spacer()
-        TabCustom_item(title: NSLocalizedString("Title 3", comment: ""), icon: Image(systemName: "3.square")) { Text("Tab 3 Content").padding(20) }
+        TabCustom_Item(title: NSLocalizedString("Title 1", comment: ""), icon: Image(systemName: "1.square")) { Text("Tab 1 Content").padding(20) }
+        TabCustom_Item(title: NSLocalizedString("Title 2", comment: ""), icon: Image(systemName: "2.square")) { Text("Tab 2 Content").padding(20) }; TabCustom_Spacer()
+        TabCustom_Item(title: NSLocalizedString("Title 3", comment: ""), icon: Image(systemName: "3.square")) { Text("Tab 3 Content").padding(20) }
     }.frame(maxWidth: 350)
 }

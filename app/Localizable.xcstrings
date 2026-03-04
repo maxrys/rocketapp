@@ -87,16 +87,6 @@
         }
       }
     },
-    "embedded" : {
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "встроенный"
-          }
-        }
-      }
-    },
     "Enlarge Icon on Hover" : {
       "localizations" : {
         "ru" : {
@@ -188,12 +178,12 @@
         }
       }
     },
-    "Settings" : {
+    "settings" : {
       "localizations" : {
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Настройки"
+            "value" : "настройки"
           }
         }
       }

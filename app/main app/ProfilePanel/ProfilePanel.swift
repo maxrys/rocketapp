@@ -27,7 +27,7 @@ struct ProfilePanel: View {
 
                 /* MARK: Button: Show Panel for append new Profile */
 
-                self.buttonShowPanelForAppend
+                self.ButtonShowPanelForAppendView()
                     .popover(isPresented: self.$isShowPanelForAppend, arrowEdge: .bottom) {
                         ProfilePanelForAppend(
                             isShowPanel: self.$isShowPanelForAppend
@@ -44,13 +44,13 @@ struct ProfilePanel: View {
                     items: self.profiles.list,
                     sortedBy: .valueAsc,
                     isPlainListStyle: true,
-                    flexibility: .size(205),
+                    flexibility: .size(250),
                     colorSet: Color.profilePanel.picker
                 )
 
                 /* MARK: Button: Show Panel for change Profile */
 
-                self.buttonShowPanelForChange
+                self.ButtonShowPanelForChangeView()
                     .popover(isPresented: self.$isShowPanelForChange, arrowEdge: .bottom) {
                         ProfilePanelForChange(
                             isShowPanel: self.$isShowPanelForChange
@@ -66,7 +66,7 @@ struct ProfilePanel: View {
         }
     }
 
-    @ViewBuilder private var buttonShowPanelForAppend: some View {
+    @ViewBuilder private func ButtonShowPanelForAppendView() -> some View {
         ButtonRound(
             label     : { Image(systemName: "plus.circle") },
             foreground: { Color.profilePanel.buttonText },
@@ -75,7 +75,7 @@ struct ProfilePanel: View {
         ) { self.isShowPanelForAppend = true }
     }
 
-    @ViewBuilder private var buttonShowPanelForChange: some View {
+    @ViewBuilder private func ButtonShowPanelForChangeView() -> some View {
         ButtonRound(
             label     : { Image(systemName: "gearshape.circle") },
             foreground: { Color.profilePanel.buttonText },

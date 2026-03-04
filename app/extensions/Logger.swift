@@ -8,9 +8,9 @@ import Foundation
 
 extension Logger {
 
-    nonisolated static func customLog(_ message: String) {
+    static func customLog(_ message: String) {
         #if DEBUG
-            print(message)
+            NSLog(message)
         #endif
     }
 

@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-struct TabCustom_item: TabCustom_item_Protocol {
+struct TabCustom_Item: TabCustom_Item_Protocol {
 
     let title: String
     let icon: Image?

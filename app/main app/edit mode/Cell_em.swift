@@ -54,34 +54,34 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorResolvingProtocol {
 
                 switch self.value {
                     case .main:
-                        self.mainCell
+                        self.MainCellView()
                     case .mini:
                         LazyVGrid(columns: self.miniGridColumns, spacing: 0) {
-                            self.miniCell(keyPath: \.cell1)
-                            self.miniCell(keyPath: \.cell2)
-                            self.miniCell(keyPath: \.cell3)
-                            self.miniCell(keyPath: \.cell4)
+                            self.MiniCellView(keyPath: \.cell1)
+                            self.MiniCellView(keyPath: \.cell2)
+                            self.MiniCellView(keyPath: \.cell3)
+                            self.MiniCellView(keyPath: \.cell4)
                         }
                     case .none:
                         LazyVGrid(columns: self.miniGridColumns, spacing: 0) {
-                            self.miniCell(keyPath: \.cell1)
-                            self.miniCell(keyPath: \.cell2)
-                            self.miniCell(keyPath: \.cell3)
-                            self.miniCell(keyPath: \.cell4)
+                            self.MiniCellView(keyPath: \.cell1)
+                            self.MiniCellView(keyPath: \.cell2)
+                            self.MiniCellView(keyPath: \.cell3)
+                            self.MiniCellView(keyPath: \.cell4)
                         }
-                        self.mainCell
+                        self.MainCellView()
                 }
 
             } else {
-                self.fakeCell
+                self.FakeCellView()
             }
         }
         .frame(width: self.size, height: self.size)
     }
 
-    @ViewBuilder private var fakeCell: some View {
+    @ViewBuilder private func FakeCellView() -> some View {
         ZStack {
-            Image("cell Background")
+            Image("Fake Cell Background")
                 .resizable()
                 .foregroundStyle(self.colorBackgroundAccentResolve(minOpacity: 0.3))
                 .frame(width: self.size * 0.66, height: self.size * 0.66)
@@ -93,11 +93,11 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorResolvingProtocol {
         )
     }
 
-    @ViewBuilder private var mainCell: some View {
+    @ViewBuilder private func MainCellView() -> some View {
         ZStack {
             switch self.value {
                 case .none:
-                    self.buttonInsert(self.sizeCellMainButton) {
+                    self.ButtonInsertView(self.sizeCellMainButton) {
                         if let appValue = AppValue.fromDialog() {
                             self.insert(appValue)
                         }
@@ -111,7 +111,7 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorResolvingProtocol {
                                 .frame(width: 20, height: 20)
                         })
                         .overlay(alignment: .topTrailing) {
-                            self.buttonDelete(self.size * 0.25) {
+                            self.ButtonDeleteView(self.size * 0.25) {
                                 self.delete()
                             }
                         }
@@ -125,11 +125,11 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorResolvingProtocol {
         )
     }
 
-    @ViewBuilder private func miniCell(keyPath: CellValuePath) -> some View {
+    @ViewBuilder private func MiniCellView(keyPath: CellValuePath) -> some View {
         ZStack {
             switch self.value {
                 case .none:
-                    self.buttonInsert(self.sizeCellMiniButton, to: keyPath) {
+                    self.ButtonInsertView(self.sizeCellMiniButton, to: keyPath) {
                         if let appValue = AppValue.fromDialog() {
                             self.insert(appValue, to: keyPath)
                         }
@@ -144,12 +144,12 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorResolvingProtocol {
                                     .frame(width: 20, height: 20)
                             })
                             .overlay(alignment: .topTrailing) {
-                                self.buttonDelete(self.size * 0.15) {
+                                self.ButtonDeleteView(self.size * 0.15) {
                                     self.delete(from: keyPath)
                                 }
                             }
                     } else {
-                        self.buttonInsert(self.sizeCellMiniButton, to: keyPath) {
+                        self.ButtonInsertView(self.sizeCellMiniButton, to: keyPath) {
                             if let appValue = AppValue.fromDialog() {
                                 self.insert(appValue, to: keyPath)
                             }
@@ -164,8 +164,8 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorResolvingProtocol {
         )
     }
 
-    @ViewBuilder private func buttonInsert(_ size: CGFloat, to keyPath: CellValuePath? = nil, onClick: @escaping () -> Void) -> some View {
-        Cell_editMode_buttonInsert(
+    @ViewBuilder private func ButtonInsertView(_ size: CGFloat, to keyPath: CellValuePath? = nil, onClick: @escaping () -> Void) -> some View {
+        Cell_editMode_ButtonInsert(
             size: size,
             foregroundStyle: self.colorBackgroundAccentResolve(minOpacity: 0.3),
             onClick: onClick,
@@ -175,7 +175,7 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorResolvingProtocol {
         )
     }
 
-    @ViewBuilder private func buttonDelete(_ size: CGFloat, onClick: @escaping () -> Void) -> some View {
+    @ViewBuilder private func ButtonDeleteView(_ size: CGFloat, onClick: @escaping () -> Void) -> some View {
         ButtonRound(
             label: {
                 Image(systemName: "minus")
@@ -296,7 +296,7 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorResolvingProtocol {
 
 }
 
-struct Cell_editMode_buttonInsert: View {
+struct Cell_editMode_ButtonInsert: View {
 
     @State private var isHovering = false
 

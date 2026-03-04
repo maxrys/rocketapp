@@ -27,24 +27,24 @@ struct ControlPanel: View {
         ], spacing: self.elementSpacing) {
             HStack(spacing: self.elementSpacing) {
                 if (!profiles.current.isShowWinTitleButtons) {
-                    self.buttonAudit
+                    self.ButtonAuditView()
                 }
             }
             ProfilePanel()
             HStack(spacing: self.elementSpacing) {
-                if (profiles.current.isShowWinTitleButtons) { self.buttonAudit }
-                self.buttonCloseSettings
+                if (profiles.current.isShowWinTitleButtons) { self.ButtonAuditView() }
+                self.ButtonCloseSettingsView()
             }
         }
         .padding(.horizontal, 15)
         .padding(.vertical  , 12)
         .background(Color.ctrlPanel.background)
         .overlay(alignment: .bottom) {
-            self.shadow.offset(y: 5)
+            self.ShadowView().offset(y: 5)
         }
     }
 
-    @ViewBuilder private var shadow: some View {
+    @ViewBuilder private func ShadowView() -> some View {
         Rectangle()
             .fill(
                 LinearGradient(
@@ -55,7 +55,7 @@ struct ControlPanel: View {
             ).frame(height: 5)
     }
 
-    @ViewBuilder private var buttonAudit: some View {
+    @ViewBuilder private func ButtonAuditView() -> some View {
         ButtonRound(
             label: {
                 if (self.cells.isAuditInProgress) {
@@ -81,9 +81,9 @@ struct ControlPanel: View {
         )
     }
 
-    @ViewBuilder private var buttonCloseSettings: some View {
+    @ViewBuilder private func ButtonCloseSettingsView() -> some View {
         ButtonRound(
-            label     : { Image(systemName: "arrow.forward.circle") },
+            label     : { Image(systemName: "checkmark.circle") },
             foreground: { Color.ctrlPanel.buttonText },
             background: { Color.ctrlPanel.buttonBackground }
         ) { self.isEditMode = false }

@@ -40,7 +40,7 @@ struct AppIcon: View, BackgroundColorResolvingProtocol {
             .overlay(alignment: .bottom) {
                 if (self.profiles.current.isShowIconTitle) {
                     if (self.isHovering) {
-                        self.title.scaleEffect(self.isMiniGrid ? 0.9 : 1.0)
+                        self.TitleView()
                     }
                 }
             }
@@ -51,9 +51,9 @@ struct AppIcon: View, BackgroundColorResolvingProtocol {
             }
     }
 
-    @ViewBuilder private var title: some View {
+    @ViewBuilder private func TitleView() -> some View {
         Text(self.name)
-            .font(.system(size: self.isMiniGrid ? 10 : 12, weight: .bold))
+            .font(.system(size: self.isMiniGrid ? 9 : 11))
             .lineLimit(1)
             .fixedSize(horizontal: true, vertical: false)
             .padding(.horizontal, 9)

@@ -14,7 +14,7 @@ struct MainScene: View, BackgroundColorResolvingProtocol {
     @Environment(\.profilesState) private var profiles
     @Environment(\.cellsState)    private var cells
 
-    @State private var isEditMode = false
+    @Binding private var isEditMode: Bool
     @State private var isHovering = false
 
     private var cellSizeFinal: Double {
@@ -25,6 +25,10 @@ struct MainScene: View, BackgroundColorResolvingProtocol {
         Double(self.profiles.current.spacing) * self.profiles.current.zoom.double
     }
 
+    init(isEditMode: Binding<Bool>) {
+        self._isEditMode = isEditMode
+    }
+
     public var body: some View {
         VStack (spacing: 0) {
 
@@ -32,17 +36,16 @@ struct MainScene: View, BackgroundColorResolvingProtocol {
                 if (self.cells.isEmpty) {
                     VStack(spacing: 10) {
                         Text(ThisApp.MESSAGE_NO_APPLICATIONS)
-                        HStack {
-                            Text(ThisApp.MESSAGE_ADD_NEW_APPLICATIONS_THROUGH)
-                            Button(ThisApp.MESSAGE_SETTINGS) {
-                                self.isEditMode = true
-                            }
+                        Text(ThisApp.MESSAGE_ADD_NEW_APPLICATIONS_THROUGH)
+                        Button(ThisApp.MESSAGE_SETTINGS) { self.isEditMode = true }
                             .underline()
-                            .foregroundColor(.blue)
+                            .font(.system(size: 12, weight: .regular))
+                            .foregroundColor(.accentColor)
                             .buttonStyle(.plain)
                             .pointerStyle(.link)
-                        }
                     }
+                    .padding(20)
+                    .multilineTextAlignment(.center)
                     .font(.system(size: 14, weight: .bold))
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .foregroundStyle(self.colorBackgroundAccentResolve(minOpacity: 0.9))
@@ -76,14 +79,14 @@ struct MainScene: View, BackgroundColorResolvingProtocol {
             minHeight: self.isEditMode ? 300 : self.cellSizeFinal + (self.cellSpacingFinal * 2))
         .overlay(alignment: .topTrailing) {
             if (self.isEditMode == false) {
-                self.buttonOpenSettings
+                self.ButtonOpenSettingsView()
                     .padding(15)
                     .opacity(self.isHovering ? 1 : 0)
             }
         }
         .overlay {
             if (self.cells.isAuditInProgress) {
-                self.auditPanel
+                self.AuditPanelView()
             }
         }
         .onHover { isHovering in
@@ -93,7 +96,7 @@ struct MainScene: View, BackgroundColorResolvingProtocol {
         }
     }
 
-    @ViewBuilder public var auditPanel: some View {
+    @ViewBuilder public func AuditPanelView() -> some View {
         Color(self.colorScheme == .dark ? .white : .black).opacity(0.3)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .overlay {
@@ -126,7 +129,7 @@ struct MainScene: View, BackgroundColorResolvingProtocol {
             }
     }
 
-    @ViewBuilder public var buttonOpenSettings: some View {
+    @ViewBuilder public func ButtonOpenSettingsView() -> some View {
         ButtonRound(
             label     : { Image(systemName: "gearshape.circle") },
             foreground: { self.colorBackgroundAccentResolve(minOpacity: 0.3) },
@@ -143,7 +146,7 @@ struct MainScene: View, BackgroundColorResolvingProtocol {
 /* ############################################################# */
 
 #Preview {
-    MainScene()
-        .buttonOpenSettings
+    MainScene(isEditMode: Binding.constant(false))
+        .ButtonOpenSettingsView()
         .padding(20)
 }

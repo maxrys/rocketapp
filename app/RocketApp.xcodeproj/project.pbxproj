@@ -44,8 +44,8 @@
 		508D6D0C2EB3597000885E95 /* TextFieldCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508D6D0B2EB3596D00885E95 /* TextFieldCustom.swift */; };
 		508D6D152EB551A800885E95 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508D6D132EB551A800885E95 /* Dictionary.swift */; };
 		50AFE98C2EB7730100815152 /* ProfileValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AFE98A2EB772FC00815152 /* ProfileValue.swift */; };
-		50C06AF02F23E467008EE619 /* TabCustom_spacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C06AEF2F23E467008EE619 /* TabCustom_spacer.swift */; };
-		50C06AF12F23E467008EE619 /* TabCustom_item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C06AEE2F23E467008EE619 /* TabCustom_item.swift */; };
+		50C06AF02F23E467008EE619 /* TabCustom_Spacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C06AEF2F23E467008EE619 /* TabCustom_Spacer.swift */; };
+		50C06AF12F23E467008EE619 /* TabCustom_Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C06AEE2F23E467008EE619 /* TabCustom_Item.swift */; };
 		50C06AF22F23E467008EE619 /* TabCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C06AED2F23E467008EE619 /* TabCustom.swift */; };
 		50CE72272EE0542300FE3282 /* info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 50CE72262EE0542300FE3282 /* info.plist */; };
 		50CE72292EE0561B00FE3282 /* UTType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE72282EE0561900FE3282 /* UTType.swift */; };
@@ -57,6 +57,16 @@
 		50CE72452EEAC80000FE3282 /* MainGrid_em.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE72442EEAC80000FE3282 /* MainGrid_em.swift */; };
 		50CE72542EED6BE200FE3282 /* CellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE72532EED6BDD00FE3282 /* CellProtocol.swift */; };
 		50CE72562EED6F5900FE3282 /* GridCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE72552EED6F5900FE3282 /* GridCustom.swift */; };
+		50CE9FB42F470D80001006CF /* ViewHover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE9FB32F470D80001006CF /* ViewHover.swift */; };
+		50CE9FC22F471679001006CF /* TextFieldCustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE9FC12F471679001006CF /* TextFieldCustomColor.swift */; };
+		50CE9FC42F47169A001006CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50CE9FC32F47169A001006CF /* Assets.xcassets */; };
+		50CE9FC72F471728001006CF /* ButtonCustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE9FC62F471728001006CF /* ButtonCustomColor.swift */; };
+		50CE9FC92F47175C001006CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50CE9FC82F47175C001006CF /* Assets.xcassets */; };
+		50CE9FCC2F47180A001006CF /* ProfilePanelColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE9FCB2F47180A001006CF /* ProfilePanelColor.swift */; };
+		50CE9FCE2F471841001006CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50CE9FCD2F471841001006CF /* Assets.xcassets */; };
+		50CE9FD12F4718F9001006CF /* ControlPanelColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE9FD02F4718F9001006CF /* ControlPanelColor.swift */; };
+		50CE9FD32F47191F001006CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50CE9FD22F47191F001006CF /* Assets.xcassets */; };
+		50CEA0A92F4C576F001006CF /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 50CEA0A82F4C576F001006CF /* InfoPlist.xcstrings */; };
 		50EE8B892ECC888E002DFEA5 /* ColorPickerCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8B882ECC888E002DFEA5 /* ColorPickerCustom.swift */; };
 		50EE8B8B2ECC8953002DFEA5 /* GraphicsContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8B8A2ECC8953002DFEA5 /* GraphicsContext.swift */; };
 		50EE8B912ECC8B11002DFEA5 /* ColorHSBValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8B902ECC8B11002DFEA5 /* ColorHSBValue.swift */; };
@@ -64,7 +74,6 @@
 		50EE8B982ECDEE9D002DFEA5 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8B972ECDEE98002DFEA5 /* MainScene.swift */; };
 		50EE8B9B2ED174FF002DFEA5 /* MiniGridValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8B992ED174FE002DFEA5 /* MiniGridValue.swift */; };
 		50EE8B9E2ED1756E002DFEA5 /* AppValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8B9C2ED17569002DFEA5 /* AppValue.swift */; };
-		50EE8BAE2ED47B1D002DFEA5 /* types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5081507C2E84011F00E12175 /* types.swift */; };
 		50EE8BB02ED5A4B4002DFEA5 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8BAF2ED5A4B3002DFEA5 /* Bool.swift */; };
 		50EE8BB12ED5A58F002DFEA5 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8BAF2ED5A4B3002DFEA5 /* Bool.swift */; };
 		50EE8BB42ED5C3D3002DFEA5 /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8BB32ED5C3CD002DFEA5 /* NSImage.swift */; };
@@ -123,8 +132,8 @@
 		508D6D132EB551A800885E95 /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		50AFE98A2EB772FC00815152 /* ProfileValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileValue.swift; sourceTree = "<group>"; };
 		50C06AED2F23E467008EE619 /* TabCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCustom.swift; sourceTree = "<group>"; };
-		50C06AEE2F23E467008EE619 /* TabCustom_item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCustom_item.swift; sourceTree = "<group>"; };
-		50C06AEF2F23E467008EE619 /* TabCustom_spacer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCustom_spacer.swift; sourceTree = "<group>"; };
+		50C06AEE2F23E467008EE619 /* TabCustom_Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCustom_Item.swift; sourceTree = "<group>"; };
+		50C06AEF2F23E467008EE619 /* TabCustom_Spacer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCustom_Spacer.swift; sourceTree = "<group>"; };
 		50CE72262EE0542300FE3282 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
 		50CE72282EE0561900FE3282 /* UTType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTType.swift; sourceTree = "<group>"; };
 		50CE722A2EE0E97F00FE3282 /* AppDragValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDragValue.swift; sourceTree = "<group>"; };
@@ -135,6 +144,16 @@
 		50CE72442EEAC80000FE3282 /* MainGrid_em.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGrid_em.swift; sourceTree = "<group>"; };
 		50CE72532EED6BDD00FE3282 /* CellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellProtocol.swift; sourceTree = "<group>"; };
 		50CE72552EED6F5900FE3282 /* GridCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCustom.swift; sourceTree = "<group>"; };
+		50CE9FB32F470D80001006CF /* ViewHover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHover.swift; sourceTree = "<group>"; };
+		50CE9FC12F471679001006CF /* TextFieldCustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCustomColor.swift; sourceTree = "<group>"; };
+		50CE9FC32F47169A001006CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		50CE9FC62F471728001006CF /* ButtonCustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCustomColor.swift; sourceTree = "<group>"; };
+		50CE9FC82F47175C001006CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		50CE9FCB2F47180A001006CF /* ProfilePanelColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePanelColor.swift; sourceTree = "<group>"; };
+		50CE9FCD2F471841001006CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		50CE9FD02F4718F9001006CF /* ControlPanelColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPanelColor.swift; sourceTree = "<group>"; };
+		50CE9FD22F47191F001006CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		50CEA0A82F4C576F001006CF /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		50EE8B882ECC888E002DFEA5 /* ColorPickerCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerCustom.swift; sourceTree = "<group>"; };
 		50EE8B8A2ECC8953002DFEA5 /* GraphicsContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsContext.swift; sourceTree = "<group>"; };
 		50EE8B902ECC8B11002DFEA5 /* ColorHSBValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHSBValue.swift; sourceTree = "<group>"; };
@@ -179,8 +198,8 @@
 			children = (
 				508150712E81334600E12175 /* App.swift */,
 				50EE8B972ECDEE98002DFEA5 /* MainScene.swift */,
-				508150892E895B5A00E12175 /* ControlPanel.swift */,
-				5013DB832EA0FC0F00BEDC5E /* ProfilePanel.swift */,
+				50CE9FCF2F4718EA001006CF /* ControlPanel */,
+				50CE9FCA2F4717F9001006CF /* ProfilePanel */,
 				5075014D2EF7FDCC00624409 /* ProfilePanelForAppend.swift */,
 				50447F682EEE9A5700C9B8D1 /* ProfilePanelForChange.swift */,
 				50CE72422EEAC5FF00FE3282 /* view mode */,
@@ -208,6 +227,7 @@
 				501D4DF02EC120CC00919AB9 /* Timer.swift */,
 				50CE72282EE0561900FE3282 /* UTType.swift */,
 				5058497A2E9A8D5B00B9F421 /* View.swift */,
+				50CE9FB32F470D80001006CF /* ViewHover.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -215,17 +235,15 @@
 		5013DB6A2E9D827F00BEDC5E /* controls */ = {
 			isa = PBXGroup;
 			children = (
-				508D6D092EB25EE100885E95 /* ButtonCustom.swift */,
+				50CE9FC52F471715001006CF /* ButtonCustom */,
 				508D6CF82EB0C14700885E95 /* ButtonRound.swift */,
 				50EE8B882ECC888E002DFEA5 /* ColorPickerCustom.swift */,
 				50CE72552EED6F5900FE3282 /* GridCustom.swift */,
 				5013DB722E9E6EDA00BEDC5E /* PickerCustom.swift */,
 				507501402EF2117100624409 /* ProgressCustom.swift */,
 				5013DB682E9D827800BEDC5E /* StepperCustom.swift */,
-				50C06AED2F23E467008EE619 /* TabCustom.swift */,
-				50C06AEE2F23E467008EE619 /* TabCustom_item.swift */,
-				50C06AEF2F23E467008EE619 /* TabCustom_spacer.swift */,
-				508D6D0B2EB3596D00885E95 /* TextFieldCustom.swift */,
+				50CEA09C2F4B711B001006CF /* TabCustom */,
+				50CE9FC02F471669001006CF /* TextFieldCustom */,
 				501D4DEC2EBFC84B00919AB9 /* ToggleCustom.swift */,
 			);
 			path = controls;
@@ -246,6 +264,7 @@
 			children = (
 				50CE72262EE0542300FE3282 /* info.plist */,
 				50CE723C2EE9687300FE3282 /* Localizable.xcstrings */,
+				50CEA0A82F4C576F001006CF /* InfoPlist.xcstrings */,
 				5013DB702E9E6EA900BEDC5E /* Assets.xcassets */,
 				50FEAD1D2F0D208600B9CAD3 /* Credits.html */,
 				50EE8B9F2ED1795B002DFEA5 /* types */,
@@ -277,6 +296,56 @@
 				5081507A2E8148AA00E12175 /* Cell_em.swift */,
 			);
 			path = "edit mode";
+			sourceTree = "<group>";
+		};
+		50CE9FC02F471669001006CF /* TextFieldCustom */ = {
+			isa = PBXGroup;
+			children = (
+				508D6D0B2EB3596D00885E95 /* TextFieldCustom.swift */,
+				50CE9FC12F471679001006CF /* TextFieldCustomColor.swift */,
+				50CE9FC32F47169A001006CF /* Assets.xcassets */,
+			);
+			path = TextFieldCustom;
+			sourceTree = "<group>";
+		};
+		50CE9FC52F471715001006CF /* ButtonCustom */ = {
+			isa = PBXGroup;
+			children = (
+				508D6D092EB25EE100885E95 /* ButtonCustom.swift */,
+				50CE9FC62F471728001006CF /* ButtonCustomColor.swift */,
+				50CE9FC82F47175C001006CF /* Assets.xcassets */,
+			);
+			path = ButtonCustom;
+			sourceTree = "<group>";
+		};
+		50CE9FCA2F4717F9001006CF /* ProfilePanel */ = {
+			isa = PBXGroup;
+			children = (
+				5013DB832EA0FC0F00BEDC5E /* ProfilePanel.swift */,
+				50CE9FCB2F47180A001006CF /* ProfilePanelColor.swift */,
+				50CE9FCD2F471841001006CF /* Assets.xcassets */,
+			);
+			path = ProfilePanel;
+			sourceTree = "<group>";
+		};
+		50CE9FCF2F4718EA001006CF /* ControlPanel */ = {
+			isa = PBXGroup;
+			children = (
+				508150892E895B5A00E12175 /* ControlPanel.swift */,
+				50CE9FD02F4718F9001006CF /* ControlPanelColor.swift */,
+				50CE9FD22F47191F001006CF /* Assets.xcassets */,
+			);
+			path = ControlPanel;
+			sourceTree = "<group>";
+		};
+		50CEA09C2F4B711B001006CF /* TabCustom */ = {
+			isa = PBXGroup;
+			children = (
+				50C06AED2F23E467008EE619 /* TabCustom.swift */,
+				50C06AEE2F23E467008EE619 /* TabCustom_Item.swift */,
+				50C06AEF2F23E467008EE619 /* TabCustom_Spacer.swift */,
+			);
+			path = TabCustom;
 			sourceTree = "<group>";
 		};
 		50EE8B9F2ED1795B002DFEA5 /* types */ = {
@@ -403,7 +472,12 @@
 				50CE72272EE0542300FE3282 /* info.plist in Resources */,
 				50FEAD1E2F0D208600B9CAD3 /* Credits.html in Resources */,
 				5013DB712E9E6EA900BEDC5E /* Assets.xcassets in Resources */,
+				50CEA0A92F4C576F001006CF /* InfoPlist.xcstrings in Resources */,
 				50CE723D2EE9687300FE3282 /* Localizable.xcstrings in Resources */,
+				50CE9FCE2F471841001006CF /* Assets.xcassets in Resources */,
+				50CE9FC92F47175C001006CF /* Assets.xcassets in Resources */,
+				50CE9FD32F47191F001006CF /* Assets.xcassets in Resources */,
+				50CE9FC42F47169A001006CF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,7 +489,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				507501482EF54D8200624409 /* CellID.swift in Sources */,
-				50EE8BAE2ED47B1D002DFEA5 /* types.swift in Sources */,
 				50EE8BB72ED79177002DFEA5 /* CellModelID.swift in Sources */,
 				505849712E9A818400B9F421 /* Tests.swift in Sources */,
 				50EE8BB12ED5A58F002DFEA5 /* Bool.swift in Sources */,
@@ -437,13 +510,15 @@
 				5075014E2EF7FDCC00624409 /* ProfilePanelForAppend.swift in Sources */,
 				50EE8B9B2ED174FF002DFEA5 /* MiniGridValue.swift in Sources */,
 				5013DB6D2E9D892800BEDC5E /* Numeric.swift in Sources */,
+				50CE9FC22F471679001006CF /* TextFieldCustomColor.swift in Sources */,
 				50447F692EEE9A5700C9B8D1 /* ProfilePanelForChange.swift in Sources */,
 				507501412EF2117100624409 /* ProgressCustom.swift in Sources */,
 				508D6D152EB551A800885E95 /* Dictionary.swift in Sources */,
 				50EE8BB02ED5A4B4002DFEA5 /* Bool.swift in Sources */,
 				508D6D0C2EB3597000885E95 /* TextFieldCustom.swift in Sources */,
-				50C06AF02F23E467008EE619 /* TabCustom_spacer.swift in Sources */,
-				50C06AF12F23E467008EE619 /* TabCustom_item.swift in Sources */,
+				50CE9FC72F471728001006CF /* ButtonCustomColor.swift in Sources */,
+				50C06AF02F23E467008EE619 /* TabCustom_Spacer.swift in Sources */,
+				50C06AF12F23E467008EE619 /* TabCustom_Item.swift in Sources */,
 				50C06AF22F23E467008EE619 /* TabCustom.swift in Sources */,
 				50CE72342EE62E8F00FE3282 /* Logger.swift in Sources */,
 				508150792E81448100E12175 /* Cell_vm.swift in Sources */,
@@ -458,6 +533,7 @@
 				5013DB732E9E6EDA00BEDC5E /* PickerCustom.swift in Sources */,
 				50CE72452EEAC80000FE3282 /* MainGrid_em.swift in Sources */,
 				508150722E81334600E12175 /* MainGrid_vm.swift in Sources */,
+				50CE9FCC2F47180A001006CF /* ProfilePanelColor.swift in Sources */,
 				501D4DEB2EB9FB6000919AB9 /* CellValue.swift in Sources */,
 				508D6CF12EA8D22700885E95 /* NSWindow.swift in Sources */,
 				501D4DF12EC120CC00919AB9 /* Timer.swift in Sources */,
@@ -476,8 +552,10 @@
 				5075014A2EF6A70300624409 /* Date.swift in Sources */,
 				508150732E81334600E12175 /* App.swift in Sources */,
 				50EE8BB42ED5C3D3002DFEA5 /* NSImage.swift in Sources */,
+				50CE9FD12F4718F9001006CF /* ControlPanelColor.swift in Sources */,
 				5013DB692E9D827800BEDC5E /* StepperCustom.swift in Sources */,
 				50EE8B982ECDEE9D002DFEA5 /* MainScene.swift in Sources */,
+				50CE9FB42F470D80001006CF /* ViewHover.swift in Sources */,
 				508D6CF92EB0C14700885E95 /* ButtonRound.swift in Sources */,
 				50CE72292EE0561B00FE3282 /* UTType.swift in Sources */,
 				5013DB862EA56D2E00BEDC5E /* Color.swift in Sources */,

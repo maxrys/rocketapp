@@ -3,9 +3,16 @@
 /* ### Copyright © 2026 Maxim Rysevets. All rights reserved. ### */
 /* ############################################################# */
 
-import AppKit
+import SwiftUI
 
 @Observable final class ProfileValue: Equatable, Comparable {
+
+    public func getBinding<T>(_ propertyName: WritableKeyPath<ProfileValue, T>) -> Binding<T> {
+        var instance = self; return Binding(
+            get: {             instance[keyPath: propertyName]            },
+            set: { newValue in instance[keyPath: propertyName] = newValue }
+        )
+    }
 
     public let ID: ProfileID
     public var title: ProfileTitle           { didSet { if (oldValue != title)                 { _ = self.modelUpdate() } } }

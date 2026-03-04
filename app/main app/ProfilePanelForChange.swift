@@ -14,10 +14,12 @@ struct ProfilePanelForChange: View {
     @State private var isShowDeleteDialog = false
 
     private let elementSpacing: CGFloat = 20
+
     private var columnsHead: [GridItem] {[
         GridItem(.flexible(), spacing: self.elementSpacing, alignment: .leading),
         GridItem(.flexible(), spacing: self.elementSpacing, alignment: .trailing)
     ]}
+
     private var columnsBody: [GridItem] {[
         GridItem(.flexible(), spacing: self.elementSpacing, alignment: .leading),
         GridItem(.fixed(90) , spacing: self.elementSpacing, alignment: .center)
@@ -27,62 +29,55 @@ struct ProfilePanelForChange: View {
         self._isShowPanel = isShowPanel
     }
 
-    @ViewBuilder private func title(_ text: String) -> some View {
+    public var body: some View {
+        TabCustom {
+            TabCustom_Item(
+                title: NSLocalizedString("Profile Settings", comment: ""),
+                icon: Image(systemName: "switch.2"),
+                view: { self.ChangeProfileView() })
+            TabCustom_Spacer()
+            TabCustom_Item(
+                title: NSLocalizedString("Delete", comment: ""),
+                icon: Image(systemName: "trash"),
+                view: { self.DeleteProfileView() }
+            )
+        }.frame(width: 450)
+    }
+
+    @ViewBuilder private func TitleView(_ text: String) -> some View {
         Text(text)
             .font(.headline)
             .lineLimit(1)
             .fixedSize(horizontal: true, vertical: false)
     }
 
-    @ViewBuilder private var delimiter: some View {
+    @ViewBuilder private func DelimiterView() -> some View {
         self.colorScheme == .dark ?
             Color.white.opacity(0.1).frame(height: 2).padding(.horizontal, 10) :
             Color.black.opacity(0.1).frame(height: 2).padding(.horizontal, 10)
     }
 
-    public var body: some View {
-        TabCustom {
-            TabCustom_item(
-                title: NSLocalizedString("Profile Settings", comment: ""),
-                icon: Image(systemName: "switch.2"),
-                view: { self.changeProfile })
-            TabCustom_spacer()
-            TabCustom_item(
-                title: NSLocalizedString("Delete", comment: ""),
-                icon: Image(systemName: "trash"),
-                view: { self.deleteProfile }
-            )
-        }.frame(width: 450)
-    }
-
-    @ViewBuilder var changeProfile: some View {
+    @ViewBuilder private func ChangeProfileView() -> some View {
         VStack(spacing: 0) {
 
             HStack(spacing: self.elementSpacing) {
 
                 /* MARK: Title */
 
-                self.title(
+                self.TitleView(
                     NSLocalizedString("Title", comment: "")
                 )
 
-                TextFieldCustom(value:
-                    Binding<String>(
-                        get: {             self.profiles.current.title },
-                        set: { newValue in self.profiles.current.title = newValue }
-                    )
-                ).onChange(of: self.profiles.current.title) { oldValue, newValue in
-                    if (newValue.isEmpty) {
-                        self.profiles.current.title = oldValue
-                    }
-                }
+                TextFieldCustom(
+                    value: self.profiles.current.getBinding(\.title)
+                )
 
             }
             .padding(.horizontal, 40)
             .padding(.vertical  , 20)
             .frame(maxWidth: .infinity)
 
-            self.delimiter
+            self.DelimiterView()
 
             LazyVGrid(columns: self.columnsHead, spacing: self.elementSpacing) {
 
@@ -90,15 +85,12 @@ struct ProfilePanelForChange: View {
 
                 HStack(spacing: 10) {
 
-                    self.title(
+                    self.TitleView(
                         NSLocalizedString("Zoom", comment: "")
                     )
 
                     StepperCustom(
-                        Binding<Decimal>(
-                            get: {             self.profiles.current.zoom },
-                            set: { newValue in self.profiles.current.zoom = newValue }
-                        ),
+                        self.profiles.current.getBinding(\.zoom),
                         in: 0.5 ... 2.0, step: 0.1,
                         colorSet: Color.ctrlPanel.stepper
                     )
@@ -109,15 +101,12 @@ struct ProfilePanelForChange: View {
 
                 HStack(spacing: 10) {
 
-                    self.title(
+                    self.TitleView(
                         NSLocalizedString("Spacing", comment: "")
                     )
 
                     StepperCustom(
-                        Binding<UInt>(
-                            get: {             self.profiles.current.spacing },
-                            set: { newValue in self.profiles.current.spacing = newValue }
-                        ),
+                        self.profiles.current.getBinding(\.spacing),
                         in: 0 ... UInt(ThisApp.CELL_SIZE), step: 5,
                         colorSet: Color.ctrlPanel.stepper
                     )
@@ -128,21 +117,18 @@ struct ProfilePanelForChange: View {
             .padding(.vertical  , 20)
             .frame(maxWidth: .infinity)
 
-            self.delimiter
+            self.DelimiterView()
 
             LazyVGrid(columns: self.columnsBody, spacing: self.elementSpacing) {
 
                 /* MARK: "Enlarge Icon on Hover" */
 
-                self.title(
+                self.TitleView(
                     NSLocalizedString("Enlarge Icon on Hover", comment: "")
                 )
 
                 StepperCustom(
-                    Binding<Decimal>(
-                        get: {             self.profiles.current.iconOnHoverZoom },
-                        set: { newValue in self.profiles.current.iconOnHoverZoom = newValue }
-                    ),
+                    self.profiles.current.getBinding(\.iconOnHoverZoom),
                     in: ThisApp.PROFILE_ICON_ON_HOVER_ZOOM_MIN ...
                         ThisApp.PROFILE_ICON_ON_HOVER_ZOOM_MAX, step: 0.1,
                     colorSet: Color.ctrlPanel.stepper
@@ -153,58 +139,46 @@ struct ProfilePanelForChange: View {
 
                 /* MARK: "Show Icon Title" */
 
-                self.title(
+                self.TitleView(
                     NSLocalizedString("Show Icon Title", comment: "")
                 )
 
                 ToggleCustom(
                     isFlexible: true,
-                    isOn: Binding<Bool>(
-                        get: {             self.profiles.current.isShowIconTitle },
-                        set: { newValue in self.profiles.current.isShowIconTitle = newValue }
-                    )
+                    isOn: self.profiles.current.getBinding(\.isShowIconTitle)
                 )
 
                 /* MARK: "Hide on Misclick" */
 
-                self.title(
+                self.TitleView(
                     NSLocalizedString("Hide on Misclick", comment: "")
                 )
 
                 ToggleCustom(
                     isFlexible: true,
-                    isOn: Binding<Bool>(
-                        get: {             self.profiles.current.isHideOnMisclick },
-                        set: { newValue in self.profiles.current.isHideOnMisclick = newValue }
-                    )
+                    isOn: self.profiles.current.getBinding(\.isHideOnMisclick)
                 )
 
                 /* MARK: "Sticky Grid" */
 
-                self.title(
+                self.TitleView(
                     NSLocalizedString("Sticky Grid", comment: "")
                 )
 
                 ToggleCustom(
                     isFlexible: true,
-                    isOn: Binding<Bool>(
-                        get: {             self.profiles.current.isStickyGrid },
-                        set: { newValue in self.profiles.current.isStickyGrid = newValue }
-                    )
+                    isOn: self.profiles.current.getBinding(\.isStickyGrid)
                 )
 
                 /* MARK: "Show Window Title Buttons" */
 
-                self.title(
+                self.TitleView(
                     NSLocalizedString("Show Window Title Buttons", comment: "")
                 )
 
                 ToggleCustom(
                     isFlexible: true,
-                    isOn: Binding<Bool>(
-                        get: {             self.profiles.current.isShowWinTitleButtons },
-                        set: { newValue in self.profiles.current.isShowWinTitleButtons = newValue }
-                    )
+                    isOn: self.profiles.current.getBinding(\.isShowWinTitleButtons)
                 )
 
             }
@@ -212,32 +186,32 @@ struct ProfilePanelForChange: View {
             .padding(.vertical  , 20)
             .frame(maxWidth: .infinity)
 
-            self.delimiter
+            self.DelimiterView()
 
             LazyVGrid(columns: self.columnsBody, spacing: self.elementSpacing) {
 
                 /* MARK: Background */
 
-                self.title(
+                self.TitleView(
                     NSLocalizedString("Background", comment: "")
                 )
 
                 ColorPickerCustom(
-                    Binding<ColorHSBValue>(
-                        get: {             self.profiles.current.background },
-                        set: { newColor in self.profiles.current.background = newColor }
-                    ), openerSize: .init(width: 40, height: 15), openerRadius: 10, isInstantUpdate: true
+                    self.profiles.current.getBinding(\.background),
+                    openerSize: .init(width: 40, height: 15),
+                    openerRadius: 10,
+                    isInstantUpdate: true
                 )
 
-                self.title(
+                self.TitleView(
                     NSLocalizedString("Background (Dark Scheme)", comment: "")
                 )
 
                 ColorPickerCustom(
-                    Binding<ColorHSBValue>(
-                        get: {             self.profiles.current.backgroundDark },
-                        set: { newColor in self.profiles.current.backgroundDark = newColor }
-                    ), openerSize: .init(width: 40, height: 15), openerRadius: 10, isInstantUpdate: true
+                    self.profiles.current.getBinding(\.backgroundDark),
+                    openerSize: .init(width: 40, height: 15),
+                    openerRadius: 10,
+                    isInstantUpdate: true
                 )
 
             }
@@ -248,12 +222,15 @@ struct ProfilePanelForChange: View {
         }.padding(.vertical, 10)
     }
 
-    @ViewBuilder var deleteProfile: some View {
+    @ViewBuilder private func DeleteProfileView() -> some View {
         HStack(spacing: self.elementSpacing) {
             ButtonCustom(
                 NSLocalizedString("delete profile", comment: ""),
                 disabled: self.profiles.current.ID == ThisApp.EMBEDDED_PROFILE_ID,
-                style: .danger,
+                colorStyle: .danger,
+                isFlat: false,
+                font: .system(size: 14, weight: .regular),
+                padding: .init(top: 10, leading: 20, bottom: 10, trailing: 20),
                 flexibility: .size(200)
             )                   { self.isShowDeleteDialog = true }
             .onPressEnterOrSpace{ self.isShowDeleteDialog = true }

@@ -18,19 +18,11 @@ struct PickerCustom<Key>: View where Key: Hashable & Comparable {
     fileprivate let flexibility: Flexibility
     fileprivate let colorSet: ColorSet
     fileprivate let cornerRadius: CGFloat = 15
+    fileprivate let borderWidth: CGFloat = 4
 
-    fileprivate var itemsSorted: [(key: Key, value: String)] {
-        self.items.sortedBy(
-            order: self.sortedBy
-        )
-    }
-
-    fileprivate var KeyToIndex: [Key: Int] {
-        self.itemsSorted.enumerated().reduce(into: [Key: Int]()) { result, info in
-            let (index, item) = info
-            result[item.key] = index
-        }
-    }
+    fileprivate var keyToIndex: [Key: Int] = [:]
+    fileprivate var indexToKey: [Int: Key] = [:]
+    fileprivate var itemsSorted: [(key: Key, value: String)] = []
 
     init(
         selected: Binding<Key>,
@@ -46,14 +38,19 @@ struct PickerCustom<Key>: View where Key: Hashable & Comparable {
         self.isPlainListStyle = isPlainListStyle
         self.flexibility = flexibility
         self.colorSet = colorSet
+        self.itemsSorted = self.items.sortedBy(order: self.sortedBy)
+        self.itemsSorted.enumerated().forEach { index, keyValuePair in
+            self.keyToIndex[keyValuePair.key] = index
+            self.indexToKey[index] = keyValuePair.key
+        }
     }
 
     public var body: some View {
         if (self.items.isEmpty) {
-            self.opener
+            self.OpenerView()
                 .disabled(true)
         } else {
-            self.opener
+            self.OpenerView()
                 .onKeyPress(phases: .down) { press in
                     switch press.key {
                         case .upArrow, .downArrow, .return:
@@ -70,7 +67,7 @@ struct PickerCustom<Key>: View where Key: Hashable & Comparable {
         }
     }
 
-    @ViewBuilder private var opener: some View {
+    @ViewBuilder private func OpenerView() -> some View {
         Button {
             self.isOpened = true
         } label: {
@@ -80,13 +77,11 @@ struct PickerCustom<Key>: View where Key: Hashable & Comparable {
                 .padding(.vertical  , 5)
                 .flexibility(self.flexibility)
                 .foregroundStyle(self.colorSet.text)
-                .background {
+                .background(
                     RoundedRectangle(cornerRadius: self.cornerRadius)
-                        .stroke(self.colorSet.border, lineWidth: 4)
-                        .fill(self.colorSet.background)
-                }.contentShape(.focusEffect,
-                    RoundedRectangle(cornerRadius: self.cornerRadius)
-                )
+                        .stroke(self.colorSet.border, lineWidth: self.borderWidth)
+                        .fill(self.colorSet.background))
+                .contentShape(RoundedRectangle(cornerRadius: self.cornerRadius))
         }
         .hoverBehavior(.scaleEffect(from: 1.0, to: 1.02))
         .buttonStyle(.plain)
@@ -102,9 +97,9 @@ fileprivate struct PickerCustomPopover<Key>: View where Key: Hashable & Comparab
     }
 
     @FocusState private var focuser: Focuser?
-    @State private var hoveringKey: Key?
+    @State private var hoveredKey: Key?
 
-    private var rootView: PickerCustom<Key>
+    private let rootView: PickerCustom<Key>
 
     init(rootView: PickerCustom<Key>) {
         self.rootView = rootView
@@ -112,11 +107,11 @@ fileprivate struct PickerCustomPopover<Key>: View where Key: Hashable & Comparab
 
     public var body: some View {
         if (self.rootView.items.count > 8)
-             { self.listWithScroll }
-        else { self.list }
+             { self.ListWithScroll() }
+        else { self.ListView() }
     }
 
-    private var list: some View {
+    @ViewBuilder private func ListView() -> some View {
         VStack(spacing: 10) {
             ForEach(Array(self.rootView.itemsSorted.enumerated()), id: \.element.key) { index, item in
                 Button {
@@ -125,7 +120,7 @@ fileprivate struct PickerCustomPopover<Key>: View where Key: Hashable & Comparab
                 } label: {
                     var backgroundColor: Color {
                         if (self.rootView.selectedKey      == item.key) { return self.rootView.colorSet.itemSelectedBackground }
-                        if (self.hoveringKey               == item.key) { return self.rootView.colorSet.itemHoveringBackground }
+                        if (self.hoveredKey                == item.key) { return self.rootView.colorSet.itemHoveringBackground }
                         if (self.rootView.isPlainListStyle == false   ) { return self.rootView.colorSet.itemBackground }
                         return Color.clear
                     }
@@ -137,12 +132,10 @@ fileprivate struct PickerCustomPopover<Key>: View where Key: Hashable & Comparab
                         .foregroundStyle(self.rootView.colorSet.itemText)
                         .background(
                             RoundedRectangle(cornerRadius: self.rootView.cornerRadius)
-                                .fill(backgroundColor)
-                        ).contentShape(.focusEffect,
-                            RoundedRectangle(cornerRadius: self.rootView.cornerRadius)
-                        )
+                                .fill(backgroundColor))
+                        .contentShape(RoundedRectangle(cornerRadius: self.rootView.cornerRadius))
                         .onHover { isHovering in
-                            self.hoveringKey = isHovering ? item.key : nil
+                            self.hoveredKey = isHovering ? item.key : nil
                         }
                 }
                 .pointerStyle(.link)
@@ -153,7 +146,7 @@ fileprivate struct PickerCustomPopover<Key>: View where Key: Hashable & Comparab
         }
         .padding(10)
         .onAppear {
-            let index = self.rootView.KeyToIndex[self.rootView.selectedKey] ?? 0
+            let index = self.rootView.keyToIndex[self.rootView.selectedKey] ?? 0
             self.focuser = .item(index: index)
         }
         .onKeyPress(phases: .down) { press in
@@ -184,7 +177,7 @@ fileprivate struct PickerCustomPopover<Key>: View where Key: Hashable & Comparab
         }
     }
 
-    private var listWithScroll: some View {
+    @ViewBuilder private func ListWithScroll() -> some View {
         ScrollViewReader { scrollProxy in
             List {
                 ForEach(Array(self.rootView.itemsSorted.enumerated()), id: \.element.key) { index, item in
@@ -194,7 +187,7 @@ fileprivate struct PickerCustomPopover<Key>: View where Key: Hashable & Comparab
                     } label: {
                         var backgroundColor: Color {
                             if (self.rootView.selectedKey      == item.key) { return self.rootView.colorSet.itemSelectedBackground }
-                            if (self.hoveringKey               == item.key) { return self.rootView.colorSet.itemHoveringBackground }
+                            if (self.hoveredKey                == item.key) { return self.rootView.colorSet.itemHoveringBackground }
                             if (self.rootView.isPlainListStyle == false   ) { return self.rootView.colorSet.itemBackground }
                             return Color.clear
                         }
@@ -206,12 +199,10 @@ fileprivate struct PickerCustomPopover<Key>: View where Key: Hashable & Comparab
                             .foregroundStyle(self.rootView.colorSet.itemText)
                             .background(
                                 RoundedRectangle(cornerRadius: self.rootView.cornerRadius)
-                                    .fill(backgroundColor)
-                            ).contentShape(.focusEffect,
-                                RoundedRectangle(cornerRadius: self.rootView.cornerRadius)
-                            )
+                                    .fill(backgroundColor))
+                            .contentShape(RoundedRectangle(cornerRadius: self.rootView.cornerRadius))
                             .onHover { isHovering in
-                                self.hoveringKey = isHovering ? item.key : nil
+                                self.hoveredKey = isHovering ? item.key : nil
                             }
                     }
                     .pointerStyle(.link)
@@ -222,7 +213,7 @@ fileprivate struct PickerCustomPopover<Key>: View where Key: Hashable & Comparab
             }
             .listStyle(.sidebar)
             .onAppear {
-                let index = self.rootView.KeyToIndex[self.rootView.selectedKey] ?? 0
+                let index = self.rootView.keyToIndex[self.rootView.selectedKey] ?? 0
                 self.focuser = .item(index: index)
             }
             .onKeyPress(phases: .down) { press in
@@ -264,21 +255,21 @@ fileprivate struct PickerCustomPopover<Key>: View where Key: Hashable & Comparab
 /* ########################## PREVIEW ########################## */
 /* ############################################################# */
 
-func generatePreviewItems_intKey(count: Int) -> [UInt: String] {
+fileprivate func generatePreviewItems_intKey(count: Int) -> [UInt: String] {
     (1000 ..< 1000 + count).reduce(into: [UInt: String]()) { result, i in
         if (i == 1005) { result[UInt(i)] = "Value \(i) long long long long long long" }
         else           { result[UInt(i)] = "Value \(i)" }
     }
 }
 
-func generatePreviewItems_strKey(count: Int) -> [String: String] {
+fileprivate func generatePreviewItems_strKey(count: Int) -> [String: String] {
     (1000 ..< 1100).reduce(into: [String: String]()) { result, i in
         if (i == 1005) { result["ID:\(i)"] = "Value \(i) long long long long long long" }
         else           { result["ID:\(i)"] = "Value \(i)" }
     }
 }
 
-func generatePreviewItems_forSort() -> [String: String] {[
+fileprivate func generatePreviewItems_forSort() -> [String: String] {[
     "key1": "Значение Б",
     "key3": "Значение Я",
     "key5": "Значение Ё",
@@ -315,7 +306,9 @@ func generatePreviewItems_forSort() -> [String: String] {[
             PickerCustom<String>(selected: $selectedKeyString, items: generatePreviewItems_strKey(count: 30))
         }
 
-    }.frame(minWidth: 250, minHeight: 600)
+    }
+    .frame(minWidth: 250, minHeight: 600)
+    .background(Color.gray)
 }
 
 #Preview {
@@ -346,33 +339,35 @@ func generatePreviewItems_forSort() -> [String: String] {[
             PickerCustom<String>(selected: $selectedKeyString, items: generatePreviewItems_strKey(count: 30), isPlainListStyle: true)
         }
 
-    }.frame(minWidth: 250, minHeight: 600)
+    }
+    .frame(minWidth: 250, minHeight: 600)
+    .background(Color.gray)
 }
 
-
 #Preview {
-    @Previewable @State var selectedKeyInt: UInt = 0
+    @Previewable @State var selected: UInt = 0
     VStack {
         Text("Flexibility:").font(.headline)
-        PickerCustom<UInt>(selected: $selectedKeyInt, items: generatePreviewItems_intKey(count: 30))
-        PickerCustom<UInt>(selected: $selectedKeyInt, items: generatePreviewItems_intKey(count: 30), flexibility: .none)
-        PickerCustom<UInt>(selected: $selectedKeyInt, items: generatePreviewItems_intKey(count: 30), flexibility: .size(100))
-        PickerCustom<UInt>(selected: $selectedKeyInt, items: generatePreviewItems_intKey(count: 30), flexibility: .infinity)
+        PickerCustom<UInt>(selected: $selected, items: generatePreviewItems_intKey(count: 30))
+        PickerCustom<UInt>(selected: $selected, items: generatePreviewItems_intKey(count: 30), flexibility: .none)
+        PickerCustom<UInt>(selected: $selected, items: generatePreviewItems_intKey(count: 30), flexibility: .size(100))
+        PickerCustom<UInt>(selected: $selected, items: generatePreviewItems_intKey(count: 30), flexibility: .infinity)
     }
     .padding(20)
     .frame(width: 200)
+    .background(Color.gray)
 }
 
-
 #Preview {
-    @Previewable @State var selectedKeyString: String = ""
+    @Previewable @State var selected: String = ""
     VStack {
         Text("Sort:").font(.headline)
-        PickerCustom<String>(selected: $selectedKeyString, items: generatePreviewItems_forSort(), sortedBy: .keyAsc)
-        PickerCustom<String>(selected: $selectedKeyString, items: generatePreviewItems_forSort(), sortedBy: .keyDsc)
-        PickerCustom<String>(selected: $selectedKeyString, items: generatePreviewItems_forSort(), sortedBy: .valueAsc)
-        PickerCustom<String>(selected: $selectedKeyString, items: generatePreviewItems_forSort(), sortedBy: .valueDsc)
+        PickerCustom<String>(selected: $selected, items: generatePreviewItems_forSort(), sortedBy: .keyAsc)
+        PickerCustom<String>(selected: $selected, items: generatePreviewItems_forSort(), sortedBy: .keyDsc)
+        PickerCustom<String>(selected: $selected, items: generatePreviewItems_forSort(), sortedBy: .valueAsc)
+        PickerCustom<String>(selected: $selected, items: generatePreviewItems_forSort(), sortedBy: .valueDsc)
     }
     .padding(20)
     .frame(width: 200)
+    .background(Color.gray)
 }

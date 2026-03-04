@@ -22,7 +22,7 @@ struct GridCustom: View {
     @State private var stickyGridDelayTimer: Timer.Custom!
     @State private var stickyGridTimer: Timer.Custom!
     @State private var cellsVisibilityDelayTimer: Timer.Custom!
-    @State private var cellsVisibility: [CellID.Value: Bool] = [:]
+    @State private var cellsVisibility: Set<CellID.Value> = []
 
     private let source: DataSource
     private let cellSize: CGFloat
@@ -82,7 +82,7 @@ struct GridCustom: View {
     }
 
     public var body: some View {
-        ScrollView([.horizontal, .vertical]) { self.grid }
+        ScrollView([.horizontal, .vertical]) { self.GridView() }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .scrollDisabled(self.isScrollDisabled)
             .scrollPosition(self.$scrollPosition)
@@ -104,7 +104,7 @@ struct GridCustom: View {
             }
     }
 
-    @ViewBuilder private var grid: some View {
+    @ViewBuilder private func GridView() -> some View {
         if let bounds = self.source.bounds {
             switch self.gridType {
 
@@ -116,7 +116,7 @@ struct GridCustom: View {
                             let rowNum = CellID.Index(rowNum)
                             let colNum = CellID.Index(colNum)
                             if var cell = self.source[rowNum, colNum] {
-                                let _ = { cell.isVisible = self.cellsVisibility[cell.ID] ?? false }()
+                                let _ = { cell.isVisible = self.cellsVisibility.contains(cell.ID) }()
                                 AnyView(cell)
                                     .hoverBehavior(.zIndex(to: 1))
                                     .id(cell.ID)
@@ -135,7 +135,7 @@ struct GridCustom: View {
                             let rowNum = CellID.Index(rowNum)
                             let colNum = CellID.Index(colNum)
                             if var cell = self.source[rowNum, colNum] {
-                                let _ = { cell.isVisible = self.cellsVisibility[cell.ID] ?? false }()
+                                let _ = { cell.isVisible = self.cellsVisibility.contains(cell.ID) }()
                                 AnyView(cell)
                                     .hoverBehavior(.zIndex(to: 1))
                                     .id(cell.ID)
@@ -156,7 +156,7 @@ struct GridCustom: View {
                             let rowNum = CellID.Index(rowNum)
                             let colNum = CellID.Index(colNum)
                             if var cell = self.source[rowNum, colNum] {
-                                let _ = { cell.isVisible = self.cellsVisibility[cell.ID] ?? false }()
+                                let _ = { cell.isVisible = self.cellsVisibility.contains(cell.ID) }()
                                 AnyView(cell)
                                     .id(cell.ID)
                             } else {
@@ -178,9 +178,11 @@ struct GridCustom: View {
             repeats: .count(1),
             delay: 0.1,
             onExpire: { _ in
-                self.cellsVisibility = [:]
+                self.cellsVisibility.removeAll()
                 for (cellIDValue, cellFrame) in self.cellsFrame {
-                    self.cellsVisibility[cellIDValue] = cellFrame.intersects(self.visibleFrame)
+                    if (cellFrame.intersects(self.visibleFrame)) {
+                        self.cellsVisibility.insert(cellIDValue)
+                    }
                 }
             }
         )
