@@ -40,7 +40,7 @@
     </filter>
   </defs>
   <rect style="stroke-width: 21.333; filter: url(&quot;#drop-shadow-filter-1&quot;); fill: url(&quot;#gradient-0&quot;);" x="100" y="100" width="820" height="820" rx="127.5" ry="127.5"/>
-  <g style="transform-origin: 512.001px 512px;" transform="matrix(1.279244, 0, 0, 1.279244, 0.000135, -39.735382)">
+  <g style="transform-origin: 512.001px 512px;" transform="matrix(0.984452, 0, 0, 0.984452, 0.000003, -6.99357)">
     <g>
       <path style="stroke-linecap: round; stroke-linejoin: round; stroke-width: 20; fill: rgb(246, 94, 73); stroke: rgb(0, 0, 0);" d="M 411.124 717.226 L 326.133 787.365 C 318.048 793.728 311.232 790.343 312.07 773.75 L 312.998 663.559 C 314.085 647.722 319.43 632.877 327.061 621.717 C 334.852 610.297 373.327 567.91 396.653 549.457 L 411.124 717.226 Z"/>
       <path style="stroke-linecap: round; stroke-linejoin: round; stroke-width: 20; fill: rgb(209, 78, 65); transform-box: fill-box; transform-origin: 50% 50%; stroke: rgb(0, 0, 0);" d="M 712.001 622.599 L 627.01 552.46 C 618.925 546.097 612.109 549.482 612.947 566.075 L 613.875 676.266 C 614.962 692.103 620.307 706.948 627.938 718.108 C 635.729 729.528 674.204 771.915 697.53 790.368 L 712.001 622.599 Z" transform="matrix(-1, 0, 0, -1, -0.000052, 0.000096)"/>
