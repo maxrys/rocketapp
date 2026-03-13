@@ -17,6 +17,18 @@ nonisolated struct MiniGridValue: Equatable {
         self[keyPath: keyPath] = value
     }
 
+    init(
+        cell1Value: AppValue? = nil,
+        cell2Value: AppValue? = nil,
+        cell3Value: AppValue? = nil,
+        cell4Value: AppValue? = nil,
+    ) {
+        self.cell1 = cell1Value
+        self.cell2 = cell2Value
+        self.cell3 = cell3Value
+        self.cell4 = cell4Value
+    }
+
     var isEmpty: Bool {
         self.cell1 == nil &&
         self.cell2 == nil &&

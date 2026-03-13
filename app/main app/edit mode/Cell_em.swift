@@ -56,18 +56,26 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
                     case .main:
                         self.MainCellView()
                     case .mini:
-                        LazyVGrid(columns: self.miniGridColumns, spacing: 0) {
-                            self.MiniCellView(keyPath: \.cell1).id(1)
-                            self.MiniCellView(keyPath: \.cell2).id(2)
-                            self.MiniCellView(keyPath: \.cell3).id(3)
-                            self.MiniCellView(keyPath: \.cell4).id(4)
+                        Grid(alignment: .center, horizontalSpacing: 0, verticalSpacing: 0) {
+                            GridRow {
+                                self.MiniCellView(keyPath: \.cell1).id(1).hoverBehavior(.zIndex(to: 1))
+                                self.MiniCellView(keyPath: \.cell2).id(2).hoverBehavior(.zIndex(to: 1))
+                            }
+                            GridRow {
+                                self.MiniCellView(keyPath: \.cell3).id(3).hoverBehavior(.zIndex(to: 1))
+                                self.MiniCellView(keyPath: \.cell4).id(4).hoverBehavior(.zIndex(to: 1))
+                            }
                         }
                     case .none:
-                        LazyVGrid(columns: self.miniGridColumns, spacing: 0) {
-                            self.MiniCellView(keyPath: \.cell1).id(1)
-                            self.MiniCellView(keyPath: \.cell2).id(2)
-                            self.MiniCellView(keyPath: \.cell3).id(3)
-                            self.MiniCellView(keyPath: \.cell4).id(4)
+                        Grid(alignment: .center, horizontalSpacing: 0, verticalSpacing: 0) {
+                            GridRow {
+                                self.MiniCellView(keyPath: \.cell1).id(1).hoverBehavior(.zIndex(to: 1))
+                                self.MiniCellView(keyPath: \.cell2).id(2).hoverBehavior(.zIndex(to: 1))
+                            }
+                            GridRow {
+                                self.MiniCellView(keyPath: \.cell3).id(3).hoverBehavior(.zIndex(to: 1))
+                                self.MiniCellView(keyPath: \.cell4).id(4).hoverBehavior(.zIndex(to: 1))
+                            }
                         }
                         self.MainCellView()
                 }
@@ -77,6 +85,7 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
             }
         }
         .frame(width: self.size, height: self.size)
+        .hoverBehavior(.zIndex(to: 1))
     }
 
     @ViewBuilder private func FakeCellView() -> some View {
@@ -103,19 +112,17 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
                         }
                     }
                 case .main(let appValue):
-                    Image(nsImage: appValue.resolvedIcon)
-                        .resizable()
-                        .onDrag({ self.onDragAppValue() }, preview: {
-                            Image(nsImage: appValue.resolvedIcon)
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                        })
-                        .overlay(alignment: .topTrailing) {
-                            self.ButtonDeleteView(self.size * 0.25) {
-                                self.delete()
-                            }
-                        }
-                        .scaleEffect(1.15)
+                    AppIcon_editMode(
+                        name: appValue.name,
+                        icon: appValue.resolvedIcon,
+                        cellSize: self.size,
+                        onDelete: { self.delete() }
+                    )
+                    .onDrag({ self.onDragAppValue() }, preview: {
+                        Image(nsImage: appValue.resolvedIcon)
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                    })
                 default:
                     Color.clear
             }
@@ -136,18 +143,18 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
                     }
                 case .mini(let miniGrid):
                     if let appValue = miniGrid[keyPath: keyPath] {
-                        Image(nsImage: appValue.resolvedIcon)
-                            .resizable()
-                            .onDrag({ self.onDragAppValue(from: keyPath) }, preview: {
-                                Image(nsImage: appValue.resolvedIcon)
-                                    .resizable()
-                                    .frame(width: 20, height: 20)
-                            })
-                            .overlay(alignment: .topTrailing) {
-                                self.ButtonDeleteView(self.size * 0.15) {
-                                    self.delete(from: keyPath)
-                                }
-                            }
+                        AppIcon_editMode(
+                            name: appValue.name,
+                            icon: appValue.resolvedIcon,
+                            cellSize: self.sizeCellMini,
+                            isMiniGrid: true,
+                            onDelete: { self.delete(from: keyPath) }
+                        )
+                        .onDrag({ self.onDragAppValue(from: keyPath) }, preview: {
+                            Image(nsImage: appValue.resolvedIcon)
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                        })
                     } else {
                         self.ButtonInsertView(self.sizeCellMiniButton, to: keyPath) {
                             if let appValue = AppValue.fromDialog() {
@@ -172,25 +179,6 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
             onDrop: { providers in
                 self.onDropAppValue(providers, to: keyPath)
             }
-        )
-    }
-
-    @ViewBuilder private func ButtonDeleteView(_ size: CGFloat, onClick: @escaping () -> Void) -> some View {
-        ButtonRound(
-            label: {
-                Image(systemName: "minus")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding(size * 0.25)
-            },
-            foreground: { Color.ButtonCustomStyle.danger.text },
-            background: { Circle().fill(Color.ButtonCustomStyle.danger.background.gradient) },
-            size: size,
-            onClick: onClick
-        ).shadow(
-            color: .black,
-            radius: size * 0.1,
-            y: size * 0.1
         )
     }
 
@@ -296,7 +284,7 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
 
 }
 
-struct Cell_editMode_ButtonInsert: View {
+fileprivate struct Cell_editMode_ButtonInsert: View {
 
     @State private var isHovering = false
 
@@ -325,10 +313,12 @@ struct Cell_editMode_ButtonInsert: View {
 /* ############################################################# */
 
 #Preview {
-    @Previewable @State var mockForNone = CellsState.initMock(profileID: ThisApp.PREVIEW_PROFILE_ID)
+    @Previewable @State var mockForNone = CellsState.initMock(
+        profileID: ThisApp.PREVIEW_PROFILE_ID
+    )
     @Previewable @State var mockForMain: CellsState = {
         let data = CellsState.initMock(profileID: ThisApp.PREVIEW_PROFILE_ID)
-        data.insert(0, CellValue.main(.init(
+        data.insert(0, .main(.init(
             bundleID: ThisApp.DEMO_BUNDLE_ID,
             name: ThisApp.DEMO_NAME,
             path: ThisApp.DEMO_PATH,
@@ -338,17 +328,19 @@ struct Cell_editMode_ButtonInsert: View {
     }()
     @Previewable @State var mockForMini: CellsState = {
         let data = CellsState.initMock(profileID: ThisApp.PREVIEW_PROFILE_ID)
-        data.insert(0, CellValue.mini(.init(keyPath: \.cell1, value: .init(
-            bundleID: ThisApp.DEMO_BUNDLE_ID,
-            name: ThisApp.DEMO_NAME,
-            path: ThisApp.DEMO_PATH,
-            icon: nil
-        ))))
+        data.insert(0, .mini(.init(
+            cell1Value: .init(bundleID: ThisApp.DEMO_BUNDLE_ID, name: ThisApp.DEMO_NAME, path: ThisApp.DEMO_PATH, icon: nil),
+            cell2Value: .init(bundleID: ThisApp.DEMO_BUNDLE_ID, name: ThisApp.DEMO_NAME, path: ThisApp.DEMO_PATH, icon: nil),
+            cell3Value: .init(bundleID: ThisApp.DEMO_BUNDLE_ID, name: ThisApp.DEMO_NAME, path: ThisApp.DEMO_PATH, icon: nil),
+            cell4Value: .init(bundleID: ThisApp.DEMO_BUNDLE_ID, name: ThisApp.DEMO_NAME, path: ThisApp.DEMO_PATH, icon: nil)
+        )))
         return data
     }()
-    VStack(spacing: 10) {
-        Cell_editMode(ID: 0, size: 100, isVisible: true).environment(\.cellsState, mockForNone).padding(10)
-        Cell_editMode(ID: 0, size: 100, isVisible: true).environment(\.cellsState, mockForMain).padding(10)
-        Cell_editMode(ID: 0, size: 100, isVisible: true).environment(\.cellsState, mockForMini).padding(10)
-    }.padding(10)
+    Grid(alignment: .center, horizontalSpacing: 0, verticalSpacing: 0) {
+        Cell_editMode(ID: 0, size: 100, isVisible: true).id(1).environment(\.cellsState, mockForNone)
+        Cell_editMode(ID: 0, size: 100, isVisible: true).id(2).environment(\.cellsState, mockForMain)
+        Cell_editMode(ID: 0, size: 100, isVisible: true).id(3).environment(\.cellsState, mockForMini)
+    }
+    .padding(20)
+    .frame(width: 200)
 }

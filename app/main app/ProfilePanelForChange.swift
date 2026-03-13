@@ -44,11 +44,24 @@ struct ProfilePanelForChange: View {
         }.frame(width: 450)
     }
 
-    @ViewBuilder private func TitleView(_ text: String) -> some View {
+    @ViewBuilder private func TitleView(_ text: String, _ description: String? = nil) -> some View {
+        VStack(alignment: .leading, spacing: 1) {
+            Text(text)
+                .font(.headline)
+                .lineLimit(1)
+                .fixedSize(horizontal: true, vertical: false)
+            if let description {
+                Text(description)
+                    .font(.system(size: 10))
+                    .opacity(0.3)
+            }
+        }
+    }
+
+    @ViewBuilder private func DescriptionView(_ text: String) -> some View {
         Text(text)
-            .font(.headline)
-            .lineLimit(1)
-            .fixedSize(horizontal: true, vertical: false)
+            .font(.system(size: 10))
+            .opacity(0.5)
     }
 
     @ViewBuilder private func DelimiterView() -> some View {
@@ -140,7 +153,8 @@ struct ProfilePanelForChange: View {
                 /* MARK: "Show Icon Title" */
 
                 self.TitleView(
-                    NSLocalizedString("Show Icon Title", comment: "")
+                    NSLocalizedString("Show Icon Title", comment: ""),
+                    NSLocalizedString("turn off to improve performance", comment: "")
                 )
 
                 ToggleCustom(

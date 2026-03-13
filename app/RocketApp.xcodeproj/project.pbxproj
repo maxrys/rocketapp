@@ -25,6 +25,7 @@
 		505849672E97E23100B9F421 /* CellsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505849662E97E23000B9F421 /* CellsState.swift */; };
 		505849712E9A818400B9F421 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505849702E9A818400B9F421 /* Tests.swift */; };
 		5058497B2E9A8D5D00B9F421 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5058497A2E9A8D5B00B9F421 /* View.swift */; };
+		506421C02F616F9F0020F6C8 /* AppIcon_em.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506421BF2F616F9F0020F6C8 /* AppIcon_em.swift */; };
 		507501412EF2117100624409 /* ProgressCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507501402EF2117100624409 /* ProgressCustom.swift */; };
 		507501472EF54D8200624409 /* CellID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507501462EF54D8200624409 /* CellID.swift */; };
 		507501482EF54D8200624409 /* CellID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507501462EF54D8200624409 /* CellID.swift */; };
@@ -52,7 +53,7 @@
 		50CE722B2EE0E97F00FE3282 /* AppDragValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE722A2EE0E97F00FE3282 /* AppDragValue.swift */; };
 		50CE72342EE62E8F00FE3282 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE72332EE62E8F00FE3282 /* Logger.swift */; };
 		50CE72382EE6B9D400FE3282 /* NSApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE72372EE6B9D400FE3282 /* NSApplication.swift */; };
-		50CE723A2EE6D48200FE3282 /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE72392EE6D48200FE3282 /* AppIcon.swift */; };
+		50CE723A2EE6D48200FE3282 /* AppIcon_vm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE72392EE6D48200FE3282 /* AppIcon_vm.swift */; };
 		50CE723D2EE9687300FE3282 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 50CE723C2EE9687300FE3282 /* Localizable.xcstrings */; };
 		50CE72452EEAC80000FE3282 /* MainGrid_em.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE72442EEAC80000FE3282 /* MainGrid_em.swift */; };
 		50CE72542EED6BE200FE3282 /* CellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE72532EED6BDD00FE3282 /* CellProtocol.swift */; };
@@ -111,8 +112,9 @@
 		505849662E97E23000B9F421 /* CellsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellsState.swift; sourceTree = "<group>"; };
 		505849702E9A818400B9F421 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		5058497A2E9A8D5B00B9F421 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
-		506421CF2F644E280020F6C8 /* RocketApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RocketApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		506421D02F644E280020F6C8 /* RocketApp Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RocketApp Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		506421BD2F616C750020F6C8 /* RocketApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RocketApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		506421BE2F616C750020F6C8 /* RocketApp Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RocketApp Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		506421BF2F616F9F0020F6C8 /* AppIcon_em.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon_em.swift; sourceTree = "<group>"; };
 		507501402EF2117100624409 /* ProgressCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCustom.swift; sourceTree = "<group>"; };
 		507501462EF54D8200624409 /* CellID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellID.swift; sourceTree = "<group>"; };
 		507501492EF6A70300624409 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
@@ -139,7 +141,7 @@
 		50CE722A2EE0E97F00FE3282 /* AppDragValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDragValue.swift; sourceTree = "<group>"; };
 		50CE72332EE62E8F00FE3282 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		50CE72372EE6B9D400FE3282 /* NSApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSApplication.swift; sourceTree = "<group>"; };
-		50CE72392EE6D48200FE3282 /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
+		50CE72392EE6D48200FE3282 /* AppIcon_vm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon_vm.swift; sourceTree = "<group>"; };
 		50CE723C2EE9687300FE3282 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = SOURCE_ROOT; };
 		50CE72442EEAC80000FE3282 /* MainGrid_em.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGrid_em.swift; sourceTree = "<group>"; };
 		50CE72532EED6BDD00FE3282 /* CellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellProtocol.swift; sourceTree = "<group>"; };
@@ -330,8 +332,8 @@
 				50EE8BA02ED46624002DFEA5 /* state */,
 				5013DB612E9D6EF100BEDC5E /* main app */,
 				5013DB602E9D6EC900BEDC5E /* test */,
-				506421CF2F644E280020F6C8 /* RocketApp.app */,
-				506421D02F644E280020F6C8 /* RocketApp Tests.xctest */,
+				506421BD2F616C750020F6C8 /* RocketApp.app */,
+				506421BE2F616C750020F6C8 /* RocketApp Tests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -340,7 +342,7 @@
 			children = (
 				508150702E81334600E12175 /* MainGrid_vm.swift */,
 				508150782E81448100E12175 /* Cell_vm.swift */,
-				50CE72392EE6D48200FE3282 /* AppIcon.swift */,
+				50CE72392EE6D48200FE3282 /* AppIcon_vm.swift */,
 			);
 			path = "view mode";
 			sourceTree = "<group>";
@@ -350,6 +352,7 @@
 			children = (
 				50CE72442EEAC80000FE3282 /* MainGrid_em.swift */,
 				5081507A2E8148AA00E12175 /* Cell_em.swift */,
+				506421BF2F616F9F0020F6C8 /* AppIcon_em.swift */,
 			);
 			path = "edit mode";
 			sourceTree = "<group>";
@@ -451,7 +454,7 @@
 			packageProductDependencies = (
 			);
 			productName = "RocketApp Tests";
-			productReference = 506421D02F644E280020F6C8 /* RocketApp Tests.xctest */;
+			productReference = 506421BE2F616C750020F6C8 /* RocketApp Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		508150602E81330E00E12175 /* RocketApp */ = {
@@ -470,7 +473,7 @@
 			packageProductDependencies = (
 			);
 			productName = RocketApp;
-			productReference = 506421CF2F644E280020F6C8 /* RocketApp.app */;
+			productReference = 506421BD2F616C750020F6C8 /* RocketApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -558,6 +561,7 @@
 				507501602EF9593400624409 /* ResultBuilder.swift in Sources */,
 				50EE8B952ECDDCDD002DFEA5 /* EnvironmentValues.swift in Sources */,
 				501D4DED2EBFC84B00919AB9 /* ToggleCustom.swift in Sources */,
+				506421C02F616F9F0020F6C8 /* AppIcon_em.swift in Sources */,
 				507501622EF9645700624409 /* Array.swift in Sources */,
 				50EE8B9E2ED1756E002DFEA5 /* AppValue.swift in Sources */,
 				50EE8B8B2ECC8953002DFEA5 /* GraphicsContext.swift in Sources */,
@@ -592,7 +596,7 @@
 				501D4DEB2EB9FB6000919AB9 /* CellValue.swift in Sources */,
 				508D6CF12EA8D22700885E95 /* NSWindow.swift in Sources */,
 				501D4DF12EC120CC00919AB9 /* Timer.swift in Sources */,
-				50CE723A2EE6D48200FE3282 /* AppIcon.swift in Sources */,
+				50CE723A2EE6D48200FE3282 /* AppIcon_vm.swift in Sources */,
 				50CE72542EED6BE200FE3282 /* CellProtocol.swift in Sources */,
 				50AFE98C2EB7730100815152 /* ProfileValue.swift in Sources */,
 				50EE8BB62ED79177002DFEA5 /* CellModelID.swift in Sources */,

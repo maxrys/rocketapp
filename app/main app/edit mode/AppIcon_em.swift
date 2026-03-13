@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-struct AppIcon: View, BackgroundColorProtocol {
+struct AppIcon_editMode: View, BackgroundColorProtocol {
 
     @Environment(\.colorScheme)          internal var colorScheme
     @Environment(\.windowBackground)     internal var background
@@ -19,24 +19,38 @@ struct AppIcon: View, BackgroundColorProtocol {
     private let icon: NSImage
     private let cellSize: CGFloat
     private let isMiniGrid: Bool
+    private let onDelete: () -> Void
 
     init(
         name: String,
         icon: NSImage,
         cellSize: CGFloat,
-        isMiniGrid: Bool = false
+        isMiniGrid: Bool = false,
+        onDelete: @escaping () -> Void = {}
     ) {
         self.name = name
         self.icon = icon
         self.cellSize = cellSize
         self.isMiniGrid = isMiniGrid
+        self.onDelete = onDelete
     }
 
     public var body: some View {
         Image(nsImage: self.icon)
             .resizable()
+            .frame(width: self.cellSize, height: self.cellSize)
             .aspectRatio(contentMode: .fit)
-            .contentShape(.focusEffect, RoundedRectangle(cornerRadius: self.cellSize / 8))
+            .overlay(alignment: .topTrailing) {
+                if (self.isHovering) {
+                    self.ButtonDeleteView(
+                        self.isMiniGrid ?
+                            self.cellSize * 0.35 :
+                            self.cellSize * 0.25
+                    ) {
+                        self.onDelete()
+                    }
+                }
+            }
             .overlay(alignment: .bottom) {
                 if (self.profiles.current.isShowIconTitle) {
                     if (self.isHovering) {
@@ -45,10 +59,9 @@ struct AppIcon: View, BackgroundColorProtocol {
                 }
             }
             .scaleEffect(self.isMiniGrid ? 1.0 : 1.15)
-            .hoverBehavior(.scaleEffect(from: 1.0, to: self.profiles.current.iconOnHoverZoom.double))
             .onHover { hovering in
                 self.isHovering = hovering
-            }
+            }.hoverBehavior(.zIndex(to: 1))
     }
 
     @ViewBuilder private func TitleView() -> some View {
@@ -76,6 +89,25 @@ struct AppIcon: View, BackgroundColorProtocol {
             )
     }
 
+    @ViewBuilder private func ButtonDeleteView(_ size: CGFloat, onClick: @escaping () -> Void) -> some View {
+        ButtonRound(
+            label: {
+                Image(systemName: "minus")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .padding(size * 0.25)
+            },
+            foreground: { Color.ButtonCustomStyle.danger.text },
+            background: { Circle().fill(Color.ButtonCustomStyle.danger.background.gradient) },
+            size: size,
+            onClick: onClick
+        ).shadow(
+            color: .black,
+            radius: size * 0.1,
+            y: size * 0.1
+        )
+    }
+
 }
 
 
@@ -85,22 +117,33 @@ struct AppIcon: View, BackgroundColorProtocol {
 /* ############################################################# */
 
 #Preview {
-    VStack(spacing: 10) {
-        AppIcon(
-            name: "App Title",
+    Grid(alignment: .center, horizontalSpacing: 0, verticalSpacing: 0) {
+        AppIcon_editMode(
+            name: "Application Title",
             icon: AppValue.APP_NO_ICON,
             cellSize: 100
-        ).zIndex(3)
-        AppIcon(
-            name: "App Title",
+        ).id(1)
+        AppIcon_editMode(
+            name: "Application Title",
             icon: ThisApp.DEMO_ICON,
             cellSize: 100
-        ).zIndex(2)
-        AppIcon(
-            name: "App with Long long long long long long long long title",
-            icon: ThisApp.DEMO_ICON,
-            cellSize: 100
-        ).zIndex(1)
+        ).id(2)
+        Grid(alignment: .center, horizontalSpacing: 0, verticalSpacing: 0) {
+            GridRow {
+                AppIcon_editMode(
+                    name: "Application Title",
+                    icon: AppValue.APP_NO_ICON,
+                    cellSize: 50,
+                    isMiniGrid: true
+                ).id(3)
+                AppIcon_editMode(
+                    name: "Application Title",
+                    icon: ThisApp.DEMO_ICON,
+                    cellSize: 50,
+                    isMiniGrid: true
+                ).id(4)
+            }
+        }
     }
     .padding(10)
     .frame(width: 200)

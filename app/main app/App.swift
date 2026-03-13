@@ -20,9 +20,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     static let NOT_APPLICABLE = "—"
     static let CONTAINER_PATH = "~/Library/Containers/maxrys.rocketapp"
-    static let DEMO_BUNDLE_ID = "com.apple.calculator"
-    static let DEMO_PATH = "file:///System/Applications/Calculator.app/"
-    static let DEMO_NAME = "Calculator"
+    static let DEMO_BUNDLE_ID = "rysmax.demo"
+    static let DEMO_PATH = "file:///System/Applications/Demo Application.app/"
+    static let DEMO_NAME = "Demo Application"
     static let DEMO_ICON = NSImage(named: "AppIcon")!
     static let MAIN_WINDOW_TITLE = "RocketApp"
     static let MAIN_WINDOW_ID = "mainGrid"

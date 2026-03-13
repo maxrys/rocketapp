@@ -51,7 +51,9 @@ struct MainGrid_editMode: View {
             cellSize: self.cellSize,
             cellSpacing: self.cellSpacing,
             isSticky: self.profiles.current.isStickyGrid,
-            gridType: .lazyVGrid
+            gridType: profiles.current.isShowIconTitle ?
+                .grid :
+                .lazyVGrid
         )
     }
 

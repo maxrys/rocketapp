@@ -38,7 +38,9 @@ struct MainGrid_viewMode: View {
             cellSize: self.cellSize,
             cellSpacing: self.cellSpacing,
             isSticky: self.profiles.current.isStickyGrid,
-            gridType: .grid
+            gridType: profiles.current.isShowIconTitle ?
+                .grid :
+                .lazyVGrid
         )
     }
 
