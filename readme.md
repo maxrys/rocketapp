@@ -25,5 +25,8 @@ The user can click on any application icon, and that application will be launche
 Launcher supports the creation of profiles (for example, for different monitor sizes).  
 Each profile can have its own individual settings and its own set of application icons.
 
-Launcher has open-source code.  
 Data is not collected.
+
+It is open-source software.  
+Free from subscription model.  
+Free from AI-generated code.
