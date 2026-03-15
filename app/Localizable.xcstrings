@@ -9,6 +9,12 @@
     },
     "Add new applications through the" : {
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дадайце новыя дадаткі праз"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19,6 +25,12 @@
     },
     "append profile" : {
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "дадаць профіль"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29,6 +41,12 @@
     },
     "Background" : {
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фон"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -39,6 +57,12 @@
     },
     "Background (Dark Scheme)" : {
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фон (цёмная схема)"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -49,6 +73,12 @@
     },
     "Cancel" : {
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Адмена"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -59,6 +89,12 @@
     },
     "Delete" : {
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выдаліць"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -69,6 +105,12 @@
     },
     "delete profile" : {
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "выдаліць профіль"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -79,6 +121,12 @@
     },
     "Delete profile\n \"%@\"" : {
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выдаліць профіль \n\"%@\""
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -89,6 +137,12 @@
     },
     "Enlarge Icon on Hover" : {
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Павелічэнне значка пры навядзенні"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -99,6 +153,12 @@
     },
     "Hide on Misclick" : {
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Схаваць пры хібным кліку"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -110,6 +170,12 @@
     "My Profile" : {
       "extractionState" : "manual",
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мой профіль"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -120,6 +186,12 @@
     },
     "No Applications" : {
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Няма дадаткаў"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -130,6 +202,12 @@
     },
     "no items" : {
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "няма элементаў"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -140,6 +218,12 @@
     },
     "Open Main Window" : {
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Адчыніць асноўнае акно"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -150,6 +234,12 @@
     },
     "Profile" : {
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профіль"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -160,6 +250,12 @@
     },
     "Profile Settings" : {
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Налады профілю"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -170,6 +266,12 @@
     },
     "Select this application" : {
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Абраць гэты дадатак"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -180,6 +282,12 @@
     },
     "settings" : {
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "наладкі"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -190,6 +298,12 @@
     },
     "Show Icon Title" : {
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Паказаць назву значка"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -200,6 +314,12 @@
     },
     "Show Window Title Buttons" : {
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Паказаць кнопкі акна"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -210,6 +330,12 @@
     },
     "Spacing" : {
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зазор"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -220,6 +346,12 @@
     },
     "Sticky Grid" : {
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ліпкая сетка"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -230,6 +362,12 @@
     },
     "Title" : {
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Загаловак"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -240,6 +378,12 @@
     },
     "turn off to improve performance" : {
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "адключыце для павышэння прадукцыйнасці"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -250,6 +394,12 @@
     },
     "Zoom" : {
       "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Маштаб"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
