@@ -5,6 +5,9 @@
 
 import SwiftUI
 
+protocol TabCustom_Item_Protocol: View {
+}
+
 struct TabCustom_Item: TabCustom_Item_Protocol {
 
     let title: String

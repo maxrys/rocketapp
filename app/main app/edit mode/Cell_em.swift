@@ -7,7 +7,7 @@ import os
 import SwiftUI
 import UniformTypeIdentifiers
 
-struct Cell_editMode: View, CellProtocol, BackgroundColorResolvingProtocol {
+struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
 
     @Environment(\.colorScheme)          internal var colorScheme
     @Environment(\.windowBackground)     internal var background
@@ -57,17 +57,17 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorResolvingProtocol {
                         self.MainCellView()
                     case .mini:
                         LazyVGrid(columns: self.miniGridColumns, spacing: 0) {
-                            self.MiniCellView(keyPath: \.cell1)
-                            self.MiniCellView(keyPath: \.cell2)
-                            self.MiniCellView(keyPath: \.cell3)
-                            self.MiniCellView(keyPath: \.cell4)
+                            self.MiniCellView(keyPath: \.cell1).id(1)
+                            self.MiniCellView(keyPath: \.cell2).id(2)
+                            self.MiniCellView(keyPath: \.cell3).id(3)
+                            self.MiniCellView(keyPath: \.cell4).id(4)
                         }
                     case .none:
                         LazyVGrid(columns: self.miniGridColumns, spacing: 0) {
-                            self.MiniCellView(keyPath: \.cell1)
-                            self.MiniCellView(keyPath: \.cell2)
-                            self.MiniCellView(keyPath: \.cell3)
-                            self.MiniCellView(keyPath: \.cell4)
+                            self.MiniCellView(keyPath: \.cell1).id(1)
+                            self.MiniCellView(keyPath: \.cell2).id(2)
+                            self.MiniCellView(keyPath: \.cell3).id(3)
+                            self.MiniCellView(keyPath: \.cell4).id(4)
                         }
                         self.MainCellView()
                 }
@@ -183,8 +183,8 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorResolvingProtocol {
                     .aspectRatio(contentMode: .fit)
                     .padding(size * 0.25)
             },
-            foreground: { Color.ButtonCustomColorSet.Style.danger.text },
-            background: { Circle().fill(Color.ButtonCustomColorSet.Style.danger.background.gradient) },
+            foreground: { Color.ButtonCustomStyle.danger.text },
+            background: { Circle().fill(Color.ButtonCustomStyle.danger.background.gradient) },
             size: size,
             onClick: onClick
         ).shadow(

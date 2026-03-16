@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-struct ColorPickerCustom: View {
+struct ColorPickerHSBO: View {
 
     enum ColorComponent {
         case H
@@ -225,9 +225,9 @@ struct ColorPickerCustom: View {
     @Previewable @State var pickerColorG = ColorHSBValue(0.33, 1.0, 1.0)
     @Previewable @State var pickerColorB = ColorHSBValue(0.66, 1.0, 1.0)
     VStack(spacing: 10) {
-        ColorPickerCustom($pickerColorR)
-        ColorPickerCustom($pickerColorG)
-        ColorPickerCustom($pickerColorB)
+        ColorPickerHSBO($pickerColorR)
+        ColorPickerHSBO($pickerColorG)
+        ColorPickerHSBO($pickerColorB)
     }
     .padding(20)
     .onChange(of: pickerColorR) { _, value in print(value.encode() ?? "") }

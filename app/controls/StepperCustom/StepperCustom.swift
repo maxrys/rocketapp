@@ -30,7 +30,7 @@ struct StepperCustom<T>: View where T: Numeric & Comparable {
     public var body: some View {
         HStack(spacing: 10) {
 
-            self.ButtonView(image: Image(systemName: "minus.circle"), disabled: self.value == self.range.lowerBound) {
+            self.ButtonView(image: Image(systemName: "minus.circle"), isDisabled: self.value == self.range.lowerBound) {
                 let newValue = self.value - self.step
                 self.value = newValue.fixBounds(
                     min: self.range.lowerBound,
@@ -55,7 +55,7 @@ struct StepperCustom<T>: View where T: Numeric & Comparable {
                 .foregroundStyle(self.colorSet.valueText)
                 .frame(minWidth: 30)
 
-            self.ButtonView(image: Image(systemName: "plus.circle"), disabled: self.value == self.range.upperBound) {
+            self.ButtonView(image: Image(systemName: "plus.circle"), isDisabled: self.value == self.range.upperBound) {
                 let newValue = self.value + self.step
                 self.value = newValue.fixBounds(
                     min: self.range.lowerBound,
@@ -69,12 +69,12 @@ struct StepperCustom<T>: View where T: Numeric & Comparable {
         .clipShape(Capsule())
     }
 
-    @ViewBuilder private func ButtonView(image: Image, disabled: Bool, onClick: @escaping () -> Void) -> some View {
+    @ViewBuilder private func ButtonView(image: Image, isDisabled: Bool, onClick: @escaping () -> Void) -> some View {
         ButtonRound(
             label     : { image },
             foreground: { self.colorSet.buttonText },
             background: { self.colorSet.buttonBackground },
-            disabled: disabled,
+            isDisabled: isDisabled,
             size: 25.0,
             onClick: onClick
         )

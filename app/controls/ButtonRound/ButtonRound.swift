@@ -10,7 +10,7 @@ struct ButtonRound<L: View, F: ShapeStyle, B: View>: View {
     private let label: L
     private let foreground: F
     private let background: B
-    private let disabled: Bool
+    private let isDisabled: Bool
     private let size: CGFloat
     private let onClick: () -> Void
 
@@ -18,14 +18,14 @@ struct ButtonRound<L: View, F: ShapeStyle, B: View>: View {
         @ViewBuilder label: () -> L,
         @ViewBuilder foreground: () -> F = { Color.black },
         @ViewBuilder background: () -> B = { Color.white },
-        disabled: Bool = false,
+        isDisabled: Bool = false,
         size: CGFloat = 30.0,
         onClick: @escaping () -> Void = { }
     ) {
         self.label = label()
         self.foreground = foreground()
         self.background = background()
-        self.disabled = disabled
+        self.isDisabled = isDisabled
         self.size = size
         self.onClick = onClick
     }
@@ -55,8 +55,8 @@ struct ButtonRound<L: View, F: ShapeStyle, B: View>: View {
         }
         .buttonStyle(.plain)
         .frame(width: self.size, height: self.size)
-        .pointerStyle(self.disabled ? .default : .link)
-        .disabled(self.disabled)
+        .disabled(self.isDisabled)
+        .pointerStyle(.link)
     }
 
 }
@@ -70,7 +70,7 @@ struct ButtonRound<L: View, F: ShapeStyle, B: View>: View {
 #Preview {
     VStack(spacing: 10) {
         ButtonRound( label: { Image(systemName: "plus.circle") } )
-        ButtonRound( label: { Image(systemName: "plus.circle") }, disabled: true )
+        ButtonRound( label: { Image(systemName: "plus.circle") }, isDisabled: true )
         ButtonRound(
             label: {
                 Image(systemName: "minus")

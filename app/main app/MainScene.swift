@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-struct MainScene: View, BackgroundColorResolvingProtocol {
+struct MainScene: View, BackgroundColorProtocol {
 
     @Environment(\.colorScheme)          internal var colorScheme
     @Environment(\.windowBackground)     internal var background
@@ -55,7 +55,7 @@ struct MainScene: View, BackgroundColorResolvingProtocol {
                         cellSpacing: self.cellSpacingFinal
                     ).onTapGesture {
                         if (self.profiles.current.isHideOnMisclick) {
-                            NSWindow.hideWithAnimation(windowId: ThisApp.MAIN_WINDOW_ID)
+                            NSWindow.hideWithAnimation(ThisApp.MAIN_WINDOW_ID)
                         }
                     }
                 }

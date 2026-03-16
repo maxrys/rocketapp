@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-struct AppIcon: View, BackgroundColorResolvingProtocol {
+struct AppIcon: View, BackgroundColorProtocol {
 
     @Environment(\.colorScheme)          internal var colorScheme
     @Environment(\.windowBackground)     internal var background

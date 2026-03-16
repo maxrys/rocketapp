@@ -27,7 +27,7 @@ struct ProfilePanelForAppend: View {
 
             ButtonCustom(
                 NSLocalizedString("append profile", comment: ""),
-                disabled: self.title.isEmpty,
+                isDisabled: self.title.isEmpty,
                 colorStyle: .accent,
                 isFlat: false,
                 font: .system(size: 14, weight: .regular),

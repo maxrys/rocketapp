@@ -7,10 +7,10 @@ import AppKit
 
 extension NSWindow {
 
-    static func get(ID: String) -> NSWindow? {
+    static func get(_ ID: String) -> NSWindow? {
         for window in NSApplication.shared.windows {
-            if let foundID = window.identifier {
-                if foundID.rawValue == ID {
+            if let foundID = window.ID {
+                if foundID == ID {
                     return window
                 }
             }
@@ -18,8 +18,8 @@ extension NSWindow {
         return nil
     }
 
-    static func hideWithAnimation(windowId: String) {
-        if let window = Self.get(ID: windowId) {
+    static func hideWithAnimation(_ ID: String, onComplete: @escaping () -> Void = {}) {
+        if let window = Self.get(ID) {
             if (window.isVisible) {
                 let steps: UInt = 10
                 _ = Timer.Custom(
@@ -30,17 +30,26 @@ extension NSWindow {
                         window.alphaValue = opacity
                     },
                     onExpire: { _ in
-                        window.close()
+                        window.hide()
+                        window.alphaValue = 1.0
+                        onComplete()
                     }
                 )
             }
         }
     }
 
+    func show() { self.makeKeyAndOrderFront(nil) }
+    func hide() { self.orderOut(nil) }
+
     func hideTitleButtons(isVisible: Bool = true) {
-        self.standardWindowButton(.closeButton)?.isHidden       = !isVisible
+        self.standardWindowButton(.closeButton      )?.isHidden = !isVisible
         self.standardWindowButton(.miniaturizeButton)?.isHidden = !isVisible
-        self.standardWindowButton(.zoomButton)?.isHidden        = !isVisible
+        self.standardWindowButton(.zoomButton       )?.isHidden = !isVisible
+    }
+
+    var ID: String? {
+        self.identifier?.rawValue
     }
 
 }

@@ -34,10 +34,8 @@ import SwiftData
 
     @ObservationIgnored var list: [ProfileID: ProfileTitle] {
         self.cache.reduce(into: [ProfileID: ProfileTitle]()) { (result, item) in
-            if (item.value.ID == ThisApp.EMBEDDED_PROFILE_ID && item.value.title.isEmpty != true) { result[item.value.ID] = "\(item.value.title)°" }
-            if (item.value.ID != ThisApp.EMBEDDED_PROFILE_ID && item.value.title.isEmpty != true) { result[item.value.ID] = "\(item.value.title)" }
-            if (item.value.ID == ThisApp.EMBEDDED_PROFILE_ID && item.value.title.isEmpty == true) { result[item.value.ID] = "ID: \(item.value.ID)°" }
-            if (item.value.ID != ThisApp.EMBEDDED_PROFILE_ID && item.value.title.isEmpty == true) { result[item.value.ID] = "ID: \(item.value.ID)" }
+            if (item.value.title.isEmpty != true) { result[item.value.ID] =     "\(item.value.title)" }
+            if (item.value.title.isEmpty == true) { result[item.value.ID] = "ID: \(item.value.ID)" }
         }
     }
 

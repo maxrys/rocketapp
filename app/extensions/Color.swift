@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-protocol BackgroundColorResolvingProtocol {
+protocol BackgroundColorProtocol {
 
     var colorScheme   : ColorScheme   { get }
     var background    : ColorHSBValue { get }
@@ -16,17 +16,17 @@ protocol BackgroundColorResolvingProtocol {
 
 }
 
-extension BackgroundColorResolvingProtocol {
+extension BackgroundColorProtocol {
 
     private func accentComponent(_ value: Double) -> Double {
         switch value {
-            case 0.0 ... 0.1: return value + 0.3
-            case 0.1 ... 0.2: return value + 0.2
-            case 0.2 ... 0.7: return value + 0.1
-            case 0.7 ... 0.8: return value - 0.1
-            case 0.8 ... 0.9: return value - 0.2
-            case 0.9 ... 1.0: return value - 0.3
-            default         : return value
+            case 0.0 ... 0.1: value + 0.3
+            case 0.1 ... 0.2: value + 0.2
+            case 0.2 ... 0.7: value + 0.1
+            case 0.7 ... 0.8: value - 0.1
+            case 0.8 ... 0.9: value - 0.2
+            case 0.9 ... 1.0: value - 0.3
+            default         : value
         }
     }
 

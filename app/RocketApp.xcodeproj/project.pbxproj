@@ -67,7 +67,7 @@
 		50CE9FD12F4718F9001006CF /* ControlPanelColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE9FD02F4718F9001006CF /* ControlPanelColor.swift */; };
 		50CE9FD32F47191F001006CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50CE9FD22F47191F001006CF /* Assets.xcassets */; };
 		50CEA0A92F4C576F001006CF /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 50CEA0A82F4C576F001006CF /* InfoPlist.xcstrings */; };
-		50EE8B892ECC888E002DFEA5 /* ColorPickerCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8B882ECC888E002DFEA5 /* ColorPickerCustom.swift */; };
+		50EE8B892ECC888E002DFEA5 /* ColorPickerHSBO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8B882ECC888E002DFEA5 /* ColorPickerHSBO.swift */; };
 		50EE8B8B2ECC8953002DFEA5 /* GraphicsContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8B8A2ECC8953002DFEA5 /* GraphicsContext.swift */; };
 		50EE8B912ECC8B11002DFEA5 /* ColorHSBValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8B902ECC8B11002DFEA5 /* ColorHSBValue.swift */; };
 		50EE8B952ECDDCDD002DFEA5 /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8B942ECDDCDC002DFEA5 /* EnvironmentValues.swift */; };
@@ -106,13 +106,13 @@
 		501D4DEC2EBFC84B00919AB9 /* ToggleCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleCustom.swift; sourceTree = "<group>"; };
 		501D4DF02EC120CC00919AB9 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		50447F682EEE9A5700C9B8D1 /* ProfilePanelForChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePanelForChange.swift; sourceTree = "<group>"; };
-		505849352E9109B600B9F421 /* RocketApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RocketApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		505849602E95341400B9F421 /* ModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelContainer.swift; sourceTree = "<group>"; };
 		505849612E95341400B9F421 /* ModelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelCell.swift; sourceTree = "<group>"; };
 		505849662E97E23000B9F421 /* CellsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellsState.swift; sourceTree = "<group>"; };
 		505849702E9A818400B9F421 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		505849772E9A81D400B9F421 /* RocketApp Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RocketApp Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5058497A2E9A8D5B00B9F421 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		506421CF2F644E280020F6C8 /* RocketApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RocketApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		506421D02F644E280020F6C8 /* RocketApp Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RocketApp Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		507501402EF2117100624409 /* ProgressCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCustom.swift; sourceTree = "<group>"; };
 		507501462EF54D8200624409 /* CellID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellID.swift; sourceTree = "<group>"; };
 		507501492EF6A70300624409 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
@@ -154,7 +154,7 @@
 		50CE9FD02F4718F9001006CF /* ControlPanelColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPanelColor.swift; sourceTree = "<group>"; };
 		50CE9FD22F47191F001006CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		50CEA0A82F4C576F001006CF /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
-		50EE8B882ECC888E002DFEA5 /* ColorPickerCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerCustom.swift; sourceTree = "<group>"; };
+		50EE8B882ECC888E002DFEA5 /* ColorPickerHSBO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerHSBO.swift; sourceTree = "<group>"; };
 		50EE8B8A2ECC8953002DFEA5 /* GraphicsContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsContext.swift; sourceTree = "<group>"; };
 		50EE8B902ECC8B11002DFEA5 /* ColorHSBValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHSBValue.swift; sourceTree = "<group>"; };
 		50EE8B942ECDDCDC002DFEA5 /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
@@ -236,15 +236,15 @@
 			isa = PBXGroup;
 			children = (
 				50CE9FC52F471715001006CF /* ButtonCustom */,
-				508D6CF82EB0C14700885E95 /* ButtonRound.swift */,
-				50EE8B882ECC888E002DFEA5 /* ColorPickerCustom.swift */,
-				50CE72552EED6F5900FE3282 /* GridCustom.swift */,
-				5013DB722E9E6EDA00BEDC5E /* PickerCustom.swift */,
-				507501402EF2117100624409 /* ProgressCustom.swift */,
-				5013DB682E9D827800BEDC5E /* StepperCustom.swift */,
+				506421D12F644E3A0020F6C8 /* ButtonRound */,
+				506421D22F644E460020F6C8 /* ColorPickerHSBO */,
+				506421D32F644E510020F6C8 /* GridCustom */,
+				506421D42F644E5E0020F6C8 /* PickerCustom */,
+				506421D52F644E6A0020F6C8 /* ProgressCustom */,
+				506421D62F644E760020F6C8 /* StepperCustom */,
 				50CEA09C2F4B711B001006CF /* TabCustom */,
 				50CE9FC02F471669001006CF /* TextFieldCustom */,
-				501D4DEC2EBFC84B00919AB9 /* ToggleCustom.swift */,
+				506421D72F644E830020F6C8 /* ToggleCustom */,
 			);
 			path = controls;
 			sourceTree = "<group>";
@@ -257,6 +257,62 @@
 				505849612E95341400B9F421 /* ModelCell.swift */,
 			);
 			path = model;
+			sourceTree = "<group>";
+		};
+		506421D12F644E3A0020F6C8 /* ButtonRound */ = {
+			isa = PBXGroup;
+			children = (
+				508D6CF82EB0C14700885E95 /* ButtonRound.swift */,
+			);
+			path = ButtonRound;
+			sourceTree = "<group>";
+		};
+		506421D22F644E460020F6C8 /* ColorPickerHSBO */ = {
+			isa = PBXGroup;
+			children = (
+				50EE8B882ECC888E002DFEA5 /* ColorPickerHSBO.swift */,
+			);
+			path = ColorPickerHSBO;
+			sourceTree = "<group>";
+		};
+		506421D32F644E510020F6C8 /* GridCustom */ = {
+			isa = PBXGroup;
+			children = (
+				50CE72552EED6F5900FE3282 /* GridCustom.swift */,
+			);
+			path = GridCustom;
+			sourceTree = "<group>";
+		};
+		506421D42F644E5E0020F6C8 /* PickerCustom */ = {
+			isa = PBXGroup;
+			children = (
+				5013DB722E9E6EDA00BEDC5E /* PickerCustom.swift */,
+			);
+			path = PickerCustom;
+			sourceTree = "<group>";
+		};
+		506421D52F644E6A0020F6C8 /* ProgressCustom */ = {
+			isa = PBXGroup;
+			children = (
+				507501402EF2117100624409 /* ProgressCustom.swift */,
+			);
+			path = ProgressCustom;
+			sourceTree = "<group>";
+		};
+		506421D62F644E760020F6C8 /* StepperCustom */ = {
+			isa = PBXGroup;
+			children = (
+				5013DB682E9D827800BEDC5E /* StepperCustom.swift */,
+			);
+			path = StepperCustom;
+			sourceTree = "<group>";
+		};
+		506421D72F644E830020F6C8 /* ToggleCustom */ = {
+			isa = PBXGroup;
+			children = (
+				501D4DEC2EBFC84B00919AB9 /* ToggleCustom.swift */,
+			);
+			path = ToggleCustom;
 			sourceTree = "<group>";
 		};
 		508150582E81330E00E12175 = {
@@ -274,8 +330,8 @@
 				50EE8BA02ED46624002DFEA5 /* state */,
 				5013DB612E9D6EF100BEDC5E /* main app */,
 				5013DB602E9D6EC900BEDC5E /* test */,
-				505849352E9109B600B9F421 /* RocketApp.app */,
-				505849772E9A81D400B9F421 /* RocketApp Tests.xctest */,
+				506421CF2F644E280020F6C8 /* RocketApp.app */,
+				506421D02F644E280020F6C8 /* RocketApp Tests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -395,7 +451,7 @@
 			packageProductDependencies = (
 			);
 			productName = "RocketApp Tests";
-			productReference = 505849772E9A81D400B9F421 /* RocketApp Tests.xctest */;
+			productReference = 506421D02F644E280020F6C8 /* RocketApp Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		508150602E81330E00E12175 /* RocketApp */ = {
@@ -414,7 +470,7 @@
 			packageProductDependencies = (
 			);
 			productName = RocketApp;
-			productReference = 505849352E9109B600B9F421 /* RocketApp.app */;
+			productReference = 506421CF2F644E280020F6C8 /* RocketApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -429,7 +485,6 @@
 				TargetAttributes = {
 					5058496D2E9A818400B9F421 = {
 						CreatedOnToolsVersion = 26.0;
-						TestTargetID = 508150602E81330E00E12175;
 					};
 					508150602E81330E00E12175 = {
 						CreatedOnToolsVersion = 26.0;
@@ -524,7 +579,7 @@
 				508150792E81448100E12175 /* Cell_vm.swift in Sources */,
 				507501472EF54D8200624409 /* CellID.swift in Sources */,
 				50EE8B912ECC8B11002DFEA5 /* ColorHSBValue.swift in Sources */,
-				50EE8B892ECC888E002DFEA5 /* ColorPickerCustom.swift in Sources */,
+				50EE8B892ECC888E002DFEA5 /* ColorPickerHSBO.swift in Sources */,
 				50CE722B2EE0E97F00FE3282 /* AppDragValue.swift in Sources */,
 				505849672E97E23100B9F421 /* CellsState.swift in Sources */,
 				5013DB5F2E9D525E00BEDC5E /* ProfilesState.swift in Sources */,
@@ -576,7 +631,6 @@
 		505849752E9A818400B9F421 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 97CZR6J379;
@@ -591,14 +645,12 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RocketApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RocketApp";
 			};
 			name = Debug;
 		};
 		505849762E9A818400B9F421 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 97CZR6J379;
@@ -612,7 +664,6 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RocketApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RocketApp";
 			};
 			name = Release;
 		};

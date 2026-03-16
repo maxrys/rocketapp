@@ -71,18 +71,20 @@ nonisolated struct AppValue: Equatable, Codable {
 
     @MainActor static func fromDialog() -> Self? {
         let openPanel = NSOpenPanel()
-            openPanel.allowsMultipleSelection = false
-            openPanel.canChooseFiles = true
-            openPanel.canChooseDirectories = false
-            openPanel.canCreateDirectories = false
-            openPanel.allowedContentTypes = [.application]
-            openPanel.prompt = NSLocalizedString(ThisApp.MESSAGE_SELECT_THIS_APPLICATION, comment: "")
-        if (openPanel.runModal() == .OK) {
-            if let appURL = openPanel.url {
-                return Self(appURL)
-            }
+        openPanel.allowsMultipleSelection = false
+        openPanel.canChooseFiles = true
+        openPanel.canChooseDirectories = false
+        openPanel.canCreateDirectories = false
+        openPanel.allowedContentTypes = [.application]
+        openPanel.prompt = NSLocalizedString(ThisApp.MESSAGE_SELECT_THIS_APPLICATION, comment: "")
+
+        guard openPanel.runModal() == .OK else {
+            return nil
         }
-        return nil
+        guard let appURL = openPanel.url else {
+            return nil
+        }
+        return Self(appURL)
     }
 
 }

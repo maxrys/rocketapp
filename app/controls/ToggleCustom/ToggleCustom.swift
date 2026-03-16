@@ -9,45 +9,54 @@ struct ToggleCustom: View {
 
     @Binding private var isOn: Bool
 
-    private let text: String
+    private let text: String?
     private let isFlexible: Bool
-    private let onChange: (Bool) -> Void
+    private let size: CGSize
+    private let innerPadding: CGFloat
 
-    init(text: String = "", isFlexible: Bool = false, isOn: Binding<Bool>, onChange: @escaping (Bool) -> Void = { isOn in }) {
+    init(
+        text: String? = nil,
+        isOn: Binding<Bool>,
+        isFlexible: Bool = false,
+        size: CGSize = CGSize(width: 40, height: 16),
+        innerPadding: CGFloat = 3
+    ) {
         self.text = text
         self._isOn = isOn
         self.isFlexible = isFlexible
-        self.onChange = onChange
+        self.size = size
+        self.innerPadding = innerPadding
     }
 
     public var body: some View {
-        if (self.text.count > 0) {
+        if let text = self.text {
             if (self.isFlexible) {
                 HStack {
-                    Text(self.text)
-                        .font(.headline)
-                    Spacer()
-                    ToggleCustom_Switcher(
-                        isOn: self.$isOn,
-                        onChange: self.onChange
-                    )
+                    self.TextView(text); Spacer()
+                    self.SwitcherView()
                 }.frame(maxWidth: .infinity)
             } else {
                 HStack {
-                    Text(self.text)
-                        .font(.headline)
-                    ToggleCustom_Switcher(
-                        isOn: self.$isOn,
-                        onChange: self.onChange
-                    )
+                    self.TextView(text)
+                    self.SwitcherView()
                 }
             }
         } else {
-            ToggleCustom_Switcher(
-                isOn: self.$isOn,
-                onChange: self.onChange
-            )
+            self.SwitcherView()
         }
+    }
+
+    @ViewBuilder private func TextView(_ text: String) -> some View {
+        Text(text)
+            .font(.headline)
+    }
+
+    @ViewBuilder private func SwitcherView() -> some View {
+        ToggleCustom_Switcher(
+            isOn: self.$isOn,
+            size: self.size,
+            innerPadding: self.innerPadding
+        )
     }
 
 }
@@ -56,18 +65,21 @@ fileprivate struct ToggleCustom_Switcher: View {
 
     @Binding fileprivate var isOn: Bool
 
-    fileprivate let size = CGSize(width: 40, height: 16)
-    fileprivate let innerPadding: CGFloat = 3
-    fileprivate let onChange: (Bool) -> Void
+    private let size: CGSize
+    private let innerPadding: CGFloat
 
-    init(isOn: Binding<Bool>, onChange: @escaping (Bool) -> Void = { isOn in }) {
+    init(
+        isOn: Binding<Bool>,
+        size: CGSize = CGSize(width: 40, height: 16),
+        innerPadding: CGFloat = 3
+    ) {
         self._isOn = isOn
-        self.onChange = onChange
+        self.size = size
+        self.innerPadding = innerPadding
     }
 
     public var body: some View {
         Button {
-            self.onChange(!self.isOn)
             withAnimation(.easeInOut(duration: 0.1)) {
                 self.isOn.toggle()
             }
@@ -78,7 +90,9 @@ fileprivate struct ToggleCustom_Switcher: View {
                     .frame(width: self.size.width, height: self.size.height)
                 Capsule()
                     .fill(.white)
-                    .frame(width: (self.size.height * 1.5) - (self.innerPadding * 2), height: self.size.height - (self.innerPadding * 2))
+                    .frame(
+                        width: (self.size.height * 1.5) - (self.innerPadding * 2),
+                        height: self.size.height        - (self.innerPadding * 2))
                     .padding(self.innerPadding)
                     .shadow(
                         color: .black.opacity(0.5),
@@ -99,13 +113,13 @@ fileprivate struct ToggleCustom_Switcher: View {
 /* ########################## PREVIEW ########################## */
 /* ############################################################# */
 
-#Preview {
-    @Previewable @State var isOn = false
-    HStack {
-        ToggleCustom(
-            text: "Test",
-            isOn: $isOn
-        ).frame(width: 100, height: 50)
+@available(macOS 14.0, *) #Preview {
+    @Previewable @State var isOn: Bool = false
+    VStack(alignment: .trailing) {
+        ToggleCustom(text: "Test", isOn: $isOn, isFlexible: true)
+        ToggleCustom(text: "Test", isOn: $isOn, isFlexible: false)
+        ToggleCustom(isOn: $isOn)
     }
+    .frame(width: 200)
     .padding(20)
 }

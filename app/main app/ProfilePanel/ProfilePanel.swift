@@ -10,6 +10,7 @@ struct ProfilePanel: View {
     @State private var isShowPanelForAppend = false
     @State private var isShowPanelForChange = false
 
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.profilesState) private var profiles
 
     public var body: some View {
@@ -46,7 +47,19 @@ struct ProfilePanel: View {
                     isPlainListStyle: true,
                     flexibility: .size(250),
                     colorSet: Color.profilePanel.picker
-                )
+                ).overlay(alignment: .trailing) {
+                    if (self.profiles.current.ID == ThisApp.EMBEDDED_PROFILE_ID) {
+                        Image(systemName: "lock.fill")
+                            .font(.system(size: 10))
+                            .background(
+                                Circle()
+                                    .fill  (self.colorScheme == .dark ? .black : .white)
+                                    .stroke(self.colorScheme == .dark ? .white : .black)
+                                    .frame(width: 18, height: 18)
+                            )
+                            .offset(x: -7)
+                    }
+                }
 
                 /* MARK: Button: Show Panel for change Profile */
 

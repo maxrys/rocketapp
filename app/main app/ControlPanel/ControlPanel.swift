@@ -76,7 +76,7 @@ struct ControlPanel: View {
             },
             foreground: { Color.ctrlPanel.buttonText },
             background: { Color.ctrlPanel.buttonBackground },
-            disabled  :   self.cells.isAuditInProgress || self.cells.isEmpty,
+            isDisabled:   self.cells.isAuditInProgress || self.cells.isEmpty,
             onClick   : { self.cells.audit() }
         )
     }

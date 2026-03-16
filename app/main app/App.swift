@@ -68,7 +68,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 .gesture(WindowDragGesture())
                 .onAppear {
                     /* hide window control buttons */
-                    if let window = NSWindow.get(ID: Self.MAIN_WINDOW_ID) {
+                    if let window = NSWindow.get(Self.MAIN_WINDOW_ID) {
                         window.hideTitleButtons(isVisible: self.profiles.current.isShowWinTitleButtons)
                         window.backgroundColor = .clear
                         window.alphaValue = 1.0
@@ -77,7 +77,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 .onAppBecomeBackground {
                     if (!self.isEditMode) {
                         NSWindow.hideWithAnimation(
-                            windowId: Self.MAIN_WINDOW_ID
+                            Self.MAIN_WINDOW_ID
                         )
                     }
                 }
@@ -93,7 +93,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             self.cells.setProfileID(value.ID)
         })
         .onChange(of: self.profiles.current.isShowWinTitleButtons) { _, value in
-            if let window = NSWindow.get(ID: Self.MAIN_WINDOW_ID) {
+            if let window = NSWindow.get(Self.MAIN_WINDOW_ID) {
                 window.hideTitleButtons(isVisible: value)
             }
         }

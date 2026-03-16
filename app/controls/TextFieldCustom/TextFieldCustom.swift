@@ -12,18 +12,18 @@ struct TextFieldCustom: View {
     @Binding private var value: String
 
     private let title: String?
-    private let disabled: Bool
+    private let isDisabled: Bool
     private let colorSet: ColorSet
 
     init(
         _ title: String? = nil,
         value: Binding<String>,
-        disabled: Bool = false,
+        isDisabled: Bool = false,
         colorSet: ColorSet = Color.textField
     ) {
         self.title = title
         self._value = value
-        self.disabled = disabled
+        self.isDisabled = isDisabled
         self.colorSet = colorSet
     }
 
@@ -34,7 +34,7 @@ struct TextFieldCustom: View {
                 Text(title)
                     .font(.headline)
                     .foregroundStyle(self.colorSet.titleText)
-                    .disabled(self.disabled)
+                    .disabled(self.isDisabled)
             }
 
             TextField("", text: self.$value)

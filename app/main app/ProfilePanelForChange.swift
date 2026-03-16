@@ -144,8 +144,8 @@ struct ProfilePanelForChange: View {
                 )
 
                 ToggleCustom(
-                    isFlexible: true,
-                    isOn: self.profiles.current.getBinding(\.isShowIconTitle)
+                    isOn: self.profiles.current.getBinding(\.isShowIconTitle),
+                    isFlexible: true
                 )
 
                 /* MARK: "Hide on Misclick" */
@@ -155,8 +155,8 @@ struct ProfilePanelForChange: View {
                 )
 
                 ToggleCustom(
-                    isFlexible: true,
-                    isOn: self.profiles.current.getBinding(\.isHideOnMisclick)
+                    isOn: self.profiles.current.getBinding(\.isHideOnMisclick),
+                    isFlexible: true
                 )
 
                 /* MARK: "Sticky Grid" */
@@ -166,8 +166,8 @@ struct ProfilePanelForChange: View {
                 )
 
                 ToggleCustom(
-                    isFlexible: true,
-                    isOn: self.profiles.current.getBinding(\.isStickyGrid)
+                    isOn: self.profiles.current.getBinding(\.isStickyGrid),
+                    isFlexible: true
                 )
 
                 /* MARK: "Show Window Title Buttons" */
@@ -177,8 +177,8 @@ struct ProfilePanelForChange: View {
                 )
 
                 ToggleCustom(
-                    isFlexible: true,
-                    isOn: self.profiles.current.getBinding(\.isShowWinTitleButtons)
+                    isOn: self.profiles.current.getBinding(\.isShowWinTitleButtons),
+                    isFlexible: true
                 )
 
             }
@@ -196,7 +196,7 @@ struct ProfilePanelForChange: View {
                     NSLocalizedString("Background", comment: "")
                 )
 
-                ColorPickerCustom(
+                ColorPickerHSBO(
                     self.profiles.current.getBinding(\.background),
                     openerSize: .init(width: 40, height: 15),
                     openerRadius: 10,
@@ -207,7 +207,7 @@ struct ProfilePanelForChange: View {
                     NSLocalizedString("Background (Dark Scheme)", comment: "")
                 )
 
-                ColorPickerCustom(
+                ColorPickerHSBO(
                     self.profiles.current.getBinding(\.backgroundDark),
                     openerSize: .init(width: 40, height: 15),
                     openerRadius: 10,
@@ -226,7 +226,7 @@ struct ProfilePanelForChange: View {
         HStack(spacing: self.elementSpacing) {
             ButtonCustom(
                 NSLocalizedString("delete profile", comment: ""),
-                disabled: self.profiles.current.ID == ThisApp.EMBEDDED_PROFILE_ID,
+                isDisabled: self.profiles.current.ID == ThisApp.EMBEDDED_PROFILE_ID,
                 colorStyle: .danger,
                 isFlat: false,
                 font: .system(size: 14, weight: .regular),
