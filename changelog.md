@@ -1,4 +1,8 @@
 
+## Version 1.4
+
+Codebase improvements.
+
 ## Version 1.3
 
 Translation into Belarusian has been added.  
