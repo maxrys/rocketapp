@@ -8,59 +8,86 @@ import SwiftUI
 struct ProgressCustom: View {
 
     @Environment(\.colorScheme) private var colorScheme
-
     @Binding private var value: Double
-    @State private var visibleFrame: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
 
+    let isAnimatable: Bool
     let height: CGFloat
+    let zebraSize: CGFloat
+    let zebraSpeed: Double
+    let valueFont: Font
 
-    init(value: Binding<Double>, height: CGFloat = 30) {
+    init(
+        value: Binding<Double>,
+        isAnimatable: Bool = true,
+        height: CGFloat = 30.0,
+        zebraSize: CGFloat = 30.0,
+        zebraSpeed: Double = 50,
+        valueFont: Font = .system(size: 14, weight: .bold)
+    ) {
         self._value = value
+        self.isAnimatable = isAnimatable
         self.height = height
+        self.zebraSize = zebraSize
+        self.zebraSpeed = zebraSpeed
+        self.valueFont = valueFont
     }
 
     public var body: some View {
-        let value = self.value.fixBounds(max: 1.0)
-        let formattedValue = Int(value * 100)
-        let width: CGFloat = visibleFrame.width * CGFloat(value)
-        Color(self.colorScheme == .dark ? .black : .white).frame(height: self.height)
-            .overlay(alignment: .leading) {
-                self.IndicatorView(width)
-            }.overlay(alignment: .center) {
-                Text("\(formattedValue) %")
-                    .font(.system(size: 14, weight: .bold))
-                    .foregroundStyle(.blue)
-                    .blendMode(.difference)
-            }
-        .clipShape(RoundedRectangle(cornerRadius: 7))
-        .onGeometryChange(for: CGSize.self) { geometry in geometry.size } action: { size in
-            self.visibleFrame.size = size
+        Group {
+            Color(self.colorScheme == .dark ? .black : .white)
+                .overlay(alignment: .leading) { self.IndicatorView() }
+                .overlay(alignment: .center ) { self.ValueView() }
         }
+        .frame(height: self.height)
+        .clipShape(RoundedRectangle(cornerRadius: 7))
     }
 
-    @ViewBuilder private func IndicatorView(_ width: CGFloat, zebraSize: CGFloat = 30.0) -> some View {
-        let value = self.value.fixBounds(max: 1.0)
-        ZStack {
+    @ViewBuilder private func IndicatorView() -> some View {
+        GeometryReader { geometry in
+            let value = self.value.fixBounds(max: 1.0)
+            let width = geometry.size.width * CGFloat(value)
             Rectangle()
                 .fill(Color.accentColor.gradient)
                 .animation(.linear, value: value)
-            Rectangle()
-                .fill(Color.white.opacity(0.1))
-                .animation(.linear, value: value)
-                .mask {
-                    TimelineView(.periodic(from: .now, by: Date.defaultFPS)) { _ in
-                        Path { path in
-                            for i in -Int(zebraSize) ... Int(width / zebraSize) {
-                                let x = CGFloat(i) * zebraSize
-                                path.move   (to: CGPoint(x: x,      y: +20 + self.height))
-                                path.addLine(to: CGPoint(x: x + 40, y: -20))
-                            }
-                        }
-                        .offset(x: Date.spin(max: UInt(zebraSize), speed: 50))
-                        .stroke(.black, lineWidth: zebraSize / 2.2)
-                    }
-                }.clipShape(Rectangle())
-        }.frame(width: width)
+                .frame(width: width)
+                .overlay(alignment: .leading) {
+                    Rectangle()
+                        .fill(Color.white.opacity(0.1))
+                        .mask(self.ZebraView(width))
+                        .frame(width: width)
+                        .clipShape(Rectangle())
+                }
+        }
+    }
+
+    @ViewBuilder private func ZebraPathView(_ width: CGFloat) -> some View {
+        Path { path in
+            for i in -Int(self.zebraSize) ... Int(width / self.zebraSize) {
+                let x = CGFloat(i) * self.zebraSize
+                path.move   (to: CGPoint(x: x,        y: +20.0 + self.height))
+                path.addLine(to: CGPoint(x: x + 40.0, y: -20.0))
+            }
+        }.stroke(.black, lineWidth: self.zebraSize / 2.2)
+    }
+
+    @ViewBuilder private func ZebraView(_ width: CGFloat) -> some View {
+        if (self.isAnimatable) {
+            TimelineView(.periodic(from: .now, by: Date.defaultFPS)) { _ in
+                self.ZebraPathView(width)
+                    .offset(x: Date.spin(max: UInt(self.zebraSize), speed: self.zebraSpeed))
+            }
+        } else {
+            self.ZebraPathView(width)
+        }
+    }
+
+    @ViewBuilder private func ValueView() -> some View {
+        let value = self.value.fixBounds(max: 1.0)
+        let formattedValue = Int(value * 100)
+        Text("\(formattedValue) %")
+            .font(self.valueFont)
+            .foregroundStyle(.blue)
+            .blendMode(.difference)
     }
 
 }
@@ -75,7 +102,7 @@ struct ProgressCustom: View {
     VStack(spacing: 10) {
         ForEach(Array(stride(from: -0.1, through: 1.1, by: 0.1)), id: \.self) { value in
             ProgressCustom(
-                value: Binding.constant(value)
+                value: .constant(value)
             )
         }
     }

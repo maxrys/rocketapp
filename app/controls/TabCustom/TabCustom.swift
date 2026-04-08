@@ -17,6 +17,12 @@ struct TabCustom: View {
         self.contents = content()
     }
 
+    private var colorHeadBackground: Color {
+        self.colorScheme == .dark ?
+            Color.tab.headBackgroundDark :
+            Color.tab.headBackground
+    }
+
     public var body: some View {
         VStack(spacing: 0) {
 
@@ -26,7 +32,7 @@ struct TabCustom: View {
                 ForEach(self.contents.indices, id: \.self) { index in
                     if let tatSpacer = self.contents[safe: index] as? TabCustom_Spacer { tatSpacer }
                     if let tabItem   = self.contents[safe: index] as? TabCustom_Item {
-                        TabCustom_Header(
+                        TabCustom_HeadTitle(
                             title: tabItem.title,
                             icon: tabItem.icon,
                             index: index,
@@ -39,11 +45,7 @@ struct TabCustom: View {
             .padding(.horizontal, 30)
             .padding(.vertical  , 20)
             .frame(maxWidth: .infinity)
-            .background(
-                self.colorScheme == .dark ?
-                    .black.opacity(0.2) :
-                    .white.opacity(0.5)
-            )
+            .background(self.colorHeadBackground)
             .overlay(alignment: .bottom) {
                 self.ShadowView()
             }
@@ -76,9 +78,9 @@ struct TabCustom: View {
 
 }
 
-fileprivate struct TabCustom_Header: View {
+fileprivate struct TabCustom_HeadTitle: View {
 
-    @Environment(\.colorScheme) fileprivate var colorScheme
+    @Environment(\.colorScheme) private var colorScheme
 
     @State fileprivate var isHovering = false
 
@@ -87,6 +89,28 @@ fileprivate struct TabCustom_Header: View {
     fileprivate let index: Int
     fileprivate let isSelected: Bool
     fileprivate let onClick: (Int) -> Void
+
+    private var colorBorder: Color {
+        if (self.isHovering != true && self.colorScheme != .dark) { return .tab.headTitleBorder             }
+        if (self.isHovering != true && self.colorScheme == .dark) { return .tab.headTitleBorderDark         }
+        if (self.isHovering == true && self.colorScheme != .dark) { return .tab.headTitleBorderHovering     }
+        if (self.isHovering == true && self.colorScheme == .dark) { return .tab.headTitleBorderHoveringDark }
+        return .clear
+    }
+
+    private var colorForeground: Color {
+        if (self.isSelected != true && self.colorScheme != .dark) { return .tab.headTitle             }
+        if (self.isSelected != true && self.colorScheme == .dark) { return .tab.headTitleDark         }
+        if (self.isSelected == true && self.colorScheme != .dark) { return .tab.headTitleSelected     }
+        if (self.isSelected == true && self.colorScheme == .dark) { return .tab.headTitleSelectedDark }
+        return .clear
+    }
+
+    private var colorBackground: Color {
+        self.isSelected ?
+            .tab.headTitleSelectedBackground :
+            .tab.headTitleBackground
+    }
 
     public var body: some View {
         Button {
@@ -99,38 +123,23 @@ fileprivate struct TabCustom_Header: View {
                 }
                 if (!title.isEmpty) {
                     Text(title)
+                        .font(.system(size: 13))
                         .lineLimit(1)
                         .fixedSize(horizontal: true, vertical: false)
                 }
             }
             .padding(.horizontal, 12)
             .padding(.vertical  , 10)
-            .foregroundStyle(
-                self.isSelected ? Color.white :
-                    (self.colorScheme == .dark ?
-                        Color.white :
-                        Color.black
-                    )
-            )
+            .foregroundStyle(self.colorForeground)
             .background {
-                if (self.isSelected) {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(Color.accentColor)
-                } else {
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(style: StrokeStyle(lineWidth: 1))
-                        .contentShape(RoundedRectangle(cornerRadius: 10))
-                        .foregroundStyle({
-                            if (self.isHovering) {
-                                return Color.accentColor } else {
-                                return self.colorScheme == .dark ?
-                                    Color.white.opacity(0.1) :
-                                    Color.black.opacity(0.1)
-                            }
-                        }())
-                }
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(self.colorBackground)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(style: StrokeStyle(lineWidth: 1))
+                            .foregroundStyle(self.colorBorder)
+                    }.contentShape(RoundedRectangle(cornerRadius: 10))
             }
-            .contentShape(.focusEffect, RoundedRectangle(cornerRadius: 10))
         }
         .buttonStyle(.plain)
         .pointerStyle(.link)

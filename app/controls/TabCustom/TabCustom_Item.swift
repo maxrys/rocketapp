@@ -12,20 +12,20 @@ struct TabCustom_Item: TabCustom_Item_Protocol {
 
     let title: String
     let icon: Image?
-    let view: any View
+    let content: any View
 
     init(
         title: String,
         icon: Image?,
-        @ViewBuilder view: () -> any View
+        @ViewBuilder content: () -> any View
     ) {
         self.title = title
         self.icon = icon
-        self.view = view()
+        self.content = content()
     }
 
     public var body: some View {
-        AnyView(self.view)
+        AnyView(self.content)
     }
 
 }

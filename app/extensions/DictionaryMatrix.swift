@@ -26,7 +26,7 @@ extension Dictionary {
         public var flat: [Key: Value] {
             return self.data
         }
-        
+
         public var multidimensional: [Index: [Index: Value]] {
             var result: [Index: [Index: Value]] = [:]
             for (localKey, value) in self.data {

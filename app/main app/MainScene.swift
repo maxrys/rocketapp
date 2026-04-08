@@ -101,7 +101,7 @@ struct MainScene: View, BackgroundColorProtocol {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .overlay {
                 VStack(spacing: 10) {
-                    ProgressCustom(value: Binding.constant(self.cells.auditProgress))
+                    ProgressCustom(value: .constant(self.cells.auditProgress))
                         .shadow(
                             color: .black.opacity(0.5),
                             radius: 5.0
@@ -146,7 +146,7 @@ struct MainScene: View, BackgroundColorProtocol {
 /* ############################################################# */
 
 #Preview {
-    MainScene(isEditMode: Binding.constant(false))
+    MainScene(isEditMode: .constant(false))
         .ButtonOpenSettingsView()
         .padding(20)
 }

@@ -73,6 +73,6 @@ struct ProfilePanelForAppend: View {
 
 #Preview {
     ProfilePanelForAppend(
-        isShowPanel: Binding.constant(true)
+        isShowPanel: .constant(true)
     )
 }

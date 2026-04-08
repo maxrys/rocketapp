@@ -34,12 +34,12 @@ struct ProfilePanelForChange: View {
             TabCustom_Item(
                 title: NSLocalizedString("Profile Settings", comment: ""),
                 icon: Image(systemName: "switch.2"),
-                view: { self.ChangeProfileView() })
+                content: { self.ChangeProfileView() })
             TabCustom_Spacer()
             TabCustom_Item(
                 title: NSLocalizedString("Delete", comment: ""),
                 icon: Image(systemName: "trash"),
-                view: { self.DeleteProfileView() }
+                content: { self.DeleteProfileView() }
             )
         }.frame(width: 450)
     }
@@ -277,6 +277,6 @@ struct ProfilePanelForChange: View {
 
 #Preview {
     ProfilePanelForChange(
-        isShowPanel: Binding.constant(true)
+        isShowPanel: .constant(true)
     )
 }
