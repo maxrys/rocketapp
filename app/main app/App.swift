@@ -39,8 +39,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     static let NEW_PROFILE_IS_SHOW_ICON_TITLE = true
     static let NEW_PROFILE_IS_HIDE_ON_MISCLICK = false
     static let NEW_PROFILE_IS_STICKY_GRID = false
-    static let NEW_PROFILE_BACKGROUND = ColorHSBValue(0.55, 0.0, 1.0, 0.92)
-    static let NEW_PROFILE_BACKGROUND_DARK = ColorHSBValue(0.30, 0.0, 0.16, 0.92)
+    static let NEW_PROFILE_BACKGROUND = ColorHSBValue(0.55, 0.15, 0.97, 0.70)
+    static let NEW_PROFILE_BACKGROUND_DARK = ColorHSBValue(0.67, 0.38, 0.28, 0.70)
     static let NEW_PROFILE_BACKGROUND_ENCODED = Self.NEW_PROFILE_BACKGROUND.encode()!
     static let NEW_PROFILE_BACKGROUND_DARK_ENCODED = Self.NEW_PROFILE_BACKGROUND_DARK.encode()!
     static let NEW_PROFILE_IS_SHOW_WINDOW_TITLE_BUTTONS = true

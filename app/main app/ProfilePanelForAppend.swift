@@ -27,12 +27,12 @@ struct ProfilePanelForAppend: View {
 
             ButtonCustom(
                 NSLocalizedString("append profile", comment: ""),
-                isDisabled: self.title.isEmpty,
                 colorStyle: .accent,
-                isFlat: false,
                 font: .system(size: 14, weight: .regular),
                 padding: .init(top: 10, leading: 20, bottom: 10, trailing: 20),
-                flexibility: .infinity
+                flexibility: .infinity,
+                isFlat: false,
+                isDisabled: self.title.isEmpty
             )                    { self.onAppendProfile() }
             .onPressEnterOrSpace { self.onAppendProfile() }
 

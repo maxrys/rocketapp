@@ -34,21 +34,7 @@ struct MainScene: View, BackgroundColorProtocol {
 
             if (self.isEditMode == false) {
                 if (self.cells.isEmpty) {
-                    VStack(spacing: 10) {
-                        Text(ThisApp.MESSAGE_NO_APPLICATIONS)
-                        Text(ThisApp.MESSAGE_ADD_NEW_APPLICATIONS_THROUGH)
-                        Button(ThisApp.MESSAGE_SETTINGS) { self.isEditMode = true }
-                            .underline()
-                            .font(.system(size: 12, weight: .regular))
-                            .foregroundColor(.accentColor)
-                            .buttonStyle(.plain)
-                            .pointerStyle(.link)
-                    }
-                    .padding(20)
-                    .multilineTextAlignment(.center)
-                    .font(.system(size: 14, weight: .bold))
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .foregroundStyle(self.colorBackgroundAccentResolve(minOpacity: 0.9))
+                    self.NoOneAppView()
                 } else {
                     MainGrid_viewMode(
                         cellSize: self.cellSizeFinal,
@@ -72,11 +58,11 @@ struct MainScene: View, BackgroundColorProtocol {
             }
 
         }
-        .background(self.colorBackgroundResolve())
-        .contentShape(Rectangle())
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .frame(
             minWidth : self.isEditMode ? 600 : self.cellSizeFinal + (self.cellSpacingFinal * 2),
             minHeight: self.isEditMode ? 300 : self.cellSizeFinal + (self.cellSpacingFinal * 2))
+        .background(self.backgroundHSB().color)
         .overlay(alignment: .topTrailing) {
             if (self.isEditMode == false) {
                 self.ButtonOpenSettingsView()
@@ -96,7 +82,24 @@ struct MainScene: View, BackgroundColorProtocol {
         }
     }
 
-    @ViewBuilder public func AuditPanelView() -> some View {
+    @ViewBuilder private func NoOneAppView() -> some View {
+        VStack(spacing: 10) {
+            Text(ThisApp.MESSAGE_NO_APPLICATIONS)
+            Text(ThisApp.MESSAGE_ADD_NEW_APPLICATIONS_THROUGH)
+            Button(ThisApp.MESSAGE_SETTINGS) { self.isEditMode = true }
+                .underline()
+                .font(.system(size: 12, weight: .regular))
+                .foregroundColor(.accentColor)
+                .buttonStyle(.plain)
+                .pointerStyle(.link)
+        }
+        .padding(20)
+        .multilineTextAlignment(.center)
+        .font(.system(size: 14, weight: .bold))
+        .foregroundStyle(self.backgroundAccentHSB(minOpacity: 1.0).color)
+    }
+
+    @ViewBuilder private func AuditPanelView() -> some View {
         Color(self.colorScheme == .dark ? .white : .black).opacity(0.3)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .overlay {
@@ -129,10 +132,10 @@ struct MainScene: View, BackgroundColorProtocol {
             }
     }
 
-    @ViewBuilder public func ButtonOpenSettingsView() -> some View {
+    @ViewBuilder fileprivate func ButtonOpenSettingsView() -> some View {
         ButtonRound(
             label     : { Image(systemName: "gearshape.circle") },
-            foreground: { self.colorBackgroundAccentResolve(minOpacity: 0.3) },
+            foreground: { self.backgroundAccentHSB(minOpacity: 0.5).color },
             background: { Color.clear },
         ) { self.isEditMode = true }
     }

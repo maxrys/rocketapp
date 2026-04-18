@@ -19,6 +19,7 @@
 		501D4DEB2EB9FB6000919AB9 /* CellValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501D4DE92EB9FB5F00919AB9 /* CellValue.swift */; };
 		501D4DED2EBFC84B00919AB9 /* ToggleCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501D4DEC2EBFC84B00919AB9 /* ToggleCustom.swift */; };
 		501D4DF12EC120CC00919AB9 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501D4DF02EC120CC00919AB9 /* Timer.swift */; };
+		50242EB82F9255EA000FDCC6 /* SlotsEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50242EB72F9255EA000FDCC6 /* SlotsEnumerator.swift */; };
 		50447F692EEE9A5700C9B8D1 /* ProfilePanelForChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50447F682EEE9A5700C9B8D1 /* ProfilePanelForChange.swift */; };
 		505849632E9534BC00B9F421 /* ModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505849602E95341400B9F421 /* ModelContainer.swift */; };
 		505849642E9534BC00B9F421 /* ModelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505849612E95341400B9F421 /* ModelCell.swift */; };
@@ -108,6 +109,7 @@
 		501D4DE92EB9FB5F00919AB9 /* CellValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellValue.swift; sourceTree = "<group>"; };
 		501D4DEC2EBFC84B00919AB9 /* ToggleCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleCustom.swift; sourceTree = "<group>"; };
 		501D4DF02EC120CC00919AB9 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		50242EB72F9255EA000FDCC6 /* SlotsEnumerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotsEnumerator.swift; sourceTree = "<group>"; };
 		50447F682EEE9A5700C9B8D1 /* ProfilePanelForChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePanelForChange.swift; sourceTree = "<group>"; };
 		505849602E95341400B9F421 /* ModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelContainer.swift; sourceTree = "<group>"; };
 		505849612E95341400B9F421 /* ModelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelCell.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				507501492EF6A70300624409 /* Date.swift */,
 				508D6D132EB551A800885E95 /* Dictionary.swift */,
 				500A69C32F1671AE00C3CCE7 /* DictionaryMatrix.swift */,
+				50EE8B942ECDDCDC002DFEA5 /* EnvironmentValues.swift */,
 				50EE8B8A2ECC8953002DFEA5 /* GraphicsContext.swift */,
 				50CE72332EE62E8F00FE3282 /* Logger.swift */,
 				50CE72372EE6B9D400FE3282 /* NSApplication.swift */,
@@ -423,8 +426,8 @@
 				50EE8BB52ED79176002DFEA5 /* CellModelID.swift */,
 				50CE72532EED6BDD00FE3282 /* CellProtocol.swift */,
 				50EE8B902ECC8B11002DFEA5 /* ColorHSBValue.swift */,
-				50EE8B942ECDDCDC002DFEA5 /* EnvironmentValues.swift */,
 				50EE8B992ED174FE002DFEA5 /* MiniGridValue.swift */,
+				50242EB72F9255EA000FDCC6 /* SlotsEnumerator.swift */,
 			);
 			path = types;
 			sourceTree = "<group>";
@@ -587,6 +590,7 @@
 				50C06AF12F23E467008EE619 /* TabCustom_Item.swift in Sources */,
 				50D28FF52F845121006A7304 /* AuditSequence.swift in Sources */,
 				50C06AF22F23E467008EE619 /* TabCustom.swift in Sources */,
+				50242EB82F9255EA000FDCC6 /* SlotsEnumerator.swift in Sources */,
 				50CE72342EE62E8F00FE3282 /* Logger.swift in Sources */,
 				508150792E81448100E12175 /* Cell_vm.swift in Sources */,
 				507501472EF54D8200624409 /* CellID.swift in Sources */,

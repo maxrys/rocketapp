@@ -3,7 +3,7 @@
 /* ### Copyright © 2026 Maxim Rysevets. All rights reserved. ### */
 /* ############################################################# */
 
-import Foundation
+import SwiftUI
 
 struct ColorHSBValue: Equatable, Codable {
 
@@ -13,7 +13,16 @@ struct ColorHSBValue: Equatable, Codable {
     public var opacity: Double
 
     public var isTinted: Bool {
-        self.brightness < 0.5
+        self.brightness < 0.6
+    }
+
+    public var color: Color {
+        Color(
+            hue       : self.hue,
+            saturation: self.saturation,
+            brightness: self.brightness,
+            opacity   : self.opacity
+        )
     }
 
     init(_ hue: Double, _ saturation: Double, _ brightness: Double, _ opacity: Double = 1.0) {

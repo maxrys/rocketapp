@@ -78,7 +78,7 @@ struct AppIcon_editMode: View, BackgroundColorProtocol {
             )
             .background(
                 RoundedRectangle(cornerRadius: 20)
-                    .fill(self.colorBackgroundResolve(minOpacity: 0.9).gradient)
+                    .fill(self.backgroundHSB(minOpacity: 0.9).color.gradient)
                     .shadow(
                         color:
                             self.colorScheme == .dark ?

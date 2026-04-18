@@ -9,4 +9,8 @@ extension Array {
         indices.contains(index) ? self[index] : nil
     }
 
+    subscript(safe index: Int, default value: Element) -> Element {
+        indices.contains(index) ? self[index] : value
+    }
+
 }

@@ -88,14 +88,18 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
         .hoverBehavior(.zIndex(to: 1))
     }
 
-    @ViewBuilder private func FakeCellView() -> some View {
+    @ViewBuilder fileprivate func FakeCellView() -> some View {
         ZStack {
             Image("Fake Cell Background")
                 .resizable()
-                .foregroundStyle(self.colorBackgroundAccentResolve(minOpacity: 0.3))
+                .foregroundStyle(self.backgroundAccentHSB(minOpacity: 1.0).color)
                 .frame(width: self.size * 0.66, height: self.size * 0.66)
                 .padding(.leading, self.size * 0.01)
                 .padding(.top    , self.size * 0.01)
+                .shadow(
+                    color: self.backgroundHSB(minOpacity: 1.0).color,
+                    radius: 3
+                )
         }.frame(
             width : self.size,
             height: self.size
@@ -174,7 +178,8 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
     @ViewBuilder private func ButtonInsertView(_ size: CGFloat, to keyPath: CellValuePath? = nil, onClick: @escaping () -> Void) -> some View {
         Cell_editMode_ButtonInsert(
             size: size,
-            foregroundStyle: self.colorBackgroundAccentResolve(minOpacity: 0.3),
+            foregroundStyle: self.backgroundAccentHSB(minOpacity: 1.0).color,
+            shadowColor: self.backgroundHSB(minOpacity: 1.0).color,
             onClick: onClick,
             onDrop: { providers in
                 self.onDropAppValue(providers, to: keyPath)
@@ -290,6 +295,7 @@ fileprivate struct Cell_editMode_ButtonInsert: View {
 
     public let size: CGFloat
     public let foregroundStyle: Color
+    public let shadowColor: Color
     public let onClick: () -> Void
     public let onDrop: (_ providers: [NSItemProvider]) -> Bool
 
@@ -302,6 +308,10 @@ fileprivate struct Cell_editMode_ButtonInsert: View {
             .onHover { isHovering in self.isHovering = isHovering }
             .onDrop(of: [.application, UTType.appDragValue], isTargeted: self.$isHovering, perform: self.onDrop)
             .pointerStyle(.link)
+            .shadow(
+                color: shadowColor,
+                radius: self.isHovering ? 0 : 3
+            )
     }
 
 }
@@ -337,6 +347,7 @@ fileprivate struct Cell_editMode_ButtonInsert: View {
         return data
     }()
     Grid(alignment: .center, horizontalSpacing: 0, verticalSpacing: 0) {
+        Cell_editMode(ID: 0, size: 100, isVisible: true).FakeCellView().id(0)
         Cell_editMode(ID: 0, size: 100, isVisible: true).id(1).environment(\.cellsState, mockForNone)
         Cell_editMode(ID: 0, size: 100, isVisible: true).id(2).environment(\.cellsState, mockForMain)
         Cell_editMode(ID: 0, size: 100, isVisible: true).id(3).environment(\.cellsState, mockForMini)

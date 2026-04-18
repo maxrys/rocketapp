@@ -240,12 +240,12 @@ struct ProfilePanelForChange: View {
         HStack(spacing: self.elementSpacing) {
             ButtonCustom(
                 NSLocalizedString("delete profile", comment: ""),
-                isDisabled: self.profiles.current.ID == ThisApp.EMBEDDED_PROFILE_ID,
                 colorStyle: .danger,
-                isFlat: false,
                 font: .system(size: 14, weight: .regular),
                 padding: .init(top: 10, leading: 20, bottom: 10, trailing: 20),
-                flexibility: .size(200)
+                flexibility: .size(200),
+                isFlat: false,
+                isDisabled: self.profiles.current.ID == ThisApp.EMBEDDED_PROFILE_ID
             )                   { self.isShowDeleteDialog = true }
             .onPressEnterOrSpace{ self.isShowDeleteDialog = true }
             .confirmationDialog("Delete profile\n \"\(self.profiles.current.title)\"", isPresented: self.$isShowDeleteDialog) {
