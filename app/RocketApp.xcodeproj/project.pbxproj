@@ -69,6 +69,7 @@
 		50CE9FD12F4718F9001006CF /* ControlPanelColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE9FD02F4718F9001006CF /* ControlPanelColor.swift */; };
 		50CE9FD32F47191F001006CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50CE9FD22F47191F001006CF /* Assets.xcassets */; };
 		50CEA0A92F4C576F001006CF /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 50CEA0A82F4C576F001006CF /* InfoPlist.xcstrings */; };
+		50CF30CE2FB351A600A9319D /* СhameleonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CF30CD2FB351A600A9319D /* СhameleonView.swift */; };
 		50CF30D02FB4A9F200A9319D /* Previewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CF30CF2FB4A9F200A9319D /* Previewer.swift */; };
 		50D28F9A2F7AB036006A7304 /* TabCustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D28F992F7AB036006A7304 /* TabCustomColors.swift */; };
 		50D28FF52F845121006A7304 /* AuditSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D28FF42F845120006A7304 /* AuditSequence.swift */; };
@@ -161,6 +162,7 @@
 		50CE9FD02F4718F9001006CF /* ControlPanelColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPanelColor.swift; sourceTree = "<group>"; };
 		50CE9FD22F47191F001006CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		50CEA0A82F4C576F001006CF /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
+		50CF30CD2FB351A600A9319D /* СhameleonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СhameleonView.swift"; sourceTree = "<group>"; };
 		50CF30CF2FB4A9F200A9319D /* Previewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Previewer.swift; sourceTree = "<group>"; };
 		50D28F992F7AB036006A7304 /* TabCustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCustomColors.swift; sourceTree = "<group>"; };
 		50D28FF42F845120006A7304 /* AuditSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditSequence.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 		5013DB6A2E9D827F00BEDC5E /* controls */ = {
 			isa = PBXGroup;
 			children = (
+				50CF30CC2FB3519E00A9319D /* СhameleonView */,
 				50CE9FC52F471715001006CF /* ButtonCustom */,
 				506421D12F644E3A0020F6C8 /* ButtonRound */,
 				506421D22F644E460020F6C8 /* ColorPickerHSBO */,
@@ -415,6 +418,14 @@
 				50D28F992F7AB036006A7304 /* TabCustomColors.swift */,
 			);
 			path = TabCustom;
+			sourceTree = "<group>";
+		};
+		50CF30CC2FB3519E00A9319D /* СhameleonView */ = {
+			isa = PBXGroup;
+			children = (
+				50CF30CD2FB351A600A9319D /* СhameleonView.swift */,
+			);
+			path = "СhameleonView";
 			sourceTree = "<group>";
 		};
 		50EE8B9F2ED1795B002DFEA5 /* types */ = {
@@ -594,6 +605,7 @@
 				50C06AF12F23E467008EE619 /* TabCustom_Item.swift in Sources */,
 				50D28FF52F845121006A7304 /* AuditSequence.swift in Sources */,
 				50C06AF22F23E467008EE619 /* TabCustom.swift in Sources */,
+				50CF30CE2FB351A600A9319D /* СhameleonView.swift in Sources */,
 				50242EB82F9255EA000FDCC6 /* SlotsEnumerator.swift in Sources */,
 				50CE72342EE62E8F00FE3282 /* Logger.swift in Sources */,
 				508150792E81448100E12175 /* Cell_vm.swift in Sources */,
