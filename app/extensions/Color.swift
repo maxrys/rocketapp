@@ -23,45 +23,57 @@ protocol BackgroundColorProtocol {
     var background    : ColorHSBValue { get }
     var backgroundDark: ColorHSBValue { get }
 
-    func backgroundHSB      (minOpacity: Double) -> ColorHSBValue
-    func backgroundAccentHSB(minOpacity: Double) -> ColorHSBValue
+    func backgroundHSB      (minOpacity: Double, maxOpacity: Double) -> ColorHSBValue
+    func backgroundAccentHSB(minOpacity: Double, maxOpacity: Double) -> ColorHSBValue
 
 }
 
 extension BackgroundColorProtocol {
 
-    func backgroundHSB(minOpacity: Double = 0.0) -> ColorHSBValue {
+    func backgroundHSB(minOpacity: Double = 0.0, maxOpacity: Double = 1.0) -> ColorHSBValue {
         if (self.colorScheme == .dark) {
             ColorHSBValue(
                 self.backgroundDark.hue,
                 self.backgroundDark.saturation,
                 self.backgroundDark.brightness,
-                self.backgroundDark.opacity.fixBounds(min: minOpacity, max: 1.0)
+                self.backgroundDark.opacity.fixBounds(
+                    min: minOpacity,
+                    max: maxOpacity
+                )
             )
         } else {
             ColorHSBValue(
                 self.background.hue,
                 self.background.saturation,
                 self.background.brightness,
-                self.background.opacity.fixBounds(min: minOpacity, max: 1.0)
+                self.background.opacity.fixBounds(
+                    min: minOpacity,
+                    max: maxOpacity
+                )
             )
         }
     }
 
-    func backgroundAccentHSB(minOpacity: Double = 0.0) -> ColorHSBValue {
+    func backgroundAccentHSB(minOpacity: Double = 0.0, maxOpacity: Double = 1.0) -> ColorHSBValue {
         if (self.colorScheme == .dark) {
             ColorHSBValue(
                 self.backgroundDark.hue,
                 self.backgroundDark.saturation,
                 self.shiftForAccent(self.backgroundDark.brightness),
-                self.backgroundDark.opacity.fixBounds(min: minOpacity, max: 1.0)
+                self.backgroundDark.opacity.fixBounds(
+                    min: minOpacity,
+                    max: maxOpacity
+                )
             )
         } else {
             ColorHSBValue(
                 self.background.hue,
                 self.background.saturation,
                 self.shiftForAccent(self.background.brightness),
-                self.background.opacity.fixBounds(min: minOpacity, max: 1.0)
+                self.background.opacity.fixBounds(
+                    min: minOpacity,
+                    max: maxOpacity
+                )
             )
         }
     }
@@ -71,6 +83,8 @@ extension BackgroundColorProtocol {
     }
 
 }
+
+
 
 /* ############################################################# */
 /* ########################## PREVIEW ########################## */
