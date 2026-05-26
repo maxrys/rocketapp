@@ -282,7 +282,7 @@ fileprivate func generatePreviewItems_forSort() -> [String: String] {[
     @Previewable @State var selectedKeyInt: UInt = 0
     @Previewable @State var selectedKeyString: String = ""
 
-    VStack(spacing: 20) {
+    Previewer (isHorizontal: true, padding: 20) {
 
         VStack {
             Text("Items: 0-30, key: int").font(.headline)
@@ -306,16 +306,14 @@ fileprivate func generatePreviewItems_forSort() -> [String: String] {[
             PickerCustom<String>(selected: $selectedKeyString, items: generatePreviewItems_strKey(count: 30))
         }
 
-    }
-    .frame(minWidth: 250, minHeight: 600)
-    .background(Color.gray)
+    }.frame(minHeight: 600)
 }
 
 #Preview {
     @Previewable @State var selectedKeyInt: UInt = 0
     @Previewable @State var selectedKeyString: String = ""
 
-    VStack(spacing: 20) {
+    Previewer (isHorizontal: true, padding: 20) {
 
         VStack {
             Text("Items: 0-30, key: int, style: plain").font(.headline)
@@ -339,35 +337,27 @@ fileprivate func generatePreviewItems_forSort() -> [String: String] {[
             PickerCustom<String>(selected: $selectedKeyString, items: generatePreviewItems_strKey(count: 30), isPlainListStyle: true)
         }
 
-    }
-    .frame(minWidth: 250, minHeight: 600)
-    .background(Color.gray)
+    }.frame(minHeight: 600)
 }
 
 #Preview {
     @Previewable @State var selected: UInt = 0
-    VStack {
+    Previewer (isHorizontal: false, padding: 20) {
         Text("Flexibility:").font(.headline)
         PickerCustom<UInt>(selected: $selected, items: generatePreviewItems_intKey(count: 30))
         PickerCustom<UInt>(selected: $selected, items: generatePreviewItems_intKey(count: 30), flexibility: .none)
         PickerCustom<UInt>(selected: $selected, items: generatePreviewItems_intKey(count: 30), flexibility: .size(100))
         PickerCustom<UInt>(selected: $selected, items: generatePreviewItems_intKey(count: 30), flexibility: .infinity)
-    }
-    .padding(20)
-    .frame(width: 200)
-    .background(Color.gray)
+    }.frame(width: 200)
 }
 
 #Preview {
     @Previewable @State var selected: String = ""
-    VStack {
+    Previewer (isHorizontal: true, padding: 20) {
         Text("Sort:").font(.headline)
         PickerCustom<String>(selected: $selected, items: generatePreviewItems_forSort(), sortedBy: .keyAsc)
         PickerCustom<String>(selected: $selected, items: generatePreviewItems_forSort(), sortedBy: .keyDsc)
         PickerCustom<String>(selected: $selected, items: generatePreviewItems_forSort(), sortedBy: .valueAsc)
         PickerCustom<String>(selected: $selected, items: generatePreviewItems_forSort(), sortedBy: .valueDsc)
-    }
-    .padding(20)
-    .frame(width: 200)
-    .background(Color.gray)
+    }.frame(width: 300)
 }
