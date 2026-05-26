@@ -115,11 +115,13 @@ fileprivate struct ToggleCustom_Switcher: View {
 
 @available(macOS 14.0, *) #Preview {
     @Previewable @State var isOn: Bool = false
-    VStack(alignment: .trailing) {
-        ToggleCustom(text: "Test", isOn: $isOn, isFlexible: true)
-        ToggleCustom(text: "Test", isOn: $isOn, isFlexible: false)
-        ToggleCustom(isOn: $isOn)
+    Previewer {
+        VStack(alignment: .trailing) {
+            ToggleCustom(text: "Test", isOn: $isOn, isFlexible: true)
+            ToggleCustom(text: "Test", isOn: $isOn, isFlexible: false)
+            ToggleCustom(isOn: $isOn)
+        }
+        .frame(width: 200)
+        .padding(20)
     }
-    .frame(width: 200)
-    .padding(20)
 }
