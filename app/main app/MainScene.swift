@@ -50,7 +50,7 @@ struct MainScene: View, BackgroundColorProtocol {
             if (self.isEditMode) {
                 ControlPanel(
                     isEditMode: self.$isEditMode
-                )
+                ).zIndex(1)
                 MainGrid_editMode(
                     cellSize: self.cellSizeFinal,
                     cellSpacing: self.cellSpacingFinal

@@ -40,19 +40,9 @@ struct ControlPanel: View {
         .padding(.vertical  , 12)
         .background(Color.ctrlPanel.background)
         .overlay(alignment: .bottom) {
-            self.ShadowView().offset(y: 5)
+            ShadowLine()
+                .offset(y: 5)
         }
-    }
-
-    @ViewBuilder private func ShadowView() -> some View {
-        Rectangle()
-            .fill(
-                LinearGradient(
-                    colors: [.black.opacity(0.3), Color.clear],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-            ).frame(height: 5)
     }
 
     @ViewBuilder private func ButtonAuditView() -> some View {
@@ -97,7 +87,9 @@ struct ControlPanel: View {
 /* ############################################################# */
 
 #Preview {
-    ControlPanel(
-        isEditMode: .constant(true)
-    ).frame(width: 600)
+    Previewer {
+        ControlPanel(
+            isEditMode: .constant(true)
+        ).frame(width: 600, height: 100, alignment: .top)
+    }
 }
