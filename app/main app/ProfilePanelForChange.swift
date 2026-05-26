@@ -245,9 +245,9 @@ struct ProfilePanelForChange: View {
                 padding: .init(top: 10, leading: 20, bottom: 10, trailing: 20),
                 flexibility: .size(200),
                 isFlat: false,
-                isDisabled: self.profiles.current.ID == ThisApp.EMBEDDED_PROFILE_ID
-            )                   { self.isShowDeleteDialog = true }
+                onClick:        { self.isShowDeleteDialog = true })
             .onPressEnterOrSpace{ self.isShowDeleteDialog = true }
+            .disabled(self.profiles.current.ID == ThisApp.EMBEDDED_PROFILE_ID)
             .confirmationDialog("Delete profile\n \"\(self.profiles.current.title)\"", isPresented: self.$isShowDeleteDialog) {
                 Button("Delete", role: .destructive, action: self.onDeleteProfile)
                 Button("Cancel", role: .cancel) {

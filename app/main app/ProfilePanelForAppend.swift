@@ -32,9 +32,9 @@ struct ProfilePanelForAppend: View {
                 padding: .init(top: 10, leading: 20, bottom: 10, trailing: 20),
                 flexibility: .infinity,
                 isFlat: false,
-                isDisabled: self.title.isEmpty
-            )                    { self.onAppendProfile() }
+                onClick:         { self.onAppendProfile() })                    
             .onPressEnterOrSpace { self.onAppendProfile() }
+            .disabled(self.title.isEmpty)
 
         }
         .padding(20)
