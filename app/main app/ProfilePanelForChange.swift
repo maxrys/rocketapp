@@ -212,7 +212,7 @@ struct ProfilePanelForChange: View {
 
                 ColorPickerHSBO(
                     self.profiles.current.getBinding(\.background),
-                    openerSize: .init(width: 40, height: 15),
+                    openerSize: .init(width: 40, height: 20),
                     openerRadius: 10,
                     isInstantUpdate: true
                 )
@@ -223,7 +223,7 @@ struct ProfilePanelForChange: View {
 
                 ColorPickerHSBO(
                     self.profiles.current.getBinding(\.backgroundDark),
-                    openerSize: .init(width: 40, height: 15),
+                    openerSize: .init(width: 40, height: 20),
                     openerRadius: 10,
                     isInstantUpdate: true
                 )

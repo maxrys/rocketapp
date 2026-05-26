@@ -14,8 +14,9 @@ struct ColorPickerHSBO: View {
         case O
     }
 
-    @Binding private var colorExternal: ColorHSBValue
+    @Environment(\.isEnabled) private var isEnabled
 
+    @Binding private var colorExternal: ColorHSBValue
     @State private var colorInternal: ColorHSBValue
     @State private var isShowPopover: Bool = false
 
@@ -38,19 +39,18 @@ struct ColorPickerHSBO: View {
     }
 
     public var body: some View {
-        Button {
-            self.isShowPopover = true
-        } label: {
-            self.ColorView()
+        Button { self.isShowPopover = true } label: {
+            self.ChessboardView()
                 .frame(width: openerSize.width, height: openerSize.height)
+                .overlay { self.ColorView() }
                 .overlay { self.ZebraStrokeView() }
-                .clipShape(                 RoundedRectangle(cornerRadius: self.openerRadius))
+                .clipShape   (              RoundedRectangle(cornerRadius: self.openerRadius))
                 .contentShape(              RoundedRectangle(cornerRadius: self.openerRadius))
                 .contentShape(.focusEffect, RoundedRectangle(cornerRadius: self.openerRadius))
                 .hoverBehavior(.scaleEffect(from: 1.0, to: 1.1))
         }
         .buttonStyle(.plain)
-        .pointerStyle(.link)
+        .pointerStyle(self.isEnabled ? .link : .default)
         .popover(isPresented: self.$isShowPopover) {
             self.PopoverView()
         }
@@ -75,41 +75,62 @@ struct ColorPickerHSBO: View {
         }
     }
 
-    @ViewBuilder private func PopoverView() -> some View {
+    @ViewBuilder fileprivate func PopoverView() -> some View {
         VStack(spacing: 20) {
 
             ZStack(alignment: .leading) {
                 self.PaletteView  (component: .H)
                 self.IndicatorView(component: .H)
                 self.TouchpadView (component: .H)
-            }.frame(height: 30)
+            }
+            .frame(height: 30)
+            .overlay(alignment: .bottom) {
+                self.ValueView(self.colorInternal.hue).offset(y: 14)
+            }
 
             ZStack(alignment: .leading) {
                 self.PaletteView  (component: .S)
                 self.IndicatorView(component: .S)
                 self.TouchpadView (component: .S)
-            }.frame(height: 30)
+            }
+            .frame(height: 30)
+            .overlay(alignment: .bottom) {
+                self.ValueView(self.colorInternal.saturation).offset(y: 14)
+            }
 
             ZStack(alignment: .leading) {
                 self.PaletteView  (component: .B)
                 self.IndicatorView(component: .B)
                 self.TouchpadView (component: .B)
-            }.frame(height: 30)
+            }
+            .frame(height: 30)
+            .overlay(alignment: .bottom) {
+                self.ValueView(self.colorInternal.brightness).offset(y: 14)
+            }
 
             ZStack(alignment: .leading) {
                 self.ChessboardView()
                 self.ColorView()
                 self.IndicatorView(component: .O)
                 self.TouchpadView (component: .O)
-            }.frame(height: 30)
+            }
+            .frame(height: 30)
+            .overlay(alignment: .bottom) {
+                self.ValueView(self.colorInternal.opacity).offset(y: 14)
+            }
 
         }
         .frame(width: self.width)
         .padding(20)
     }
 
-    @ViewBuilder private func ChessboardView() -> some View {
-        let cellSize: CGFloat = 10
+    @ViewBuilder private func ValueView(_ value: Double) -> some View {
+        Text(value.formatted(.number.precision(.fractionLength(4))))
+            .font(.system(size: 7, design: .monospaced))
+            .opacity(0.5)
+    }
+
+    @ViewBuilder private func ChessboardView(cellSize: CGFloat = 10) -> some View {
         Canvas { context, size in
             context.drawRectangle(x: 0, y: 0, w: size.width, h: size.height, colorFill: .white)
             for j in 0 ... Int(size.height / cellSize) {
@@ -222,15 +243,27 @@ struct ColorPickerHSBO: View {
 
 #Preview {
     @Previewable @State var pickerColorR = ColorHSBValue(0.00, 1.0, 1.0)
-    @Previewable @State var pickerColorG = ColorHSBValue(0.33, 1.0, 1.0)
-    @Previewable @State var pickerColorB = ColorHSBValue(0.66, 1.0, 1.0)
-    VStack(spacing: 10) {
-        ColorPickerHSBO($pickerColorR)
-        ColorPickerHSBO($pickerColorG)
-        ColorPickerHSBO($pickerColorB)
+    @Previewable @State var pickerColorD = ColorHSBValue(0.00, 0.0, 0.0)
+    VStack(spacing: 20) {
+        HStack(spacing: 20) {
+            ColorPickerHSBO($pickerColorR)
+            ColorPickerHSBO($pickerColorD).disabled(true)
+        }
+        ColorPickerHSBO($pickerColorR).PopoverView()
+            .background {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color.NS[\.windowBackgroundColor])
+                    .shadow(radius: 3)
+            }.environment(\.colorScheme, .light)
+        ColorPickerHSBO($pickerColorR).PopoverView()
+            .background {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color.NS[\.windowBackgroundColor])
+                    .shadow(radius: 3)
+            }.environment(\.colorScheme, .dark)
     }
     .padding(20)
-    .onChange(of: pickerColorR) { _, value in print(value.encode() ?? "") }
-    .onChange(of: pickerColorG) { _, value in print(value.encode() ?? "") }
-    .onChange(of: pickerColorB) { _, value in print(value.encode() ?? "") }
+    .onChange(of: pickerColorR) { _, value in
+        print(value.encode() ?? "")
+    }
 }
