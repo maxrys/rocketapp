@@ -59,7 +59,7 @@ import SwiftData
         self.cache[ID]
     }
 
-    func insert(_ ID: CellID.Value, _ cellValue: CellValue) {
+    func insertCellValue(_ ID: CellID.Value, _ cellValue: CellValue) {
         switch cellValue {
             case .main, .mini:
                 self.cache[ID] = cellValue
@@ -69,10 +69,46 @@ import SwiftData
         }
     }
 
-    func delete(_ ID: CellID.Value) {
+    func insertAppValue(_ ID: CellID.Value, _ appValue: AppValue, to keyPath: CellValuePath? = nil) {
+        if let keyPath {
+            switch self.select(ID) {
+                case .none:
+                    self.insertCellValue(
+                        ID, .mini(
+                            .init(keyPath: keyPath, value: appValue)
+                        )
+                    )
+                case .mini(var miniGrid):
+                    miniGrid[keyPath: keyPath] = appValue
+                    self.insertCellValue(
+                        ID, .mini(miniGrid)
+                    )
+                default: break
+            }
+        } else {
+            self.insertCellValue(
+                ID, .main(appValue)
+            )
+        }
+    }
+
+    func deleteCellValue(_ ID: CellID.Value) {
         self.cache[ID] = nil
         Task {
             _ = CellValue.modelDelete(ID, self.profileID)
+        }
+    }
+
+    func deleteAppValue(_ ID: CellID.Value, from keyPath: CellValuePath? = nil) {
+        if let keyPath {
+            if case .mini(var miniGrid) = self.select(ID) {
+                miniGrid[keyPath: keyPath] = nil
+                if (miniGrid.isEmpty)
+                     { self.deleteCellValue(ID) }
+                else { self.insertCellValue(ID, .mini(miniGrid)) }
+            }
+        } else {
+            self.deleteCellValue(ID)
         }
     }
 
@@ -122,6 +158,66 @@ import SwiftData
                 self.reloadCache()
             }
         }
+    }
+
+    func onDrag(_ ID: CellID.Value, from keyPathFrom: CellValuePath? = nil) -> NSItemProvider {
+        NSItemProvider(
+            object: AppDragValue(
+                ID: ID,
+                keyPath: keyPathFrom
+            )
+        )
+    }
+
+    func onDrop(_ ID: CellID.Value, _ providers: [NSItemProvider], to keyPathTo: CellValuePath? = nil) -> Bool {
+        if let provider = providers.first {
+            provider.loadItem(forTypeIdentifier: "public.item", options: nil) { (item, error) in
+                if let error = error {
+                    Logger.customLog("onDropApp error: \(error.localizedDescription)")
+                    return
+                }
+                Task { @MainActor in
+                    if let appURL = item as? URL {
+                        if let appValue = AppValue(appURL) {
+                            self.insertAppValue(ID, appValue, to: keyPathTo)
+                        }
+                    }
+                }
+            }
+            provider.loadObject(ofClass: AppDragValue.self) { object, error in
+                if let error = error {
+                    Logger.customLog("onDropApp error: \(error.localizedDescription)")
+                    return
+                }
+                Task { @MainActor in
+                    if let appDragValue = object as? AppDragValue {
+                        if let cellValueFrom = self.select(appDragValue.ID) {
+                            switch appDragValue.from {
+                                case .`mini_#1`, .`mini_#2`, .`mini_#3`, .`mini_#4`:
+                                    if case .mini(var miniGridFrom) = cellValueFrom {
+                                        if let keyPathFrom = appDragValue.keyPathFrom {
+                                            if let appValueFrom = miniGridFrom[keyPath: keyPathFrom] {
+                                                miniGridFrom[keyPath: keyPathFrom] = nil
+                                                if (miniGridFrom.isEmpty)
+                                                     { self.deleteCellValue(appDragValue.ID) }
+                                                else { self.insertCellValue(appDragValue.ID, .mini(miniGridFrom)) }
+                                                self.insertAppValue(ID, appValueFrom, to: keyPathTo)
+                                            }
+                                        }
+                                    }
+                                case .`main_#0`:
+                                    if case .main(let appValueFrom) = cellValueFrom {
+                                        self.deleteCellValue(appDragValue.ID)
+                                        self.insertAppValue(ID, appValueFrom, to: keyPathTo)
+                                    }
+                            }
+                        }
+                    }
+                }
+            }
+            return true
+        }
+        return false
     }
 
 }

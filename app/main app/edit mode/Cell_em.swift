@@ -95,7 +95,7 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
                 case .none:
                     self.ButtonInsertView(self.sizeCellMainButton) {
                         if let appValue = AppValue.fromDialog() {
-                            self.insert(appValue)
+                            self.cells.insertAppValue(self.ID, appValue)
                         }
                     }
                 case .main(let appValue):
@@ -103,12 +103,12 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
                         name: appValue.name,
                         icon: appValue.resolvedIcon,
                         size: self.size,
-                        onDelete: { self.delete() }
+                        onDelete: {
+                            self.cells.deleteAppValue(self.ID)
+                        }
                     )
-                    .onDrag({ self.onDragAppValue() }, preview: {
-                        Image(nsImage: appValue.resolvedIcon)
-                            .resizable()
-                            .frame(width: 20, height: 20)
+                    .onDrag({ self.cells.onDrag(self.ID) }, preview: {
+                        self.dragIcon(appValue)
                     })
                 default:
                     Color.clear
@@ -125,7 +125,7 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
                 case .none:
                     self.ButtonInsertView(self.sizeCellMiniButton, to: keyPath) {
                         if let appValue = AppValue.fromDialog() {
-                            self.insert(appValue, to: keyPath)
+                            self.cells.insertAppValue(self.ID, appValue, to: keyPath)
                         }
                     }
                 case .mini(let miniGrid):
@@ -134,17 +134,17 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
                             name: appValue.name,
                             icon: appValue.resolvedIcon,
                             size: self.sizeCellMini,
-                            onDelete: { self.delete(from: keyPath) }
+                            onDelete: {
+                                self.cells.deleteAppValue(self.ID, from: keyPath)
+                            }
                         )
-                        .onDrag({ self.onDragAppValue(from: keyPath) }, preview: {
-                            Image(nsImage: appValue.resolvedIcon)
-                                .resizable()
-                                .frame(width: 20, height: 20)
+                        .onDrag({ self.cells.onDrag(self.ID, from: keyPath) }, preview: {
+                            self.dragIcon(appValue)
                         })
                     } else {
                         self.ButtonInsertView(self.sizeCellMiniButton, to: keyPath) {
                             if let appValue = AppValue.fromDialog() {
-                                self.insert(appValue, to: keyPath)
+                                self.cells.insertAppValue(self.ID, appValue, to: keyPath)
                             }
                         }
                     }
@@ -157,114 +157,20 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
         )
     }
 
+    @ViewBuilder private func dragIcon(_ appValue: AppValue) -> some View {
+        Image(nsImage: appValue.resolvedIcon)
+            .resizable()
+            .frame(width: 20, height: 20)
+    }
+
     @ViewBuilder private func ButtonInsertView(_ size: CGFloat, to keyPath: CellValuePath? = nil, onClick: @escaping () -> Void) -> some View {
         Cell_editMode_ButtonInsert(
             size: size,
             onClick: onClick,
             onDrop: { providers in
-                self.onDropAppValue(providers, to: keyPath)
+                self.cells.onDrop(self.ID, providers, to: keyPath)
             }
         )
-    }
-
-    private func insert(_ appValue: AppValue, to keyPath: CellValuePath? = nil) {
-        if let keyPath {
-            switch self.value {
-                case .none:
-                    self.cells.insert(
-                        self.ID, .mini(
-                            .init(keyPath: keyPath, value: appValue)
-                        )
-                    )
-                case .mini(var miniGrid):
-                    miniGrid[keyPath: keyPath] = appValue
-                    self.cells.insert(
-                        self.ID, .mini(miniGrid)
-                    )
-                default: break
-            }
-        } else {
-            self.cells.insert(
-                self.ID, .main(appValue)
-            )
-        }
-    }
-
-    private func delete(from keyPath: CellValuePath? = nil) {
-        if let keyPath {
-            if case .mini(var miniGrid) = self.value {
-                miniGrid[keyPath: keyPath] = nil
-                if (miniGrid.isEmpty)
-                     { self.cells.delete(self.ID) }
-                else { self.cells.insert(self.ID, .mini(miniGrid)) }
-            }
-        } else {
-            self.cells.delete(
-                self.ID
-            )
-        }
-    }
-
-    private func onDragAppValue(from keyPathFrom: CellValuePath? = nil) -> NSItemProvider {
-        NSItemProvider(
-            object: AppDragValue(
-                ID: self.ID,
-                keyPath: keyPathFrom
-            )
-        )
-    }
-
-    private func onDropAppValue(_ providers: [NSItemProvider], to keyPathTo: CellValuePath? = nil) -> Bool {
-        if let provider = providers.first {
-            provider.loadItem(forTypeIdentifier: "public.item", options: nil) { (item, error) in
-                if let error = error {
-                    Logger.customLog("onDropApp error: \(error.localizedDescription)")
-                    return
-                }
-                Task { @MainActor in
-                    if let appURL = item as? URL {
-                        if let appValue = AppValue(appURL) {
-                            if let keyPathTo
-                                 { self.insert(appValue, to: keyPathTo) }
-                            else { self.insert(appValue) }
-                        }
-                    }
-                }
-            }
-            provider.loadObject(ofClass: AppDragValue.self) { object, error in
-                if let error = error {
-                    Logger.customLog("onDropApp error: \(error.localizedDescription)")
-                    return
-                }
-                Task { @MainActor in
-                    if let appDragValue = object as? AppDragValue {
-                        if let cellValueFrom = self.cells.select(appDragValue.ID) {
-                            switch appDragValue.position {
-                                case .`mini_#1`, .`mini_#2`, .`mini_#3`, .`mini_#4`:
-                                    if case .mini(var miniGridFrom) = cellValueFrom {
-                                        if let keyPathFrom = appDragValue.keyPathResolve {
-                                            if let appValueFrom = miniGridFrom[keyPath: keyPathFrom] {
-                                                miniGridFrom[keyPath: keyPathFrom] = nil
-                                                if (miniGridFrom.isEmpty)
-                                                     { self.cells.delete(appDragValue.ID) }
-                                                else { self.cells.insert(appDragValue.ID, .mini(miniGridFrom)) }
-                                                self.insert(appValueFrom, to: keyPathTo)
-                                            }
-                                        }
-                                    }
-                                case .`main_#0`:
-                                    if case .main(let appValue) = cellValueFrom {
-                                        self.cells.delete(appDragValue.ID)
-                                        self.insert(appValue, to: keyPathTo)
-                                    }
-                            }
-                        }
-                    }
-                }
-            }
-            return true
-        }
-        return false
     }
 
 }
@@ -282,7 +188,7 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
 
     @Previewable @State var mockForMain: CellsState = {
         let data = CellsState.initMock(profileID: ThisApp.PREVIEW_PROFILE_ID)
-        data.insert(0, .main(.init(
+        data.insertCellValue(0, .main(.init(
             bundleID: ThisApp.DEMO_BUNDLE_ID,
             name: ThisApp.DEMO_NAME,
             path: ThisApp.DEMO_PATH,
@@ -293,7 +199,7 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
 
     @Previewable @State var mockForMini: CellsState = {
         let data = CellsState.initMock(profileID: ThisApp.PREVIEW_PROFILE_ID)
-        data.insert(0, .mini(.init(
+        data.insertCellValue(0, .mini(.init(
             cell1Value: .init(bundleID: ThisApp.DEMO_BUNDLE_ID, name: ThisApp.DEMO_NAME, path: ThisApp.DEMO_PATH, icon: nil),
             cell2Value: .init(bundleID: ThisApp.DEMO_BUNDLE_ID, name: ThisApp.DEMO_NAME, path: ThisApp.DEMO_PATH, icon: nil),
             cell3Value: .init(bundleID: ThisApp.DEMO_BUNDLE_ID, name: ThisApp.DEMO_NAME, path: ThisApp.DEMO_PATH, icon: nil),

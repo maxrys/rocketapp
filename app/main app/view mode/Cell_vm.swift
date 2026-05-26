@@ -118,7 +118,7 @@ struct Cell_viewMode: View, CellProtocol {
 
     @Previewable @State var mockForMain: CellsState = {
         let data = CellsState.initMock(profileID: ThisApp.PREVIEW_PROFILE_ID)
-        data.insert(0, .main(.init(
+        data.insertCellValue(0, .main(.init(
             bundleID: ThisApp.DEMO_BUNDLE_ID,
             name: ThisApp.DEMO_NAME,
             path: ThisApp.DEMO_PATH,
@@ -129,7 +129,7 @@ struct Cell_viewMode: View, CellProtocol {
 
     @Previewable @State var mockForMini: CellsState = {
         let data = CellsState.initMock(profileID: ThisApp.PREVIEW_PROFILE_ID)
-        data.insert(0, .mini(.init(
+        data.insertCellValue(0, .mini(.init(
             cell1Value: .init(bundleID: ThisApp.DEMO_BUNDLE_ID, name: ThisApp.DEMO_NAME, path: ThisApp.DEMO_PATH, icon: nil),
             cell2Value: .init(bundleID: ThisApp.DEMO_BUNDLE_ID, name: ThisApp.DEMO_NAME, path: ThisApp.DEMO_PATH, icon: nil),
             cell3Value: .init(bundleID: ThisApp.DEMO_BUNDLE_ID, name: ThisApp.DEMO_NAME, path: ThisApp.DEMO_PATH, icon: nil),

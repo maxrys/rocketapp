@@ -11,7 +11,7 @@ final class AppDragValue: NSObject, Codable, NSItemProviderWriting, NSItemProvid
     static var writableTypeIdentifiersForItemProvider: [String] { [UTType.appDragValue.identifier] }
     static var readableTypeIdentifiersForItemProvider: [String] { [UTType.appDragValue.identifier] }
 
-    enum Position: Codable {
+    enum From: Codable {
         case `main_#0`
         case `mini_#1`
         case `mini_#2`
@@ -20,10 +20,10 @@ final class AppDragValue: NSObject, Codable, NSItemProviderWriting, NSItemProvid
     }
 
     var ID: CellID.Value
-    var position: Position
+    var from: From
 
-    var keyPathResolve: CellValuePath? {
-        switch self.position {
+    var keyPathFrom: CellValuePath? {
+        switch self.from {
             case .`mini_#1`: return \.cell1
             case .`mini_#2`: return \.cell2
             case .`mini_#3`: return \.cell3
@@ -35,11 +35,11 @@ final class AppDragValue: NSObject, Codable, NSItemProviderWriting, NSItemProvid
     init(ID: CellID.Value, keyPath: CellValuePath? = nil) {
         self.ID = ID
         switch keyPath {
-            case \.cell1: self.position = .`mini_#1`
-            case \.cell2: self.position = .`mini_#2`
-            case \.cell3: self.position = .`mini_#3`
-            case \.cell4: self.position = .`mini_#4`
-            default     : self.position = .`main_#0`
+            case \.cell1: self.from = .`mini_#1`
+            case \.cell2: self.from = .`mini_#2`
+            case \.cell3: self.from = .`mini_#3`
+            case \.cell4: self.from = .`mini_#4`
+            default     : self.from = .`main_#0`
         }
     }
 
