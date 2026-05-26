@@ -104,7 +104,7 @@ struct MainScene: View, BackgroundColorProtocol {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .overlay {
                 VStack(spacing: 10) {
-                    ProgressCustom(value: .constant(self.cells.auditProgress))
+                    ProgressCustom(value: self.cells.auditProgress)
                         .shadow(
                             color: .black.opacity(0.5),
                             radius: 5.0

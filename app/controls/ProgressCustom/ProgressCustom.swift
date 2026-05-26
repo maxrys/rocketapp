@@ -8,7 +8,8 @@ import SwiftUI
 struct ProgressCustom: View {
 
     @Environment(\.colorScheme) private var colorScheme
-    @Binding private var value: Double
+
+    private var value: Double
 
     let isAnimatable: Bool
     let height: CGFloat
@@ -17,14 +18,14 @@ struct ProgressCustom: View {
     let valueFont: Font
 
     init(
-        value: Binding<Double>,
+        value: Double,
         isAnimatable: Bool = true,
         height: CGFloat = 30.0,
         zebraSize: CGFloat = 30.0,
         zebraSpeed: Double = 50,
         valueFont: Font = .system(size: 14, weight: .bold)
     ) {
-        self._value = value
+        self.value = value
         self.isAnimatable = isAnimatable
         self.height = height
         self.zebraSize = zebraSize
@@ -86,7 +87,7 @@ struct ProgressCustom: View {
         let formattedValue = Int(value * 100)
         Text("\(formattedValue) %")
             .font(self.valueFont)
-            .foregroundStyle(.blue)
+            .foregroundStyle(Color.accentColor)
             .blendMode(.difference)
     }
 
@@ -99,13 +100,9 @@ struct ProgressCustom: View {
 /* ############################################################# */
 
 #Preview {
-    VStack(spacing: 10) {
-        ForEach(Array(stride(from: -0.1, through: 1.1, by: 0.1)), id: \.self) { value in
-            ProgressCustom(
-                value: .constant(value)
-            )
+    Previewer(spacing: 10, padding: 10) {
+        ForEach(Array(stride(from: -0.1, through: 1.1, by: 0.2)), id: \.self) { value in
+            ProgressCustom(value: value)
         }
-    }
-    .padding(10)
-    .frame(width: 300)
+    }.frame(width: 300)
 }
