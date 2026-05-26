@@ -7,10 +7,11 @@ import SwiftUI
 
 struct ButtonRound<L: View, F: ShapeStyle, B: View>: View {
 
+    @Environment(\.isEnabled) private var isEnabled
+
     private let label: L
     private let foreground: F
     private let background: B
-    private let isDisabled: Bool
     private let size: CGFloat
     private let onClick: () -> Void
 
@@ -18,14 +19,12 @@ struct ButtonRound<L: View, F: ShapeStyle, B: View>: View {
         @ViewBuilder label: () -> L,
         @ViewBuilder foreground: () -> F = { Color.black },
         @ViewBuilder background: () -> B = { Color.white },
-        isDisabled: Bool = false,
         size: CGFloat = 30.0,
         onClick: @escaping () -> Void = { }
     ) {
         self.label = label()
         self.foreground = foreground()
         self.background = background()
-        self.isDisabled = isDisabled
         self.size = size
         self.onClick = onClick
     }
@@ -40,7 +39,8 @@ struct ButtonRound<L: View, F: ShapeStyle, B: View>: View {
                     .aspectRatio(contentMode: .fit)
                     .foregroundStyle(self.foreground)
                     .background(self.background)
-                    .clipShape(Circle())
+                    .clipShape   (              Circle())
+                    .contentShape(              Circle())
                     .contentShape(.focusEffect, Circle())
                     .hoverBehavior(.scaleEffect(from: 1.0, to: 1.1))
             } else {
@@ -48,15 +48,15 @@ struct ButtonRound<L: View, F: ShapeStyle, B: View>: View {
                     .frame(width: self.size, height: self.size)
                     .foregroundStyle(self.foreground)
                     .background(self.background)
-                    .clipShape(Circle())
+                    .clipShape   (              Circle())
+                    .contentShape(              Circle())
                     .contentShape(.focusEffect, Circle())
                     .hoverBehavior(.scaleEffect(from: 1.0, to: 1.1))
             }
         }
         .buttonStyle(.plain)
         .frame(width: self.size, height: self.size)
-        .disabled(self.isDisabled)
-        .pointerStyle(.link)
+        .pointerStyle(self.isEnabled ? .link : .default)
     }
 
 }
@@ -68,9 +68,9 @@ struct ButtonRound<L: View, F: ShapeStyle, B: View>: View {
 /* ############################################################# */
 
 #Preview {
-    VStack(spacing: 10) {
+    Previewer(isHorizontal: true, padding: 20) {
         ButtonRound( label: { Image(systemName: "plus.circle") } )
-        ButtonRound( label: { Image(systemName: "plus.circle") }, isDisabled: true )
+        ButtonRound( label: { Image(systemName: "plus.circle") } ).disabled(true)
         ButtonRound(
             label: {
                 Image(systemName: "minus")
@@ -90,5 +90,5 @@ struct ButtonRound<L: View, F: ShapeStyle, B: View>: View {
             radius: 2,
             y: 1
         )
-    }.padding(20)
+    }
 }

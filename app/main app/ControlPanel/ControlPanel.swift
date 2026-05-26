@@ -76,9 +76,8 @@ struct ControlPanel: View {
             },
             foreground: { Color.ctrlPanel.buttonText },
             background: { Color.ctrlPanel.buttonBackground },
-            isDisabled:   self.cells.isAuditInProgress || self.cells.isEmpty,
             onClick   : { self.cells.audit() }
-        )
+        ).disabled(self.cells.isAuditInProgress || self.cells.isEmpty)
     }
 
     @ViewBuilder private func ButtonCloseSettingsView() -> some View {
