@@ -25,8 +25,8 @@ import SwiftData
     public var isShowWinTitleButtons: Bool
     public var background: String
     public var backgroundDark: String
-    public var winFrameViewMode: String = ThisApp.NEW_PROFILE_WIN_FRAME_VIEW_MODE.encode()
-    public var winFrameEditMode: String = ThisApp.NEW_PROFILE_WIN_FRAME_EDIT_MODE.encode()
+    public var winFrameViewMode: String = ThisApp.DEFAULT_WIN_FRAME_VIEW_MODE.encode()
+    public var winFrameEditMode: String = ThisApp.DEFAULT_WIN_FRAME_EDIT_MODE.encode()
 
     init(
         ID: ProfileID,

@@ -55,6 +55,6 @@ struct MainGrid_viewMode: View {
 #Preview {
     MainGrid_viewMode(
         cellSize: ThisApp.CELL_SIZE,
-        cellSpacing: CGFloat(ThisApp.NEW_PROFILE_SPACING)
+        cellSpacing: CGFloat(ThisApp.DEFAULT_SPACING)
     ).frame(width: 300)
 }

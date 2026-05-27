@@ -68,6 +68,6 @@ struct MainGrid_editMode: View {
 #Preview {
     MainGrid_editMode(
         cellSize: ThisApp.CELL_SIZE,
-        cellSpacing: CGFloat(ThisApp.NEW_PROFILE_SPACING)
+        cellSpacing: CGFloat(ThisApp.DEFAULT_SPACING)
     ).frame(width: 300, height: 500)
 }

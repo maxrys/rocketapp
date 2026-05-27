@@ -161,7 +161,7 @@ struct BackgroundColorProtocol_Previews: PreviewProvider {
                 ColorPlateView().background(Color(hue: 0.0, saturation: 0.0, brightness: 0.9))
             }
             .environment(\.colorScheme, .light)
-            .environment(\.windowBackground, ThisApp.NEW_PROFILE_BACKGROUND)
+            .environment(\.windowBackground, ThisApp.DEFAULT_BACKGROUND)
 
             LazyVGrid(columns: columns, spacing: 0) {
                 ColorPlateView().background(Color(hue: 0.0, saturation: 0.0, brightness: 0.1))
@@ -175,7 +175,7 @@ struct BackgroundColorProtocol_Previews: PreviewProvider {
                 ColorPlateView().background(Color(hue: 0.0, saturation: 0.0, brightness: 0.9))
             }
             .environment(\.colorScheme, .dark)
-            .environment(\.windowBackgroundDark, ThisApp.NEW_PROFILE_BACKGROUND_DARK)
+            .environment(\.windowBackgroundDark, ThisApp.DEFAULT_BACKGROUND_DARK)
 
             /* one background and different colors */
 

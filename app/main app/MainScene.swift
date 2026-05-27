@@ -62,8 +62,8 @@ struct MainScene: View, BackgroundColorProtocol {
 
         }
         .frame(
-            minWidth : self.isEditMode ? ThisApp.NEW_PROFILE_WIN_FRAME_EDIT_MODE.w : self.frameMinSizeViewMode, maxWidth : .infinity,
-            minHeight: self.isEditMode ? ThisApp.NEW_PROFILE_WIN_FRAME_EDIT_MODE.h : self.frameMinSizeViewMode, maxHeight: .infinity
+            minWidth : self.isEditMode ? ThisApp.DEFAULT_WIN_FRAME_EDIT_MODE.w : self.frameMinSizeViewMode, maxWidth : .infinity,
+            minHeight: self.isEditMode ? ThisApp.DEFAULT_WIN_FRAME_EDIT_MODE.h : self.frameMinSizeViewMode, maxHeight: .infinity
         )
         .background(self.backgroundHSB().color)
         .overlay(alignment: .topTrailing) {

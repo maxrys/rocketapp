@@ -142,8 +142,8 @@ struct ProfilePanelForChange: View {
 
                 StepperCustom(
                     self.profiles.current.getBinding(\.iconOnHoverZoom),
-                    in: ThisApp.PROFILE_ICON_ON_HOVER_ZOOM_MIN ...
-                        ThisApp.PROFILE_ICON_ON_HOVER_ZOOM_MAX, step: 0.1,
+                    in: ThisApp.ICON_ON_HOVER_ZOOM_MIN ...
+                        ThisApp.ICON_ON_HOVER_ZOOM_MAX, step: 0.1,
                     colorSet: Color.ctrlPanel.stepper
                 )
                 .scaleEffect(0.7)

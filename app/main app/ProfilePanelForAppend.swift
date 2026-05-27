@@ -90,17 +90,17 @@ struct ProfilePanelForAppend: View {
         let profile = ProfileValue(
             ID                   : profiles.newID,
             title                : self.title,
-            zoom                 : ThisApp.NEW_PROFILE_ZOOM,
-            spacing              : ThisApp.NEW_PROFILE_SPACING,
-            iconOnHoverZoom      : ThisApp.NEW_PROFILE_ICON_ON_HOVER_ZOOM,
-            isShowIconTitle      : ThisApp.NEW_PROFILE_IS_SHOW_ICON_TITLE,
-            isHideOnMisclick     : ThisApp.NEW_PROFILE_IS_HIDE_ON_MISCLICK,
-            isStickyGrid         : ThisApp.NEW_PROFILE_IS_STICKY_GRID,
-            isShowWinTitleButtons: ThisApp.NEW_PROFILE_IS_SHOW_WINDOW_TITLE_BUTTONS,
-            background           : ThisApp.NEW_PROFILE_BACKGROUND,
-            backgroundDark       : ThisApp.NEW_PROFILE_BACKGROUND_DARK,
-            winFrameViewMode     : NSWindow.centerWindowFrame(ThisApp.WINDOW_MAIN_ID, frame: ThisApp.NEW_PROFILE_WIN_FRAME_VIEW_MODE),
-            winFrameEditMode     : NSWindow.centerWindowFrame(ThisApp.WINDOW_MAIN_ID, frame: ThisApp.NEW_PROFILE_WIN_FRAME_EDIT_MODE)
+            zoom                 : ThisApp.DEFAULT_ZOOM,
+            spacing              : ThisApp.DEFAULT_SPACING,
+            iconOnHoverZoom      : ThisApp.DEFAULT_ICON_ON_HOVER_ZOOM,
+            isShowIconTitle      : ThisApp.DEFAULT_IS_SHOW_ICON_TITLE,
+            isHideOnMisclick     : ThisApp.DEFAULT_IS_HIDE_ON_MISCLICK,
+            isStickyGrid         : ThisApp.DEFAULT_IS_STICKY_GRID,
+            isShowWinTitleButtons: ThisApp.DEFAULT_IS_SHOW_WINDOW_TITLE_BUTTONS,
+            background           : ThisApp.DEFAULT_BACKGROUND,
+            backgroundDark       : ThisApp.DEFAULT_BACKGROUND_DARK,
+            winFrameViewMode     : NSWindow.centerWindowFrame(ThisApp.WINDOW_MAIN_ID, frame: ThisApp.DEFAULT_WIN_FRAME_VIEW_MODE),
+            winFrameEditMode     : NSWindow.centerWindowFrame(ThisApp.WINDOW_MAIN_ID, frame: ThisApp.DEFAULT_WIN_FRAME_EDIT_MODE)
         )
         if (self.profiles.insert(profile)) {
             Logger.customLog("The profile (ID: \(profile.ID)) has been created.")
