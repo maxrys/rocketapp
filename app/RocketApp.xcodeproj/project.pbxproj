@@ -21,6 +21,7 @@
 		501D4DF12EC120CC00919AB9 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501D4DF02EC120CC00919AB9 /* Timer.swift */; };
 		50242EB82F9255EA000FDCC6 /* SlotsEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50242EB72F9255EA000FDCC6 /* SlotsEnumerator.swift */; };
 		50447F692EEE9A5700C9B8D1 /* ProfilePanelForChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50447F682EEE9A5700C9B8D1 /* ProfilePanelForChange.swift */; };
+		505507302FC59DC8007DB93D /* ShadowLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5055072F2FC59DC8007DB93D /* ShadowLine.swift */; };
 		505849632E9534BC00B9F421 /* ModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505849602E95341400B9F421 /* ModelContainer.swift */; };
 		505849642E9534BC00B9F421 /* ModelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505849612E95341400B9F421 /* ModelCell.swift */; };
 		505849672E97E23100B9F421 /* CellsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505849662E97E23000B9F421 /* CellsState.swift */; };
@@ -113,6 +114,7 @@
 		501D4DF02EC120CC00919AB9 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		50242EB72F9255EA000FDCC6 /* SlotsEnumerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotsEnumerator.swift; sourceTree = "<group>"; };
 		50447F682EEE9A5700C9B8D1 /* ProfilePanelForChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePanelForChange.swift; sourceTree = "<group>"; };
+		5055072F2FC59DC8007DB93D /* ShadowLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowLine.swift; sourceTree = "<group>"; };
 		505849602E95341400B9F421 /* ModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelContainer.swift; sourceTree = "<group>"; };
 		505849612E95341400B9F421 /* ModelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelCell.swift; sourceTree = "<group>"; };
 		505849662E97E23000B9F421 /* CellsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellsState.swift; sourceTree = "<group>"; };
@@ -255,12 +257,21 @@
 				506421D32F644E510020F6C8 /* GridCustom */,
 				506421D42F644E5E0020F6C8 /* PickerCustom */,
 				506421D52F644E6A0020F6C8 /* ProgressCustom */,
+				505507342FC5AE90007DB93D /* ShadowLine */,
 				506421D62F644E760020F6C8 /* StepperCustom */,
 				50CEA09C2F4B711B001006CF /* TabCustom */,
 				50CE9FC02F471669001006CF /* TextFieldCustom */,
 				506421D72F644E830020F6C8 /* ToggleCustom */,
 			);
 			path = controls;
+			sourceTree = "<group>";
+		};
+		505507342FC5AE90007DB93D /* ShadowLine */ = {
+			isa = PBXGroup;
+			children = (
+				5055072F2FC59DC8007DB93D /* ShadowLine.swift */,
+			);
+			path = ShadowLine;
 			sourceTree = "<group>";
 		};
 		505849562E95147200B9F421 /* model */ = {
@@ -634,6 +645,7 @@
 				505849632E9534BC00B9F421 /* ModelContainer.swift in Sources */,
 				50CE72382EE6B9D400FE3282 /* NSApplication.swift in Sources */,
 				50CE72562EED6F5900FE3282 /* GridCustom.swift in Sources */,
+				505507302FC59DC8007DB93D /* ShadowLine.swift in Sources */,
 				505849642E9534BC00B9F421 /* ModelCell.swift in Sources */,
 				5013DB5D2E9D092900BEDC5E /* ModelProfile.swift in Sources */,
 				5081507B2E8148AA00E12175 /* Cell_em.swift in Sources */,
