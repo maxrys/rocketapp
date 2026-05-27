@@ -69,6 +69,7 @@
 		50CE9FD12F4718F9001006CF /* ControlPanelColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE9FD02F4718F9001006CF /* ControlPanelColor.swift */; };
 		50CE9FD32F47191F001006CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50CE9FD22F47191F001006CF /* Assets.xcassets */; };
 		50CEA0A92F4C576F001006CF /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 50CEA0A82F4C576F001006CF /* InfoPlist.xcstrings */; };
+		50CF30D02FB4A9F200A9319D /* Previewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CF30CF2FB4A9F200A9319D /* Previewer.swift */; };
 		50D28F9A2F7AB036006A7304 /* TabCustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D28F992F7AB036006A7304 /* TabCustomColors.swift */; };
 		50D28FF52F845121006A7304 /* AuditSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D28FF42F845120006A7304 /* AuditSequence.swift */; };
 		50EE8B892ECC888E002DFEA5 /* ColorPickerHSBO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8B882ECC888E002DFEA5 /* ColorPickerHSBO.swift */; };
@@ -160,6 +161,7 @@
 		50CE9FD02F4718F9001006CF /* ControlPanelColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPanelColor.swift; sourceTree = "<group>"; };
 		50CE9FD22F47191F001006CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		50CEA0A82F4C576F001006CF /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
+		50CF30CF2FB4A9F200A9319D /* Previewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Previewer.swift; sourceTree = "<group>"; };
 		50D28F992F7AB036006A7304 /* TabCustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCustomColors.swift; sourceTree = "<group>"; };
 		50D28FF42F845120006A7304 /* AuditSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditSequence.swift; sourceTree = "<group>"; };
 		50EE8B882ECC888E002DFEA5 /* ColorPickerHSBO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerHSBO.swift; sourceTree = "<group>"; };
@@ -427,6 +429,7 @@
 				50CE72532EED6BDD00FE3282 /* CellProtocol.swift */,
 				50EE8B902ECC8B11002DFEA5 /* ColorHSBValue.swift */,
 				50EE8B992ED174FE002DFEA5 /* MiniGridValue.swift */,
+				50CF30CF2FB4A9F200A9319D /* Previewer.swift */,
 				50242EB72F9255EA000FDCC6 /* SlotsEnumerator.swift */,
 			);
 			path = types;
@@ -584,6 +587,7 @@
 				507501412EF2117100624409 /* ProgressCustom.swift in Sources */,
 				508D6D152EB551A800885E95 /* Dictionary.swift in Sources */,
 				50EE8BB02ED5A4B4002DFEA5 /* Bool.swift in Sources */,
+				50CF30D02FB4A9F200A9319D /* Previewer.swift in Sources */,
 				508D6D0C2EB3597000885E95 /* TextFieldCustom.swift in Sources */,
 				50CE9FC72F471728001006CF /* ButtonCustomColor.swift in Sources */,
 				50C06AF02F23E467008EE619 /* TabCustom_Spacer.swift in Sources */,
