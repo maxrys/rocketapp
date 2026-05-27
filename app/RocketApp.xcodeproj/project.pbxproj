@@ -22,11 +22,11 @@
 		50242EB82F9255EA000FDCC6 /* SlotsEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50242EB72F9255EA000FDCC6 /* SlotsEnumerator.swift */; };
 		50447F692EEE9A5700C9B8D1 /* ProfilePanelForChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50447F682EEE9A5700C9B8D1 /* ProfilePanelForChange.swift */; };
 		505507122FB525D7007DB93D /* Cell_em_Fake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505507112FB525D7007DB93D /* Cell_em_Fake.swift */; };
-		505507302FC59DC8007DB93D /* ShadowLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5055072F2FC59DC8007DB93D /* ShadowLine.swift */; };
 		505507142FB5D6D6007DB93D /* ButtonDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505507132FB5D6D6007DB93D /* ButtonDelete.swift */; };
 		505507272FC1BCE8007DB93D /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505507262FC1BCE8007DB93D /* CGRect.swift */; };
 		505507292FC1CFDD007DB93D /* ValueState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505507282FC1CFDD007DB93D /* ValueState.swift */; };
 		5055072C2FC46F73007DB93D /* About.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5055072B2FC46F73007DB93D /* About.swift */; };
+		505507302FC59DC8007DB93D /* ShadowLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5055072F2FC59DC8007DB93D /* ShadowLine.swift */; };
 		505849632E9534BC00B9F421 /* ModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505849602E95341400B9F421 /* ModelContainer.swift */; };
 		505849642E9534BC00B9F421 /* ModelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505849612E95341400B9F421 /* ModelCell.swift */; };
 		505849672E97E23100B9F421 /* CellsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505849662E97E23000B9F421 /* CellsState.swift */; };
@@ -120,11 +120,11 @@
 		50242EB72F9255EA000FDCC6 /* SlotsEnumerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotsEnumerator.swift; sourceTree = "<group>"; };
 		50447F682EEE9A5700C9B8D1 /* ProfilePanelForChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePanelForChange.swift; sourceTree = "<group>"; };
 		505507112FB525D7007DB93D /* Cell_em_Fake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell_em_Fake.swift; sourceTree = "<group>"; };
-		5055072F2FC59DC8007DB93D /* ShadowLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowLine.swift; sourceTree = "<group>"; };
 		505507132FB5D6D6007DB93D /* ButtonDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDelete.swift; sourceTree = "<group>"; };
 		505507262FC1BCE8007DB93D /* CGRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
 		505507282FC1CFDD007DB93D /* ValueState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueState.swift; sourceTree = "<group>"; };
 		5055072B2FC46F73007DB93D /* About.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About.swift; sourceTree = "<group>"; };
+		5055072F2FC59DC8007DB93D /* ShadowLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowLine.swift; sourceTree = "<group>"; };
 		505849602E95341400B9F421 /* ModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelContainer.swift; sourceTree = "<group>"; };
 		505849612E95341400B9F421 /* ModelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelCell.swift; sourceTree = "<group>"; };
 		505849662E97E23000B9F421 /* CellsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellsState.swift; sourceTree = "<group>"; };
@@ -259,7 +259,7 @@
 			path = extensions;
 			sourceTree = "<group>";
 		};
-		5013DB6A2E9D827F00BEDC5E /* controls */ = {
+		5013DB6A2E9D827F00BEDC5E /* components */ = {
 			isa = PBXGroup;
 			children = (
 				50CF30CC2FB3519E00A9319D /* СhameleonView */,
@@ -275,7 +275,7 @@
 				50CE9FC02F471669001006CF /* TextFieldCustom */,
 				506421D72F644E830020F6C8 /* ToggleCustom */,
 			);
-			path = controls;
+			path = components;
 			sourceTree = "<group>";
 		};
 		505507342FC5AE90007DB93D /* ShadowLine */ = {
@@ -361,7 +361,7 @@
 				5013DB702E9E6EA900BEDC5E /* Assets.xcassets */,
 				50EE8B9F2ED1795B002DFEA5 /* types */,
 				5013DB622E9D6F7000BEDC5E /* extensions */,
-				5013DB6A2E9D827F00BEDC5E /* controls */,
+				5013DB6A2E9D827F00BEDC5E /* components */,
 				505849562E95147200B9F421 /* model */,
 				50EE8BA02ED46624002DFEA5 /* state */,
 				5013DB612E9D6EF100BEDC5E /* main app */,
