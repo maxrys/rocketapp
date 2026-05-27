@@ -4,18 +4,18 @@
     "%lld %%" : {
       "shouldTranslate" : false
     },
-    "append profile" : {
+    "append" : {
       "localizations" : {
         "be-BY" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "дадаць профіль"
+            "value" : "дадаць"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "добавить профиль"
+            "value" : "добавить"
           }
         }
       }
@@ -64,6 +64,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Отмена"
+          }
+        }
+      }
+    },
+    "clone" : {
+      "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "кланаваць"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "клонировать"
           }
         }
       }
