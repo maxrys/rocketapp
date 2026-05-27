@@ -9,21 +9,20 @@ struct TextFieldCustom: View {
 
     typealias ColorSet = Color.TextFieldCustomColorSet
 
+    static let EMPTY_STRING = ""
+
     @Binding private var value: String
 
     private let title: String?
-    private let isDisabled: Bool
     private let colorSet: ColorSet
 
     init(
         _ title: String? = nil,
         value: Binding<String>,
-        isDisabled: Bool = false,
         colorSet: ColorSet = Color.textField
     ) {
         self.title = title
         self._value = value
-        self.isDisabled = isDisabled
         self.colorSet = colorSet
     }
 
@@ -34,10 +33,9 @@ struct TextFieldCustom: View {
                 Text(title)
                     .font(.headline)
                     .foregroundStyle(self.colorSet.titleText)
-                    .disabled(self.isDisabled)
             }
 
-            TextField("", text: self.$value)
+            TextField(Self.EMPTY_STRING, text: self.$value)
                 .padding(.horizontal, 10)
                 .padding(.vertical  ,  5)
                 .textFieldStyle(.plain)
@@ -61,11 +59,9 @@ struct TextFieldCustom: View {
 
 #Preview {
     @Previewable @State var value: String = "some text"
-    VStack {
+    Previewer (padding: 20) {
         TextFieldCustom("Title", value: $value)
         TextFieldCustom(""     , value: $value)
         TextFieldCustom(         value: $value)
-    }
-    .frame(width: 200)
-    .padding(10)
+    }.frame(width: 200)
 }
