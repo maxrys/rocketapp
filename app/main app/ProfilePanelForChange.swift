@@ -9,6 +9,7 @@ struct ProfilePanelForChange: View {
 
     @Environment(\.colorScheme)   private var colorScheme
     @Environment(\.profilesState) private var profiles
+    @Environment(\.cellsState)    private var cells
 
     @Binding private var isShowPanel: Bool
     @State private var isShowDeleteDialog = false
@@ -37,7 +38,12 @@ struct ProfilePanelForChange: View {
                 content: { self.ChangeProfileView() })
             TabCustom_Spacer()
             TabCustom_Item(
-                title: NSLocalizedString("Delete", comment: ""),
+                title: "",
+                icon: Image(systemName: "arrow.trianglehead.2.clockwise.rotate.90.circle"),
+                content: { self.AuditProfileView() }
+            )
+            TabCustom_Item(
+                title: "",
                 icon: Image(systemName: "trash"),
                 content: { self.DeleteProfileView() }
             )
@@ -236,17 +242,37 @@ struct ProfilePanelForChange: View {
         }.padding(.vertical, 10)
     }
 
+    @ViewBuilder private func AuditProfileView() -> some View {
+        HStack(spacing: self.elementSpacing) {
+            ButtonCustom(
+                NSLocalizedString("refresh icons", comment: ""),
+                Image(systemName: "arrow.trianglehead.2.clockwise.rotate.90.circle"),
+                colorStyle: .common,
+                font: .system(size: 14, weight: .regular),
+                padding: .init(top: 10, leading: 20, bottom: 10, trailing: 20),
+                flexibility: .size(200),
+                isFlat: false,
+                onClick:         { self.isShowPanel = false; self.cells.audit() })
+            .onPressEnterOrSpace { self.isShowPanel = false; self.cells.audit() }
+            .disabled(self.cells.isAuditInProgress || self.cells.isEmpty)
+        }
+        .padding(.horizontal, 40)
+        .padding(.vertical  , 20)
+        .frame(maxWidth: .infinity)
+    }
+
     @ViewBuilder private func DeleteProfileView() -> some View {
         HStack(spacing: self.elementSpacing) {
             ButtonCustom(
                 NSLocalizedString("delete profile", comment: ""),
+                Image(systemName: "trash"),
                 colorStyle: .danger,
                 font: .system(size: 14, weight: .regular),
                 padding: .init(top: 10, leading: 20, bottom: 10, trailing: 20),
                 flexibility: .size(200),
                 isFlat: false,
-                onClick:        { self.isShowDeleteDialog = true })
-            .onPressEnterOrSpace{ self.isShowDeleteDialog = true }
+                onClick:         { self.isShowDeleteDialog = true })
+            .onPressEnterOrSpace { self.isShowDeleteDialog = true }
             .disabled(self.profiles.current.ID == ThisApp.EMBEDDED_PROFILE_ID)
             .confirmationDialog("Delete profile\n \"\(self.profiles.current.title)\"", isPresented: self.$isShowDeleteDialog) {
                 Button("Delete", role: .destructive, action: self.onDeleteProfile)

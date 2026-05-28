@@ -293,6 +293,22 @@
         }
       }
     },
+    "refresh icons" : {
+      "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "абнавіць значкі"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "обновить значки"
+          }
+        }
+      }
+    },
     "Select this application" : {
       "localizations" : {
         "be-BY" : {

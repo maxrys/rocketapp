@@ -13,61 +13,24 @@ struct ControlPanel: View {
 
     @Binding private var isEditMode: Bool
 
-    private let elementSpacing: CGFloat = 30
-
     init(isEditMode: Binding<Bool>) {
         self._isEditMode = isEditMode
     }
 
     public var body: some View {
-        LazyVGrid(columns: [
-            GridItem(.fixed(100), spacing: self.elementSpacing, alignment: .leading),
-            GridItem(.flexible(), spacing: self.elementSpacing),
-            GridItem(.fixed(100), spacing: self.elementSpacing, alignment: .trailing)
-        ], spacing: self.elementSpacing) {
-            HStack(spacing: self.elementSpacing) {
-                if (!profiles.current.isShowWinTitleButtons) {
-                    self.ButtonAuditView()
-                }
-            }
-            ProfilePanel()
-            HStack(spacing: self.elementSpacing) {
-                if (profiles.current.isShowWinTitleButtons) { self.ButtonAuditView() }
+        ProfilePanel()
+            .padding(.horizontal, 15)
+            .padding(.vertical  , 12)
+            .frame(maxWidth: .infinity)
+            .background(Color.ctrlPanel.background)
+            .overlay(alignment: .trailing) {
                 self.ButtonCloseSettingsView()
+                    .offset(x: -12)
             }
-        }
-        .padding(.horizontal, 15)
-        .padding(.vertical  , 12)
-        .background(Color.ctrlPanel.background)
-        .overlay(alignment: .bottom) {
-            ShadowLine()
-                .offset(y: 5)
-        }
-    }
-
-    @ViewBuilder private func ButtonAuditView() -> some View {
-        ButtonRound(
-            label: {
-                if (self.cells.isAuditInProgress) {
-                    TimelineView(.periodic(from: .now, by: 1.0 / 24)) { _ in
-                        Image(systemName: "arrow.trianglehead.2.clockwise.rotate.90.circle")
-                            .resizable()
-                            .scaledToFit()
-                            .rotationEffect(.degrees(
-                                Date.spin(max: 360, speed: 500)
-                            )
-                        )
-                    }
-                } else {
-                    Image(systemName: "arrow.trianglehead.2.clockwise.rotate.90.circle")
-                        .resizable()
-                        .scaledToFit()
-                }
-            },
-            foreground: { Color.ctrlPanel.buttonText },
-            background: { Color.ctrlPanel.buttonBackground },
-            onClick   : { self.cells.audit() }
-        ).disabled(self.cells.isAuditInProgress || self.cells.isEmpty)
+            .overlay(alignment: .bottom) {
+                ShadowLine()
+                    .offset(y: 5)
+            }
     }
 
     @ViewBuilder private func ButtonCloseSettingsView() -> some View {
