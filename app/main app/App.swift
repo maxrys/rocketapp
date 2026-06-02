@@ -8,9 +8,18 @@ import SwiftUI
 import SwiftData
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
+
+    func applicationShouldHandleReopen(_ app: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        if let window = NSWindow.get(ThisApp.WINDOW_MAIN_ID) {
+            window.show()
+        }
+        return true
+    }
+
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         false
     }
+
 }
 
 @main struct ThisApp: App {
@@ -24,6 +33,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     static let DEMO_PATH = "file:///System/Applications/Demo Application.app/"
     static let DEMO_NAME = "Demo Application"
     static let DEMO_ICON = NSImage(named: "AppIcon")!
+    static let WINDOW_ABOUT_TITLE_LOCALIZED = String(format: NSLocalizedString("About %@" , comment: ""), NSApplication.appNameLocalized)
+    static let WINDOW_ABOUT_ID = "about"
     static let WINDOW_MAIN_TITLE = "RocketApp"
     static let WINDOW_MAIN_ID = "mainGrid"
     static let MESSAGE_NO_APPLICATIONS = NSLocalizedString("No Applications!", comment: "")
@@ -111,6 +122,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 }
             }
         }
+
+        Window(Self.WINDOW_ABOUT_TITLE_LOCALIZED, id: Self.WINDOW_ABOUT_ID) { About() }
+            .windowResizability(.contentSize)
+            .restorationBehavior(.disabled)
+            .commands {
+                CommandGroup(replacing: .appInfo) {
+                    Button(Self.WINDOW_ABOUT_TITLE_LOCALIZED) {
+                        openWindow(id: Self.WINDOW_ABOUT_ID)
+                    }
+                }
+            }
     }
 
     private func updateWindowFrame(_ isEditMode: Bool) {

@@ -26,6 +26,7 @@
 		505507142FB5D6D6007DB93D /* ButtonDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505507132FB5D6D6007DB93D /* ButtonDelete.swift */; };
 		505507272FC1BCE8007DB93D /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505507262FC1BCE8007DB93D /* CGRect.swift */; };
 		505507292FC1CFDD007DB93D /* ValueState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505507282FC1CFDD007DB93D /* ValueState.swift */; };
+		5055072C2FC46F73007DB93D /* About.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5055072B2FC46F73007DB93D /* About.swift */; };
 		505849632E9534BC00B9F421 /* ModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505849602E95341400B9F421 /* ModelContainer.swift */; };
 		505849642E9534BC00B9F421 /* ModelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505849612E95341400B9F421 /* ModelCell.swift */; };
 		505849672E97E23100B9F421 /* CellsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505849662E97E23000B9F421 /* CellsState.swift */; };
@@ -91,7 +92,6 @@
 		50EE8BB42ED5C3D3002DFEA5 /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8BB32ED5C3CD002DFEA5 /* NSImage.swift */; };
 		50EE8BB62ED79177002DFEA5 /* CellModelID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8BB52ED79176002DFEA5 /* CellModelID.swift */; };
 		50EE8BB72ED79177002DFEA5 /* CellModelID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8BB52ED79176002DFEA5 /* CellModelID.swift */; };
-		50FEAD1E2F0D208600B9CAD3 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 50FEAD1D2F0D208600B9CAD3 /* Credits.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +124,7 @@
 		505507132FB5D6D6007DB93D /* ButtonDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDelete.swift; sourceTree = "<group>"; };
 		505507262FC1BCE8007DB93D /* CGRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
 		505507282FC1CFDD007DB93D /* ValueState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueState.swift; sourceTree = "<group>"; };
+		5055072B2FC46F73007DB93D /* About.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About.swift; sourceTree = "<group>"; };
 		505849602E95341400B9F421 /* ModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelContainer.swift; sourceTree = "<group>"; };
 		505849612E95341400B9F421 /* ModelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelCell.swift; sourceTree = "<group>"; };
 		505849662E97E23000B9F421 /* CellsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellsState.swift; sourceTree = "<group>"; };
@@ -188,7 +189,6 @@
 		50EE8BAF2ED5A4B3002DFEA5 /* Bool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bool.swift; sourceTree = "<group>"; };
 		50EE8BB32ED5C3CD002DFEA5 /* NSImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImage.swift; sourceTree = "<group>"; };
 		50EE8BB52ED79176002DFEA5 /* CellModelID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModelID.swift; sourceTree = "<group>"; };
-		50FEAD1D2F0D208600B9CAD3 /* Credits.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				508150712E81334600E12175 /* App.swift */,
+				5055072B2FC46F73007DB93D /* About.swift */,
 				50EE8B972ECDEE98002DFEA5 /* MainScene.swift */,
 				50CE9FCF2F4718EA001006CF /* ControlPanel */,
 				50CE9FCA2F4717F9001006CF /* ProfilePanel */,
@@ -358,7 +359,6 @@
 				50CE723C2EE9687300FE3282 /* Localizable.xcstrings */,
 				50CEA0A82F4C576F001006CF /* InfoPlist.xcstrings */,
 				5013DB702E9E6EA900BEDC5E /* Assets.xcassets */,
-				50FEAD1D2F0D208600B9CAD3 /* Credits.html */,
 				50EE8B9F2ED1795B002DFEA5 /* types */,
 				5013DB622E9D6F7000BEDC5E /* extensions */,
 				5013DB6A2E9D827F00BEDC5E /* controls */,
@@ -578,7 +578,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				50CE72272EE0542300FE3282 /* info.plist in Resources */,
-				50FEAD1E2F0D208600B9CAD3 /* Credits.html in Resources */,
 				5013DB712E9E6EA900BEDC5E /* Assets.xcassets in Resources */,
 				50CEA0A92F4C576F001006CF /* InfoPlist.xcstrings in Resources */,
 				50CE723D2EE9687300FE3282 /* Localizable.xcstrings in Resources */,
@@ -677,6 +676,7 @@
 				508D6CF92EB0C14700885E95 /* ButtonRound.swift in Sources */,
 				50CE72292EE0561B00FE3282 /* UTType.swift in Sources */,
 				5013DB862EA56D2E00BEDC5E /* Color.swift in Sources */,
+				5055072C2FC46F73007DB93D /* About.swift in Sources */,
 				505507142FB5D6D6007DB93D /* ButtonDelete.swift in Sources */,
 				50CF30D22FB4AFB200A9319D /* ButtonInsert.swift in Sources */,
 			);
@@ -883,7 +883,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "RocketApp Launcher";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 Maxim Rysevets. All rights reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2026 Maxim Rysevets";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -938,7 +938,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "RocketApp Launcher";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 Maxim Rysevets. All rights reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2026 Maxim Rysevets";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",

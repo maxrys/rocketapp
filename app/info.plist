@@ -4,6 +4,10 @@
 <dict>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>Page Marketing</key>
+	<string>https://github.com/maxrys/rocketapp</string>
+	<key>Page Support</key>
+	<string>https://github.com/maxrys/rocketapp/issues</string>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
