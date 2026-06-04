@@ -1,4 +1,11 @@
 
+## Version 1.6
+
+Profile cloning has been added.
+Main window supports restoring the state for each profile separately.
+UI has been improved.
+Codebase has been improved.
+
 ## Version 1.5
 
 UI has been improved.
