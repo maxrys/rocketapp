@@ -12,7 +12,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		50993B682D33C4C900195667 /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		50993B682D33C4C900195667 /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50993B6B2D33C4C900195667 /* app.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = app.swift; sourceTree = "<group>"; };
 		50993B742D33C4CD00195667 /* app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = app.entitlements; sourceTree = "<group>"; };
 		50FEACFA2EFAAD5400B9CAD3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -42,7 +42,7 @@
 		50993B692D33C4C900195667 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				50993B682D33C4C900195667 /* app.app */,
+				50993B682D33C4C900195667 /* App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -50,9 +50,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		50993B672D33C4C900195667 /* app */ = {
+		50993B672D33C4C900195667 /* App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 50993B772D33C4CD00195667 /* Build configuration list for PBXNativeTarget "app" */;
+			buildConfigurationList = 50993B772D33C4CD00195667 /* Build configuration list for PBXNativeTarget "App" */;
 			buildPhases = (
 				50993B642D33C4C900195667 /* Sources */,
 				50993B652D33C4C900195667 /* Frameworks */,
@@ -62,11 +62,11 @@
 			);
 			dependencies = (
 			);
-			name = app;
+			name = App;
 			packageProductDependencies = (
 			);
 			productName = research;
-			productReference = 50993B682D33C4C900195667 /* app.app */;
+			productReference = 50993B682D33C4C900195667 /* App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -100,7 +100,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				50993B672D33C4C900195667 /* app */,
+				50993B672D33C4C900195667 /* App */,
 			);
 		};
 /* End PBXProject section */
@@ -342,7 +342,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		50993B772D33C4CD00195667 /* Build configuration list for PBXNativeTarget "app" */ = {
+		50993B772D33C4CD00195667 /* Build configuration list for PBXNativeTarget "App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				50993B782D33C4CD00195667 /* Debug */,
