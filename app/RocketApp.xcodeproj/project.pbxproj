@@ -21,7 +21,9 @@
 		501D4DF12EC120CC00919AB9 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501D4DF02EC120CC00919AB9 /* Timer.swift */; };
 		50242EB82F9255EA000FDCC6 /* SlotsEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50242EB72F9255EA000FDCC6 /* SlotsEnumerator.swift */; };
 		50447F692EEE9A5700C9B8D1 /* ProfilePanelForChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50447F682EEE9A5700C9B8D1 /* ProfilePanelForChange.swift */; };
+		505507122FB525D7007DB93D /* Cell_em_Fake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505507112FB525D7007DB93D /* Cell_em_Fake.swift */; };
 		505507302FC59DC8007DB93D /* ShadowLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5055072F2FC59DC8007DB93D /* ShadowLine.swift */; };
+		505507142FB5D6D6007DB93D /* ButtonDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505507132FB5D6D6007DB93D /* ButtonDelete.swift */; };
 		505849632E9534BC00B9F421 /* ModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505849602E95341400B9F421 /* ModelContainer.swift */; };
 		505849642E9534BC00B9F421 /* ModelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505849612E95341400B9F421 /* ModelCell.swift */; };
 		505849672E97E23100B9F421 /* CellsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505849662E97E23000B9F421 /* CellsState.swift */; };
@@ -72,6 +74,7 @@
 		50CEA0A92F4C576F001006CF /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 50CEA0A82F4C576F001006CF /* InfoPlist.xcstrings */; };
 		50CF30CE2FB351A600A9319D /* СhameleonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CF30CD2FB351A600A9319D /* СhameleonView.swift */; };
 		50CF30D02FB4A9F200A9319D /* Previewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CF30CF2FB4A9F200A9319D /* Previewer.swift */; };
+		50CF30D22FB4AFB200A9319D /* ButtonInsert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CF30D12FB4AFB000A9319D /* ButtonInsert.swift */; };
 		50D28F9A2F7AB036006A7304 /* TabCustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D28F992F7AB036006A7304 /* TabCustomColors.swift */; };
 		50D28FF52F845121006A7304 /* AuditSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D28FF42F845120006A7304 /* AuditSequence.swift */; };
 		50EE8B892ECC888E002DFEA5 /* ColorPickerHSBO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8B882ECC888E002DFEA5 /* ColorPickerHSBO.swift */; };
@@ -114,7 +117,9 @@
 		501D4DF02EC120CC00919AB9 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		50242EB72F9255EA000FDCC6 /* SlotsEnumerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotsEnumerator.swift; sourceTree = "<group>"; };
 		50447F682EEE9A5700C9B8D1 /* ProfilePanelForChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePanelForChange.swift; sourceTree = "<group>"; };
+		505507112FB525D7007DB93D /* Cell_em_Fake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell_em_Fake.swift; sourceTree = "<group>"; };
 		5055072F2FC59DC8007DB93D /* ShadowLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowLine.swift; sourceTree = "<group>"; };
+		505507132FB5D6D6007DB93D /* ButtonDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDelete.swift; sourceTree = "<group>"; };
 		505849602E95341400B9F421 /* ModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelContainer.swift; sourceTree = "<group>"; };
 		505849612E95341400B9F421 /* ModelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelCell.swift; sourceTree = "<group>"; };
 		505849662E97E23000B9F421 /* CellsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellsState.swift; sourceTree = "<group>"; };
@@ -166,6 +171,7 @@
 		50CEA0A82F4C576F001006CF /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		50CF30CD2FB351A600A9319D /* СhameleonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СhameleonView.swift"; sourceTree = "<group>"; };
 		50CF30CF2FB4A9F200A9319D /* Previewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Previewer.swift; sourceTree = "<group>"; };
+		50CF30D12FB4AFB000A9319D /* ButtonInsert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonInsert.swift; sourceTree = "<group>"; };
 		50D28F992F7AB036006A7304 /* TabCustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCustomColors.swift; sourceTree = "<group>"; };
 		50D28FF42F845120006A7304 /* AuditSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditSequence.swift; sourceTree = "<group>"; };
 		50EE8B882ECC888E002DFEA5 /* ColorPickerHSBO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerHSBO.swift; sourceTree = "<group>"; };
@@ -375,7 +381,10 @@
 			children = (
 				50CE72442EEAC80000FE3282 /* MainGrid_em.swift */,
 				5081507A2E8148AA00E12175 /* Cell_em.swift */,
+				505507112FB525D7007DB93D /* Cell_em_Fake.swift */,
 				506421BF2F616F9F0020F6C8 /* AppIcon_em.swift */,
+				50CF30D12FB4AFB000A9319D /* ButtonInsert.swift */,
+				505507132FB5D6D6007DB93D /* ButtonDelete.swift */,
 			);
 			path = "edit mode";
 			sourceTree = "<group>";
@@ -618,6 +627,7 @@
 				50C06AF22F23E467008EE619 /* TabCustom.swift in Sources */,
 				50CF30CE2FB351A600A9319D /* СhameleonView.swift in Sources */,
 				50242EB82F9255EA000FDCC6 /* SlotsEnumerator.swift in Sources */,
+				505507122FB525D7007DB93D /* Cell_em_Fake.swift in Sources */,
 				50CE72342EE62E8F00FE3282 /* Logger.swift in Sources */,
 				508150792E81448100E12175 /* Cell_vm.swift in Sources */,
 				507501472EF54D8200624409 /* CellID.swift in Sources */,
@@ -659,6 +669,8 @@
 				508D6CF92EB0C14700885E95 /* ButtonRound.swift in Sources */,
 				50CE72292EE0561B00FE3282 /* UTType.swift in Sources */,
 				5013DB862EA56D2E00BEDC5E /* Color.swift in Sources */,
+				505507142FB5D6D6007DB93D /* ButtonDelete.swift in Sources */,
+				50CF30D22FB4AFB200A9319D /* ButtonInsert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

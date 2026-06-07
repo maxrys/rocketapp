@@ -43,7 +43,7 @@ struct Cell_viewMode: View, CellProtocol {
                             self.MiniCellView(keyPath: \.cell3).id(3).hoverBehavior(.zIndex(to: 1))
                             self.MiniCellView(keyPath: \.cell4).id(4).hoverBehavior(.zIndex(to: 1))
                         }
-                    }
+                    }.scaleEffect(0.89)
                 case .none:
                     Color.clear
             }
@@ -64,7 +64,7 @@ struct Cell_viewMode: View, CellProtocol {
                         AppIcon_viewMode(
                             name: appValue.name,
                             icon: appValue.resolvedIcon,
-                            cellSize: self.size
+                            size: self.size
                         )
                     }
                     .buttonStyle(.plain)
@@ -89,8 +89,7 @@ struct Cell_viewMode: View, CellProtocol {
                             AppIcon_viewMode(
                                 name: appValue.name,
                                 icon: appValue.resolvedIcon,
-                                cellSize: self.sizeCellMini,
-                                isMiniGrid: true
+                                size: self.sizeCellMini
                             )
                         }
                         .buttonStyle(.plain)
@@ -116,6 +115,7 @@ struct Cell_viewMode: View, CellProtocol {
     @Previewable @State var mockForNone = CellsState.initMock(
         profileID: ThisApp.PREVIEW_PROFILE_ID
     )
+
     @Previewable @State var mockForMain: CellsState = {
         let data = CellsState.initMock(profileID: ThisApp.PREVIEW_PROFILE_ID)
         data.insert(0, .main(.init(
@@ -126,6 +126,7 @@ struct Cell_viewMode: View, CellProtocol {
         )))
         return data
     }()
+
     @Previewable @State var mockForMini: CellsState = {
         let data = CellsState.initMock(profileID: ThisApp.PREVIEW_PROFILE_ID)
         data.insert(0, .mini(.init(
@@ -136,11 +137,12 @@ struct Cell_viewMode: View, CellProtocol {
         )))
         return data
     }()
-    Grid(alignment: .center, horizontalSpacing: 0, verticalSpacing: 0) {
-        Cell_viewMode(ID: 0, size: 100).id(1).environment(\.cellsState, mockForNone)
-        Cell_viewMode(ID: 0, size: 100).id(2).environment(\.cellsState, mockForMain)
-        Cell_viewMode(ID: 0, size: 100).id(3).environment(\.cellsState, mockForMini)
+
+    Previewer(isHorizontal: true) {
+        Grid(alignment: .center, horizontalSpacing: 0, verticalSpacing: 0) {
+            Cell_viewMode(ID: 0, size: ThisApp.CELL_SIZE).id(1).environment(\.cellsState, mockForNone)
+            Cell_viewMode(ID: 0, size: ThisApp.CELL_SIZE).id(2).environment(\.cellsState, mockForMain)
+            Cell_viewMode(ID: 0, size: ThisApp.CELL_SIZE).id(3).environment(\.cellsState, mockForMini)
+        }.padding(10)
     }
-    .padding(20)
-    .frame(width: 200)
 }

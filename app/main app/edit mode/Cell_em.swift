@@ -12,7 +12,6 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
     @Environment(\.colorScheme)          internal var colorScheme
     @Environment(\.windowBackground)     internal var background
     @Environment(\.windowBackgroundDark) internal var backgroundDark
-
     @Environment(\.cellsState) private var cells
 
     internal let ID: CellID.Value
@@ -21,7 +20,7 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
 
     private var sizeCellMini      : CGFloat { self.size / 2 }
     private var sizeCellMainButton: CGFloat { self.size * 0.3 }
-    private var sizeCellMiniButton: CGFloat { self.sizeCellMini * 0.3 }
+    private var sizeCellMiniButton: CGFloat { self.sizeCellMini * 0.4 }
 
     private var value: CellValue? {
         self.cells.select(self.ID)
@@ -65,7 +64,7 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
                                 self.MiniCellView(keyPath: \.cell3).id(3).hoverBehavior(.zIndex(to: 1))
                                 self.MiniCellView(keyPath: \.cell4).id(4).hoverBehavior(.zIndex(to: 1))
                             }
-                        }
+                        }.scaleEffect(0.89)
                     case .none:
                         Grid(alignment: .center, horizontalSpacing: 0, verticalSpacing: 0) {
                             GridRow {
@@ -81,29 +80,13 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
                 }
 
             } else {
-                self.FakeCellView()
+                Cell_editMode_Fake(
+                    size: self.size
+                )
             }
         }
         .frame(width: self.size, height: self.size)
         .hoverBehavior(.zIndex(to: 1))
-    }
-
-    @ViewBuilder fileprivate func FakeCellView() -> some View {
-        ZStack {
-            Image("Fake Cell Background")
-                .resizable()
-                .foregroundStyle(self.backgroundAccentHSB(minOpacity: 1.0).color)
-                .frame(width: self.size * 0.66, height: self.size * 0.66)
-                .padding(.leading, self.size * 0.01)
-                .padding(.top    , self.size * 0.01)
-                .shadow(
-                    color: self.backgroundHSB(minOpacity: 1.0).color,
-                    radius: 3
-                )
-        }.frame(
-            width : self.size,
-            height: self.size
-        )
     }
 
     @ViewBuilder private func MainCellView() -> some View {
@@ -119,7 +102,7 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
                     AppIcon_editMode(
                         name: appValue.name,
                         icon: appValue.resolvedIcon,
-                        cellSize: self.size,
+                        size: self.size,
                         onDelete: { self.delete() }
                     )
                     .onDrag({ self.onDragAppValue() }, preview: {
@@ -150,8 +133,7 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
                         AppIcon_editMode(
                             name: appValue.name,
                             icon: appValue.resolvedIcon,
-                            cellSize: self.sizeCellMini,
-                            isMiniGrid: true,
+                            size: self.sizeCellMini,
                             onDelete: { self.delete(from: keyPath) }
                         )
                         .onDrag({ self.onDragAppValue(from: keyPath) }, preview: {
@@ -178,8 +160,6 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
     @ViewBuilder private func ButtonInsertView(_ size: CGFloat, to keyPath: CellValuePath? = nil, onClick: @escaping () -> Void) -> some View {
         Cell_editMode_ButtonInsert(
             size: size,
-            foregroundStyle: self.backgroundAccentHSB(minOpacity: 1.0).color,
-            shadowColor: self.backgroundHSB(minOpacity: 1.0).color,
             onClick: onClick,
             onDrop: { providers in
                 self.onDropAppValue(providers, to: keyPath)
@@ -289,33 +269,6 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
 
 }
 
-fileprivate struct Cell_editMode_ButtonInsert: View {
-
-    @State private var isHovering = false
-
-    public let size: CGFloat
-    public let foregroundStyle: Color
-    public let shadowColor: Color
-    public let onClick: () -> Void
-    public let onDrop: (_ providers: [NSItemProvider]) -> Bool
-
-    public var body: some View {
-        Image(systemName: "plus")
-            .resizable()
-            .foregroundStyle(self.isHovering ? Color.accentColor : self.foregroundStyle)
-            .frame(width: self.size, height: self.size)
-            .onTapGesture(count: 1, perform: self.onClick)
-            .onHover { isHovering in self.isHovering = isHovering }
-            .onDrop(of: [.application, UTType.appDragValue], isTargeted: self.$isHovering, perform: self.onDrop)
-            .pointerStyle(.link)
-            .shadow(
-                color: shadowColor,
-                radius: self.isHovering ? 0 : 3
-            )
-    }
-
-}
-
 
 
 /* ############################################################# */
@@ -326,6 +279,7 @@ fileprivate struct Cell_editMode_ButtonInsert: View {
     @Previewable @State var mockForNone = CellsState.initMock(
         profileID: ThisApp.PREVIEW_PROFILE_ID
     )
+
     @Previewable @State var mockForMain: CellsState = {
         let data = CellsState.initMock(profileID: ThisApp.PREVIEW_PROFILE_ID)
         data.insert(0, .main(.init(
@@ -336,6 +290,7 @@ fileprivate struct Cell_editMode_ButtonInsert: View {
         )))
         return data
     }()
+
     @Previewable @State var mockForMini: CellsState = {
         let data = CellsState.initMock(profileID: ThisApp.PREVIEW_PROFILE_ID)
         data.insert(0, .mini(.init(
@@ -346,12 +301,13 @@ fileprivate struct Cell_editMode_ButtonInsert: View {
         )))
         return data
     }()
-    Grid(alignment: .center, horizontalSpacing: 0, verticalSpacing: 0) {
-        Cell_editMode(ID: 0, size: 100, isVisible: true).FakeCellView().id(0)
-        Cell_editMode(ID: 0, size: 100, isVisible: true).id(1).environment(\.cellsState, mockForNone)
-        Cell_editMode(ID: 0, size: 100, isVisible: true).id(2).environment(\.cellsState, mockForMain)
-        Cell_editMode(ID: 0, size: 100, isVisible: true).id(3).environment(\.cellsState, mockForMini)
+
+    Previewer(isHorizontal: true) {
+        Grid(alignment: .center, horizontalSpacing: 0, verticalSpacing: 0) {
+            Cell_editMode_Fake(size: ThisApp.CELL_SIZE).id(1)
+            Cell_editMode(ID: 0, size: ThisApp.CELL_SIZE, isVisible: true).id(2).environment(\.cellsState, mockForNone)
+            Cell_editMode(ID: 0, size: ThisApp.CELL_SIZE, isVisible: true).id(3).environment(\.cellsState, mockForMain)
+            Cell_editMode(ID: 0, size: ThisApp.CELL_SIZE, isVisible: true).id(4).environment(\.cellsState, mockForMini)
+        }.padding(10)
     }
-    .padding(20)
-    .frame(width: 200)
 }

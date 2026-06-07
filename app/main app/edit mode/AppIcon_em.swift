@@ -7,48 +7,50 @@ import SwiftUI
 
 struct AppIcon_editMode: View, BackgroundColorProtocol {
 
+    static private let BUTTON_DELETE_MIN_SIZE: Double = 15
+    static private let BUTTON_DELETE_MAX_SIZE: Double = 40
+
     @Environment(\.colorScheme)          internal var colorScheme
     @Environment(\.windowBackground)     internal var background
     @Environment(\.windowBackgroundDark) internal var backgroundDark
-
     @Environment(\.profilesState) private var profiles
 
     @State private var isHovering = false
 
     private let name: String
     private let icon: NSImage
-    private let cellSize: CGFloat
-    private let isMiniGrid: Bool
+    private let size: CGFloat
     private let onDelete: () -> Void
+
+    private var scaleFactor: Double {
+        self.size / ThisApp.CELL_SIZE
+    }
 
     init(
         name: String,
         icon: NSImage,
-        cellSize: CGFloat,
-        isMiniGrid: Bool = false,
+        size: CGFloat,
         onDelete: @escaping () -> Void = {}
     ) {
         self.name = name
         self.icon = icon
-        self.cellSize = cellSize
-        self.isMiniGrid = isMiniGrid
+        self.size = size
         self.onDelete = onDelete
     }
 
     public var body: some View {
         Image(nsImage: self.icon)
             .resizable()
-            .frame(width: self.cellSize, height: self.cellSize)
+            .frame(width: self.size, height: self.size)
             .aspectRatio(contentMode: .fit)
             .overlay(alignment: .topTrailing) {
                 if (self.isHovering) {
-                    self.ButtonDeleteView(
-                        self.isMiniGrid ?
-                            self.cellSize * 0.35 :
-                            self.cellSize * 0.25
-                    ) {
-                        self.onDelete()
-                    }
+                    Cell_editMode_ButtonDelete(
+                        size: (self.size * 0.25 * self.scaleFactor).fixBounds(
+                            min: Self.BUTTON_DELETE_MIN_SIZE,
+                            max: Self.BUTTON_DELETE_MAX_SIZE),
+                        onClick: self.onDelete
+                    )
                 }
             }
             .overlay(alignment: .bottom) {
@@ -58,53 +60,24 @@ struct AppIcon_editMode: View, BackgroundColorProtocol {
                     }
                 }
             }
-            .scaleEffect(self.isMiniGrid ? 1.0 : 1.15)
             .onHover { hovering in
                 self.isHovering = hovering
             }.hoverBehavior(.zIndex(to: 1))
     }
 
     @ViewBuilder private func TitleView() -> some View {
-        Text(self.name)
-            .font(.system(size: self.isMiniGrid ? 9 : 11))
-            .lineLimit(1)
-            .fixedSize(horizontal: true, vertical: false)
-            .padding(.horizontal, 9)
-            .padding(.vertical  , 5)
-            .foregroundStyle(
-                self.colorScheme == .dark ?
-                    (self.backgroundDark.isTinted == true ? Color.white : Color.black) :
-                    (self.background    .isTinted != true ? Color.black : Color.white)
+        СhameleonView {
+            Text(self.name)
+                .font(.system(size: 14))
+                .lineLimit(1)
+                .fixedSize(horizontal: true, vertical: false)
+                .padding(.horizontal, 9)
+                .padding(.vertical  , 5)
+        }.scaleEffect(
+            self.scaleFactor.fixBounds(
+                min: 0.8,
+                max: 1.5
             )
-            .background(
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(self.backgroundHSB(minOpacity: 0.9).color.gradient)
-                    .shadow(
-                        color:
-                            self.colorScheme == .dark ?
-                                (self.backgroundDark.isTinted == true ? Color.white.opacity(0.5) : Color.black.opacity(0.5)) :
-                                (self.background    .isTinted != true ? Color.black.opacity(0.5) : Color.white.opacity(0.5)),
-                        radius: 10.0
-                    )
-            )
-    }
-
-    @ViewBuilder private func ButtonDeleteView(_ size: CGFloat, onClick: @escaping () -> Void) -> some View {
-        ButtonRound(
-            label: {
-                Image(systemName: "minus")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding(size * 0.25)
-            },
-            foreground: { Color.ButtonCustomStyle.danger.text },
-            background: { Circle().fill(Color.ButtonCustomStyle.danger.background.gradient) },
-            size: size,
-            onClick: onClick
-        ).shadow(
-            color: .black,
-            radius: size * 0.1,
-            y: size * 0.1
         )
     }
 
@@ -117,34 +90,69 @@ struct AppIcon_editMode: View, BackgroundColorProtocol {
 /* ############################################################# */
 
 #Preview {
-    Grid(alignment: .center, horizontalSpacing: 0, verticalSpacing: 0) {
+    Previewer(isHorizontal: true) {
+        Grid(alignment: .center, horizontalSpacing: 10, verticalSpacing: 10) {
+
+            AppIcon_editMode(
+                name: "Application Title",
+                icon: AppValue.APP_NO_ICON,
+                size: ThisApp.CELL_SIZE
+            ).id(1)
+
+            AppIcon_editMode(
+                name: "Application Title",
+                icon: ThisApp.DEMO_ICON,
+                size: ThisApp.CELL_SIZE
+            ).id(2)
+
+            Grid(alignment: .center, horizontalSpacing: 0, verticalSpacing: 0) {
+                GridRow {
+
+                    AppIcon_editMode(
+                        name: "Application Title",
+                        icon: AppValue.APP_NO_ICON,
+                        size: ThisApp.CELL_SIZE / 2
+                    ).id(3)
+
+                    AppIcon_editMode(
+                        name: "Application Title",
+                        icon: ThisApp.DEMO_ICON,
+                        size: ThisApp.CELL_SIZE / 2
+                    ).id(4)
+
+                }
+            }
+
+        }.padding(10)
+    }
+}
+
+#Preview {
+    Grid(alignment: .center, horizontalSpacing: 10, verticalSpacing: 10) {
+
         AppIcon_editMode(
             name: "Application Title",
             icon: AppValue.APP_NO_ICON,
-            cellSize: 100
+            size: 50
         ).id(1)
+
         AppIcon_editMode(
             name: "Application Title",
-            icon: ThisApp.DEMO_ICON,
-            cellSize: 100
+            icon: AppValue.APP_NO_ICON,
+            size: 100
         ).id(2)
-        Grid(alignment: .center, horizontalSpacing: 0, verticalSpacing: 0) {
-            GridRow {
-                AppIcon_editMode(
-                    name: "Application Title",
-                    icon: AppValue.APP_NO_ICON,
-                    cellSize: 50,
-                    isMiniGrid: true
-                ).id(3)
-                AppIcon_editMode(
-                    name: "Application Title",
-                    icon: ThisApp.DEMO_ICON,
-                    cellSize: 50,
-                    isMiniGrid: true
-                ).id(4)
-            }
-        }
-    }
-    .padding(10)
-    .frame(width: 200)
+
+        AppIcon_editMode(
+            name: "Application Title",
+            icon: AppValue.APP_NO_ICON,
+            size: 150
+        ).id(3)
+
+        AppIcon_editMode(
+            name: "Application Title",
+            icon: AppValue.APP_NO_ICON,
+            size: 200
+        ).id(4)
+
+    }.padding(20)
 }
