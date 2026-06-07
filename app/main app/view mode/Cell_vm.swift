@@ -58,7 +58,7 @@ struct Cell_viewMode: View, CellProtocol {
             if case .main(let appValue) = self.value {
                 if let appURL = URL(string: appValue.path) {
                     Button {
-                        NSWindow.hideWithAnimation(ThisApp.MAIN_WINDOW_ID)
+                        NSWindow.hideWithAnimation(ThisApp.WINDOW_MAIN_ID)
                         NSApplication.open(appURL)
                     } label: {
                         AppIcon_viewMode(
@@ -83,7 +83,7 @@ struct Cell_viewMode: View, CellProtocol {
                 if let appValue = miniGrid[keyPath: keyPath] {
                     if let appURL = URL(string: appValue.path) {
                         Button {
-                            NSWindow.hideWithAnimation(ThisApp.MAIN_WINDOW_ID)
+                            NSWindow.hideWithAnimation(ThisApp.WINDOW_MAIN_ID)
                             NSApplication.open(appURL)
                         } label: {
                             AppIcon_viewMode(

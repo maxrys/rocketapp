@@ -53,7 +53,9 @@ struct ProfilePanelForAppend: View {
             isStickyGrid         : ThisApp.NEW_PROFILE_IS_STICKY_GRID,
             isShowWinTitleButtons: ThisApp.NEW_PROFILE_IS_SHOW_WINDOW_TITLE_BUTTONS,
             background           : ThisApp.NEW_PROFILE_BACKGROUND,
-            backgroundDark       : ThisApp.NEW_PROFILE_BACKGROUND_DARK
+            backgroundDark       : ThisApp.NEW_PROFILE_BACKGROUND_DARK,
+            winFrameViewMode     : NSWindow.centerWindowFrame(ThisApp.WINDOW_MAIN_ID, frame: ThisApp.NEW_PROFILE_WIN_FRAME_VIEW_MODE),
+            winFrameEditMode     : NSWindow.centerWindowFrame(ThisApp.WINDOW_MAIN_ID, frame: ThisApp.NEW_PROFILE_WIN_FRAME_EDIT_MODE)
         )
         if (self.profiles.insert(profile)) {
             Logger.customLog("The profile (ID: \(profile.ID)) has been created.")

@@ -24,11 +24,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     static let DEMO_PATH = "file:///System/Applications/Demo Application.app/"
     static let DEMO_NAME = "Demo Application"
     static let DEMO_ICON = NSImage(named: "AppIcon")!
-    static let MAIN_WINDOW_TITLE = "RocketApp"
-    static let MAIN_WINDOW_ID = "mainGrid"
-    static let MESSAGE_NO_APPLICATIONS = NSLocalizedString("No Applications", comment: "")
-    static let MESSAGE_ADD_NEW_APPLICATIONS_THROUGH = NSLocalizedString("Add new applications through the", comment: "")
-    static let MESSAGE_SETTINGS = NSLocalizedString("settings", comment: "")
+    static let WINDOW_MAIN_TITLE = "RocketApp"
+    static let WINDOW_MAIN_ID = "mainGrid"
+    static let MESSAGE_NO_APPLICATIONS = NSLocalizedString("No Applications!", comment: "")
+    static let MESSAGE_OPEN_SETTINGS = NSLocalizedString("open settings", comment: "")
     static let MESSAGE_SELECT_THIS_APPLICATION = NSLocalizedString("Select this application", comment: "")
     static let PREVIEW_PROFILE_ID: ProfileID = ProfileID.max
     static let EMBEDDED_PROFILE_ID: ProfileID = 0
@@ -39,11 +38,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     static let NEW_PROFILE_IS_SHOW_ICON_TITLE = true
     static let NEW_PROFILE_IS_HIDE_ON_MISCLICK = false
     static let NEW_PROFILE_IS_STICKY_GRID = false
-    static let NEW_PROFILE_BACKGROUND = ColorHSBValue(0.55, 0.15, 0.97, 0.70)
-    static let NEW_PROFILE_BACKGROUND_DARK = ColorHSBValue(0.67, 0.38, 0.28, 0.70)
-    static let NEW_PROFILE_BACKGROUND_ENCODED = Self.NEW_PROFILE_BACKGROUND.encode()!
-    static let NEW_PROFILE_BACKGROUND_DARK_ENCODED = Self.NEW_PROFILE_BACKGROUND_DARK.encode()!
     static let NEW_PROFILE_IS_SHOW_WINDOW_TITLE_BUTTONS = true
+    static let NEW_PROFILE_BACKGROUND      = ColorHSBValue(0.55, 0.15, 0.97, 0.70)
+    static let NEW_PROFILE_BACKGROUND_DARK = ColorHSBValue(0.67, 0.38, 0.28, 0.70)
+    static let NEW_PROFILE_WIN_FRAME_VIEW_MODE = CGRect(x: 0, y: 0, w: 400, h: 300)
+    static let NEW_PROFILE_WIN_FRAME_EDIT_MODE = CGRect(x: 0, y: 0, w: 600, h: 300)
     static let PROFILE_ICON_ON_HOVER_ZOOM_MIN: Decimal = 1.0
     static let PROFILE_ICON_ON_HOVER_ZOOM_MAX: Decimal = 1.5
     static let GRID_COLS_MAX: CellsByAxisCount = 30
@@ -53,37 +52,41 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private let profiles = EnvironmentValues().profilesState
     private let cells    = EnvironmentValues().cellsState
 
-    @State private var isEditMode = false
+    @State private var isEditMode = ValueState<Bool>(false)
 
     init() {
         if let url = ModelContainer.shared.configurations.first?.url.path(percentEncoded: false) {
             Logger.customLog("Storage path: \(url)")
         }
+        NSWindow.onChangeRect(Self.WINDOW_MAIN_ID) { [self] window in
+            if (self.isEditMode.value) { self.profiles.current.winFrameEditMode = window.frame }
+            else                       { self.profiles.current.winFrameViewMode = window.frame }
+        }
     }
 
     public var body: some Scene {
-        Window(Self.MAIN_WINDOW_TITLE, id: Self.MAIN_WINDOW_ID) {
-            MainScene(isEditMode: self.$isEditMode)
+        Window(Self.WINDOW_MAIN_TITLE, id: Self.WINDOW_MAIN_ID) {
+            MainScene(isEditMode: self.$isEditMode.value)
                 .ignoresSafeArea(.all)
                 .gesture(WindowDragGesture())
                 .onAppear {
-                    /* hide window control buttons */
-                    if let window = NSWindow.get(Self.MAIN_WINDOW_ID) {
-                        window.hideTitleButtons(isVisible: self.profiles.current.isShowWinTitleButtons)
+                    if let window = NSWindow.get(Self.WINDOW_MAIN_ID) {
                         window.backgroundColor = .clear
                         window.alphaValue = 1.0
+                        window.hideTitleButtons(self.profiles.current.isShowWinTitleButtons)
+                        self.updateWindowFrame(self.isEditMode.value)
                     }
                 }
                 .onAppBecomeBackground {
-                    if (!self.isEditMode) {
+                    if (!self.isEditMode.value) {
                         NSWindow.hideWithAnimation(
-                            Self.MAIN_WINDOW_ID
+                            Self.WINDOW_MAIN_ID
                         )
                     }
                 }
         }
         .windowStyle(.hiddenTitleBar)
-        .restorationBehavior(.automatic)
+        .restorationBehavior(.disabled)
         .environment(\.windowBackground    , self.profiles.current.background)
         .environment(\.windowBackgroundDark, self.profiles.current.backgroundDark)
         .environment(\.profilesState       , self.profiles)
@@ -91,17 +94,30 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         .environment(\.layoutDirection, .leftToRight)
         .onChange(of: self.profiles.current, { _, value in
             self.cells.setProfileID(value.ID)
+            self.updateWindowFrame(self.isEditMode.value)
         })
         .onChange(of: self.profiles.current.isShowWinTitleButtons) { _, value in
-            if let window = NSWindow.get(Self.MAIN_WINDOW_ID) {
-                window.hideTitleButtons(isVisible: value)
+            if let window = NSWindow.get(Self.WINDOW_MAIN_ID) {
+                window.hideTitleButtons(value)
             }
+        }
+        .onChange(of: self.isEditMode.value) { _, isEditMode in
+            self.updateWindowFrame(isEditMode)
         }
         .commands {
             CommandGroup(after: .singleWindowList) {
                 Button("Open Main Window") {
-                    openWindow(id: Self.MAIN_WINDOW_ID)
+                    openWindow(id: Self.WINDOW_MAIN_ID)
                 }
+            }
+        }
+    }
+
+    private func updateWindowFrame(_ isEditMode: Bool) {
+        Task { @MainActor in
+            if let window = NSWindow.get(ThisApp.WINDOW_MAIN_ID) {
+                if (isEditMode) { window.setFrame(self.profiles.current.winFrameEditMode, display: true, animate: true) }
+                else            { window.setFrame(self.profiles.current.winFrameViewMode, display: true, animate: true) }
             }
         }
     }

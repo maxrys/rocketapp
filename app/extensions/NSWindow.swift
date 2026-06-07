@@ -4,6 +4,7 @@
 /* ############################################################# */
 
 import AppKit
+import Combine
 
 extension NSWindow {
 
@@ -42,7 +43,7 @@ extension NSWindow {
     func show() { self.makeKeyAndOrderFront(nil) }
     func hide() { self.orderOut(nil) }
 
-    func hideTitleButtons(isVisible: Bool = true) {
+    func hideTitleButtons(_ isVisible: Bool = true) {
         self.standardWindowButton(.closeButton      )?.isHidden = !isVisible
         self.standardWindowButton(.miniaturizeButton)?.isHidden = !isVisible
         self.standardWindowButton(.zoomButton       )?.isHidden = !isVisible
@@ -50,6 +51,41 @@ extension NSWindow {
 
     var ID: String? {
         self.identifier?.rawValue
+    }
+
+    static private var onChangeCancellableBag: [
+        String: AnyCancellable
+    ] = [:]
+
+    static func onChangeRect(_ ID: String, _ action: @escaping (NSWindow) -> Void) {
+        Self.onChangeCancellableBag[ID]?.cancel()
+        Self.onChangeCancellableBag[ID] = NotificationCenter.default.publisher(for: NSWindow.didResizeNotification)
+            .merge(with: NotificationCenter.default.publisher(for: NSWindow.didMoveNotification))
+            .compactMap { notification in notification.object as? NSWindow }
+            .filter { window in window.ID == ID }
+            .sink { window in
+                Task { @MainActor in
+                    action(window)
+                }
+            }
+    }
+
+    static func removeOnChangeRect(_ ID: String) {
+        Self.onChangeCancellableBag[ID]?.cancel()
+        Self.onChangeCancellableBag[ID] = nil
+    }
+
+    static func centerWindowFrame(_ ID: String, frame: CGRect) -> CGRect {
+        var result = frame
+        if (result.w.isFinite && result.h.isFinite) {
+            if let window = Self.get(ID) {
+                if let screenFrame = window.screen?.visibleFrame {
+                    result.x = screenFrame.origin.x + (screenFrame.w - result.w) / 2
+                    result.y = screenFrame.origin.y + (screenFrame.h - result.h) / 2
+                }
+            }
+        }
+        return result
     }
 
 }

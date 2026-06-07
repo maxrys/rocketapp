@@ -4,22 +4,6 @@
     "%lld %%" : {
       "shouldTranslate" : false
     },
-    "Add new applications through the" : {
-      "localizations" : {
-        "be-BY" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Дадайце новыя дадаткі праз"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Добавьте новые приложения через"
-          }
-        }
-      }
-    },
     "append profile" : {
       "localizations" : {
         "be-BY" : {
@@ -181,18 +165,18 @@
         }
       }
     },
-    "No Applications" : {
+    "No Applications!" : {
       "localizations" : {
         "be-BY" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Няма дадаткаў"
+            "value" : "Няма дадаткаў!"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Нет приложений"
+            "value" : "Нет приложений!"
           }
         }
       }
@@ -225,6 +209,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Открыть основное окно"
+          }
+        }
+      }
+    },
+    "open settings" : {
+      "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "адкрыць наладкі"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "открыть настройки"
           }
         }
       }
@@ -273,22 +273,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Выбрать это приложение"
-          }
-        }
-      }
-    },
-    "settings" : {
-      "localizations" : {
-        "be-BY" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "наладкі"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "настройки"
           }
         }
       }

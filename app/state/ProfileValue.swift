@@ -25,6 +25,8 @@ import SwiftUI
     public var isShowWinTitleButtons: Bool   { didSet { if (oldValue != isShowWinTitleButtons) { _ = self.modelUpdate() } } }
     public var background: ColorHSBValue     { didSet { if (oldValue != background)            { _ = self.modelUpdate() } } }
     public var backgroundDark: ColorHSBValue { didSet { if (oldValue != backgroundDark)        { _ = self.modelUpdate() } } }
+    public var winFrameViewMode: CGRect      { didSet { if (oldValue != winFrameViewMode)      { _ = self.modelUpdate() } } }
+    public var winFrameEditMode: CGRect      { didSet { if (oldValue != winFrameEditMode)      { _ = self.modelUpdate() } } }
 
     static var embeddedProfile: Self {
         Self(
@@ -38,7 +40,9 @@ import SwiftUI
             isStickyGrid         : ThisApp.NEW_PROFILE_IS_STICKY_GRID,
             isShowWinTitleButtons: ThisApp.NEW_PROFILE_IS_SHOW_WINDOW_TITLE_BUTTONS,
             background           : ThisApp.NEW_PROFILE_BACKGROUND,
-            backgroundDark       : ThisApp.NEW_PROFILE_BACKGROUND_DARK
+            backgroundDark       : ThisApp.NEW_PROFILE_BACKGROUND_DARK,
+            winFrameViewMode     : ThisApp.NEW_PROFILE_WIN_FRAME_VIEW_MODE,
+            winFrameEditMode     : ThisApp.NEW_PROFILE_WIN_FRAME_EDIT_MODE
         )
     }
 
@@ -53,7 +57,9 @@ import SwiftUI
         isStickyGrid: Bool,
         isShowWinTitleButtons: Bool,
         background: ColorHSBValue,
-        backgroundDark: ColorHSBValue
+        backgroundDark: ColorHSBValue,
+        winFrameViewMode: CGRect,
+        winFrameEditMode: CGRect
     ) {
         self.ID = ID
         self.title = title
@@ -66,6 +72,8 @@ import SwiftUI
         self.isShowWinTitleButtons = isShowWinTitleButtons
         self.background = background
         self.backgroundDark = backgroundDark
+        self.winFrameViewMode = winFrameViewMode
+        self.winFrameEditMode = winFrameEditMode
     }
 
     init?(ID: ProfileID) {
@@ -79,8 +87,10 @@ import SwiftUI
         self.isHideOnMisclick      = modelProfile.isHideOnMisclick
         self.isStickyGrid          = modelProfile.isStickyGrid
         self.isShowWinTitleButtons = modelProfile.isShowWinTitleButtons
-        self.background            = ColorHSBValue(decode: modelProfile.background)     ?? ThisApp.NEW_PROFILE_BACKGROUND
-        self.backgroundDark        = ColorHSBValue(decode: modelProfile.backgroundDark) ?? ThisApp.NEW_PROFILE_BACKGROUND_DARK
+        self.background            = ColorHSBValue(decode: modelProfile.background)       ?? ThisApp.NEW_PROFILE_BACKGROUND
+        self.backgroundDark        = ColorHSBValue(decode: modelProfile.backgroundDark)   ?? ThisApp.NEW_PROFILE_BACKGROUND_DARK
+        self.winFrameViewMode      = CGRect       (decode: modelProfile.winFrameViewMode) ?? ThisApp.NEW_PROFILE_WIN_FRAME_VIEW_MODE
+        self.winFrameEditMode      = CGRect       (decode: modelProfile.winFrameEditMode) ?? ThisApp.NEW_PROFILE_WIN_FRAME_EDIT_MODE
     }
 
     static func == (lhs: ProfileValue, rhs: ProfileValue) -> Bool {
@@ -94,7 +104,9 @@ import SwiftUI
         lhs.isStickyGrid          == rhs.isStickyGrid          &&
         lhs.isShowWinTitleButtons == rhs.isShowWinTitleButtons &&
         lhs.background            == rhs.background            &&
-        lhs.backgroundDark        == rhs.backgroundDark
+        lhs.backgroundDark        == rhs.backgroundDark        &&
+        lhs.winFrameViewMode      == rhs.winFrameViewMode      &&
+        lhs.winFrameEditMode      == rhs.winFrameEditMode
     }
 
     static func < (lhs: ProfileValue, rhs: ProfileValue) -> Bool {
@@ -113,8 +125,10 @@ import SwiftUI
                 isHideOnMisclick     : self.isHideOnMisclick,
                 isStickyGrid         : self.isStickyGrid,
                 isShowWinTitleButtons: self.isShowWinTitleButtons,
-                background           : self.background    .encode() ?? ThisApp.NEW_PROFILE_BACKGROUND_ENCODED,
-                backgroundDark       : self.backgroundDark.encode() ?? ThisApp.NEW_PROFILE_BACKGROUND_DARK_ENCODED
+                background           : self.background      .encode() ?? ThisApp.NEW_PROFILE_BACKGROUND     .encode()!,
+                backgroundDark       : self.backgroundDark  .encode() ?? ThisApp.NEW_PROFILE_BACKGROUND_DARK.encode()!,
+                winFrameViewMode     : self.winFrameViewMode.encode(),
+                winFrameEditMode     : self.winFrameEditMode.encode()
             ), autoInsert: true
         )
     }
@@ -131,8 +145,10 @@ import SwiftUI
                 isHideOnMisclick     : self.isHideOnMisclick,
                 isStickyGrid         : self.isStickyGrid,
                 isShowWinTitleButtons: self.isShowWinTitleButtons,
-                background           : self.background    .encode() ?? ThisApp.NEW_PROFILE_BACKGROUND_ENCODED,
-                backgroundDark       : self.backgroundDark.encode() ?? ThisApp.NEW_PROFILE_BACKGROUND_DARK_ENCODED
+                background           : self.background      .encode() ?? ThisApp.NEW_PROFILE_BACKGROUND     .encode()!,
+                backgroundDark       : self.backgroundDark  .encode() ?? ThisApp.NEW_PROFILE_BACKGROUND_DARK.encode()!,
+                winFrameViewMode     : self.winFrameViewMode.encode(),
+                winFrameEditMode     : self.winFrameEditMode.encode()
             )
         )
     }
@@ -150,8 +166,10 @@ import SwiftUI
                 isHideOnMisclick     : modelProfile.isHideOnMisclick,
                 isStickyGrid         : modelProfile.isStickyGrid,
                 isShowWinTitleButtons: modelProfile.isShowWinTitleButtons,
-                background           : ColorHSBValue(decode: modelProfile.background     ) ?? ThisApp.NEW_PROFILE_BACKGROUND,
-                backgroundDark       : ColorHSBValue(decode: modelProfile.backgroundDark ) ?? ThisApp.NEW_PROFILE_BACKGROUND_DARK
+                background           : ColorHSBValue(decode: modelProfile.background      ) ?? ThisApp.NEW_PROFILE_BACKGROUND,
+                backgroundDark       : ColorHSBValue(decode: modelProfile.backgroundDark  ) ?? ThisApp.NEW_PROFILE_BACKGROUND_DARK,
+                winFrameViewMode     : CGRect       (decode: modelProfile.winFrameViewMode) ?? ThisApp.NEW_PROFILE_WIN_FRAME_VIEW_MODE,
+                winFrameEditMode     : CGRect       (decode: modelProfile.winFrameEditMode) ?? ThisApp.NEW_PROFILE_WIN_FRAME_EDIT_MODE
             )
         }
         return result

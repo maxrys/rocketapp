@@ -25,6 +25,8 @@ import SwiftData
     public var isShowWinTitleButtons: Bool
     public var background: String
     public var backgroundDark: String
+    public var winFrameViewMode: String = ThisApp.NEW_PROFILE_WIN_FRAME_VIEW_MODE.encode()
+    public var winFrameEditMode: String = ThisApp.NEW_PROFILE_WIN_FRAME_EDIT_MODE.encode()
 
     init(
         ID: ProfileID,
@@ -37,7 +39,9 @@ import SwiftData
         isStickyGrid: Bool,
         isShowWinTitleButtons: Bool,
         background: String,
-        backgroundDark: String
+        backgroundDark: String,
+        winFrameViewMode: String,
+        winFrameEditMode: String
     ) {
         self.id = ID
         self.title = title
@@ -50,6 +54,8 @@ import SwiftData
         self.isShowWinTitleButtons = isShowWinTitleButtons
         self.background = background
         self.backgroundDark = backgroundDark
+        self.winFrameViewMode = winFrameViewMode
+        self.winFrameEditMode = winFrameEditMode
     }
 
     private static func predicate(ID: ProfileID) -> Predicate<SELF> {
@@ -111,6 +117,8 @@ import SwiftData
                 itemToUpdate.isShowWinTitleButtons = item.isShowWinTitleButtons
                 itemToUpdate.background            = item.background
                 itemToUpdate.backgroundDark        = item.backgroundDark
+                itemToUpdate.winFrameViewMode      = item.winFrameViewMode
+                itemToUpdate.winFrameEditMode      = item.winFrameEditMode
                 try modelContext.save()
                 return true
             } else if (autoInsert) {

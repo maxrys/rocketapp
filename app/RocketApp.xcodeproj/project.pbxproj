@@ -24,6 +24,8 @@
 		505507122FB525D7007DB93D /* Cell_em_Fake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505507112FB525D7007DB93D /* Cell_em_Fake.swift */; };
 		505507302FC59DC8007DB93D /* ShadowLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5055072F2FC59DC8007DB93D /* ShadowLine.swift */; };
 		505507142FB5D6D6007DB93D /* ButtonDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505507132FB5D6D6007DB93D /* ButtonDelete.swift */; };
+		505507272FC1BCE8007DB93D /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505507262FC1BCE8007DB93D /* CGRect.swift */; };
+		505507292FC1CFDD007DB93D /* ValueState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505507282FC1CFDD007DB93D /* ValueState.swift */; };
 		505849632E9534BC00B9F421 /* ModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505849602E95341400B9F421 /* ModelContainer.swift */; };
 		505849642E9534BC00B9F421 /* ModelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505849612E95341400B9F421 /* ModelCell.swift */; };
 		505849672E97E23100B9F421 /* CellsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505849662E97E23000B9F421 /* CellsState.swift */; };
@@ -120,6 +122,8 @@
 		505507112FB525D7007DB93D /* Cell_em_Fake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell_em_Fake.swift; sourceTree = "<group>"; };
 		5055072F2FC59DC8007DB93D /* ShadowLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowLine.swift; sourceTree = "<group>"; };
 		505507132FB5D6D6007DB93D /* ButtonDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDelete.swift; sourceTree = "<group>"; };
+		505507262FC1BCE8007DB93D /* CGRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
+		505507282FC1CFDD007DB93D /* ValueState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueState.swift; sourceTree = "<group>"; };
 		505849602E95341400B9F421 /* ModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelContainer.swift; sourceTree = "<group>"; };
 		505849612E95341400B9F421 /* ModelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelCell.swift; sourceTree = "<group>"; };
 		505849662E97E23000B9F421 /* CellsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellsState.swift; sourceTree = "<group>"; };
@@ -233,6 +237,7 @@
 			children = (
 				507501612EF9645700624409 /* Array.swift */,
 				50EE8BAF2ED5A4B3002DFEA5 /* Bool.swift */,
+				505507262FC1BCE8007DB93D /* CGRect.swift */,
 				5013DB852EA56D2800BEDC5E /* Color.swift */,
 				507501492EF6A70300624409 /* Date.swift */,
 				508D6D132EB551A800885E95 /* Dictionary.swift */,
@@ -462,6 +467,7 @@
 				50EE8B992ED174FE002DFEA5 /* MiniGridValue.swift */,
 				50CF30CF2FB4A9F200A9319D /* Previewer.swift */,
 				50242EB72F9255EA000FDCC6 /* SlotsEnumerator.swift */,
+				505507282FC1CFDD007DB93D /* ValueState.swift */,
 			);
 			path = types;
 			sourceTree = "<group>";
@@ -603,6 +609,7 @@
 			files = (
 				500A69C42F1671AE00C3CCE7 /* DictionaryMatrix.swift in Sources */,
 				507501602EF9593400624409 /* ResultBuilder.swift in Sources */,
+				505507292FC1CFDD007DB93D /* ValueState.swift in Sources */,
 				50EE8B952ECDDCDD002DFEA5 /* EnvironmentValues.swift in Sources */,
 				501D4DED2EBFC84B00919AB9 /* ToggleCustom.swift in Sources */,
 				506421C02F616F9F0020F6C8 /* AppIcon_em.swift in Sources */,
@@ -628,6 +635,7 @@
 				50CF30CE2FB351A600A9319D /* СhameleonView.swift in Sources */,
 				50242EB82F9255EA000FDCC6 /* SlotsEnumerator.swift in Sources */,
 				505507122FB525D7007DB93D /* Cell_em_Fake.swift in Sources */,
+				505507272FC1BCE8007DB93D /* CGRect.swift in Sources */,
 				50CE72342EE62E8F00FE3282 /* Logger.swift in Sources */,
 				508150792E81448100E12175 /* Cell_vm.swift in Sources */,
 				507501472EF54D8200624409 /* CellID.swift in Sources */,

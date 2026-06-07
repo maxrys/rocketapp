@@ -10,7 +10,6 @@ struct MainScene: View, BackgroundColorProtocol {
     @Environment(\.colorScheme)          internal var colorScheme
     @Environment(\.windowBackground)     internal var background
     @Environment(\.windowBackgroundDark) internal var backgroundDark
-
     @Environment(\.profilesState) private var profiles
     @Environment(\.cellsState)    private var cells
 
@@ -23,6 +22,10 @@ struct MainScene: View, BackgroundColorProtocol {
 
     private var cellSpacingFinal: Double {
         Double(self.profiles.current.spacing) * self.profiles.current.zoom.double
+    }
+
+    private var frameMinSizeViewMode: Double {
+        self.cellSizeFinal + (self.cellSpacingFinal * 2)
     }
 
     init(isEditMode: Binding<Bool>) {
@@ -41,7 +44,7 @@ struct MainScene: View, BackgroundColorProtocol {
                         cellSpacing: self.cellSpacingFinal
                     ).onTapGesture {
                         if (self.profiles.current.isHideOnMisclick) {
-                            NSWindow.hideWithAnimation(ThisApp.MAIN_WINDOW_ID)
+                            NSWindow.hideWithAnimation(ThisApp.WINDOW_MAIN_ID)
                         }
                     }
                 }
@@ -58,10 +61,10 @@ struct MainScene: View, BackgroundColorProtocol {
             }
 
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .frame(
-            minWidth : self.isEditMode ? 600 : self.cellSizeFinal + (self.cellSpacingFinal * 2),
-            minHeight: self.isEditMode ? 300 : self.cellSizeFinal + (self.cellSpacingFinal * 2))
+            minWidth : self.isEditMode ? ThisApp.NEW_PROFILE_WIN_FRAME_EDIT_MODE.w : self.frameMinSizeViewMode, maxWidth : .infinity,
+            minHeight: self.isEditMode ? ThisApp.NEW_PROFILE_WIN_FRAME_EDIT_MODE.h : self.frameMinSizeViewMode, maxHeight: .infinity
+        )
         .background(self.backgroundHSB().color)
         .overlay(alignment: .topTrailing) {
             if (self.isEditMode == false) {
@@ -82,21 +85,27 @@ struct MainScene: View, BackgroundColorProtocol {
         }
     }
 
-    @ViewBuilder private func NoOneAppView() -> some View {
-        VStack(spacing: 10) {
-            Text(ThisApp.MESSAGE_NO_APPLICATIONS)
-            Text(ThisApp.MESSAGE_ADD_NEW_APPLICATIONS_THROUGH)
-            Button(ThisApp.MESSAGE_SETTINGS) { self.isEditMode = true }
-                .underline()
-                .font(.system(size: 12, weight: .regular))
-                .foregroundColor(.accentColor)
+    @ViewBuilder fileprivate func NoOneAppView() -> some View {
+        СhameleonView(radius: 30, minOpacity: 0.7, shadowRadius: 0, isFlat: true) {
+            VStack(spacing: 15) {
+                Text(ThisApp.MESSAGE_NO_APPLICATIONS)
+                    .font(.system(size: 15, weight: .bold))
+                    .lineLimit(1)
+                    .fixedSize(horizontal: true, vertical: false)
+                Button { self.isEditMode = true } label: {
+                    СhameleonView(shadowRadius: 3) {
+                        Text(ThisApp.MESSAGE_OPEN_SETTINGS)
+                            .font(.system(size: 14))
+                            .lineLimit(1)
+                            .fixedSize(horizontal: true, vertical: false)
+                            .padding(.horizontal, 30)
+                            .padding(.vertical  , 10)
+                    }
+                }
                 .buttonStyle(.plain)
                 .pointerStyle(.link)
-        }
-        .padding(20)
-        .multilineTextAlignment(.center)
-        .font(.system(size: 14, weight: .bold))
-        .foregroundStyle(self.backgroundAccentHSB(minOpacity: 1.0).color)
+            }.padding(20)
+        }.padding(20)
     }
 
     @ViewBuilder private func AuditPanelView() -> some View {
@@ -149,7 +158,13 @@ struct MainScene: View, BackgroundColorProtocol {
 /* ############################################################# */
 
 #Preview {
-    MainScene(isEditMode: .constant(false))
-        .ButtonOpenSettingsView()
-        .padding(20)
+    Previewer {
+        MainScene(
+            isEditMode: .constant(false)
+        ).ButtonOpenSettingsView().padding(10)
+
+        MainScene(
+            isEditMode: .constant(false)
+        ).NoOneAppView()
+    }
 }
