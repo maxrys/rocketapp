@@ -1,4 +1,9 @@
 
+## Version 1.7
+
+Bugs have been fixed.
+Codebase has been improved.
+
 ## Version 1.6
 
 Profile cloning has been added.
