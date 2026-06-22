@@ -23,7 +23,7 @@ struct About: View {
                 ShadowLine(
                     length: 10,
                     angle: .`270_degrees`,
-                    opacity: 0.1,
+                    opacity: 0.15,
                     opacityDark: 0.5
                 ).offset(x: 10)
             }
@@ -93,6 +93,22 @@ struct About: View {
             }
 
         }
+        .background(
+            self.WindowChamelionBackground()
+                .ignoresSafeArea()
+        )
+        .onAppear {
+            if let window = NSWindow.get(ThisApp.WINDOW_ABOUT_ID) {
+                window.backgroundColor = .clear
+                window.alphaValue = 1.0
+            }
+        }
+    }
+
+    @ViewBuilder func WindowChamelionBackground() -> some View {
+        if (self.colorScheme == .dark)
+             { Rectangle().fill(.ultraThinMaterial) }
+        else { Rectangle().fill(.ultraThinMaterial).overlay { Color.NS[\.windowBackgroundColor].opacity(0.7) } }
     }
 
     @ViewBuilder private func ButtonOpenURL(_ value: String) -> some View {

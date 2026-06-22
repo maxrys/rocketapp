@@ -105,7 +105,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         .environment(\.layoutDirection, .leftToRight)
         .onChange(of: self.profiles.current, { _, value in
             self.cells.setProfileID(value.ID)
-            self.updateWindowFrame(self.isEditMode.value)
+            Task { @MainActor in
+                self.updateWindowFrame(self.isEditMode.value)
+            }
         })
         .onChange(of: self.profiles.current.isShowWinTitleButtons) { _, value in
             if let window = NSWindow.get(Self.WINDOW_MAIN_ID) {
@@ -113,7 +115,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
         .onChange(of: self.isEditMode.value) { _, isEditMode in
-            self.updateWindowFrame(isEditMode)
+            Task { @MainActor in
+                self.updateWindowFrame(isEditMode)
+            }
         }
         .commands {
             CommandGroup(after: .singleWindowList) {
@@ -136,11 +140,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func updateWindowFrame(_ isEditMode: Bool) {
-        Task { @MainActor in
-            if let window = NSWindow.get(ThisApp.WINDOW_MAIN_ID) {
-                if (isEditMode) { window.setFrame(self.profiles.current.winFrameEditMode, display: true, animate: true) }
-                else            { window.setFrame(self.profiles.current.winFrameViewMode, display: true, animate: true) }
-            }
+        if let window = NSWindow.get(ThisApp.WINDOW_MAIN_ID) {
+            if (isEditMode) { window.setFrame(self.profiles.current.winFrameEditMode, display: true, animate: true) }
+            else            { window.setFrame(self.profiles.current.winFrameViewMode, display: true, animate: true) }
         }
     }
 

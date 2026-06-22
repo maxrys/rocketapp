@@ -59,9 +59,9 @@ extension NSWindow {
 
     static func onChangeRect(_ ID: String, _ action: @escaping (NSWindow) -> Void) {
         Self.onChangeCancellableBag[ID]?.cancel()
-        Self.onChangeCancellableBag[ID] = NotificationCenter.default.publisher(for: NSWindow.didResizeNotification)
-            .merge(with: NotificationCenter.default.publisher(for: NSWindow.didMoveNotification))
-            .compactMap { notification in notification.object as? NSWindow }
+        Self.onChangeCancellableBag[ID] = NotificationCenter.default.publisher(for: Self.didResizeNotification)
+            .merge(with: NotificationCenter.default.publisher(for: Self.didMoveNotification))
+            .compactMap { notification in notification.object as? Self }
             .filter { window in window.ID == ID }
             .sink { window in
                 Task { @MainActor in
