@@ -1,4 +1,8 @@
 
+## Version 1.8
+
+Codebase has been improved.
+
 ## Version 1.7
 
 Bugs have been fixed.
