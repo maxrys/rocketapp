@@ -90,7 +90,7 @@ struct AppIcon_editMode: View, BackgroundColorProtocol {
 /* ############################################################# */
 
 #Preview {
-    Previewer(isHorizontal: true) {
+    Previewer(axis: .horizontal) {
         Grid(alignment: .center, horizontalSpacing: 10, verticalSpacing: 10) {
 
             AppIcon_editMode(

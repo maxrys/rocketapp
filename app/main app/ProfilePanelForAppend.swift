@@ -26,7 +26,7 @@ struct ProfilePanelForAppend: View {
                 value: self.$title
             ).onPressEnter { self.onAppendProfile() }
 
-            HStack (spacing: 10) {
+            HStack(spacing: 10) {
 
                 ButtonCustom(
                     NSLocalizedString("clone", comment: ""),

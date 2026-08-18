@@ -30,7 +30,7 @@ struct About: View {
             .frame(width: self.descriptionSize.height, height: self.descriptionSize.height)
             .zIndex(1)
 
-            VStack (alignment: .leading, spacing: 5) {
+            VStack(alignment: .leading, spacing: 5) {
 
                 Text(NSApplication.appNameLocalized)
                     .font(.system(size: 24, weight: .bold))
@@ -48,7 +48,7 @@ struct About: View {
                 }
 
                 if let pageMarketing = NSApplication.pageMarketing {
-                    HStack (spacing: 5) { self.ButtonOpenURL(pageMarketing) }
+                    HStack(spacing: 5) { self.ButtonOpenURL(pageMarketing) }
                         .font(.system(size: 12))
                         .fixedSize(horizontal: true, vertical: true)
                         .lineLimit(1)
@@ -93,22 +93,10 @@ struct About: View {
             }
 
         }
-        .background(
-            self.WindowChamelionBackground()
-                .ignoresSafeArea()
+        .windowChamelionBackground(
+            windowID: ThisApp.WINDOW_ABOUT_ID,
+            isIgnoreSafeArea: false
         )
-        .onAppear {
-            if let window = NSWindow.get(ThisApp.WINDOW_ABOUT_ID) {
-                window.backgroundColor = .clear
-                window.alphaValue = 1.0
-            }
-        }
-    }
-
-    @ViewBuilder func WindowChamelionBackground() -> some View {
-        if (self.colorScheme == .dark)
-             { Rectangle().fill(.ultraThinMaterial) }
-        else { Rectangle().fill(.ultraThinMaterial).overlay { Color.NS[\.windowBackgroundColor].opacity(0.7) } }
     }
 
     @ViewBuilder private func ButtonOpenURL(_ value: String) -> some View {

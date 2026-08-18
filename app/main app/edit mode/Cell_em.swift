@@ -208,7 +208,7 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
         return data
     }()
 
-    Previewer(isHorizontal: true) {
+    Previewer(axis: .horizontal) {
         Grid(alignment: .center, horizontalSpacing: 0, verticalSpacing: 0) {
             Cell_editMode_Fake(size: ThisApp.CELL_SIZE).id(1)
             Cell_editMode(ID: 0, size: ThisApp.CELL_SIZE, isVisible: true).id(2).environment(\.cellsState, mockForNone)

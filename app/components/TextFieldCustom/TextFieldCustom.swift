@@ -59,7 +59,7 @@ struct TextFieldCustom: View {
 
 #Preview {
     @Previewable @State var value: String = "some text"
-    Previewer (padding: 20) {
+    Previewer(padding: 20) {
         TextFieldCustom("Title", value: $value)
         TextFieldCustom(""     , value: $value)
         TextFieldCustom(         value: $value)

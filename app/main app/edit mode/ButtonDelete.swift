@@ -38,7 +38,7 @@ struct Cell_editMode_ButtonDelete: View {
 /* ############################################################# */
 
 #Preview {
-    Previewer(isHorizontal: true) {
+    Previewer(axis: .horizontal) {
         Cell_editMode_ButtonDelete(
             size: 60,
             onClick: { }

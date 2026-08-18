@@ -76,7 +76,7 @@ struct AppIcon_viewMode: View, BackgroundColorProtocol {
 /* ############################################################# */
 
 #Preview {
-    Previewer(isHorizontal: true) {
+    Previewer(axis: .horizontal) {
         Grid(alignment: .center, horizontalSpacing: 10, verticalSpacing: 10) {
 
             AppIcon_viewMode(

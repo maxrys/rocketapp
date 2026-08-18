@@ -68,7 +68,7 @@ struct ButtonRound<L: View, F: ShapeStyle, B: View>: View {
 /* ############################################################# */
 
 #Preview {
-    Previewer(isHorizontal: true, padding: 20) {
+    Previewer(axis: .horizontal, padding: 20) {
         ButtonRound( label: { Image(systemName: "plus.circle") } )
         ButtonRound( label: { Image(systemName: "plus.circle") } ).disabled(true)
         ButtonRound(

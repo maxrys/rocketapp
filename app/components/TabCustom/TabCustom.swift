@@ -38,11 +38,10 @@ struct TabCustom: View {
 
             HStack(spacing: 10) {
                 ForEach(self.contents.indices, id: \.self) { index in
-                    if let tatSpacer = self.contents[safe: index] as? TabCustom_Spacer { tatSpacer }
+                    if let tabSpacer = self.contents[safe: index] as? TabCustom_Spacer { tabSpacer }
                     if let tabItem   = self.contents[safe: index] as? TabCustom_Item {
                         TabCustom_HeadTitle(
-                            title: tabItem.title,
-                            icon: tabItem.icon,
+                            item: tabItem,
                             index: index,
                             padding: self.itemPadding,
                             isSelected: self.selected == index) { index in
@@ -78,8 +77,7 @@ fileprivate struct TabCustom_HeadTitle: View {
 
     @State fileprivate var isHovering = false
 
-    fileprivate let title: String
-    fileprivate let icon: Image?
+    fileprivate let item: TabCustom_Item
     fileprivate let index: Int
     fileprivate let padding: EdgeInsets
     fileprivate let isSelected: Bool
@@ -111,13 +109,16 @@ fileprivate struct TabCustom_HeadTitle: View {
         Button {
             self.onClick(self.index)
         } label: {
-            HStack(spacing: 7) {
-                if let icon {
+            HVStack(axis: self.item.axis, spacing: self.item.spacing) {
+                if let icon = self.item.icon, let iconSize = self.item.iconSize {
                     icon.resizable()
-                        .frame(width: 15, height: 15)
+                        .frame(
+                            width : iconSize.width,
+                            height: iconSize.height
+                        )
                 }
-                if (!title.isEmpty) {
-                    Text(title)
+                if (!self.item.title.isEmpty) {
+                    Text(self.item.title)
                         .font(.system(size: 13))
                         .lineLimit(1)
                         .fixedSize(horizontal: true, vertical: false)
@@ -132,7 +133,9 @@ fileprivate struct TabCustom_HeadTitle: View {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(style: StrokeStyle(lineWidth: 1))
                             .foregroundStyle(self.colorBorder)
-                    }.contentShape(RoundedRectangle(cornerRadius: 10))
+                    }
+                    .contentShape(              RoundedRectangle(cornerRadius: 10))
+                    .contentShape(.focusEffect, RoundedRectangle(cornerRadius: 10))
             }
         }
         .buttonStyle(.plain)

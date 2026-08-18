@@ -13,19 +13,22 @@ struct ToggleCustom: View {
     private let isFlexible: Bool
     private let size: CGSize
     private let innerPadding: CGFloat
+    private let font: Font
 
     init(
         text: String? = nil,
         isOn: Binding<Bool>,
         isFlexible: Bool = false,
         size: CGSize = CGSize(width: 40, height: 16),
-        innerPadding: CGFloat = 3
+        innerPadding: CGFloat = 3,
+        font: Font = .headline
     ) {
         self.text = text
         self._isOn = isOn
         self.isFlexible = isFlexible
         self.size = size
         self.innerPadding = innerPadding
+        self.font = font
     }
 
     public var body: some View {
@@ -48,7 +51,7 @@ struct ToggleCustom: View {
 
     @ViewBuilder private func TextView(_ text: String) -> some View {
         Text(text)
-            .font(.headline)
+            .font(self.font)
     }
 
     @ViewBuilder private func SwitcherView() -> some View {
@@ -63,6 +66,7 @@ struct ToggleCustom: View {
 
 fileprivate struct ToggleCustom_Switcher: View {
 
+    @Environment(\.colorScheme) private var colorScheme
     @Binding fileprivate var isOn: Bool
 
     private let size: CGSize
@@ -84,21 +88,21 @@ fileprivate struct ToggleCustom_Switcher: View {
                 self.isOn.toggle()
             }
         } label: {
-            ZStack(alignment: self.isOn ? .trailing : .leading) {
-                Capsule()
-                    .fill(self.isOn ? .green : .gray)
-                    .frame(width: self.size.width, height: self.size.height)
-                Capsule()
-                    .fill(.white)
-                    .frame(
-                        width: (self.size.height * 1.5) - (self.innerPadding * 2),
-                        height: self.size.height        - (self.innerPadding * 2))
-                    .padding(self.innerPadding)
-                    .shadow(
-                        color: .black.opacity(0.5),
-                        radius: 2.0
-                    )
-            }
+            Capsule()
+                .fill(self.isOn ? .green : .black.opacity(self.colorScheme == .dark ? 0.7 : 0.3))
+                .frame(width: self.size.width, height: self.size.height)
+                .overlay(alignment: self.isOn ? .trailing : .leading) {
+                    Capsule()
+                        .fill(.white)
+                        .frame(
+                            width: (self.size.height * 1.5) - (self.innerPadding * 2),
+                            height: self.size.height        - (self.innerPadding * 2))
+                        .padding(self.innerPadding)
+                        .shadow(
+                            color: .black.opacity(0.5),
+                            radius: 2.0
+                        )
+                }.contentShape(.focusEffect, Capsule())
         }
         .buttonStyle(.plain)
         .pointerStyle(.link)
@@ -115,13 +119,11 @@ fileprivate struct ToggleCustom_Switcher: View {
 
 @available(macOS 14.0, *) #Preview {
     @Previewable @State var isOn: Bool = false
-    Previewer {
+    Previewer(padding: 20) {
         VStack(alignment: .trailing) {
             ToggleCustom(text: "Test", isOn: $isOn, isFlexible: true)
             ToggleCustom(text: "Test", isOn: $isOn, isFlexible: false)
-            ToggleCustom(isOn: $isOn)
-        }
-        .frame(width: 200)
-        .padding(20)
+            ToggleCustom(isOn: $isOn).disabled(true)
+        }.frame(width: 200)
     }
 }

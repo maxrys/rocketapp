@@ -33,7 +33,7 @@ struct MainScene: View, BackgroundColorProtocol {
     }
 
     public var body: some View {
-        VStack (spacing: 0) {
+        VStack(spacing: 0) {
 
             if (self.isEditMode == false) {
                 if (self.cells.isEmpty) {

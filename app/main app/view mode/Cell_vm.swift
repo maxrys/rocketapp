@@ -138,7 +138,7 @@ struct Cell_viewMode: View, CellProtocol {
         return data
     }()
 
-    Previewer(isHorizontal: true) {
+    Previewer(axis: .horizontal) {
         Grid(alignment: .center, horizontalSpacing: 0, verticalSpacing: 0) {
             Cell_viewMode(ID: 0, size: ThisApp.CELL_SIZE).id(1).environment(\.cellsState, mockForNone)
             Cell_viewMode(ID: 0, size: ThisApp.CELL_SIZE).id(2).environment(\.cellsState, mockForMain)

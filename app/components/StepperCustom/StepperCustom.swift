@@ -96,7 +96,7 @@ struct StepperCustom<T>: View where T: Numeric & Comparable {
     @Previewable @State var valueDouble: Double = 0.5
     @Previewable @State var valueUInt: UInt = 5
     @Previewable @State var valueInt: Int = 0
-    Previewer (padding: 20) {
+    Previewer(padding: 20) {
         StepperCustom(
             $valueDecimal,
             in: 0.0 ... 1.0,

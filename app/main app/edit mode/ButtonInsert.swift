@@ -54,7 +54,7 @@ struct Cell_editMode_ButtonInsert: View, BackgroundColorProtocol {
 /* ############################################################# */
 
 #Preview {
-    Previewer(isHorizontal: true) {
+    Previewer(axis: .horizontal) {
         VStack(spacing: 10) {
 
             Cell_editMode_ButtonInsert(

@@ -43,7 +43,7 @@ struct ProfilePanel: View {
                         set: { value in self.onChangeProfile(profileID: value) }
                     ),
                     items: self.profiles.list,
-                    sortedBy: .valueAsc,
+                    sortedBy: .valueAscending,
                     isPlainListStyle: true,
                     flexibility: .size(250),
                     colorSet: Color.profilePanel.picker

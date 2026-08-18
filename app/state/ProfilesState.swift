@@ -71,7 +71,7 @@ import SwiftData
         /* load first profile */
 
         if (!self.isEmpty) {
-            if let profile = self.cache.sortedBy(order: .valueAsc).first?.value {
+            if let profile = self.cache.sorted(order: .valueAscending).first?.value {
                 _ = self.setCurrent(profile.ID)
                 Logger.customLog("The first profile (ID: \(profile.ID)) was loaded.")
                 return
