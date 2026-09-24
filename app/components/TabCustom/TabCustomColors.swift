@@ -7,21 +7,21 @@ import SwiftUI
 
 extension Color {
 
-    struct TabCustomColorSet {
-        public let headBackground              = Color.white.opacity(0.5)
-        public let headBackgroundDark          = Color.black.opacity(0.2)
-        public let headTitle                   = Color.black
-        public let headTitleDark               = Color.white
-        public let headTitleSelected           = Color.white
-        public let headTitleSelectedDark       = Color.white
-        public let headTitleBackground         = Color.clear
-        public let headTitleSelectedBackground = Color.accentColor
-        public let headTitleBorder             = Color.black.opacity(0.1)
-        public let headTitleBorderDark         = Color.white.opacity(0.1)
-        public let headTitleBorderHovering     = Color.black.opacity(0.5)
-        public let headTitleBorderHoveringDark = Color.white.opacity(0.5)
+    enum TabCustomColorSet {
+        static let headBackground              = Color.white.opacity(0.5)
+        static let headBackgroundDark          = Color.black.opacity(0.2)
+        static let headTitle                   = Color.black
+        static let headTitleDark               = Color.white
+        static let headTitleSelected           = Color.white
+        static let headTitleSelectedDark       = Color.white
+        static let headTitleBackground         = Color.clear
+        static let headTitleSelectedBackground = Color.accentColor
+        static let headTitleBorder             = Color.black.opacity(0.1)
+        static let headTitleBorderDark         = Color.white.opacity(0.1)
+        static let headTitleBorderHovering     = Color.black.opacity(0.5)
+        static let headTitleBorderHoveringDark = Color.white.opacity(0.5)
     }
 
-    static let tab = TabCustomColorSet()
+    static let tab = TabCustomColorSet.self
 
 }

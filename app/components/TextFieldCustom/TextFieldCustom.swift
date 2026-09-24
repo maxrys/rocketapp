@@ -14,16 +14,13 @@ struct TextFieldCustom: View {
     @Binding private var value: String
 
     private let title: String?
-    private let colorSet: ColorSet
 
     init(
         _ title: String? = nil,
-        value: Binding<String>,
-        colorSet: ColorSet = Color.textField
+        value: Binding<String>
     ) {
         self.title = title
         self._value = value
-        self.colorSet = colorSet
     }
 
     public var body: some View {
@@ -32,7 +29,7 @@ struct TextFieldCustom: View {
             if let title = self.title, !title.isEmpty {
                 Text(title)
                     .font(.headline)
-                    .foregroundStyle(self.colorSet.titleText)
+                    .foregroundStyle(Color.textField.titleText)
             }
 
             TextField(Self.EMPTY_STRING, text: self.$value)
@@ -40,11 +37,11 @@ struct TextFieldCustom: View {
                 .padding(.vertical  ,  5)
                 .textFieldStyle(.plain)
                 .font(.system(size: 14))
-                .foregroundStyle(self.colorSet.text)
+                .foregroundStyle(Color.textField.text)
                 .background {
                     RoundedRectangle(cornerRadius: 5)
-                        .stroke(self.colorSet.border, lineWidth: 3)
-                        .fill(self.colorSet.background)
+                        .stroke(Color.textField.border, lineWidth: 3)
+                        .fill(Color.textField.background)
                 }
         }
     }
