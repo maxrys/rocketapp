@@ -110,8 +110,7 @@ struct ProfilePanelForChange: View {
 
                     StepperCustom(
                         self.profiles.current.getBinding(\.zoom),
-                        in: 0.5 ... 2.0, step: 0.1,
-                        colorSet: Color.ctrlPanel.stepper
+                        in: 0.5 ... 2.0, step: 0.1
                     )
 
                 }
@@ -126,8 +125,7 @@ struct ProfilePanelForChange: View {
 
                     StepperCustom(
                         self.profiles.current.getBinding(\.spacing),
-                        in: 0 ... UInt(ThisApp.CELL_SIZE), step: 5,
-                        colorSet: Color.ctrlPanel.stepper
+                        in: 0 ... UInt(ThisApp.CELL_SIZE), step: 5
                     )
 
                 }
@@ -149,8 +147,7 @@ struct ProfilePanelForChange: View {
                 StepperCustom(
                     self.profiles.current.getBinding(\.iconOnHoverZoom),
                     in: ThisApp.ICON_ON_HOVER_ZOOM_MIN ...
-                        ThisApp.ICON_ON_HOVER_ZOOM_MAX, step: 0.1,
-                    colorSet: Color.ctrlPanel.stepper
+                        ThisApp.ICON_ON_HOVER_ZOOM_MAX, step: 0.1
                 )
                 .scaleEffect(0.7)
                 .padding(.horizontal, -18)

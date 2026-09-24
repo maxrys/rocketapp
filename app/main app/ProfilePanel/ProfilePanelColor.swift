@@ -7,25 +7,25 @@ import SwiftUI
 
 extension Color {
 
-    struct ProfilePanelColorSet {
+    enum ProfilePanelColorSet {
 
-        struct PickerColorSet {
-            public let text                   = Color("color Profile Panel PickerCustom Text")
-            public let border                 = Color("color Profile Panel PickerCustom Border")
-            public let background             = Color("color Profile Panel PickerCustom Background")
-            public let itemText               = Color("color Profile Panel PickerCustom Item Text")
-            public let itemBackground         = Color("color Profile Panel PickerCustom Item Background")
-            public let itemHoveringBackground = Color.accentColor.opacity(0.2)
-            public let itemSelectedBackground = Color.accentColor.opacity(0.5)
+        enum PickerColorSet {
+            static let text                   = Color("color Profile Panel PickerCustom Text")
+            static let border                 = Color("color Profile Panel PickerCustom Border")
+            static let background             = Color("color Profile Panel PickerCustom Background")
+            static let itemText               = Color("color Profile Panel PickerCustom Item Text")
+            static let itemBackground         = Color("color Profile Panel PickerCustom Item Background")
+            static let itemHoveringBackground = Color.accentColor.opacity(0.2)
+            static let itemSelectedBackground = Color.accentColor.opacity(0.5)
         }
 
-        public let titleText        = Color("color Profile Panel Title Text")
-        public let groupBackground  = Color("color Profile Panel Group Background")
-        public let buttonText       = Color("color Profile Panel Button Text")
-        public let buttonBackground = Color("color Profile Panel Button Background")
-        public let picker           = PickerColorSet()
+        static let titleText        = Color("color Profile Panel Title Text")
+        static let groupBackground  = Color("color Profile Panel Group Background")
+        static let buttonText       = Color("color Profile Panel Button Text")
+        static let buttonBackground = Color("color Profile Panel Button Background")
+        static let picker           = PickerColorSet.self
     }
 
-    static let profilePanel = ProfilePanelColorSet()
+    static let profilePanel = ProfilePanelColorSet.self
 
 }

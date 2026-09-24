@@ -7,8 +7,6 @@ import SwiftUI
 
 struct TextFieldCustom: View {
 
-    typealias ColorSet = Color.TextFieldCustomColorSet
-
     static let EMPTY_STRING = ""
 
     @Binding private var value: String

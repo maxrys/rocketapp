@@ -7,24 +7,19 @@ import SwiftUI
 
 struct StepperCustom<T>: View where T: Numeric & Comparable {
 
-    typealias ColorSet = Color.CtrlPanelColorSet.StepperColorSet
-
     @Binding private var value: T
 
     private let range: ClosedRange<T>
     private let step: T
-    private let colorSet: ColorSet
 
     init(
         _ value: Binding<T>,
         in range: ClosedRange<T>,
-        step: T,
-        colorSet: ColorSet = Color.ctrlPanel.stepper
+        step: T
     ) {
         self._value = value
         self.range = range
         self.step = step
-        self.colorSet = colorSet
     }
 
     public var body: some View {
@@ -54,7 +49,7 @@ struct StepperCustom<T>: View where T: Numeric & Comparable {
             Text(formattedValue)
                 .font(.system(size: 16, design: .monospaced))
                 .lineLimit(1)
-                .foregroundStyle(self.colorSet.valueText)
+                .foregroundStyle(Color.ctrlPanel.stepper.valueText)
                 .frame(minWidth: 30)
 
             self.ButtonView(image: Image(systemName: "plus.circle")) {
@@ -69,15 +64,15 @@ struct StepperCustom<T>: View where T: Numeric & Comparable {
 
         }
         .padding(5)
-        .background(self.colorSet.groupBackground)
+        .background(Color.ctrlPanel.stepper.groupBackground)
         .clipShape(Capsule())
     }
 
     @ViewBuilder private func ButtonView(image: Image, onClick: @escaping () -> Void) -> some View {
         ButtonRound(
             label     : { image },
-            foreground: { self.colorSet.buttonText },
-            background: { self.colorSet.buttonBackground },
+            foreground: { Color.ctrlPanel.stepper.buttonText },
+            background: { Color.ctrlPanel.stepper.buttonBackground },
             size: 25.0,
             onClick: onClick
         )
