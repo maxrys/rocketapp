@@ -68,26 +68,24 @@ struct AuditSequenceIterator: AsyncIteratorProtocol {
     }
 
     func payloadStep(info: AuditStepInfo) async {
-        Task.detached {
-            let (cellID, cellValue) = info.pair
-            switch cellValue {
+        let (cellID, cellValue) = info.pair
+        switch cellValue {
 
-                case .main(let appValueOld):
-                    if let appValueNew = AppValue(appValueOld.path) { if (appValueNew != appValueOld) {
-                              _ = await CellValue.main(appValueNew).modelInsert(cellID, profileID)
-                    }} else { _ = await CellValue                  .modelDelete(cellID, profileID) }
+            case .main(let appValueOld):
+                if let appValueNew = AppValue(appValueOld.path) { if (appValueNew != appValueOld) {
+                          _ = CellValue.main(appValueNew).modelInsert(cellID, profileID)
+                }} else { _ = CellValue                  .modelDelete(cellID, profileID) }
 
-                case .mini(let miniGridOld):
-                    var miniGridNew = MiniGridValue()
-                    if let appValueOld = miniGridOld.cell1 { miniGridNew.cell1 = AppValue(appValueOld.path) }
-                    if let appValueOld = miniGridOld.cell2 { miniGridNew.cell2 = AppValue(appValueOld.path) }
-                    if let appValueOld = miniGridOld.cell3 { miniGridNew.cell3 = AppValue(appValueOld.path) }
-                    if let appValueOld = miniGridOld.cell4 { miniGridNew.cell4 = AppValue(appValueOld.path) }
-                    if (!miniGridNew.isEmpty) { if (miniGridNew != miniGridOld) {
-                              _ = await CellValue.mini(miniGridNew).modelInsert(cellID, profileID)
-                    }} else { _ = await CellValue                  .modelDelete(cellID, profileID) }
+            case .mini(let miniGridOld):
+                var miniGridNew = MiniGridValue()
+                if let appValueOld = miniGridOld.cell1 { miniGridNew.cell1 = AppValue(appValueOld.path) }
+                if let appValueOld = miniGridOld.cell2 { miniGridNew.cell2 = AppValue(appValueOld.path) }
+                if let appValueOld = miniGridOld.cell3 { miniGridNew.cell3 = AppValue(appValueOld.path) }
+                if let appValueOld = miniGridOld.cell4 { miniGridNew.cell4 = AppValue(appValueOld.path) }
+                if (!miniGridNew.isEmpty) { if (miniGridNew != miniGridOld) {
+                          _ = CellValue.mini(miniGridNew).modelInsert(cellID, profileID)
+                }} else { _ = CellValue                  .modelDelete(cellID, profileID) }
 
-            }
         }
     }
 
