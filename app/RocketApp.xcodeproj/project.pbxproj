@@ -554,6 +554,7 @@
 				Base,
 				ru,
 				"be-BY",
+				uk,
 			);
 			mainGroup = 508150582E81330E00E12175;
 			minimizedProjectReferenceProxies = 1;
