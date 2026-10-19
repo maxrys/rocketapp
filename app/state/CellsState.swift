@@ -114,13 +114,8 @@ import SwiftData
 
     func audit() {
         Task {
-            await MainActor.run {
-                self.isAuditInProgress = true
-                self.auditProgress = 0
-                self.auditReport.removeAll()
-            }
-            for await result in AuditSequence(profileID: self.profileID) {
-                await MainActor.run {
+            let process: () async -> Void = {
+                for await result in AuditSequence(profileID: self.profileID) {
                     self.auditProgress = result.progress
                     switch result.pair.cellValue {
 
@@ -149,14 +144,24 @@ import SwiftData
                     )
                 }
             }
-            try? await Task.sleep(
+
+            self.isAuditInProgress = true
+            self.auditProgress = 0
+            self.auditReport.removeAll()
+
+            async let processResult: Void = await process()
+            async let reliableDelay: Void = await Task.sleep(
                 nanoseconds: 2_000_000_000
             )
-            await MainActor.run {
-                self.isAuditInProgress = false
-                self.auditReport.removeAll()
-                self.reloadCache()
-            }
+
+            let _ = try? await (
+                processResult,
+                reliableDelay
+            )
+
+            self.isAuditInProgress = false
+            self.auditReport.removeAll()
+            self.reloadCache()
         }
     }
 

@@ -14,10 +14,11 @@ struct ButtonCustom: View {
     private let icon: Image?
     private let colorStyle: Color.ButtonCustomStyle
     private let fixedColorScheme: ColorScheme?
-    private let isFlat: Bool
     private let font: Font
     private let padding: EdgeInsets
     private let flexibility: Flexibility
+    private let isTextTrimming: Bool
+    private let isFlat: Bool
     private let onClick: () -> Void
 
     init(
@@ -28,6 +29,7 @@ struct ButtonCustom: View {
         font: Font = .system(size: 12.5, weight: .regular),
         padding: EdgeInsets = .init(top: 6, leading: 12, bottom: 6, trailing: 12),
         flexibility: Flexibility = .none,
+        isTextTrimming: Bool = true,
         isFlat: Bool = false,
         onClick: @escaping () -> Void = { }
     ) {
@@ -35,10 +37,11 @@ struct ButtonCustom: View {
         self.icon = icon
         self.colorStyle = colorStyle
         self.fixedColorScheme = fixedColorScheme
-        self.isFlat = isFlat
         self.font = font
         self.padding = padding
         self.flexibility = flexibility
+        self.isTextTrimming = isTextTrimming
+        self.isFlat = isFlat
         self.onClick = onClick
     }
 
@@ -50,6 +53,7 @@ struct ButtonCustom: View {
 
     @ViewBuilder private func MainView() -> some View {
         Button { self.onClick() } label: {
+            let shape = RoundedRectangle(cornerRadius: 5)
             HStack(spacing: 5) {
                 self.IconView()
                 self.TextView()
@@ -59,13 +63,13 @@ struct ButtonCustom: View {
             .padding(self.padding)
             .background(
                 (self.isFlat ?
-                    AnyView(RoundedRectangle(cornerRadius: 5).fill(self.colorStyle.background)) :
-                    AnyView(RoundedRectangle(cornerRadius: 5).fill(self.colorStyle.background.gradient))
+                    AnyView(shape.fill(self.colorStyle.background)) :
+                    AnyView(shape.fill(self.colorStyle.background.gradient))
                 )
             )
-            .clipShape   (              RoundedRectangle(cornerRadius: 5))
-            .contentShape(              RoundedRectangle(cornerRadius: 5))
-            .contentShape(.focusEffect, RoundedRectangle(cornerRadius: 5))
+            .clipShape   (              shape)
+            .contentShape(              shape)
+            .contentShape(.focusEffect, shape)
             .shadow(
                 color: self.colorScheme == .dark ?
                     .black.opacity(1.0) :
@@ -82,6 +86,7 @@ struct ButtonCustom: View {
         if let text = self.text {
             Text(text)
                 .lineLimit(1)
+                .fixedSize(horizontal: !self.isTextTrimming, vertical: false)
                 .font(self.font)
         }
     }
@@ -100,37 +105,42 @@ struct ButtonCustom: View {
 /* ########################## PREVIEW ########################## */
 /* ############################################################# */
 
-#Preview {
-    VStack(spacing: 20) {
+struct ButtonCustom_Previews: PreviewProvider {
+    static let LONG_TEXT = "long long long long long long long long long long long long long long text"
+    static public var previews: some View {
+        VStack(spacing: 20) {
 
-        VStack {
-            Text("flexibility").font(.headline)
-            ButtonCustom()
-            ButtonCustom(flexibility: .none)
-            ButtonCustom(flexibility: .size(100))
-            ButtonCustom(flexibility: .infinity)
+            VStack {
+                Text("flexibility").font(.headline)
+                ButtonCustom()
+                ButtonCustom(flexibility: .none)
+                ButtonCustom(flexibility: .size(100))
+                ButtonCustom(flexibility: .infinity)
+                ButtonCustom(Self.LONG_TEXT)
+                ButtonCustom(Self.LONG_TEXT, isTextTrimming: false)
+            }
+
+            VStack {
+                Text("icon + text").font(.headline)
+                ButtonCustom("text")
+                ButtonCustom(  nil , Image(systemName: "globe"))
+                ButtonCustom("text", Image(systemName: "globe"))
+            }
+
+            Previewer(axis: .horizontal, spacing: 10, padding: 20) {
+                ButtonCustom(colorStyle: .accent)
+                ButtonCustom(colorStyle: .danger)
+                ButtonCustom(colorStyle: .common)
+                ButtonCustom(colorStyle: .common).disabled(true)
+                ButtonCustom(colorStyle: .custom(text: .white, background: .orange))
+            }.background(
+                Rectangle()
+                    .fill(Color.NS[.windowBackgroundColor])
+                    .shadow(radius: 5)
+            )
+
         }
-
-        VStack {
-            Text("icon + text").font(.headline)
-            ButtonCustom("text")
-            ButtonCustom(  nil , Image(systemName: "globe"))
-            ButtonCustom("text", Image(systemName: "globe"))
-        }
-
-        Previewer(axis: .horizontal, spacing: 10, padding: 20) {
-            ButtonCustom(colorStyle: .accent)
-            ButtonCustom(colorStyle: .danger)
-            ButtonCustom(colorStyle: .common)
-            ButtonCustom(colorStyle: .common).disabled(true)
-            ButtonCustom(colorStyle: .custom(text: .white, background: .orange))
-        }.background {
-            Rectangle()
-                .fill(Color.NS[\.windowBackgroundColor])
-                .shadow(radius: 5)
-        }
-
+        .frame(width: 210)
+        .padding(20)
     }
-    .frame(width: 210)
-    .padding(20)
 }
