@@ -25,6 +25,12 @@
             "state" : "translated",
             "value" : "RocketApp Запускатель"
           }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RocketApp Запускник"
+          }
         }
       }
     },
@@ -45,6 +51,12 @@
           }
         },
         "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RocketApp"
+          }
+        },
+        "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "RocketApp"
@@ -72,6 +84,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "© 2026 Рысевец Максим Владимирович"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2026 Рисівець Максим Володимирович"
           }
         }
       }
