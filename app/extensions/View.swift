@@ -67,10 +67,10 @@ extension View {
 
     @ViewBuilder func windowChamelionBackground(
         windowID                   : String? = nil,
-        backgroundTint             : Color = .NS[\.windowBackgroundColor].opacity(0.7),
-        backgroundTintDark         : Color = .NS[\.windowBackgroundColor].opacity(0.7),
-        backgroundColorFallback    : Color = .NS[\.windowBackgroundColor],
-        backgroundColorDarkFallback: Color = .NS[\.windowBackgroundColor],
+        backgroundTint             : Color = .NS[.windowBackgroundColor].opacity(0.7),
+        backgroundTintDark         : Color = .NS[.windowBackgroundColor].opacity(0.7),
+        backgroundColorFallback    : Color = .NS[.windowBackgroundColor],
+        backgroundColorDarkFallback: Color = .NS[.windowBackgroundColor],
         isIgnoreSafeArea: Bool = true
     ) -> some View {
         self.ignoresSafeArea(
@@ -85,7 +85,7 @@ extension View {
                 )
             )
             .onAppear {
-                if let windowID, let window = NSWindow.get(windowID) {
+                if let windowID = windowID, let window = NSWindow.get(windowID) {
                     window.backgroundColor = .clear
                     window.alphaValue = 1.0
                 }

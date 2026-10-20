@@ -7,13 +7,13 @@ import SwiftUI
 
 extension Color {
 
-    struct TextFieldCustomColorSet {
-        public let titleText  = Color("color TextFieldCustom Title Text")
-        public let text       = Color("color TextFieldCustom Text")
-        public let border     = Color("color TextFieldCustom Border")
-        public let background = Color("color TextFieldCustom Background")
+    enum TextFieldCustomColorSet {
+        static let titleText  = Color("color TextFieldCustom Title Text")
+        static let text       = Color("color TextFieldCustom Text")
+        static let border     = Color("color TextFieldCustom Border")
+        static let background = Color("color TextFieldCustom Background")
     }
 
-    static let textField = TextFieldCustomColorSet()
+    static let textField = TextFieldCustomColorSet.self
 
 }
