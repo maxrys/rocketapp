@@ -26,7 +26,7 @@ struct ProfilePanelForAppend: View {
                 value: self.$title
             ).onPressEnter { self.onAppendProfile() }
 
-            HStack(spacing: 10) {
+            VStack(spacing: 10) {
 
                 ButtonCustom(
                     NSLocalizedString("clone", comment: ""),
@@ -36,6 +36,17 @@ struct ProfilePanelForAppend: View {
                     flexibility: .infinity,
                     isFlat: false,
                     onClick: { self.onCloneProfile() })
+                .disabled(self.title.isEmpty)
+
+                ButtonCustom(
+                    NSLocalizedString("append with default apps", comment: ""),
+                    colorStyle: .common,
+                    font: .system(size: 14, weight: .regular),
+                    padding: .init(top: 10, leading: 20, bottom: 10, trailing: 20),
+                    flexibility: .infinity,
+                    isFlat: false,
+                    onClick:         { self.onAppendWithDefAppsProfile() })
+                .onPressEnterOrSpace { self.onAppendWithDefAppsProfile() }
                 .disabled(self.title.isEmpty)
 
                 ButtonCustom(
@@ -83,6 +94,24 @@ struct ProfilePanelForAppend: View {
             if (self.profiles.setCurrent(profile.ID)) {
                 self.isShowPanel = false
             }
+        }
+    }
+
+    private func onAppendWithDefAppsProfile() {
+        let embeddedApps = PL_embeddedApps.selectList()
+        for defApps in PL_defaultProfileApps.selectList() {
+            let id = defApps.key
+            let path = embeddedApps[id]
+            let rowNum = defApps.value.rowNum
+            let colNum = defApps.value.colNum
+            let sector = defApps.value.sector
+            print(
+                "\(id)\n" +
+                "    \(path!)\n" +
+                "    rowNum = \(rowNum)\n" +
+                "    colNum = \(colNum)\n" +
+                "    sector = \(sector)"
+            )
         }
     }
 

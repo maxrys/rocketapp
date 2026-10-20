@@ -48,6 +48,9 @@
         }
       }
     },
+    "append with default apps" : {
+
+    },
     "Background" : {
       "localizations" : {
         "be-BY" : {

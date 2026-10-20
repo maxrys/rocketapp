@@ -55,6 +55,8 @@
 		50C06AF02F23E467008EE619 /* TabCustom_Spacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C06AEF2F23E467008EE619 /* TabCustom_Spacer.swift */; };
 		50C06AF12F23E467008EE619 /* TabCustom_Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C06AEE2F23E467008EE619 /* TabCustom_Item.swift */; };
 		50C06AF22F23E467008EE619 /* TabCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C06AED2F23E467008EE619 /* TabCustom.swift */; };
+		50CABEFB308666E50033BA16 /* PL_defaultProfileApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CABEFA308666E50033BA16 /* PL_defaultProfileApps.swift */; };
+		50CABEFD308667990033BA16 /* PropertyListSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CABEFC308667990033BA16 /* PropertyListSerialization.swift */; };
 		50CE72272EE0542300FE3282 /* info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 50CE72262EE0542300FE3282 /* info.plist */; };
 		50CE72292EE0561B00FE3282 /* UTType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE72282EE0561900FE3282 /* UTType.swift */; };
 		50CE722B2EE0E97F00FE3282 /* AppDragValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE722A2EE0E97F00FE3282 /* AppDragValue.swift */; };
@@ -80,6 +82,9 @@
 		50CF30D22FB4AFB200A9319D /* ButtonInsert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CF30D12FB4AFB000A9319D /* ButtonInsert.swift */; };
 		50D28F9A2F7AB036006A7304 /* TabCustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D28F992F7AB036006A7304 /* TabCustomColors.swift */; };
 		50D28FF52F845121006A7304 /* AuditSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D28FF42F845120006A7304 /* AuditSequence.swift */; };
+		50D6EC9E3086A2630090411A /* embeddedApps.plist in Resources */ = {isa = PBXBuildFile; fileRef = 50D6EC9D3086A2630090411A /* embeddedApps.plist */; };
+		50D6ECA03086A3A40090411A /* PL_embeddedApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D6EC9F3086A3A40090411A /* PL_embeddedApps.swift */; };
+		50D6ECA33086A8B70090411A /* defaultProfileApps.plist in Resources */ = {isa = PBXBuildFile; fileRef = 50D6ECA23086A8B70090411A /* defaultProfileApps.plist */; };
 		50E4B0C92FF1876A008D625B /* HVStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E4B0C82FF1876A008D625B /* HVStack.swift */; };
 		50EE8B892ECC888E002DFEA5 /* ColorPickerHSBO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8B882ECC888E002DFEA5 /* ColorPickerHSBO.swift */; };
 		50EE8B8B2ECC8953002DFEA5 /* GraphicsContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8B8A2ECC8953002DFEA5 /* GraphicsContext.swift */; };
@@ -155,6 +160,8 @@
 		50C06AED2F23E467008EE619 /* TabCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCustom.swift; sourceTree = "<group>"; };
 		50C06AEE2F23E467008EE619 /* TabCustom_Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCustom_Item.swift; sourceTree = "<group>"; };
 		50C06AEF2F23E467008EE619 /* TabCustom_Spacer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCustom_Spacer.swift; sourceTree = "<group>"; };
+		50CABEFA308666E50033BA16 /* PL_defaultProfileApps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PL_defaultProfileApps.swift; sourceTree = "<group>"; };
+		50CABEFC308667990033BA16 /* PropertyListSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListSerialization.swift; sourceTree = "<group>"; };
 		50CE72262EE0542300FE3282 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
 		50CE72282EE0561900FE3282 /* UTType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTType.swift; sourceTree = "<group>"; };
 		50CE722A2EE0E97F00FE3282 /* AppDragValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDragValue.swift; sourceTree = "<group>"; };
@@ -180,6 +187,9 @@
 		50CF30D12FB4AFB000A9319D /* ButtonInsert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonInsert.swift; sourceTree = "<group>"; };
 		50D28F992F7AB036006A7304 /* TabCustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCustomColors.swift; sourceTree = "<group>"; };
 		50D28FF42F845120006A7304 /* AuditSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditSequence.swift; sourceTree = "<group>"; };
+		50D6EC9D3086A2630090411A /* embeddedApps.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = embeddedApps.plist; sourceTree = "<group>"; };
+		50D6EC9F3086A3A40090411A /* PL_embeddedApps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PL_embeddedApps.swift; sourceTree = "<group>"; };
+		50D6ECA23086A8B70090411A /* defaultProfileApps.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = defaultProfileApps.plist; sourceTree = "<group>"; };
 		50E4B0C82FF1876A008D625B /* HVStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HVStack.swift; sourceTree = "<group>"; };
 		50EE8B882ECC888E002DFEA5 /* ColorPickerHSBO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerHSBO.swift; sourceTree = "<group>"; };
 		50EE8B8A2ECC8953002DFEA5 /* GraphicsContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsContext.swift; sourceTree = "<group>"; };
@@ -252,6 +262,7 @@
 				50EE8BB32ED5C3CD002DFEA5 /* NSImage.swift */,
 				508D6CEF2EA8D22400885E95 /* NSWindow.swift */,
 				5013DB6B2E9D892800BEDC5E /* Numeric.swift */,
+				50CABEFC308667990033BA16 /* PropertyListSerialization.swift */,
 				5075015F2EF9593400624409 /* ResultBuilder.swift */,
 				501D4DF02EC120CC00919AB9 /* Timer.swift */,
 				50CE72282EE0561900FE3282 /* UTType.swift */,
@@ -365,6 +376,7 @@
 				5013DB622E9D6F7000BEDC5E /* extensions */,
 				5013DB6A2E9D827F00BEDC5E /* components */,
 				505849562E95147200B9F421 /* model */,
+				50D6ECA13086A3E50090411A /* pLists */,
 				50EE8BA02ED46624002DFEA5 /* state */,
 				5013DB612E9D6EF100BEDC5E /* main app */,
 				5013DB602E9D6EC900BEDC5E /* test */,
@@ -453,6 +465,17 @@
 				50CF30CD2FB351A600A9319D /* СhameleonView.swift */,
 			);
 			path = "СhameleonView";
+			sourceTree = "<group>";
+		};
+		50D6ECA13086A3E50090411A /* pLists */ = {
+			isa = PBXGroup;
+			children = (
+				50D6EC9F3086A3A40090411A /* PL_embeddedApps.swift */,
+				50D6EC9D3086A2630090411A /* embeddedApps.plist */,
+				50CABEFA308666E50033BA16 /* PL_defaultProfileApps.swift */,
+				50D6ECA23086A8B70090411A /* defaultProfileApps.plist */,
+			);
+			path = pLists;
 			sourceTree = "<group>";
 		};
 		50EE8B9F2ED1795B002DFEA5 /* types */ = {
@@ -583,10 +606,12 @@
 			files = (
 				50CE72272EE0542300FE3282 /* info.plist in Resources */,
 				5013DB712E9E6EA900BEDC5E /* Assets.xcassets in Resources */,
+				50D6EC9E3086A2630090411A /* embeddedApps.plist in Resources */,
 				50CEA0A92F4C576F001006CF /* InfoPlist.xcstrings in Resources */,
 				50CE723D2EE9687300FE3282 /* Localizable.xcstrings in Resources */,
 				50CE9FCE2F471841001006CF /* Assets.xcassets in Resources */,
 				50CE9FC92F47175C001006CF /* Assets.xcassets in Resources */,
+				50D6ECA33086A8B70090411A /* defaultProfileApps.plist in Resources */,
 				50CE9FD32F47191F001006CF /* Assets.xcassets in Resources */,
 				50CE9FC42F47169A001006CF /* Assets.xcassets in Resources */,
 			);
@@ -624,9 +649,11 @@
 				50EE8B9B2ED174FF002DFEA5 /* MiniGridValue.swift in Sources */,
 				5013DB6D2E9D892800BEDC5E /* Numeric.swift in Sources */,
 				50CE9FC22F471679001006CF /* TextFieldCustomColor.swift in Sources */,
+				50CABEFB308666E50033BA16 /* PL_defaultProfileApps.swift in Sources */,
 				50447F692EEE9A5700C9B8D1 /* ProfilePanelForChange.swift in Sources */,
 				507501412EF2117100624409 /* ProgressCustom.swift in Sources */,
 				508D6D152EB551A800885E95 /* Dictionary.swift in Sources */,
+				50D6ECA03086A3A40090411A /* PL_embeddedApps.swift in Sources */,
 				50EE8BB02ED5A4B4002DFEA5 /* Bool.swift in Sources */,
 				50CF30D02FB4A9F200A9319D /* Previewer.swift in Sources */,
 				508D6D0C2EB3597000885E95 /* TextFieldCustom.swift in Sources */,
@@ -666,6 +693,7 @@
 				505849632E9534BC00B9F421 /* ModelContainer.swift in Sources */,
 				50CE72382EE6B9D400FE3282 /* NSApplication.swift in Sources */,
 				50CE72562EED6F5900FE3282 /* GridCustom.swift in Sources */,
+				50CABEFD308667990033BA16 /* PropertyListSerialization.swift in Sources */,
 				505507302FC59DC8007DB93D /* ShadowLine.swift in Sources */,
 				505849642E9534BC00B9F421 /* ModelCell.swift in Sources */,
 				5013DB5D2E9D092900BEDC5E /* ModelProfile.swift in Sources */,
