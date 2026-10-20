@@ -114,14 +114,8 @@ import SwiftData
 
     func audit() {
         Task {
-            await MainActor.run {
-                self.isAuditInProgress = true
-                self.auditProgress = 0
-                self.auditReport.removeAll()
-            }
-            for await result in AuditSequence(profileID: self.profileID) {
-                await MainActor.run {
-                    self.auditProgress = result.progress
+            let process: () async -> Void = {
+                for await result in AuditSequence(profileID: self.profileID) {
                     switch result.pair.cellValue {
 
                         case .main(let appValue):
@@ -147,11 +141,28 @@ import SwiftData
                         "\(Int(result.progress * 100))%) " +
                         "for cell with ID = \"\(result.pair.cellID)\" was done"
                     )
+                    await MainActor.run {
+                        self.auditProgress = result.progress
+                    }
                 }
             }
-            try? await Task.sleep(
+
+            await MainActor.run {
+                self.isAuditInProgress = true
+                self.auditProgress = 0
+                self.auditReport.removeAll()
+            }
+
+            async let processResult: Void = await process()
+            async let reliableDelay: Void = await Task.sleep(
                 nanoseconds: 2_000_000_000
             )
+
+            let _ = try? await (
+                processResult,
+                reliableDelay
+            )
+
             await MainActor.run {
                 self.isAuditInProgress = false
                 self.auditReport.removeAll()
