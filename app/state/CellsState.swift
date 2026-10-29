@@ -11,37 +11,37 @@ import SwiftData
 
     typealias SELF = CellsState
 
-    public static var shared: CellsState!
+    static public private(set) var shared: CellsState!
+
     public private(set) var isAuditInProgress = false
     public private(set) var auditProgress: Double = 0
     public private(set) var auditReport: [String] = []
+    public private(set) var data = CellsDataSource()
 
     private var profileID: ProfileID
-    private var cache = CellsDataSource()
 
-    @ObservationIgnored public var data: CellsDataSource { self.cache }
-    @ObservationIgnored public var isEmpty: Bool { self.cache.isEmpty }
+    @ObservationIgnored public var isEmpty: Bool {
+        self.data.isEmpty
+    }
 
     private init(profileID: ProfileID) {
         self.profileID = profileID
-        self.reloadCache()
+        self.reload()
     }
 
     static func initShared(profileID: ProfileID) -> SELF {
-        if let singleton = SELF.shared {
-            return singleton
-        } else {
-            SELF.shared = SELF(profileID: profileID)
-            return SELF.shared
-        }
+        if let shared = SELF.shared { return shared }
+        let state = SELF(profileID: profileID)
+        SELF.shared = state
+        return state
     }
 
     static func initMock(profileID: ProfileID) -> SELF {
         SELF(profileID: profileID)
     }
 
-    func reloadCache() {
-        self.cache = CellValue.modelSelectMatrix(
+    func reload() {
+        self.data = CellValue.modelSelect(
             profileID: self.profileID
         )
     }
@@ -52,76 +52,74 @@ import SwiftData
 
     func setProfileID(_ profileID: ProfileID) {
         self.profileID = profileID
-        self.reloadCache()
+        self.reload()
     }
 
-    func select(_ ID: CellID.Value) -> CellValue? {
-        self.cache[ID]
+    func selectCellValue(_ cellID: CellIDValue) -> CellValue? {
+        self.data[cellID]
     }
 
-    func insertCellValue(_ ID: CellID.Value, _ cellValue: CellValue) {
+    func insertCellValue(_ cellID: CellIDValue, _ cellValue: CellValue) {
         switch cellValue {
             case .main, .mini:
-                self.cache[ID] = cellValue
+                self.data[cellID] = cellValue
                 Task {
-                    _ = cellValue.modelInsert(ID, self.profileID)
+                    _ = cellValue.modelInsert(cellID, self.profileID)
                 }
         }
     }
 
-    func insertAppValue(_ ID: CellID.Value, _ appValue: AppValue, to keyPath: CellValuePath? = nil) {
+    func deleteCellValue(_ cellID: CellIDValue) {
+        self.data[cellID] = nil
+        Task {
+            _ = CellValue.modelDelete(cellID, self.profileID)
+        }
+    }
+
+    func insertAppValue(_ cellID: CellIDValue, _ appValue: AppValue, to keyPath: CellValuePath? = nil) {
         if let keyPath {
-            switch self.select(ID) {
+            switch self.selectCellValue(cellID) {
                 case .none:
                     self.insertCellValue(
-                        ID, .mini(
+                        cellID, .mini(
                             .init(keyPath: keyPath, value: appValue)
                         )
                     )
                 case .mini(var miniGrid):
                     miniGrid[keyPath: keyPath] = appValue
                     self.insertCellValue(
-                        ID, .mini(miniGrid)
+                        cellID, .mini(miniGrid)
                     )
                 default: break
             }
         } else {
             self.insertCellValue(
-                ID, .main(appValue)
+                cellID, .main(appValue)
             )
         }
     }
 
-    func deleteCellValue(_ ID: CellID.Value) {
-        self.cache[ID] = nil
-        Task {
-            _ = CellValue.modelDelete(ID, self.profileID)
+    func deleteAppValue(_ cellID: CellIDValue, from keyPath: CellValuePath? = nil) {
+        if let keyPath {
+            if case .mini(var miniGrid) = self.selectCellValue(cellID) {
+                miniGrid[keyPath: keyPath] = nil
+                if (miniGrid.isEmpty)
+                     { self.deleteCellValue(cellID) }
+                else { self.insertCellValue(cellID, .mini(miniGrid)) }
+            }
+        } else {
+            self.deleteCellValue(cellID)
         }
     }
 
-    func deleteAppValue(_ ID: CellID.Value, from keyPath: CellValuePath? = nil) {
-        if let keyPath {
-            if case .mini(var miniGrid) = self.select(ID) {
-                miniGrid[keyPath: keyPath] = nil
-                if (miniGrid.isEmpty)
-                     { self.deleteCellValue(ID) }
-                else { self.insertCellValue(ID, .mini(miniGrid)) }
-            }
-        } else {
-            self.deleteCellValue(ID)
-        }
-    }
+    /* ############# */
+    /* ### audit ### */
+    /* ############# */
 
     func audit() {
         Task {
-            await MainActor.run {
-                self.isAuditInProgress = true
-                self.auditProgress = 0
-                self.auditReport.removeAll()
-            }
-            for await result in AuditSequence(profileID: self.profileID) {
-                await MainActor.run {
-                    self.auditProgress = result.progress
+            let process: () async -> Void = {
+                for await result in AuditSequence(profileID: self.profileID) {
                     switch result.pair.cellValue {
 
                         case .main(let appValue):
@@ -147,29 +145,50 @@ import SwiftData
                         "\(Int(result.progress * 100))%) " +
                         "for cell with ID = \"\(result.pair.cellID)\" was done"
                     )
+                    await MainActor.run {
+                        self.auditProgress = result.progress
+                    }
                 }
             }
-            try? await Task.sleep(
+
+            await MainActor.run {
+                self.isAuditInProgress = true
+                self.auditProgress = 0
+                self.auditReport.removeAll()
+            }
+
+            async let processResult: Void = await process()
+            async let reliableDelay: Void = await Task.sleep(
                 nanoseconds: 2_000_000_000
             )
+
+            let _ = try? await (
+                processResult,
+                reliableDelay
+            )
+
             await MainActor.run {
                 self.isAuditInProgress = false
                 self.auditReport.removeAll()
-                self.reloadCache()
+                self.reload()
             }
         }
     }
 
-    func onDrag(_ ID: CellID.Value, from keyPathFrom: CellValuePath? = nil) -> NSItemProvider {
+    /* ################# */
+    /* ### Drag&Drop ### */
+    /* ################# */
+
+    func onDrag(_ cellID: CellIDValue, from keyPathFrom: CellValuePath? = nil) -> NSItemProvider {
         NSItemProvider(
             object: AppDragValue(
-                ID: ID,
+                cellID: cellID,
                 keyPath: keyPathFrom
             )
         )
     }
 
-    func onDrop(_ ID: CellID.Value, _ providers: [NSItemProvider], to keyPathTo: CellValuePath? = nil) -> Bool {
+    func onDrop(_ cellID: CellIDValue, _ providers: [NSItemProvider], to keyPathTo: CellValuePath? = nil) -> Bool {
         if let provider = providers.first {
             provider.loadItem(forTypeIdentifier: "public.item", options: nil) { (item, error) in
                 if let error = error {
@@ -179,7 +198,7 @@ import SwiftData
                 Task { @MainActor in
                     if let appURL = item as? URL {
                         if let appValue = AppValue(appURL) {
-                            self.insertAppValue(ID, appValue, to: keyPathTo)
+                            self.insertAppValue(cellID, appValue, to: keyPathTo)
                         }
                     }
                 }
@@ -191,7 +210,7 @@ import SwiftData
                 }
                 Task { @MainActor in
                     if let appDragValue = object as? AppDragValue {
-                        if let cellValueFrom = self.select(appDragValue.ID) {
+                        if let cellValueFrom = self.selectCellValue(appDragValue.cellID) {
                             switch appDragValue.from {
                                 case .`mini_#1`, .`mini_#2`, .`mini_#3`, .`mini_#4`:
                                     if case .mini(var miniGridFrom) = cellValueFrom {
@@ -199,16 +218,16 @@ import SwiftData
                                             if let appValueFrom = miniGridFrom[keyPath: keyPathFrom] {
                                                 miniGridFrom[keyPath: keyPathFrom] = nil
                                                 if (miniGridFrom.isEmpty)
-                                                     { self.deleteCellValue(appDragValue.ID) }
-                                                else { self.insertCellValue(appDragValue.ID, .mini(miniGridFrom)) }
-                                                self.insertAppValue(ID, appValueFrom, to: keyPathTo)
+                                                     { self.deleteCellValue(appDragValue.cellID) }
+                                                else { self.insertCellValue(appDragValue.cellID, .mini(miniGridFrom)) }
+                                                self.insertAppValue(cellID, appValueFrom, to: keyPathTo)
                                             }
                                         }
                                     }
                                 case .`main_#0`:
                                     if case .main(let appValueFrom) = cellValueFrom {
-                                        self.deleteCellValue(appDragValue.ID)
-                                        self.insertAppValue(ID, appValueFrom, to: keyPathTo)
+                                        self.deleteCellValue(appDragValue.cellID)
+                                        self.insertAppValue(cellID, appValueFrom, to: keyPathTo)
                                     }
                             }
                         }

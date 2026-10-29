@@ -22,49 +22,49 @@ struct Tests {
     }
 
     @Test func test_CellID() async throws {
-        #expect( CellID(rowNum: 0x00, colNum: 0x00).value == 0x0000 )
-        #expect( CellID(rowNum: 0x00, colNum: 0x0f).value == 0x000f )
-        #expect( CellID(rowNum: 0x00, colNum: 0xf0).value == 0x00f0 )
-        #expect( CellID(rowNum: 0x0f, colNum: 0x00).value == 0x0f00 )
-        #expect( CellID(rowNum: 0xf0, colNum: 0x00).value == 0xf000 )
+        #expect( CellIDValue(rowNum: 0x00, colNum: 0x00).raw == 0x0000 )
+        #expect( CellIDValue(rowNum: 0x00, colNum: 0x0f).raw == 0x000f )
+        #expect( CellIDValue(rowNum: 0x00, colNum: 0xf0).raw == 0x00f0 )
+        #expect( CellIDValue(rowNum: 0x0f, colNum: 0x00).raw == 0x0f00 )
+        #expect( CellIDValue(rowNum: 0xf0, colNum: 0x00).raw == 0xf000 )
 
-        #expect( CellID(rowNum: 0xff, colNum: 0xff).value == 0xffff )
-        #expect( CellID(rowNum: 0xff, colNum: 0xf0).value == 0xfff0 )
-        #expect( CellID(rowNum: 0xff, colNum: 0x0f).value == 0xff0f )
-        #expect( CellID(rowNum: 0xf0, colNum: 0xff).value == 0xf0ff )
-        #expect( CellID(rowNum: 0x0f, colNum: 0xff).value == 0x0fff )
+        #expect( CellIDValue(rowNum: 0xff, colNum: 0xff).raw == 0xffff )
+        #expect( CellIDValue(rowNum: 0xff, colNum: 0xf0).raw == 0xfff0 )
+        #expect( CellIDValue(rowNum: 0xff, colNum: 0x0f).raw == 0xff0f )
+        #expect( CellIDValue(rowNum: 0xf0, colNum: 0xff).raw == 0xf0ff )
+        #expect( CellIDValue(rowNum: 0x0f, colNum: 0xff).raw == 0x0fff )
     }
 
-    @Test func test_cellModelID() async throws {
-        #expect( CellModelID(ID: 0x000f, sector: 0x00).value == 0x000f00 + 0x00 )
-        #expect( CellModelID(ID: 0x00f0, sector: 0x00).value == 0x00f000 + 0x00 )
-        #expect( CellModelID(ID: 0x0f00, sector: 0x00).value == 0x0f0000 + 0x00 )
-        #expect( CellModelID(ID: 0xf000, sector: 0x00).value == 0xf00000 + 0x00 )
+    @Test func test_GridPlaceIDValue() async throws {
+        #expect( GridPlaceIDValue(cellID: CellIDValue(raw: 0x000f), sector: 0x00).raw == 0x000f00 + 0x00 )
+        #expect( GridPlaceIDValue(cellID: CellIDValue(raw: 0x00f0), sector: 0x00).raw == 0x00f000 + 0x00 )
+        #expect( GridPlaceIDValue(cellID: CellIDValue(raw: 0x0f00), sector: 0x00).raw == 0x0f0000 + 0x00 )
+        #expect( GridPlaceIDValue(cellID: CellIDValue(raw: 0xf000), sector: 0x00).raw == 0xf00000 + 0x00 )
 
-        #expect( CellModelID(ID: 0x000f, sector: 0x07).value == 0x000f00 + 0x07 )
-        #expect( CellModelID(ID: 0x00f0, sector: 0x07).value == 0x00f000 + 0x07 )
-        #expect( CellModelID(ID: 0x0f00, sector: 0x07).value == 0x0f0000 + 0x07 )
-        #expect( CellModelID(ID: 0xf000, sector: 0x07).value == 0xf00000 + 0x07 )
+        #expect( GridPlaceIDValue(cellID: CellIDValue(raw: 0x000f), sector: 0x07).raw == 0x000f00 + 0x07 )
+        #expect( GridPlaceIDValue(cellID: CellIDValue(raw: 0x00f0), sector: 0x07).raw == 0x00f000 + 0x07 )
+        #expect( GridPlaceIDValue(cellID: CellIDValue(raw: 0x0f00), sector: 0x07).raw == 0x0f0000 + 0x07 )
+        #expect( GridPlaceIDValue(cellID: CellIDValue(raw: 0xf000), sector: 0x07).raw == 0xf00000 + 0x07 )
 
-        #expect( CellModelID(ID: 0x000f, sector: 0x70).value == 0x000f00 + 0x70 )
-        #expect( CellModelID(ID: 0x00f0, sector: 0x70).value == 0x00f000 + 0x70 )
-        #expect( CellModelID(ID: 0x0f00, sector: 0x70).value == 0x0f0000 + 0x70 )
-        #expect( CellModelID(ID: 0xf000, sector: 0x70).value == 0xf00000 + 0x70 )
+        #expect( GridPlaceIDValue(cellID: CellIDValue(raw: 0x000f), sector: 0x70).raw == 0x000f00 + 0x70 )
+        #expect( GridPlaceIDValue(cellID: CellIDValue(raw: 0x00f0), sector: 0x70).raw == 0x00f000 + 0x70 )
+        #expect( GridPlaceIDValue(cellID: CellIDValue(raw: 0x0f00), sector: 0x70).raw == 0x0f0000 + 0x70 )
+        #expect( GridPlaceIDValue(cellID: CellIDValue(raw: 0xf000), sector: 0x70).raw == 0xf00000 + 0x70 )
 
-        #expect( CellModelID(decodeFrom: 0x0000000f00 + 0x00) == CellModelID(ID: 0x0000000f, sector: 0x00) )
-        #expect( CellModelID(decodeFrom: 0x000000f000 + 0x00) == CellModelID(ID: 0x000000f0, sector: 0x00) )
-        #expect( CellModelID(decodeFrom: 0x00000f0000 + 0x00) == CellModelID(ID: 0x00000f00, sector: 0x00) )
-        #expect( CellModelID(decodeFrom: 0x0000f00000 + 0x00) == CellModelID(ID: 0x0000f000, sector: 0x00) )
+        #expect( GridPlaceIDValue(raw: 0x0000000f00 + 0x00) == GridPlaceIDValue(cellID: CellIDValue(raw: 0x0000000f), sector: 0x00) )
+        #expect( GridPlaceIDValue(raw: 0x000000f000 + 0x00) == GridPlaceIDValue(cellID: CellIDValue(raw: 0x000000f0), sector: 0x00) )
+        #expect( GridPlaceIDValue(raw: 0x00000f0000 + 0x00) == GridPlaceIDValue(cellID: CellIDValue(raw: 0x00000f00), sector: 0x00) )
+        #expect( GridPlaceIDValue(raw: 0x0000f00000 + 0x00) == GridPlaceIDValue(cellID: CellIDValue(raw: 0x0000f000), sector: 0x00) )
 
-        #expect( CellModelID(decodeFrom: 0x0000000f00 + 0x07) == CellModelID(ID: 0x0000000f, sector: 0x07) )
-        #expect( CellModelID(decodeFrom: 0x000000f000 + 0x07) == CellModelID(ID: 0x000000f0, sector: 0x07) )
-        #expect( CellModelID(decodeFrom: 0x00000f0000 + 0x07) == CellModelID(ID: 0x00000f00, sector: 0x07) )
-        #expect( CellModelID(decodeFrom: 0x0000f00000 + 0x07) == CellModelID(ID: 0x0000f000, sector: 0x07) )
+        #expect( GridPlaceIDValue(raw: 0x0000000f00 + 0x07) == GridPlaceIDValue(cellID: CellIDValue(raw: 0x0000000f), sector: 0x07) )
+        #expect( GridPlaceIDValue(raw: 0x000000f000 + 0x07) == GridPlaceIDValue(cellID: CellIDValue(raw: 0x000000f0), sector: 0x07) )
+        #expect( GridPlaceIDValue(raw: 0x00000f0000 + 0x07) == GridPlaceIDValue(cellID: CellIDValue(raw: 0x00000f00), sector: 0x07) )
+        #expect( GridPlaceIDValue(raw: 0x0000f00000 + 0x07) == GridPlaceIDValue(cellID: CellIDValue(raw: 0x0000f000), sector: 0x07) )
 
-        #expect( CellModelID(decodeFrom: 0x0000000f00 + 0x70) == CellModelID(ID: 0x0000000f, sector: 0x70) )
-        #expect( CellModelID(decodeFrom: 0x000000f000 + 0x70) == CellModelID(ID: 0x000000f0, sector: 0x70) )
-        #expect( CellModelID(decodeFrom: 0x00000f0000 + 0x70) == CellModelID(ID: 0x00000f00, sector: 0x70) )
-        #expect( CellModelID(decodeFrom: 0x0000f00000 + 0x70) == CellModelID(ID: 0x0000f000, sector: 0x70) )
+        #expect( GridPlaceIDValue(raw: 0x0000000f00 + 0x70) == GridPlaceIDValue(cellID: CellIDValue(raw: 0x0000000f), sector: 0x70) )
+        #expect( GridPlaceIDValue(raw: 0x000000f000 + 0x70) == GridPlaceIDValue(cellID: CellIDValue(raw: 0x000000f0), sector: 0x70) )
+        #expect( GridPlaceIDValue(raw: 0x00000f0000 + 0x70) == GridPlaceIDValue(cellID: CellIDValue(raw: 0x00000f00), sector: 0x70) )
+        #expect( GridPlaceIDValue(raw: 0x0000f00000 + 0x70) == GridPlaceIDValue(cellID: CellIDValue(raw: 0x0000f000), sector: 0x70) )
     }
 
 }

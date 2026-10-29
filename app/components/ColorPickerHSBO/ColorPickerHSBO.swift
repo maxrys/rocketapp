@@ -252,13 +252,13 @@ struct ColorPickerHSBO: View {
         ColorPickerHSBO($pickerColorR).PopoverView()
             .background {
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.NS[\.windowBackgroundColor])
+                    .fill(Color.NS[.windowBackgroundColor])
                     .shadow(radius: 3)
             }.environment(\.colorScheme, .light)
         ColorPickerHSBO($pickerColorR).PopoverView()
             .background {
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.NS[\.windowBackgroundColor])
+                    .fill(Color.NS[.windowBackgroundColor])
                     .shadow(radius: 3)
             }.environment(\.colorScheme, .dark)
     }

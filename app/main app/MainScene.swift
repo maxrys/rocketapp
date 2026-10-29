@@ -65,7 +65,7 @@ struct MainScene: View, BackgroundColorProtocol {
             minWidth : self.isEditMode ? ThisApp.DEFAULT_WIN_FRAME_EDIT_MODE.w : self.frameMinSizeViewMode, maxWidth : .infinity,
             minHeight: self.isEditMode ? ThisApp.DEFAULT_WIN_FRAME_EDIT_MODE.h : self.frameMinSizeViewMode, maxHeight: .infinity
         )
-        .background(self.backgroundHSB().color)
+        .background(self.backgroundCurrent().color)
         .overlay(alignment: .topTrailing) {
             if (self.isEditMode == false) {
                 self.ButtonOpenSettingsView()
@@ -144,7 +144,7 @@ struct MainScene: View, BackgroundColorProtocol {
     @ViewBuilder fileprivate func ButtonOpenSettingsView() -> some View {
         ButtonRound(
             label     : { Image(systemName: "gearshape.circle") },
-            foreground: { self.backgroundAccentHSB(minOpacity: 0.5).color },
+            foreground: { self.backgroundCurrentAccent(minOpacity: 0.5).color },
             background: { Color.clear },
         ) { self.isEditMode = true }
     }

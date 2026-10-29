@@ -24,9 +24,9 @@ struct ProfilePanelForAppend: View {
             TextFieldCustom(
                 NSLocalizedString("Title", comment: ""),
                 value: self.$title
-            ).onPressEnter { self.onAppendProfile() }
+            ).onPressEnter { self.onAddProfile() }
 
-            HStack(spacing: 10) {
+            VStack(spacing: 10) {
 
                 ButtonCustom(
                     NSLocalizedString("clone", comment: ""),
@@ -39,14 +39,25 @@ struct ProfilePanelForAppend: View {
                 .disabled(self.title.isEmpty)
 
                 ButtonCustom(
-                    NSLocalizedString("append", comment: ""),
+                    NSLocalizedString("add with applications", comment: ""),
+                    colorStyle: .common,
+                    font: .system(size: 14, weight: .regular),
+                    padding: .init(top: 10, leading: 20, bottom: 10, trailing: 20),
+                    flexibility: .infinity,
+                    isFlat: false,
+                    onClick:         { self.onAddProfileWithApps() })
+                .onPressEnterOrSpace { self.onAddProfileWithApps() }
+                .disabled(true) /* self.title.isEmpty */
+
+                ButtonCustom(
+                    NSLocalizedString("add", comment: ""),
                     colorStyle: .accent,
                     font: .system(size: 14, weight: .regular),
                     padding: .init(top: 10, leading: 20, bottom: 10, trailing: 20),
                     flexibility: .infinity,
                     isFlat: false,
-                    onClick:         { self.onAppendProfile() })
-                .onPressEnterOrSpace { self.onAppendProfile() }
+                    onClick:         { self.onAddProfile() })
+                .onPressEnterOrSpace { self.onAddProfile() }
                 .disabled(self.title.isEmpty)
 
             }
@@ -76,7 +87,7 @@ struct ProfilePanelForAppend: View {
         if (self.profiles.insert(profile)) {
             Logger.customLog("The profile (ID: \(profile.ID)) has been cloned.")
             if (!cells.isEmpty) {
-                for (cellID, cellValue) in cells.flat {
+                for (cellID, cellValue) in cells {
                     _ = cellValue.modelInsert(cellID, profile.ID)
                 }
             }
@@ -86,7 +97,25 @@ struct ProfilePanelForAppend: View {
         }
     }
 
-    private func onAppendProfile() {
+    private func onAddProfileWithApps() {
+        let embeddedApps = PL_embeddedApps.selectList()
+        for defApps in PL_defaultProfileApps.selectList() {
+            let id = defApps.key
+            let path = embeddedApps[id]
+            let rowNum = defApps.value.rowNum
+            let colNum = defApps.value.colNum
+            let sector = defApps.value.sector
+            print(
+                "\(id)\n" +
+                "    \(path!)\n" +
+                "    rowNum = \(rowNum)\n" +
+                "    colNum = \(colNum)\n" +
+                "    sector = \(sector)"
+            )
+        }
+    }
+
+    private func onAddProfile() {
         let profile = ProfileValue(
             ID                   : profiles.newID,
             title                : self.title,

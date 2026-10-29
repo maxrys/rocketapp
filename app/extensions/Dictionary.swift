@@ -26,3 +26,35 @@ extension Dictionary {
     }
 
 }
+
+extension Dictionary where Key == CellIDValue {
+
+    struct Bounds: Equatable {
+        var minRow: CellIDValue.Index
+        var maxRow: CellIDValue.Index
+        var minCol: CellIDValue.Index
+        var maxCol: CellIDValue.Index
+    }
+
+    internal var bounds: Bounds? {
+        var result: Bounds?
+        for (cellID, _) in self {
+            if var bounds = result {
+                bounds.minRow = Swift.min(bounds.minRow, cellID.rowNum)
+                bounds.maxRow = Swift.max(bounds.maxRow, cellID.rowNum)
+                bounds.minCol = Swift.min(bounds.minCol, cellID.colNum)
+                bounds.maxCol = Swift.max(bounds.maxCol, cellID.colNum)
+                result = bounds
+            } else {
+                result = Bounds(
+                    minRow: cellID.rowNum,
+                    maxRow: cellID.rowNum,
+                    minCol: cellID.colNum,
+                    maxCol: cellID.colNum
+                )
+            }
+        }
+        return result
+    }
+
+}

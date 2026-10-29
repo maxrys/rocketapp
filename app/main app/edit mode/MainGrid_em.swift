@@ -24,20 +24,18 @@ struct MainGrid_editMode: View {
     private var gridSource: GridCustom.DataSource {
         var result = GridCustom.DataSource()
         if let bounds = self.cells.data.bounds {
-            for rowNum in 0 ... (bounds.maxY + 3).fixBounds(max: ThisApp.GRID_ROWS_MAX - 1) {
-            for colNum in 0 ... (bounds.maxX + 3).fixBounds(max: ThisApp.GRID_COLS_MAX - 1) {
-                let rowNum = CellID.Index(rowNum)
-                let colNum = CellID.Index(colNum)
-                let cellID = CellID(rowNum: rowNum, colNum: colNum)
-                result[rowNum, colNum] = Cell_editMode(
-                    ID: cellID.value,
+            for rowNum in 0 ... (bounds.maxRow + 3).fixBounds(max: ThisApp.GRID_ROWS_MAX - 1) {
+            for colNum in 0 ... (bounds.maxCol + 3).fixBounds(max: ThisApp.GRID_COLS_MAX - 1) {
+                let cellID = CellIDValue(rowNum: rowNum, colNum: colNum)
+                result[cellID] = Cell_editMode(
+                    ID: cellID,
                     size: self.cellSize,
                     isVisible: true
                 )
             }}
         } else {
-            result[0] = Cell_editMode(
-                ID: 0,
+            result[CellIDValue.zero] = Cell_editMode(
+                ID: CellIDValue.zero,
                 size: self.cellSize,
                 isVisible: true
             )

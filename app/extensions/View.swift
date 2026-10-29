@@ -63,14 +63,20 @@ extension View {
 
 }
 
+
+
+/* ################################# */
+/* ### windowChamelionBackground ### */
+/* ################################# */
+
 extension View {
 
     @ViewBuilder func windowChamelionBackground(
         windowID                   : String? = nil,
-        backgroundTint             : Color = .NS[\.windowBackgroundColor].opacity(0.7),
-        backgroundTintDark         : Color = .NS[\.windowBackgroundColor].opacity(0.7),
-        backgroundColorFallback    : Color = .NS[\.windowBackgroundColor],
-        backgroundColorDarkFallback: Color = .NS[\.windowBackgroundColor],
+        backgroundTint             : Color = .NS[.windowBackgroundColor].opacity(0.7),
+        backgroundTintDark         : Color = .NS[.windowBackgroundColor].opacity(0.7),
+        backgroundColorFallback    : Color = .NS[.windowBackgroundColor],
+        backgroundColorDarkFallback: Color = .NS[.windowBackgroundColor],
         isIgnoreSafeArea: Bool = true
     ) -> some View {
         self.ignoresSafeArea(
@@ -85,7 +91,7 @@ extension View {
                 )
             )
             .onAppear {
-                if let windowID, let window = NSWindow.get(windowID) {
+                if let windowID = windowID, let window = NSWindow.get(windowID) {
                     window.backgroundColor = .clear
                     window.alphaValue = 1.0
                 }
@@ -112,6 +118,102 @@ struct ChamelionBackground: View {
             if (self.colorScheme == .dark)
                  { self.backgroundColorDarkFallback }
             else { self.backgroundColorFallback     }
+        }
+    }
+
+}
+
+
+
+/* ##################### */
+/* ### HoverBehavior ### */
+/* ##################### */
+
+extension View {
+
+    @ViewBuilder func hoverBehavior(_ behavior: HoverBehavior, duration: TimeInterval = 0.3) -> some View {
+        HoverBehaviorView(
+            content: { self },
+            behavior: behavior,
+            duration: duration
+        )
+    }
+
+}
+
+enum HoverBehavior {
+
+    case scaleEffect(
+        from: Double,
+        to  : Double
+    )
+    case changeForegroundColor(
+        from: Color,
+        to  : Color
+    )
+    case changeBackgroundColor(
+        from: Color,
+        to  : Color
+    )
+    case zIndex(
+        to: Double
+    )
+
+}
+
+struct HoverBehaviorView<Content: View>: View {
+
+    @State private var isHovering = false
+
+    private let content: () -> Content
+    private let behavior: HoverBehavior
+    private let duration: TimeInterval
+
+    init(@ViewBuilder content: @escaping () -> Content, behavior: HoverBehavior, duration: TimeInterval) {
+        self.content  = content
+        self.behavior = behavior
+        self.duration = duration
+    }
+
+    public var body: some View {
+        switch self.behavior {
+
+            case .scaleEffect(let from, let to):
+                self.content()
+                    .scaleEffect(self.isHovering ? to : from)
+                    .onHover { isHovering in
+                        withAnimation(.easeInOut(duration: self.duration)) {
+                            self.isHovering = isHovering
+                        }
+                    }
+
+            case .changeForegroundColor(let from, let to):
+                self.content()
+                    .foregroundStyle(self.isHovering ? to : from)
+                    .onHover { isHovering in
+                        withAnimation(.easeInOut(duration: self.duration)) {
+                            self.isHovering = isHovering
+                        }
+                    }
+
+            case .changeBackgroundColor(let from, let to):
+                self.content()
+                    .background(self.isHovering ? to : from)
+                    .onHover { isHovering in
+                        withAnimation(.easeInOut(duration: self.duration)) {
+                            self.isHovering = isHovering
+                        }
+                    }
+
+            case .zIndex(let to):
+                self.content()
+                    .zIndex(self.isHovering ? to : 0)
+                    .onHover { isHovering in
+                        withAnimation(.easeInOut(duration: self.duration)) {
+                            self.isHovering = isHovering
+                        }
+                    }
+
         }
     }
 

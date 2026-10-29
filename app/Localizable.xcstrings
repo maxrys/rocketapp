@@ -17,10 +17,16 @@
             "state" : "translated",
             "value" : "О приложении %@"
           }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Про додаток %@"
+          }
         }
       }
     },
-    "append" : {
+    "add" : {
       "localizations" : {
         "be-BY" : {
           "stringUnit" : {
@@ -32,6 +38,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "добавить"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "додати"
+          }
+        }
+      }
+    },
+    "add with applications" : {
+      "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "дадаць з дадаткамі"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "добавить с приложениями"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "додати з додатками"
           }
         }
       }
@@ -45,6 +79,12 @@
           }
         },
         "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фон"
+          }
+        },
+        "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Фон"
@@ -63,7 +103,13 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Фон (темная схема)"
+            "value" : "Фон (тёмная схема)"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фон (темна схема)"
           }
         }
       }
@@ -81,6 +127,12 @@
             "state" : "translated",
             "value" : "Отмена"
           }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відміна"
+          }
         }
       }
     },
@@ -96,6 +148,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "клонировать"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "клонувати"
           }
         }
       }
@@ -113,6 +171,12 @@
             "state" : "translated",
             "value" : "Удалить"
           }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Видалити"
+          }
         }
       }
     },
@@ -128,6 +192,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "удалить профиль"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "видалити профіль"
           }
         }
       }
@@ -145,6 +215,12 @@
             "state" : "translated",
             "value" : "Удалить профиль\n \"%@\""
           }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Видалити профіль \n\"%@\""
+          }
         }
       }
     },
@@ -161,6 +237,12 @@
             "state" : "translated",
             "value" : "Увеличение значка при наведении"
           }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Збільшення значка при наведенні"
+          }
         }
       }
     },
@@ -176,6 +258,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Скрыть при ошибочном клике"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Приховати при помилковому кліку"
           }
         }
       }
@@ -194,6 +282,12 @@
             "state" : "translated",
             "value" : "Мой профиль"
           }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мій профіль"
+          }
         }
       }
     },
@@ -209,6 +303,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Нет приложений!"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нема додатків!"
           }
         }
       }
@@ -226,6 +326,12 @@
             "state" : "translated",
             "value" : "нет элементов"
           }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "немає елементів"
+          }
         }
       }
     },
@@ -241,6 +347,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Открыть основное окно"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відкрити основне вікно"
           }
         }
       }
@@ -258,6 +370,12 @@
             "state" : "translated",
             "value" : "открыть настройки"
           }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "відкрити налаштування"
+          }
         }
       }
     },
@@ -273,6 +391,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Профиль"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профіль"
           }
         }
       }
@@ -290,6 +414,12 @@
             "state" : "translated",
             "value" : "Настройки профиля"
           }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Налаштування профілю"
+          }
         }
       }
     },
@@ -305,6 +435,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "обновить значки"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "оновити значки"
           }
         }
       }
@@ -322,6 +458,12 @@
             "state" : "translated",
             "value" : "Выбрать это приложение"
           }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вибрати цей додаток"
+          }
         }
       }
     },
@@ -337,6 +479,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Показать название значка"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показати назву значка"
           }
         }
       }
@@ -354,6 +502,12 @@
             "state" : "translated",
             "value" : "Показать кнопки окна"
           }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показати кнопки вікна"
+          }
         }
       }
     },
@@ -366,6 +520,12 @@
           }
         },
         "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зазор"
+          }
+        },
+        "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Зазор"
@@ -386,6 +546,12 @@
             "state" : "translated",
             "value" : "Липкая сетка"
           }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Липка сітка"
+          }
         }
       }
     },
@@ -401,6 +567,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "поддержка"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "підтримка"
           }
         }
       }
@@ -418,21 +590,11 @@
             "state" : "translated",
             "value" : "Заголовок"
           }
-        }
-      }
-    },
-    "turn off to improve performance" : {
-      "localizations" : {
-        "be-BY" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "адключыце для павышэння прадукцыйнасці"
-          }
         },
-        "ru" : {
+        "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "отключите для повышения производительности"
+            "value" : "Заголовок"
           }
         }
       }
@@ -456,6 +618,12 @@
             "state" : "translated",
             "value" : "Версия %1$@ (%2$@)"
           }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Версія %1$@ (%2$@)"
+          }
         }
       }
     },
@@ -468,6 +636,12 @@
           }
         },
         "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Масштаб"
+          }
+        },
+        "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Масштаб"

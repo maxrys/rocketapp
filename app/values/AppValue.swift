@@ -9,6 +9,7 @@ import UniformTypeIdentifiers
 nonisolated struct AppValue: Equatable, Codable {
 
     static let APP_NO_ICON = NSImage(named: "AppNoIcon")!
+    static let ICON_RENDER_SIZE = CGSize(width: 200, height: 200)
 
     public var bundleID: String
     public var name: String
@@ -51,7 +52,32 @@ nonisolated struct AppValue: Equatable, Codable {
                     self.bundleID = bundleID
                     self.name = name
                     self.path = appURL.absoluteString
-                    self.icon = NSWorkspace.shared.icon(forFile: appURL.path).tiffRepresentation
+                    let image = NSWorkspace.shared.icon(forFile: appURL.path)
+                    guard let bitmap = NSBitmapImageRep(
+                        bitmapDataPlanes: nil,
+                        pixelsWide: Int(Self.ICON_RENDER_SIZE.width),
+                        pixelsHigh: Int(Self.ICON_RENDER_SIZE.height),
+                        bitsPerSample: 8,
+                        samplesPerPixel: 4,
+                        hasAlpha: true,
+                        isPlanar: false,
+                        colorSpaceName: .deviceRGB,
+                        bytesPerRow: 0,
+                        bitsPerPixel: 0
+                    ), let context = NSGraphicsContext(bitmapImageRep: bitmap) else {
+                        return nil
+                    }
+                    NSGraphicsContext.saveGraphicsState()
+                    NSGraphicsContext.current = context
+                    context.imageInterpolation = .high
+                    image.draw(
+                        in: CGRect(x: 0, y: 0, width: Self.ICON_RENDER_SIZE.width, height: Self.ICON_RENDER_SIZE.height),
+                        from: .zero,
+                        operation: .copy,
+                        fraction: 1
+                    )
+                    NSGraphicsContext.restoreGraphicsState()
+                    self.icon = bitmap.tiffRepresentation
                     return
                 }
             }

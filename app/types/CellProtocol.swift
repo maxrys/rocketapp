@@ -7,8 +7,8 @@ import SwiftUI
 
 protocol CellProtocol: View {
 
-    var ID       : CellID.Value { get }
-    var size     : CGFloat      { get }
-    var isVisible: Bool         { get set }
+    var ID       : CellIDValue { get }
+    var size     : CGFloat     { get }
+    var isVisible: Bool        { get set }
 
 }

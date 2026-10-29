@@ -19,10 +19,10 @@ struct AuditSequence: AsyncSequence {
 
     init(profileID: ProfileID) {
         self.profileID = profileID
-        for (cellIDValue, cellValue) in CellValue.modelSelectMatrix(profileID: profileID).flat {
+        for (cellID, cellValue) in CellValue.modelSelect(profileID: profileID) {
             self.data.append(
                 CellID_CellValue_Pair(
-                    cellID   : cellIDValue,
+                    cellID   : cellID,
                     cellValue: cellValue
                 )
             )

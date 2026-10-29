@@ -4,6 +4,7 @@
 /* ############################################################# */
 
 import SwiftUI
+import SpriteKit
 
 struct ColorHSBValue: Equatable, Codable {
 
@@ -22,6 +23,15 @@ struct ColorHSBValue: Equatable, Codable {
             saturation: self.saturation,
             brightness: self.brightness,
             opacity   : self.opacity
+        )
+    }
+
+    public var skColor: SKColor {
+        SKColor(
+            hue       : self.hue,
+            saturation: self.saturation,
+            brightness: self.brightness,
+            alpha     : self.opacity
         )
     }
 

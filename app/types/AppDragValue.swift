@@ -19,7 +19,7 @@ final class AppDragValue: NSObject, Codable, NSItemProviderWriting, NSItemProvid
         case `mini_#4`
     }
 
-    var ID: CellID.Value
+    var cellID: CellIDValue
     var from: From
 
     var keyPathFrom: CellValuePath? {
@@ -32,8 +32,8 @@ final class AppDragValue: NSObject, Codable, NSItemProviderWriting, NSItemProvid
         }
     }
 
-    init(ID: CellID.Value, keyPath: CellValuePath? = nil) {
-        self.ID = ID
+    init(cellID: CellIDValue, keyPath: CellValuePath? = nil) {
+        self.cellID = cellID
         switch keyPath {
             case \.cell1: self.from = .`mini_#1`
             case \.cell2: self.from = .`mini_#2`

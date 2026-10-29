@@ -8,8 +8,8 @@ import SwiftUI
 extension Color {
 
     struct NSColorSet {
-        subscript(_ keyPath: KeyPath<NSColor.Type, NSColor>) -> Color {
-            Color(NSColor.self[keyPath: keyPath])
+        subscript(_ color: NSColor) -> Color {
+            Color(color)
         }
     }
 
@@ -23,14 +23,14 @@ protocol BackgroundColorProtocol {
     var background    : ColorHSBValue { get }
     var backgroundDark: ColorHSBValue { get }
 
-    func backgroundHSB      (minOpacity: Double, maxOpacity: Double) -> ColorHSBValue
-    func backgroundAccentHSB(minOpacity: Double, maxOpacity: Double) -> ColorHSBValue
+    func backgroundCurrent      (minOpacity: Double, maxOpacity: Double) -> ColorHSBValue
+    func backgroundCurrentAccent(minOpacity: Double, maxOpacity: Double) -> ColorHSBValue
 
 }
 
 extension BackgroundColorProtocol {
 
-    func backgroundHSB(minOpacity: Double = 0.0, maxOpacity: Double = 1.0) -> ColorHSBValue {
+    func backgroundCurrent(minOpacity: Double = 0.0, maxOpacity: Double = 1.0) -> ColorHSBValue {
         if (self.colorScheme == .dark) {
             ColorHSBValue(
                 self.backgroundDark.hue,
@@ -54,7 +54,7 @@ extension BackgroundColorProtocol {
         }
     }
 
-    func backgroundAccentHSB(minOpacity: Double = 0.0, maxOpacity: Double = 1.0) -> ColorHSBValue {
+    func backgroundCurrentAccent(minOpacity: Double = 0.0, maxOpacity: Double = 1.0) -> ColorHSBValue {
         if (self.colorScheme == .dark) {
             ColorHSBValue(
                 self.backgroundDark.hue,
@@ -100,7 +100,7 @@ struct BackgroundColorProtocol_Previews: PreviewProvider {
         @Environment(\.windowBackgroundDark) internal var backgroundDark
 
         private var accentHSB: ColorHSBValue {
-            self.backgroundAccentHSB(minOpacity: 1.0) /* magic result */
+            self.backgroundCurrentAccent(minOpacity: 1.0) /* magic result */
         }
 
         private var formattedHue       : String { self.accentHSB.hue       .formatted(.number.precision(.fractionLength(1))) }
@@ -109,7 +109,7 @@ struct BackgroundColorProtocol_Previews: PreviewProvider {
         private var formattedOpacity   : String { self.accentHSB.opacity   .formatted(.number.precision(.fractionLength(1))) }
 
         public var body: some View {
-            self.backgroundHSB().color
+            self.backgroundCurrent().color
                 .frame(width: size, height: size)
                 .overlay {
                     VStack(spacing: 0) {

@@ -9,17 +9,17 @@ struct Cell_viewMode: View, CellProtocol {
 
     @Environment(\.cellsState) private var cells
 
-    internal let ID: CellID.Value
+    internal let ID: CellIDValue
     internal let size: CGFloat
     internal var isVisible: Bool
 
     private var sizeCellMini: CGFloat { self.size / 2 }
     private var value: CellValue? {
-        self.cells.select(self.ID)
+        self.cells.selectCellValue(self.ID)
     }
 
     init(
-        ID: CellID.Value,
+        ID: CellIDValue,
         size: CGFloat
     ) {
         self.ID = ID
@@ -118,7 +118,7 @@ struct Cell_viewMode: View, CellProtocol {
 
     @Previewable @State var mockForMain: CellsState = {
         let data = CellsState.initMock(profileID: ThisApp.PREVIEW_PROFILE_ID)
-        data.insertCellValue(0, .main(.init(
+        data.insertCellValue(CellIDValue.zero, .main(.init(
             bundleID: ThisApp.DEMO_BUNDLE_ID,
             name: ThisApp.DEMO_NAME,
             path: ThisApp.DEMO_PATH,
@@ -129,7 +129,7 @@ struct Cell_viewMode: View, CellProtocol {
 
     @Previewable @State var mockForMini: CellsState = {
         let data = CellsState.initMock(profileID: ThisApp.PREVIEW_PROFILE_ID)
-        data.insertCellValue(0, .mini(.init(
+        data.insertCellValue(CellIDValue.zero, .mini(.init(
             cell1Value: .init(bundleID: ThisApp.DEMO_BUNDLE_ID, name: ThisApp.DEMO_NAME, path: ThisApp.DEMO_PATH, icon: nil),
             cell2Value: .init(bundleID: ThisApp.DEMO_BUNDLE_ID, name: ThisApp.DEMO_NAME, path: ThisApp.DEMO_PATH, icon: nil),
             cell3Value: .init(bundleID: ThisApp.DEMO_BUNDLE_ID, name: ThisApp.DEMO_NAME, path: ThisApp.DEMO_PATH, icon: nil),
@@ -140,9 +140,9 @@ struct Cell_viewMode: View, CellProtocol {
 
     Previewer(axis: .horizontal) {
         Grid(alignment: .center, horizontalSpacing: 0, verticalSpacing: 0) {
-            Cell_viewMode(ID: 0, size: ThisApp.CELL_SIZE).id(1).environment(\.cellsState, mockForNone)
-            Cell_viewMode(ID: 0, size: ThisApp.CELL_SIZE).id(2).environment(\.cellsState, mockForMain)
-            Cell_viewMode(ID: 0, size: ThisApp.CELL_SIZE).id(3).environment(\.cellsState, mockForMini)
+            Cell_viewMode(ID: CellIDValue.zero, size: ThisApp.CELL_SIZE).id(1).environment(\.cellsState, mockForNone)
+            Cell_viewMode(ID: CellIDValue.zero, size: ThisApp.CELL_SIZE).id(2).environment(\.cellsState, mockForMain)
+            Cell_viewMode(ID: CellIDValue.zero, size: ThisApp.CELL_SIZE).id(3).environment(\.cellsState, mockForMini)
         }.padding(10)
     }
 }

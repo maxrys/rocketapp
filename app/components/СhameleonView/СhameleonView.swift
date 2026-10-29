@@ -49,8 +49,8 @@ struct СhameleonView<Content: View>: View, BackgroundColorProtocol {
 
     @ViewBuilder private func AdaptiveBackgroundView() -> some View {
         if (self.isFlat)
-             { RoundedRectangle(cornerRadius: self.radius).fill( self.backgroundHSB(minOpacity: self.minOpacity).color) }
-        else { RoundedRectangle(cornerRadius: self.radius).fill( self.backgroundHSB(minOpacity: self.minOpacity).color.gradient) }
+             { RoundedRectangle(cornerRadius: self.radius).fill( self.backgroundCurrent(minOpacity: self.minOpacity).color) }
+        else { RoundedRectangle(cornerRadius: self.radius).fill( self.backgroundCurrent(minOpacity: self.minOpacity).color.gradient) }
     }
 
     @ViewBuilder private func AdaptiveShadowWrapperView(_ view: some View) -> some View {
