@@ -56,13 +56,34 @@ struct ColorHSBValue: Equatable, Codable {
         }
     }
 
-    func encode() -> String? {
+    public func encode() -> String? {
         guard let data = try? JSONEncoder().encode(self) else {
             return nil
         }
         return String(
             data: data,
             encoding: .utf8
+        )
+    }
+
+    public func limitedOpacity(min: Double = 0.0, max: Double = 1.0) -> Self {
+        Self(
+            self.hue,
+            self.saturation,
+            self.brightness,
+            self.opacity.fixBounds(
+                min: min,
+                max: max
+            )
+        )
+    }
+
+    public var accentBrightness: Self {
+        Self(
+            self.hue,
+            self.saturation,
+            self.brightness < 0.5 ? 1.0 : 0.0,
+            self.opacity
         )
     }
 

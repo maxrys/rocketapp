@@ -288,9 +288,11 @@
 		504774FF308E658300B93276 /* values */ = {
 			isa = PBXGroup;
 			children = (
+				50CE722A2EE0E97F00FE3282 /* AppDragValue.swift */,
 				50EE8B9C2ED17569002DFEA5 /* AppValue.swift */,
 				507501462EF54D8200624409 /* CellIDValue.swift */,
 				501D4DE92EB9FB5F00919AB9 /* CellValue.swift */,
+				50EE8B902ECC8B11002DFEA5 /* ColorHSBValue.swift */,
 				50EE8BB52ED79176002DFEA5 /* GridPlaceIDValue.swift */,
 				50EE8B992ED174FE002DFEA5 /* MiniGridValue.swift */,
 				50AFE98A2EB772FC00815152 /* ProfileValue.swift */,
@@ -490,10 +492,8 @@
 			isa = PBXGroup;
 			children = (
 				5081507C2E84011F00E12175 /* _types.swift */,
-				50CE722A2EE0E97F00FE3282 /* AppDragValue.swift */,
 				50D28FF42F845120006A7304 /* AuditSequence.swift */,
 				50CE72532EED6BDD00FE3282 /* CellProtocol.swift */,
-				50EE8B902ECC8B11002DFEA5 /* ColorHSBValue.swift */,
 				50E4B0C82FF1876A008D625B /* HVStack.swift */,
 				50CF30CF2FB4A9F200A9319D /* Previewer.swift */,
 				50242EB72F9255EA000FDCC6 /* SlotsEnumerator.swift */,

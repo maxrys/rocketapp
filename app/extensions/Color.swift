@@ -32,54 +32,30 @@ extension BackgroundColorProtocol {
 
     func backgroundCurrent(minOpacity: Double = 0.0, maxOpacity: Double = 1.0) -> ColorHSBValue {
         if (self.colorScheme == .dark) {
-            ColorHSBValue(
-                self.backgroundDark.hue,
-                self.backgroundDark.saturation,
-                self.backgroundDark.brightness,
-                self.backgroundDark.opacity.fixBounds(
-                    min: minOpacity,
-                    max: maxOpacity
-                )
+            self.backgroundDark.limitedOpacity(
+                min: minOpacity,
+                max: maxOpacity
             )
         } else {
-            ColorHSBValue(
-                self.background.hue,
-                self.background.saturation,
-                self.background.brightness,
-                self.background.opacity.fixBounds(
-                    min: minOpacity,
-                    max: maxOpacity
-                )
+            self.background.limitedOpacity(
+                min: minOpacity,
+                max: maxOpacity
             )
         }
     }
 
     func backgroundCurrentAccent(minOpacity: Double = 0.0, maxOpacity: Double = 1.0) -> ColorHSBValue {
         if (self.colorScheme == .dark) {
-            ColorHSBValue(
-                self.backgroundDark.hue,
-                self.backgroundDark.saturation,
-                self.shiftForAccent(self.backgroundDark.brightness),
-                self.backgroundDark.opacity.fixBounds(
-                    min: minOpacity,
-                    max: maxOpacity
-                )
+            self.backgroundDark.accentBrightness.limitedOpacity(
+                min: minOpacity,
+                max: maxOpacity
             )
         } else {
-            ColorHSBValue(
-                self.background.hue,
-                self.background.saturation,
-                self.shiftForAccent(self.background.brightness),
-                self.background.opacity.fixBounds(
-                    min: minOpacity,
-                    max: maxOpacity
-                )
+            self.background.accentBrightness.limitedOpacity(
+                min: minOpacity,
+                max: maxOpacity
             )
         }
-    }
-
-    private func shiftForAccent(_ value: Double) -> Double {
-        value < 0.5 ? 1.0 : 0.0
     }
 
 }
