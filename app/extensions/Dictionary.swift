@@ -58,3 +58,13 @@ extension Dictionary where Key == CellIDValue {
     }
 
 }
+
+extension Dictionary where Key: Hashable, Value: Equatable {
+
+    func differences(with: [Key: Value]) -> Set<Key> {
+        Set(Set(self.keys).union(with.keys).filter {
+            self[$0] != with[$0]
+        })
+    }
+
+}

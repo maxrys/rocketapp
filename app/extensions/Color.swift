@@ -17,6 +17,12 @@ extension Color {
 
 }
 
+
+
+/* ############################### */
+/* ### BackgroundColorProtocol ### */
+/* ############################### */
+
 protocol BackgroundColorProtocol {
 
     var colorScheme   : ColorScheme   { get }

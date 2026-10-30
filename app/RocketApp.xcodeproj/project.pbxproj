@@ -21,6 +21,7 @@
 		50242EB82F9255EA000FDCC6 /* SlotsEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50242EB72F9255EA000FDCC6 /* SlotsEnumerator.swift */; };
 		50447F692EEE9A5700C9B8D1 /* ProfilePanelForChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50447F682EEE9A5700C9B8D1 /* ProfilePanelForChange.swift */; };
 		5047750B308E76D000B93276 /* PropertyListSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5047750A308E76D000B93276 /* PropertyListSerialization.swift */; };
+		504E00D63094A4A600BCE036 /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504E00D53094A4A600BCE036 /* CGSize.swift */; };
 		505507122FB525D7007DB93D /* Cell_em_Fake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505507112FB525D7007DB93D /* Cell_em_Fake.swift */; };
 		505507142FB5D6D6007DB93D /* ButtonDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505507132FB5D6D6007DB93D /* ButtonDelete.swift */; };
 		505507272FC1BCE8007DB93D /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505507262FC1BCE8007DB93D /* CGRect.swift */; };
@@ -123,6 +124,7 @@
 		50242EB72F9255EA000FDCC6 /* SlotsEnumerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotsEnumerator.swift; sourceTree = "<group>"; };
 		50447F682EEE9A5700C9B8D1 /* ProfilePanelForChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePanelForChange.swift; sourceTree = "<group>"; };
 		5047750A308E76D000B93276 /* PropertyListSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListSerialization.swift; sourceTree = "<group>"; };
+		504E00D53094A4A600BCE036 /* CGSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
 		505507112FB525D7007DB93D /* Cell_em_Fake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell_em_Fake.swift; sourceTree = "<group>"; };
 		505507132FB5D6D6007DB93D /* ButtonDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDelete.swift; sourceTree = "<group>"; };
 		505507262FC1BCE8007DB93D /* CGRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				507501612EF9645700624409 /* Array.swift */,
 				50EE8BAF2ED5A4B3002DFEA5 /* Bool.swift */,
 				505507262FC1BCE8007DB93D /* CGRect.swift */,
+				504E00D53094A4A600BCE036 /* CGSize.swift */,
 				5013DB852EA56D2800BEDC5E /* Color.swift */,
 				507501492EF6A70300624409 /* Date.swift */,
 				508D6D132EB551A800885E95 /* Dictionary.swift */,
@@ -693,6 +696,7 @@
 				5081507D2E84011F00E12175 /* _types.swift in Sources */,
 				505849632E9534BC00B9F421 /* ModelContainer.swift in Sources */,
 				50CE72382EE6B9D400FE3282 /* NSApplication.swift in Sources */,
+				504E00D63094A4A600BCE036 /* CGSize.swift in Sources */,
 				50CE72562EED6F5900FE3282 /* GridCustom.swift in Sources */,
 				505507302FC59DC8007DB93D /* ShadowLine.swift in Sources */,
 				505849642E9534BC00B9F421 /* ModelCell.swift in Sources */,

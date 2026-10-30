@@ -79,7 +79,7 @@ import SwiftData
     func insertAppValue(_ cellID: CellIDValue, _ appValue: AppValue, to keyPath: CellValuePath? = nil) {
         if let keyPath {
             switch self.selectCellValue(cellID) {
-                case .none:
+                case .none, .main:
                     self.insertCellValue(
                         cellID, .mini(
                             .init(keyPath: keyPath, value: appValue)
@@ -90,7 +90,6 @@ import SwiftData
                     self.insertCellValue(
                         cellID, .mini(miniGrid)
                     )
-                default: break
             }
         } else {
             self.insertCellValue(
