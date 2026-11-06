@@ -16,15 +16,11 @@ struct EnvironmentKey_CellsState: EnvironmentKey {
 }
 
 struct EnvironmentKey_windowBackground: EnvironmentKey {
-    static let defaultValue = ColorHSBValue(
-        0.0, 0.0, 0.0
-    )
+    static let defaultValue = ColorHSBValue.black
 }
 
 struct EnvironmentKey_windowBackgroundDark: EnvironmentKey {
-    static let defaultValue = ColorHSBValue(
-        0.0, 0.0, 0.0
-    )
+    static let defaultValue = ColorHSBValue.black
 }
 
 extension EnvironmentValues {

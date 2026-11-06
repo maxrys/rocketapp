@@ -13,7 +13,7 @@ import SwiftData
 
     static let modelTitle = "Cell"
 
-    public var id: CellModelID.Value
+    public var id: GridPlaceIDValue.Raw
     public var profileID: ProfileID
     public var bundleID: String
     public var name: String
@@ -24,7 +24,7 @@ import SwiftData
     #Index<ModelCell>([\.id, \.profileID])
 
     init(
-        ID: CellModelID.Value,
+        ID: GridPlaceIDValue.Raw,
         profileID: ProfileID,
         bundleID: String,
         name: String,
@@ -45,20 +45,20 @@ import SwiftData
         }
     }
 
-    private static func predicate(ID: CellModelID.Value, profileID: ProfileID) -> Predicate<SELF> {
+    private static func predicate(ID: GridPlaceIDValue.Raw, profileID: ProfileID) -> Predicate<SELF> {
         #Predicate<SELF> { item in
             item.id        == ID &&
             item.profileID == profileID
         }
     }
 
-    private static func predicate(IDs: [CellModelID.Value], profileID: ProfileID) -> Predicate<SELF> {
+    private static func predicate(IDs: [GridPlaceIDValue.Raw], profileID: ProfileID) -> Predicate<SELF> {
         #Predicate<SELF> { item in
             IDs.contains(item.id) && item.profileID == profileID
         }
     }
 
-    @MainActor static func select(ID: CellModelID.Value, profileID: ProfileID) -> SELF? {
+    @MainActor static func select(ID: GridPlaceIDValue.Raw, profileID: ProfileID) -> SELF? {
         do {
             let modelContext = ModelContainer.shared.mainContext
             let fetchRequest = FetchDescriptor<SELF>(predicate: self.predicate(ID: ID, profileID: profileID))
@@ -69,8 +69,8 @@ import SwiftData
         return nil
     }
 
-    @MainActor static func selectAll(profileID: ProfileID) -> [CellModelID.Value: SELF] {
-        var result: [CellModelID.Value: SELF] = [:]
+    @MainActor static func selectAll(profileID: ProfileID) -> [GridPlaceIDValue.Raw: SELF] {
+        var result: [GridPlaceIDValue.Raw: SELF] = [:]
         let modelContext = ModelContainer.shared.mainContext
         let fetchRequest = FetchDescriptor<SELF>(predicate: self.predicate(profileID: profileID))
         if let items = try? modelContext.fetch(fetchRequest) {
@@ -132,7 +132,7 @@ import SwiftData
         return false
     }
 
-    @MainActor static func delete(ID: CellModelID.Value, profileID: ProfileID) -> Bool {
+    @MainActor static func delete(ID: GridPlaceIDValue.Raw, profileID: ProfileID) -> Bool {
         do {
             let modelContext = ModelContainer.shared.mainContext
             try modelContext.delete(
@@ -149,7 +149,7 @@ import SwiftData
         return false
     }
 
-    @MainActor static func delete(IDs: [CellModelID.Value], profileID: ProfileID) -> Bool {
+    @MainActor static func delete(IDs: [GridPlaceIDValue.Raw], profileID: ProfileID) -> Bool {
         do {
             let modelContext = ModelContainer.shared.mainContext
             try modelContext.delete(

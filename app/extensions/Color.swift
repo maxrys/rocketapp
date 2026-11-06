@@ -8,8 +8,8 @@ import SwiftUI
 extension Color {
 
     struct NSColorSet {
-        subscript(_ keyPath: KeyPath<NSColor.Type, NSColor>) -> Color {
-            Color(NSColor.self[keyPath: keyPath])
+        subscript(_ color: NSColor) -> Color {
+            Color(color)
         }
     }
 
@@ -17,69 +17,51 @@ extension Color {
 
 }
 
+
+
+/* ############################### */
+/* ### BackgroundColorProtocol ### */
+/* ############################### */
+
 protocol BackgroundColorProtocol {
 
     var colorScheme   : ColorScheme   { get }
     var background    : ColorHSBValue { get }
     var backgroundDark: ColorHSBValue { get }
 
-    func backgroundHSB      (minOpacity: Double, maxOpacity: Double) -> ColorHSBValue
-    func backgroundAccentHSB(minOpacity: Double, maxOpacity: Double) -> ColorHSBValue
+    func backgroundCurrent      (minOpacity: Double, maxOpacity: Double) -> ColorHSBValue
+    func backgroundCurrentAccent(minOpacity: Double, maxOpacity: Double) -> ColorHSBValue
 
 }
 
 extension BackgroundColorProtocol {
 
-    func backgroundHSB(minOpacity: Double = 0.0, maxOpacity: Double = 1.0) -> ColorHSBValue {
+    func backgroundCurrent(minOpacity: Double = 0.0, maxOpacity: Double = 1.0) -> ColorHSBValue {
         if (self.colorScheme == .dark) {
-            ColorHSBValue(
-                self.backgroundDark.hue,
-                self.backgroundDark.saturation,
-                self.backgroundDark.brightness,
-                self.backgroundDark.opacity.fixBounds(
-                    min: minOpacity,
-                    max: maxOpacity
-                )
+            self.backgroundDark.limitedOpacity(
+                min: minOpacity,
+                max: maxOpacity
             )
         } else {
-            ColorHSBValue(
-                self.background.hue,
-                self.background.saturation,
-                self.background.brightness,
-                self.background.opacity.fixBounds(
-                    min: minOpacity,
-                    max: maxOpacity
-                )
+            self.background.limitedOpacity(
+                min: minOpacity,
+                max: maxOpacity
             )
         }
     }
 
-    func backgroundAccentHSB(minOpacity: Double = 0.0, maxOpacity: Double = 1.0) -> ColorHSBValue {
+    func backgroundCurrentAccent(minOpacity: Double = 0.0, maxOpacity: Double = 1.0) -> ColorHSBValue {
         if (self.colorScheme == .dark) {
-            ColorHSBValue(
-                self.backgroundDark.hue,
-                self.backgroundDark.saturation,
-                self.shiftForAccent(self.backgroundDark.brightness),
-                self.backgroundDark.opacity.fixBounds(
-                    min: minOpacity,
-                    max: maxOpacity
-                )
+            self.backgroundDark.accentBrightness.limitedOpacity(
+                min: minOpacity,
+                max: maxOpacity
             )
         } else {
-            ColorHSBValue(
-                self.background.hue,
-                self.background.saturation,
-                self.shiftForAccent(self.background.brightness),
-                self.background.opacity.fixBounds(
-                    min: minOpacity,
-                    max: maxOpacity
-                )
+            self.background.accentBrightness.limitedOpacity(
+                min: minOpacity,
+                max: maxOpacity
             )
         }
-    }
-
-    private func shiftForAccent(_ value: Double) -> Double {
-        value < 0.5 ? 1.0 : 0.0
     }
 
 }
@@ -100,7 +82,7 @@ struct BackgroundColorProtocol_Previews: PreviewProvider {
         @Environment(\.windowBackgroundDark) internal var backgroundDark
 
         private var accentHSB: ColorHSBValue {
-            self.backgroundAccentHSB(minOpacity: 1.0) /* magic result */
+            self.backgroundCurrentAccent(minOpacity: 1.0) /* magic result */
         }
 
         private var formattedHue       : String { self.accentHSB.hue       .formatted(.number.precision(.fractionLength(1))) }
@@ -109,7 +91,7 @@ struct BackgroundColorProtocol_Previews: PreviewProvider {
         private var formattedOpacity   : String { self.accentHSB.opacity   .formatted(.number.precision(.fractionLength(1))) }
 
         public var body: some View {
-            self.backgroundHSB().color
+            self.backgroundCurrent().color
                 .frame(width: size, height: size)
                 .overlay {
                     VStack(spacing: 0) {
@@ -161,7 +143,7 @@ struct BackgroundColorProtocol_Previews: PreviewProvider {
                 ColorPlateView().background(Color(hue: 0.0, saturation: 0.0, brightness: 0.9))
             }
             .environment(\.colorScheme, .light)
-            .environment(\.windowBackground, ThisApp.DEFAULT_BACKGROUND)
+            .environment(\.windowBackground, ThisApp.WINDOW_BACKGROUND_DEFAULT)
 
             LazyVGrid(columns: columns, spacing: 0) {
                 ColorPlateView().background(Color(hue: 0.0, saturation: 0.0, brightness: 0.1))
@@ -175,7 +157,7 @@ struct BackgroundColorProtocol_Previews: PreviewProvider {
                 ColorPlateView().background(Color(hue: 0.0, saturation: 0.0, brightness: 0.9))
             }
             .environment(\.colorScheme, .dark)
-            .environment(\.windowBackgroundDark, ThisApp.DEFAULT_BACKGROUND_DARK)
+            .environment(\.windowBackgroundDark, ThisApp.WINDOW_BACKGROUND_DARK_DEFAULT)
 
             /* one background and different colors */
 

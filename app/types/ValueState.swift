@@ -5,12 +5,24 @@
 
 import Observation
 
-@Observable final class ValueState<T> {
+@Observable final class ValueState<T: Equatable> {
 
-    var value: T
+    var value: T {
+        willSet { if (value != newValue) { self.onChangeBefore(newValue) } }
+        didSet  { if (value != oldValue) { self.onChangeAfter(value) } }
+    }
 
-    init(_ value: T) {
+    private let onChangeBefore: (T) -> Void
+    private let onChangeAfter: (T) -> Void
+
+    init(
+        _ value: T,
+         onChangeBefore: @escaping (T) -> Void = { _ in },
+         onChangeAfter: @escaping (T) -> Void = { _ in }
+    ) {
         self.value = value
+        self.onChangeBefore = onChangeBefore
+        self.onChangeAfter = onChangeAfter
     }
 
     deinit {

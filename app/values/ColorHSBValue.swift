@@ -4,6 +4,7 @@
 /* ############################################################# */
 
 import SwiftUI
+import SpriteKit
 
 struct ColorHSBValue: Equatable, Codable {
 
@@ -22,6 +23,15 @@ struct ColorHSBValue: Equatable, Codable {
             saturation: self.saturation,
             brightness: self.brightness,
             opacity   : self.opacity
+        )
+    }
+
+    public var skColor: SKColor {
+        SKColor(
+            hue       : self.hue,
+            saturation: self.saturation,
+            brightness: self.brightness,
+            alpha     : self.opacity
         )
     }
 
@@ -46,7 +56,7 @@ struct ColorHSBValue: Equatable, Codable {
         }
     }
 
-    func encode() -> String? {
+    public func encode() -> String? {
         guard let data = try? JSONEncoder().encode(self) else {
             return nil
         }
@@ -54,6 +64,40 @@ struct ColorHSBValue: Equatable, Codable {
             data: data,
             encoding: .utf8
         )
+    }
+
+    public func limitedOpacity(min: Double = 0.0, max: Double = 1.0) -> Self {
+        Self(
+            self.hue,
+            self.saturation,
+            self.brightness,
+            self.opacity.fixBounds(
+                min: min,
+                max: max
+            )
+        )
+    }
+
+    public var accentBrightness: Self {
+        Self(
+            self.hue,
+            self.saturation,
+            self.brightness < 0.5 ? 1.0 : 0.0,
+            self.opacity
+        )
+    }
+
+    public var highlighted: Self {
+        Self(
+            self.hue,
+            self.saturation,
+            self.brightness + 0.1,
+            self.opacity
+        )
+    }
+
+    static public var black: Self {
+        Self(0, 0, 0, 1.0)
     }
 
 }

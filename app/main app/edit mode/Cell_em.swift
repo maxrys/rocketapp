@@ -14,7 +14,7 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
     @Environment(\.windowBackgroundDark) internal var backgroundDark
     @Environment(\.cellsState) private var cells
 
-    internal let ID: CellID.Value
+    internal let ID: CellIDValue
     internal let size: CGFloat
     internal var isVisible: Bool
 
@@ -23,7 +23,7 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
     private var sizeCellMiniButton: CGFloat { self.sizeCellMini * 0.4 }
 
     private var value: CellValue? {
-        self.cells.select(self.ID)
+        self.cells.selectCellValue(self.ID)
     }
 
     private var isCellWithValue: Bool {
@@ -38,7 +38,7 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
     ]}
 
     init(
-        ID: CellID.Value,
+        ID: CellIDValue,
         size: CGFloat,
         isVisible: Bool
     ) {
@@ -188,7 +188,7 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
 
     @Previewable @State var mockForMain: CellsState = {
         let data = CellsState.initMock(profileID: ThisApp.PREVIEW_PROFILE_ID)
-        data.insertCellValue(0, .main(.init(
+        data.insertCellValue(CellIDValue.zero, .main(.init(
             bundleID: ThisApp.DEMO_BUNDLE_ID,
             name: ThisApp.DEMO_NAME,
             path: ThisApp.DEMO_PATH,
@@ -199,7 +199,7 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
 
     @Previewable @State var mockForMini: CellsState = {
         let data = CellsState.initMock(profileID: ThisApp.PREVIEW_PROFILE_ID)
-        data.insertCellValue(0, .mini(.init(
+        data.insertCellValue(CellIDValue.zero, .mini(.init(
             cell1Value: .init(bundleID: ThisApp.DEMO_BUNDLE_ID, name: ThisApp.DEMO_NAME, path: ThisApp.DEMO_PATH, icon: nil),
             cell2Value: .init(bundleID: ThisApp.DEMO_BUNDLE_ID, name: ThisApp.DEMO_NAME, path: ThisApp.DEMO_PATH, icon: nil),
             cell3Value: .init(bundleID: ThisApp.DEMO_BUNDLE_ID, name: ThisApp.DEMO_NAME, path: ThisApp.DEMO_PATH, icon: nil),
@@ -211,9 +211,9 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
     Previewer(axis: .horizontal) {
         Grid(alignment: .center, horizontalSpacing: 0, verticalSpacing: 0) {
             Cell_editMode_Fake(size: ThisApp.CELL_SIZE).id(1)
-            Cell_editMode(ID: 0, size: ThisApp.CELL_SIZE, isVisible: true).id(2).environment(\.cellsState, mockForNone)
-            Cell_editMode(ID: 0, size: ThisApp.CELL_SIZE, isVisible: true).id(3).environment(\.cellsState, mockForMain)
-            Cell_editMode(ID: 0, size: ThisApp.CELL_SIZE, isVisible: true).id(4).environment(\.cellsState, mockForMini)
+            Cell_editMode(ID: CellIDValue.zero, size: ThisApp.CELL_SIZE, isVisible: true).id(2).environment(\.cellsState, mockForNone)
+            Cell_editMode(ID: CellIDValue.zero, size: ThisApp.CELL_SIZE, isVisible: true).id(3).environment(\.cellsState, mockForMain)
+            Cell_editMode(ID: CellIDValue.zero, size: ThisApp.CELL_SIZE, isVisible: true).id(4).environment(\.cellsState, mockForMini)
         }.padding(10)
     }
 }
