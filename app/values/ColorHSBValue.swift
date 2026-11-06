@@ -96,8 +96,12 @@ struct ColorHSBValue: Equatable, Codable {
         )
     }
 
+    static public var white: Self {
+        Self(0.0, 0.0, 1.0, 1.0)
+    }
+
     static public var black: Self {
-        Self(0, 0, 0, 1.0)
+        Self(0.0, 0.0, 0.0, 1.0)
     }
 
 }
