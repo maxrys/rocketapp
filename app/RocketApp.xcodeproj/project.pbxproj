@@ -60,8 +60,6 @@
 		50C06AF22F23E467008EE619 /* TabCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C06AED2F23E467008EE619 /* TabCustom.swift */; };
 		50CABEFB308666E50033BA16 /* PL_defaultProfileApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CABEFA308666E50033BA16 /* PL_defaultProfileApps.swift */; };
 		50CE72272EE0542300FE3282 /* info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 50CE72262EE0542300FE3282 /* info.plist */; };
-		50CE72292EE0561B00FE3282 /* UTType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE72282EE0561900FE3282 /* UTType.swift */; };
-		50CE722B2EE0E97F00FE3282 /* AppDragValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE722A2EE0E97F00FE3282 /* AppDragValue.swift */; };
 		50CE72342EE62E8F00FE3282 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE72332EE62E8F00FE3282 /* Logger.swift */; };
 		50CE72382EE6B9D400FE3282 /* NSApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE72372EE6B9D400FE3282 /* NSApplication.swift */; };
 		50CE723A2EE6D48200FE3282 /* AppIcon_vm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE72392EE6D48200FE3282 /* AppIcon_vm.swift */; };
@@ -164,8 +162,6 @@
 		50C06AEF2F23E467008EE619 /* TabCustom_Spacer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCustom_Spacer.swift; sourceTree = "<group>"; };
 		50CABEFA308666E50033BA16 /* PL_defaultProfileApps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PL_defaultProfileApps.swift; sourceTree = "<group>"; };
 		50CE72262EE0542300FE3282 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
-		50CE72282EE0561900FE3282 /* UTType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTType.swift; sourceTree = "<group>"; };
-		50CE722A2EE0E97F00FE3282 /* AppDragValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDragValue.swift; sourceTree = "<group>"; };
 		50CE72332EE62E8F00FE3282 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		50CE72372EE6B9D400FE3282 /* NSApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSApplication.swift; sourceTree = "<group>"; };
 		50CE72392EE6D48200FE3282 /* AppIcon_vm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon_vm.swift; sourceTree = "<group>"; };
@@ -263,7 +259,6 @@
 				5047750A308E76D000B93276 /* PropertyListSerialization.swift */,
 				5075015F2EF9593400624409 /* ResultBuilder.swift */,
 				501D4DF02EC120CC00919AB9 /* Timer.swift */,
-				50CE72282EE0561900FE3282 /* UTType.swift */,
 				5058497A2E9A8D5B00B9F421 /* View.swift */,
 			);
 			path = extensions;
@@ -291,7 +286,6 @@
 		504774FF308E658300B93276 /* values */ = {
 			isa = PBXGroup;
 			children = (
-				50CE722A2EE0E97F00FE3282 /* AppDragValue.swift */,
 				50EE8B9C2ED17569002DFEA5 /* AppValue.swift */,
 				507501462EF54D8200624409 /* CellIDValue.swift */,
 				501D4DE92EB9FB5F00919AB9 /* CellValue.swift */,
@@ -677,7 +671,6 @@
 				507501472EF54D8200624409 /* CellIDValue.swift in Sources */,
 				50EE8B912ECC8B11002DFEA5 /* ColorHSBValue.swift in Sources */,
 				50EE8B892ECC888E002DFEA5 /* ColorPickerHSBO.swift in Sources */,
-				50CE722B2EE0E97F00FE3282 /* AppDragValue.swift in Sources */,
 				505849672E97E23100B9F421 /* CellsState.swift in Sources */,
 				5013DB5F2E9D525E00BEDC5E /* ProfilesState.swift in Sources */,
 				5058497B2E9A8D5D00B9F421 /* View.swift in Sources */,
@@ -713,7 +706,6 @@
 				5047750B308E76D000B93276 /* PropertyListSerialization.swift in Sources */,
 				50EE8B982ECDEE9D002DFEA5 /* MainScene.swift in Sources */,
 				508D6CF92EB0C14700885E95 /* ButtonRound.swift in Sources */,
-				50CE72292EE0561B00FE3282 /* UTType.swift in Sources */,
 				5013DB862EA56D2E00BEDC5E /* Color.swift in Sources */,
 				5055072C2FC46F73007DB93D /* About.swift in Sources */,
 				505507142FB5D6D6007DB93D /* ButtonDelete.swift in Sources */,

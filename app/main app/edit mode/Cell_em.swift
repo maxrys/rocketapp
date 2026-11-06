@@ -107,9 +107,6 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
                             self.cells.deleteAppValue(self.ID)
                         }
                     )
-                    .onDrag({ self.cells.onDrag(self.ID) }, preview: {
-                        self.dragIcon(appValue)
-                    })
                 default:
                     Color.clear
             }
@@ -138,9 +135,6 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
                                 self.cells.deleteAppValue(self.ID, from: keyPath)
                             }
                         )
-                        .onDrag({ self.cells.onDrag(self.ID, from: keyPath) }, preview: {
-                            self.dragIcon(appValue)
-                        })
                     } else {
                         self.ButtonInsertView(self.sizeCellMiniButton, to: keyPath) {
                             if let appValue = AppValue.fromDialog() {
@@ -157,19 +151,10 @@ struct Cell_editMode: View, CellProtocol, BackgroundColorProtocol {
         )
     }
 
-    @ViewBuilder private func dragIcon(_ appValue: AppValue) -> some View {
-        Image(nsImage: appValue.resolvedIcon)
-            .resizable()
-            .frame(width: 20, height: 20)
-    }
-
     @ViewBuilder private func ButtonInsertView(_ size: CGFloat, to keyPath: CellValuePath? = nil, onClick: @escaping () -> Void) -> some View {
         Cell_editMode_ButtonInsert(
             size: size,
-            onClick: onClick,
-            onDrop: { providers in
-                self.cells.onDrop(self.ID, providers, to: keyPath)
-            }
+            onClick: onClick
         )
     }
 

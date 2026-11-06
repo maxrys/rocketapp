@@ -17,7 +17,6 @@ struct Cell_editMode_ButtonInsert: View, BackgroundColorProtocol {
 
     public let size: CGFloat
     public let onClick: () -> Void
-    public let onDrop: (_ providers: [NSItemProvider]) -> Bool
 
     public var body: some View {
         Button { self.onClick() } label: {
@@ -42,7 +41,6 @@ struct Cell_editMode_ButtonInsert: View, BackgroundColorProtocol {
         .buttonStyle(.plain)
         .pointerStyle(self.isEnabled ? .link : .default)
         .onHover { isHovering in self.isHovering = isHovering }
-        .onDrop(of: [.application, UTType.appDragValue], isTargeted: self.$isHovering, perform: self.onDrop)
     }
 
 }
@@ -59,18 +57,17 @@ struct Cell_editMode_ButtonInsert: View, BackgroundColorProtocol {
 
             Cell_editMode_ButtonInsert(
                 size: 40,
-                onClick: { },
-                onDrop: { providers in true }
+                onClick: { }
             )
 
             LazyVGrid(columns: [
                 GridItem(.flexible(), spacing: 10),
                 GridItem(.flexible(), spacing: 10)
             ], spacing: 10) {
-                Cell_editMode_ButtonInsert(size: 20, onClick: { }, onDrop: { providers in true } ).id(1)
-                Cell_editMode_ButtonInsert(size: 20, onClick: { }, onDrop: { providers in true } ).id(2)
-                Cell_editMode_ButtonInsert(size: 20, onClick: { }, onDrop: { providers in true } ).id(3)
-                Cell_editMode_ButtonInsert(size: 20, onClick: { }, onDrop: { providers in true } ).id(4)
+                Cell_editMode_ButtonInsert(size: 20, onClick: { } ).id(1)
+                Cell_editMode_ButtonInsert(size: 20, onClick: { } ).id(2)
+                Cell_editMode_ButtonInsert(size: 20, onClick: { } ).id(3)
+                Cell_editMode_ButtonInsert(size: 20, onClick: { } ).id(4)
             }
 
         }.padding(20)
