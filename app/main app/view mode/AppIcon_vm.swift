@@ -19,7 +19,7 @@ struct AppIcon_viewMode: View, BackgroundColorProtocol {
     private let size: CGFloat
 
     private var scaleFactor: Double {
-        self.size / ThisApp.CELL_SIZE
+        self.size / CGFloat(ThisApp.CELL_SIZE_DEFAULT)
     }
 
     init(
@@ -82,13 +82,13 @@ struct AppIcon_viewMode: View, BackgroundColorProtocol {
             AppIcon_viewMode(
                 name: "Application Title",
                 icon: AppValue.APP_NO_ICON,
-                size: ThisApp.CELL_SIZE
+                size: CGFloat(ThisApp.CELL_SIZE_DEFAULT)
             ).id(1)
 
             AppIcon_viewMode(
                 name: "Application Title",
                 icon: ThisApp.DEMO_ICON,
-                size: ThisApp.CELL_SIZE
+                size: CGFloat(ThisApp.CELL_SIZE_DEFAULT)
             ).id(2)
 
             Grid(alignment: .center, horizontalSpacing: 0, verticalSpacing: 0) {
@@ -97,13 +97,13 @@ struct AppIcon_viewMode: View, BackgroundColorProtocol {
                     AppIcon_viewMode(
                         name: "Application Title",
                         icon: AppValue.APP_NO_ICON,
-                        size: ThisApp.CELL_SIZE / 2
+                        size: CGFloat(ThisApp.CELL_SIZE_DEFAULT) / 2
                     ).id(3)
 
                     AppIcon_viewMode(
                         name: "Application Title",
                         icon: ThisApp.DEMO_ICON,
-                        size: ThisApp.CELL_SIZE / 2
+                        size: CGFloat(ThisApp.CELL_SIZE_DEFAULT) / 2
                     ).id(4)
 
                 }
@@ -119,25 +119,25 @@ struct AppIcon_viewMode: View, BackgroundColorProtocol {
         AppIcon_viewMode(
             name: "Application Title",
             icon: AppValue.APP_NO_ICON,
-            size: ThisApp.CELL_SIZE * 0.5
+            size: CGFloat(ThisApp.CELL_SIZE_DEFAULT) * 0.5
         ).id(1)
 
         AppIcon_viewMode(
             name: "Application Title",
             icon: AppValue.APP_NO_ICON,
-            size: ThisApp.CELL_SIZE
+            size: CGFloat(ThisApp.CELL_SIZE_DEFAULT)
         ).id(2)
 
         AppIcon_viewMode(
             name: "Application Title",
             icon: AppValue.APP_NO_ICON,
-            size: ThisApp.CELL_SIZE * 1.5
+            size: CGFloat(ThisApp.CELL_SIZE_DEFAULT) * 1.5
         ).id(3)
 
         AppIcon_viewMode(
             name: "Application Title",
             icon: AppValue.APP_NO_ICON,
-            size: ThisApp.CELL_SIZE * 2.0
+            size: CGFloat(ThisApp.CELL_SIZE_DEFAULT) * 2.0
         ).id(4)
 
     }.padding(20)

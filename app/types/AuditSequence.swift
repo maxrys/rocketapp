@@ -19,10 +19,10 @@ struct AuditSequence: AsyncSequence {
 
     init(profileID: ProfileID) {
         self.profileID = profileID
-        for (cellIDValue, cellValue) in CellValue.modelSelectMatrix(profileID: profileID).flat {
+        for (cellID, cellValue) in CellValue.modelSelect(profileID: profileID) {
             self.data.append(
                 CellID_CellValue_Pair(
-                    cellID   : cellIDValue,
+                    cellID   : cellID,
                     cellValue: cellValue
                 )
             )
@@ -78,7 +78,7 @@ struct AuditSequenceIterator: AsyncIteratorProtocol {
                     }} else { _ = await CellValue                  .modelDelete(cellID, profileID) }
 
                 case .mini(let miniGridOld):
-                    var miniGridNew = MiniGridValue()
+                    var miniGridNew = CellMiniGridValue()
                     if let appValueOld = miniGridOld.cell1 { miniGridNew.cell1 = AppValue(appValueOld.path) }
                     if let appValueOld = miniGridOld.cell2 { miniGridNew.cell2 = AppValue(appValueOld.path) }
                     if let appValueOld = miniGridOld.cell3 { miniGridNew.cell3 = AppValue(appValueOld.path) }

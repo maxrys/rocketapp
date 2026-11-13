@@ -16,16 +16,8 @@ struct MainScene: View, BackgroundColorProtocol {
     @Binding private var isEditMode: Bool
     @State private var isHovering = false
 
-    private var cellSizeFinal: Double {
-        ThisApp.CELL_SIZE * self.profiles.current.zoom.double
-    }
-
-    private var cellSpacingFinal: Double {
-        Double(self.profiles.current.spacing) * self.profiles.current.zoom.double
-    }
-
-    private var frameMinSizeViewMode: Double {
-        self.cellSizeFinal + (self.cellSpacingFinal * 2)
+    private var frameMinSizeViewMode: CGFloat {
+        CGFloat(self.profiles.current.cellSize) + CGFloat(self.profiles.current.cellSpacing) * 2
     }
 
     init(isEditMode: Binding<Bool>) {
@@ -40,8 +32,8 @@ struct MainScene: View, BackgroundColorProtocol {
                     self.NoOneAppView()
                 } else {
                     MainGrid_viewMode(
-                        cellSize: self.cellSizeFinal,
-                        cellSpacing: self.cellSpacingFinal
+                        cellSize   : CGFloat(self.profiles.current.cellSize),
+                        cellSpacing: CGFloat(self.profiles.current.cellSpacing)
                     ).onTapGesture {
                         if (self.profiles.current.isHideOnMisclick) {
                             NSWindow.hideWithAnimation(ThisApp.WINDOW_MAIN_ID)
@@ -55,17 +47,17 @@ struct MainScene: View, BackgroundColorProtocol {
                     isEditMode: self.$isEditMode
                 ).zIndex(1)
                 MainGrid_editMode(
-                    cellSize: self.cellSizeFinal,
-                    cellSpacing: self.cellSpacingFinal
+                    cellSize   : CGFloat(self.profiles.current.cellSize),
+                    cellSpacing: CGFloat(self.profiles.current.cellSpacing)
                 )
             }
 
         }
         .frame(
-            minWidth : self.isEditMode ? ThisApp.DEFAULT_WIN_FRAME_EDIT_MODE.w : self.frameMinSizeViewMode, maxWidth : .infinity,
-            minHeight: self.isEditMode ? ThisApp.DEFAULT_WIN_FRAME_EDIT_MODE.h : self.frameMinSizeViewMode, maxHeight: .infinity
+            minWidth : self.isEditMode ? ThisApp.WINDOW_FRAME_EDIT_MODE_DEFAULT.w : self.frameMinSizeViewMode, maxWidth : .infinity,
+            minHeight: self.isEditMode ? ThisApp.WINDOW_FRAME_EDIT_MODE_DEFAULT.h : self.frameMinSizeViewMode, maxHeight: .infinity
         )
-        .background(self.backgroundHSB().color)
+        .background(self.backgroundCurrent().color)
         .overlay(alignment: .topTrailing) {
             if (self.isEditMode == false) {
                 self.ButtonOpenSettingsView()
@@ -144,7 +136,7 @@ struct MainScene: View, BackgroundColorProtocol {
     @ViewBuilder fileprivate func ButtonOpenSettingsView() -> some View {
         ButtonRound(
             label     : { Image(systemName: "gearshape.circle") },
-            foreground: { self.backgroundAccentHSB(minOpacity: 0.5).color },
+            foreground: { self.backgroundCurrentAccent(minOpacity: 0.5).color },
             background: { Color.clear },
         ) { self.isEditMode = true }
     }

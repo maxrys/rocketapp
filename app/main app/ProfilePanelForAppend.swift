@@ -24,9 +24,9 @@ struct ProfilePanelForAppend: View {
             TextFieldCustom(
                 NSLocalizedString("Title", comment: ""),
                 value: self.$title
-            ).onPressEnter { self.onAppendProfile() }
+            ).onPressEnter { self.onAddProfile() }
 
-            HStack(spacing: 10) {
+            VStack(spacing: 10) {
 
                 ButtonCustom(
                     NSLocalizedString("clone", comment: ""),
@@ -39,14 +39,25 @@ struct ProfilePanelForAppend: View {
                 .disabled(self.title.isEmpty)
 
                 ButtonCustom(
-                    NSLocalizedString("append", comment: ""),
+                    NSLocalizedString("add with applications", comment: ""),
+                    colorStyle: .common,
+                    font: .system(size: 14, weight: .regular),
+                    padding: .init(top: 10, leading: 20, bottom: 10, trailing: 20),
+                    flexibility: .infinity,
+                    isFlat: false,
+                    onClick:         { self.onAddProfileWithApps() })
+                .onPressEnterOrSpace { self.onAddProfileWithApps() }
+                .disabled(true) /* self.title.isEmpty */
+
+                ButtonCustom(
+                    NSLocalizedString("add", comment: ""),
                     colorStyle: .accent,
                     font: .system(size: 14, weight: .regular),
                     padding: .init(top: 10, leading: 20, bottom: 10, trailing: 20),
                     flexibility: .infinity,
                     isFlat: false,
-                    onClick:         { self.onAppendProfile() })
-                .onPressEnterOrSpace { self.onAppendProfile() }
+                    onClick:         { self.onAddProfile() })
+                .onPressEnterOrSpace { self.onAddProfile() }
                 .disabled(self.title.isEmpty)
 
             }
@@ -61,8 +72,8 @@ struct ProfilePanelForAppend: View {
         let profile = ProfileValue(
             ID                   : profiles.newID,
             title                : self.title,
-            zoom                 : self.profiles.current.zoom,
-            spacing              : self.profiles.current.spacing,
+            cellSize             : self.profiles.current.cellSize,
+            cellSpacing          : self.profiles.current.cellSpacing,
             iconOnHoverZoom      : self.profiles.current.iconOnHoverZoom,
             isShowIconTitle      : self.profiles.current.isShowIconTitle,
             isHideOnMisclick     : self.profiles.current.isHideOnMisclick,
@@ -76,7 +87,7 @@ struct ProfilePanelForAppend: View {
         if (self.profiles.insert(profile)) {
             Logger.customLog("The profile (ID: \(profile.ID)) has been cloned.")
             if (!cells.isEmpty) {
-                for (cellID, cellValue) in cells.flat {
+                for (cellID, cellValue) in cells {
                     _ = cellValue.modelInsert(cellID, profile.ID)
                 }
             }
@@ -86,21 +97,39 @@ struct ProfilePanelForAppend: View {
         }
     }
 
-    private func onAppendProfile() {
+    private func onAddProfileWithApps() {
+        let embeddedApps = PL_embeddedApps.selectList()
+        for defApps in PL_defaultProfileApps.selectList() {
+            let id = defApps.key
+            let path = embeddedApps[id]
+            let rowNum = defApps.value.rowNum
+            let colNum = defApps.value.colNum
+            let sector = defApps.value.sector
+            print(
+                "\(id)\n" +
+                "    \(path!)\n" +
+                "    rowNum = \(rowNum)\n" +
+                "    colNum = \(colNum)\n" +
+                "    sector = \(sector)"
+            )
+        }
+    }
+
+    private func onAddProfile() {
         let profile = ProfileValue(
             ID                   : profiles.newID,
             title                : self.title,
-            zoom                 : ThisApp.DEFAULT_ZOOM,
-            spacing              : ThisApp.DEFAULT_SPACING,
-            iconOnHoverZoom      : ThisApp.DEFAULT_ICON_ON_HOVER_ZOOM,
-            isShowIconTitle      : ThisApp.DEFAULT_IS_SHOW_ICON_TITLE,
-            isHideOnMisclick     : ThisApp.DEFAULT_IS_HIDE_ON_MISCLICK,
-            isStickyGrid         : ThisApp.DEFAULT_IS_STICKY_GRID,
-            isShowWinTitleButtons: ThisApp.DEFAULT_IS_SHOW_WINDOW_TITLE_BUTTONS,
-            background           : ThisApp.DEFAULT_BACKGROUND,
-            backgroundDark       : ThisApp.DEFAULT_BACKGROUND_DARK,
-            winFrameViewMode     : NSWindow.centerWindowFrame(ThisApp.WINDOW_MAIN_ID, frame: ThisApp.DEFAULT_WIN_FRAME_VIEW_MODE),
-            winFrameEditMode     : NSWindow.centerWindowFrame(ThisApp.WINDOW_MAIN_ID, frame: ThisApp.DEFAULT_WIN_FRAME_EDIT_MODE)
+            cellSize             : ThisApp.CELL_SIZE_DEFAULT,
+            cellSpacing          : ThisApp.CELL_SPACING_DEFAULT,
+            iconOnHoverZoom      : ThisApp.HOVER_ZOOM_DEFAULT,
+            isShowIconTitle      : ThisApp.IS_SHOW_ICON_TITLE_DEFAULT,
+            isHideOnMisclick     : ThisApp.IS_HIDE_ON_MISCLICK_DEFAULT,
+            isStickyGrid         : ThisApp.IS_STICKY_GRID_DEFAULT,
+            isShowWinTitleButtons: ThisApp.IS_SHOW_WINDOW_TITLE_BUTTONS_DEFAULT,
+            background           : ThisApp.WINDOW_BACKGROUND_DEFAULT,
+            backgroundDark       : ThisApp.WINDOW_BACKGROUND_DARK_DEFAULT,
+            winFrameViewMode     : NSWindow.centerWindowFrame(ThisApp.WINDOW_MAIN_ID, frame: ThisApp.WINDOW_FRAME_VIEW_MODE_DEFAULT),
+            winFrameEditMode     : NSWindow.centerWindowFrame(ThisApp.WINDOW_MAIN_ID, frame: ThisApp.WINDOW_FRAME_EDIT_MODE_DEFAULT)
         )
         if (self.profiles.insert(profile)) {
             Logger.customLog("The profile (ID: \(profile.ID)) has been created.")

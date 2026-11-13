@@ -16,8 +16,8 @@ import SwiftData
     @Attribute(.unique)
     public var id: ProfileID
     public var title: ProfileTitle
-    public var zoom: Decimal
-    public var spacing: UInt
+    public var cellSize: UInt = ThisApp.CELL_SIZE_DEFAULT
+    public var cellSpacing: UInt = ThisApp.CELL_SPACING_DEFAULT
     public var iconOnHoverZoom: Decimal
     public var isShowIconTitle: Bool
     public var isHideOnMisclick: Bool
@@ -25,14 +25,14 @@ import SwiftData
     public var isShowWinTitleButtons: Bool
     public var background: String
     public var backgroundDark: String
-    public var winFrameViewMode: String = ThisApp.DEFAULT_WIN_FRAME_VIEW_MODE.encode()
-    public var winFrameEditMode: String = ThisApp.DEFAULT_WIN_FRAME_EDIT_MODE.encode()
+    public var winFrameViewMode: String = ThisApp.WINDOW_FRAME_VIEW_MODE_DEFAULT.encode()
+    public var winFrameEditMode: String = ThisApp.WINDOW_FRAME_EDIT_MODE_DEFAULT.encode()
 
     init(
         ID: ProfileID,
         title: ProfileTitle,
-        zoom: Decimal,
-        spacing: UInt,
+        cellSize: UInt,
+        cellSpacing: UInt,
         iconOnHoverZoom: Decimal,
         isShowIconTitle: Bool,
         isHideOnMisclick: Bool,
@@ -45,8 +45,8 @@ import SwiftData
     ) {
         self.id = ID
         self.title = title
-        self.zoom = zoom
-        self.spacing = spacing
+        self.cellSize = cellSize
+        self.cellSpacing = cellSpacing
         self.iconOnHoverZoom = iconOnHoverZoom
         self.isShowIconTitle = isShowIconTitle
         self.isHideOnMisclick = isHideOnMisclick
@@ -108,8 +108,8 @@ import SwiftData
             let fetchRequest = FetchDescriptor<SELF>(predicate: self.predicate(ID: item.id))
             if let itemToUpdate = try modelContext.fetch(fetchRequest).first {
                 itemToUpdate.title                 = item.title
-                itemToUpdate.zoom                  = item.zoom
-                itemToUpdate.spacing               = item.spacing
+                itemToUpdate.cellSize              = item.cellSize
+                itemToUpdate.cellSpacing           = item.cellSpacing
                 itemToUpdate.iconOnHoverZoom       = item.iconOnHoverZoom
                 itemToUpdate.isShowIconTitle       = item.isShowIconTitle
                 itemToUpdate.isHideOnMisclick      = item.isHideOnMisclick

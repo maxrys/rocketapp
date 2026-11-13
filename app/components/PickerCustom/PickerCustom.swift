@@ -7,8 +7,6 @@ import SwiftUI
 
 struct PickerCustom<Key>: View where Key: Hashable & Comparable {
 
-    typealias ColorSet = Color.ProfilePanelColorSet.PickerColorSet
-
     @Environment(\.isEnabled) private var isEnabled
     @Binding fileprivate var selectedKey: Key
     @State fileprivate var isOpened = false
@@ -17,7 +15,6 @@ struct PickerCustom<Key>: View where Key: Hashable & Comparable {
     fileprivate let sortedBy: Dictionary<Key, String>.OrderBy
     fileprivate let isPlainListStyle: Bool
     fileprivate let flexibility: Flexibility
-    fileprivate let colorSet: ColorSet
     fileprivate let cornerRadius: CGFloat = 15
     fileprivate let borderWidth: CGFloat = 4
 
@@ -31,14 +28,12 @@ struct PickerCustom<Key>: View where Key: Hashable & Comparable {
         sortedBy: Dictionary<Key, String>.OrderBy = .keyAscending,
         isPlainListStyle: Bool = false,
         flexibility: Flexibility = .none,
-        colorSet: ColorSet = Color.profilePanel.picker
     ) {
         self._selectedKey = selected
         self.items = items
         self.sortedBy = sortedBy
         self.isPlainListStyle = isPlainListStyle
         self.flexibility = flexibility
-        self.colorSet = colorSet
         self.itemsSorted = self.items.sorted(order: self.sortedBy)
         self.itemsSorted.enumerated().forEach { index, keyValuePair in
             self.keyToIndex[keyValuePair.key] = index
@@ -78,11 +73,11 @@ struct PickerCustom<Key>: View where Key: Hashable & Comparable {
                 .padding(.horizontal, 9)
                 .padding(.vertical  , 5)
                 .flexibility(self.flexibility)
-                .foregroundStyle(self.colorSet.text)
+                .foregroundStyle(Color.profilePanel.picker.text)
                 .background(
                     RoundedRectangle(cornerRadius: self.cornerRadius)
-                        .stroke(self.colorSet.border, lineWidth: self.borderWidth)
-                        .fill(self.colorSet.background))
+                        .stroke(Color.profilePanel.picker.border, lineWidth: self.borderWidth)
+                        .fill(Color.profilePanel.picker.background))
                 .contentShape(RoundedRectangle(cornerRadius: self.cornerRadius))
         }
         .hoverBehavior(.scaleEffect(from: 1.0, to: 1.02))
@@ -121,9 +116,9 @@ fileprivate struct PickerCustomPopover<Key>: View where Key: Hashable & Comparab
                     self.rootView.isOpened = false
                 } label: {
                     let backgroundColor = {
-                        if (self.rootView.selectedKey      == item.key) { return self.rootView.colorSet.itemSelectedBackground }
-                        if (self.hoveredKey                == item.key) { return self.rootView.colorSet.itemHoveringBackground }
-                        if (self.rootView.isPlainListStyle == false   ) { return self.rootView.colorSet.itemBackground }
+                        if (self.rootView.selectedKey      == item.key) { return Color.profilePanel.picker.itemSelectedBackground }
+                        if (self.hoveredKey                == item.key) { return Color.profilePanel.picker.itemHoveringBackground }
+                        if (self.rootView.isPlainListStyle == false   ) { return Color.profilePanel.picker.itemBackground }
                         return Color.clear
                     }()
                     Text(item.value)
@@ -131,7 +126,7 @@ fileprivate struct PickerCustomPopover<Key>: View where Key: Hashable & Comparab
                         .padding(.horizontal, 9)
                         .padding(.vertical  , 5)
                         .frame(maxWidth: .infinity, alignment: self.rootView.isPlainListStyle ? .leading : .center)
-                        .foregroundStyle(self.rootView.colorSet.itemText)
+                        .foregroundStyle(Color.profilePanel.picker.itemText)
                         .background(
                             RoundedRectangle(cornerRadius: self.rootView.cornerRadius)
                                 .fill(backgroundColor))
@@ -188,9 +183,9 @@ fileprivate struct PickerCustomPopover<Key>: View where Key: Hashable & Comparab
                         self.rootView.isOpened = false
                     } label: {
                         let backgroundColor = {
-                            if (self.rootView.selectedKey      == item.key) { return self.rootView.colorSet.itemSelectedBackground }
-                            if (self.hoveredKey                == item.key) { return self.rootView.colorSet.itemHoveringBackground }
-                            if (self.rootView.isPlainListStyle == false   ) { return self.rootView.colorSet.itemBackground }
+                            if (self.rootView.selectedKey      == item.key) { return Color.profilePanel.picker.itemSelectedBackground }
+                            if (self.hoveredKey                == item.key) { return Color.profilePanel.picker.itemHoveringBackground }
+                            if (self.rootView.isPlainListStyle == false   ) { return Color.profilePanel.picker.itemBackground }
                             return Color.clear
                         }()
                         Text(item.value)
@@ -198,7 +193,7 @@ fileprivate struct PickerCustomPopover<Key>: View where Key: Hashable & Comparab
                             .padding(.horizontal, 9)
                             .padding(.vertical  , 5)
                             .frame(maxWidth: .infinity, alignment: self.rootView.isPlainListStyle ? .leading : .center)
-                            .foregroundStyle(self.rootView.colorSet.itemText)
+                            .foregroundStyle(Color.profilePanel.picker.itemText)
                             .background(
                                 RoundedRectangle(cornerRadius: self.rootView.cornerRadius)
                                     .fill(backgroundColor))

@@ -17,8 +17,8 @@ struct ProfilePanelForChange: View {
     private let elementSpacing: CGFloat = 20
 
     private var columnsHead: [GridItem] {[
-        GridItem(.flexible(), spacing: self.elementSpacing, alignment: .leading),
-        GridItem(.flexible(), spacing: self.elementSpacing, alignment: .trailing)
+        GridItem(.flexible(), spacing: 0, alignment: .leading),
+        GridItem(.flexible(), spacing: 0, alignment: .trailing)
     ]}
 
     private var columnsBody: [GridItem] {[
@@ -100,18 +100,20 @@ struct ProfilePanelForChange: View {
 
             LazyVGrid(columns: self.columnsHead, spacing: self.elementSpacing) {
 
-                /* MARK: Zoom configurator */
+                /* MARK: Size configurator */
 
                 HStack(spacing: 10) {
 
                     self.TitleView(
-                        NSLocalizedString("Zoom", comment: "")
+                        NSLocalizedString("Size", comment: "")
                     )
 
                     StepperCustom(
-                        self.profiles.current.getBinding(\.zoom),
-                        in: 0.5 ... 2.0, step: 0.1,
-                        colorSet: Color.ctrlPanel.stepper
+                        self.profiles.current.getBinding(\.cellSize),
+                        in: ThisApp.CELL_SIZE_MIN ...
+                            ThisApp.CELL_SIZE_MAX,
+                        step: ThisApp.CELL_SIZE_STEP,
+                        minWidth: 40
                     )
 
                 }
@@ -125,9 +127,10 @@ struct ProfilePanelForChange: View {
                     )
 
                     StepperCustom(
-                        self.profiles.current.getBinding(\.spacing),
-                        in: 0 ... UInt(ThisApp.CELL_SIZE), step: 5,
-                        colorSet: Color.ctrlPanel.stepper
+                        self.profiles.current.getBinding(\.cellSpacing),
+                        in: ThisApp.CELL_SPACING_MIN ...
+                            ThisApp.CELL_SPACING_MAX,
+                        step: ThisApp.CELL_SPACING_STEP
                     )
 
                 }
@@ -148,9 +151,11 @@ struct ProfilePanelForChange: View {
 
                 StepperCustom(
                     self.profiles.current.getBinding(\.iconOnHoverZoom),
-                    in: ThisApp.ICON_ON_HOVER_ZOOM_MIN ...
-                        ThisApp.ICON_ON_HOVER_ZOOM_MAX, step: 0.1,
-                    colorSet: Color.ctrlPanel.stepper
+                    prefix: "x",
+                    in: ThisApp.HOVER_ZOOM_MIN ...
+                        ThisApp.HOVER_ZOOM_MAX,
+                    step: ThisApp.HOVER_ZOOM_STEP,
+                    minWidth: 40
                 )
                 .scaleEffect(0.7)
                 .padding(.horizontal, -18)
@@ -159,8 +164,7 @@ struct ProfilePanelForChange: View {
                 /* MARK: "Show Icon Title" */
 
                 self.TitleView(
-                    NSLocalizedString("Show Icon Title", comment: ""),
-                    NSLocalizedString("turn off to improve performance", comment: "")
+                    NSLocalizedString("Show Icon Title", comment: "")
                 )
 
                 ToggleCustom(

@@ -45,8 +45,7 @@ struct ProfilePanel: View {
                     items: self.profiles.list,
                     sortedBy: .valueAscending,
                     isPlainListStyle: true,
-                    flexibility: .size(250),
-                    colorSet: Color.profilePanel.picker
+                    flexibility: .size(250)
                 ).overlay(alignment: .trailing) {
                     if (self.profiles.current.ID == ThisApp.EMBEDDED_PROFILE_ID) {
                         Image(systemName: "lock.fill")

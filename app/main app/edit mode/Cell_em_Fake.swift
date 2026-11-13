@@ -34,8 +34,8 @@ struct Cell_editMode_Fake: View, BackgroundColorProtocol {
                 .padding(.top    , self.size * 0.022)
                 .symbolRenderingMode(.palette)
                 .foregroundStyle(
-                    self.color1 ?? self.backgroundAccentHSB(minOpacity: 1.0).color,
-                    self.color2 ?? self.backgroundHSB      (minOpacity: 1.0).color
+                    self.color1 ?? self.backgroundCurrentAccent(minOpacity: 1.0).color,
+                    self.color2 ?? self.backgroundCurrent      (minOpacity: 1.0).color
                 )
         }.frame(
             width : self.size,
@@ -62,14 +62,14 @@ struct Cell_editMode_Fake: View, BackgroundColorProtocol {
             color2: .blue
         )
         Cell_editMode(
-            ID: 0,
+            ID: CellIDValue.zero,
             size: size,
             isVisible: true
         ).environment(\.cellsState, mockForNone).opacity(0.5)
     }
     ZStack {
         Cell_editMode(
-            ID: 0,
+            ID: CellIDValue.zero,
             size: size,
             isVisible: true
         ).environment(\.cellsState, mockForNone)

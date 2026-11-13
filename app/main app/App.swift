@@ -29,36 +29,51 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     static let NOT_APPLICABLE = "—"
     static let CONTAINER_PATH = "~/Library/Containers/maxrys.rocketapp"
+
     static let DEMO_BUNDLE_ID = "rysmax.demo"
     static let DEMO_PATH = "file:///System/Applications/Demo Application.app/"
     static let DEMO_NAME = "Demo Application"
     static let DEMO_ICON = NSImage(named: "AppIcon")!
+
     static let WINDOW_ABOUT_TITLE_LOCALIZED = String(format: NSLocalizedString("About %@" , comment: ""), NSApplication.appNameLocalized)
     static let WINDOW_ABOUT_ID = "about"
     static let WINDOW_MAIN_TITLE = "RocketApp"
     static let WINDOW_MAIN_ID = "mainGrid"
+    static let WINDOW_FRAME_VIEW_MODE_DEFAULT = CGRect(x: 0, y: 0, w: 400, h: 300)
+    static let WINDOW_FRAME_EDIT_MODE_DEFAULT = CGRect(x: 0, y: 0, w: 600, h: 300)
+    static let WINDOW_BACKGROUND_DEFAULT      = ColorHSBValue(0.55, 0.15, 0.97, 0.70)
+    static let WINDOW_BACKGROUND_DARK_DEFAULT = ColorHSBValue(0.67, 0.38, 0.28, 0.70)
+
     static let MESSAGE_NO_APPLICATIONS = NSLocalizedString("No Applications!", comment: "")
     static let MESSAGE_OPEN_SETTINGS = NSLocalizedString("open settings", comment: "")
     static let MESSAGE_SELECT_THIS_APPLICATION = NSLocalizedString("Select this application", comment: "")
+
     static let PREVIEW_PROFILE_ID: ProfileID = ProfileID.max
     static let EMBEDDED_PROFILE_ID: ProfileID = 0
-    static let DEFAULT_TITLE: ProfileTitle = "My Profile"
-    static let DEFAULT_ZOOM: Decimal = 1.0
-    static let DEFAULT_SPACING: UInt = 20
-    static let DEFAULT_ICON_ON_HOVER_ZOOM: Decimal = 1.2
-    static let DEFAULT_IS_SHOW_ICON_TITLE = true
-    static let DEFAULT_IS_HIDE_ON_MISCLICK = false
-    static let DEFAULT_IS_STICKY_GRID = false
-    static let DEFAULT_IS_SHOW_WINDOW_TITLE_BUTTONS = true
-    static let DEFAULT_BACKGROUND      = ColorHSBValue(0.55, 0.15, 0.97, 0.70)
-    static let DEFAULT_BACKGROUND_DARK = ColorHSBValue(0.67, 0.38, 0.28, 0.70)
-    static let DEFAULT_WIN_FRAME_VIEW_MODE = CGRect(x: 0, y: 0, w: 400, h: 300)
-    static let DEFAULT_WIN_FRAME_EDIT_MODE = CGRect(x: 0, y: 0, w: 600, h: 300)
-    static let ICON_ON_HOVER_ZOOM_MIN: Decimal = 1.0
-    static let ICON_ON_HOVER_ZOOM_MAX: Decimal = 1.5
-    static let GRID_COLS_MAX: CellsByAxisCount = 30
-    static let GRID_ROWS_MAX: CellsByAxisCount = 30
-    static let CELL_SIZE: CGFloat = 100
+
+    static let TITLE_DEFAULT: ProfileTitle = "My Profile"
+    static let IS_SHOW_ICON_TITLE_DEFAULT = true
+    static let IS_HIDE_ON_MISCLICK_DEFAULT = false
+    static let IS_STICKY_GRID_DEFAULT = false
+    static let IS_SHOW_WINDOW_TITLE_BUTTONS_DEFAULT = true
+
+    static let GRID_COLS: UInt8 = 45
+    static let GRID_ROWS: UInt8 = 45
+
+    static let CELL_SIZE_MIN: UInt = 50
+    static let CELL_SIZE_MAX: UInt = 150
+    static let CELL_SIZE_DEFAULT: UInt = 100
+    static let CELL_SIZE_STEP: UInt = 10
+
+    static let CELL_SPACING_MIN: UInt = 0
+    static let CELL_SPACING_MAX: UInt = 30
+    static let CELL_SPACING_DEFAULT: UInt = 20
+    static let CELL_SPACING_STEP: UInt = 5
+
+    static let HOVER_ZOOM_MIN: Decimal = 1.0
+    static let HOVER_ZOOM_MAX: Decimal = 1.5
+    static let HOVER_ZOOM_DEFAULT: Decimal = 1.2
+    static let HOVER_ZOOM_STEP: Decimal = 0.1
 
     private let profiles = EnvironmentValues().profilesState
     private let cells    = EnvironmentValues().cellsState
