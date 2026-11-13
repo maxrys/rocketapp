@@ -8,23 +8,5 @@
 	<string>https://github.com/maxrys/rocketapp</string>
 	<key>Page Support</key>
 	<string>https://github.com/maxrys/rocketapp/issues</string>
-	<key>UTExportedTypeDeclarations</key>
-	<array>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.data</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>AppDragValue</string>
-			<key>UTTypeIdentifier</key>
-			<string>maxrys.rocketapp.app-drag-value</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.mime-type</key>
-				<string>application/json</string>
-			</dict>
-		</dict>
-	</array>
 </dict>
 </plist>
