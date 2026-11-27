@@ -6,7 +6,7 @@
 import SwiftUI
 
 struct EnvironmentKey_ProfilesState: EnvironmentKey {
-    static let defaultValue: ProfilesState = ProfilesState.shared
+    static let defaultValue = ProfilesState.shared
 }
 
 struct EnvironmentKey_CellsState: EnvironmentKey {
@@ -15,16 +15,16 @@ struct EnvironmentKey_CellsState: EnvironmentKey {
     )
 }
 
+struct EnvironmentKey_isEditMode: EnvironmentKey {
+    static let defaultValue = ValueState<Bool>(false)
+}
+
 struct EnvironmentKey_windowBackground: EnvironmentKey {
-    static let defaultValue = ColorHSBValue(
-        0.0, 0.0, 0.0
-    )
+    static let defaultValue = ColorHSBValue.black
 }
 
 struct EnvironmentKey_windowBackgroundDark: EnvironmentKey {
-    static let defaultValue = ColorHSBValue(
-        0.0, 0.0, 0.0
-    )
+    static let defaultValue = ColorHSBValue.black
 }
 
 extension EnvironmentValues {
@@ -37,6 +37,11 @@ extension EnvironmentValues {
     var cellsState: CellsState {
         get { self[EnvironmentKey_CellsState.self] }
         set { self[EnvironmentKey_CellsState.self] = newValue }
+    }
+
+    var isEditMode: ValueState<Bool> {
+        get { self[EnvironmentKey_isEditMode.self] }
+        set { self[EnvironmentKey_isEditMode.self] = newValue }
     }
 
     var windowBackground: ColorHSBValue {

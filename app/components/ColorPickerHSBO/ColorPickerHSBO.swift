@@ -38,6 +38,15 @@ struct ColorPickerHSBO: View {
         self.isInstantUpdate = isInstantUpdate
     }
 
+    private func setComponentValue(_ component: ColorComponent, x: Double) -> Void {
+        switch component {
+            case .H: self.colorInternal.hue        = x / self.width
+            case .S: self.colorInternal.saturation = x / self.width
+            case .B: self.colorInternal.brightness = x / self.width
+            case .O: self.colorInternal.opacity    = x / self.width
+        }
+    }
+
     public var body: some View {
         Button { self.isShowPopover = true } label: {
             self.ChessboardView()
@@ -203,26 +212,18 @@ struct ColorPickerHSBO: View {
     }
 
     @ViewBuilder private func TouchpadView(component: ColorComponent) -> some View {
-        let setComponentValue: (ColorComponent, Double) -> Void = { component, x in
-            switch component {
-                case .H: self.colorInternal.hue        = x / self.width
-                case .S: self.colorInternal.saturation = x / self.width
-                case .B: self.colorInternal.brightness = x / self.width
-                case .O: self.colorInternal.opacity    = x / self.width
-            }
-        }
         Rectangle()
             .foregroundColor(.clear)
             .contentShape(Rectangle())
             .pointerStyle(.link)
             .onTapGesture { location in
-                setComponentValue(component, location.x.fixBounds(max: self.width))
+                self.setComponentValue(component, x: location.x.fixBounds(max: self.width))
                 self.colorExternal = self.colorInternal
             }
             .gesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged { gesture in
-                        setComponentValue(component, gesture.location.x.fixBounds(max: self.width))
+                        self.setComponentValue(component, x: gesture.location.x.fixBounds(max: self.width))
                         if (self.isInstantUpdate) {
                             self.colorExternal = self.colorInternal
                         }
@@ -252,13 +253,13 @@ struct ColorPickerHSBO: View {
         ColorPickerHSBO($pickerColorR).PopoverView()
             .background {
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.NS[\.windowBackgroundColor])
+                    .fill(Color.NS[.windowBackgroundColor])
                     .shadow(radius: 3)
             }.environment(\.colorScheme, .light)
         ColorPickerHSBO($pickerColorR).PopoverView()
             .background {
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.NS[\.windowBackgroundColor])
+                    .fill(Color.NS[.windowBackgroundColor])
                     .shadow(radius: 3)
             }.environment(\.colorScheme, .dark)
     }

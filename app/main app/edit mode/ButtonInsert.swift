@@ -22,8 +22,8 @@ struct Cell_editMode_ButtonInsert: View, BackgroundColorProtocol {
     public var body: some View {
         Button { self.onClick() } label: {
             Circle()
-                .fill(self.backgroundHSB(minOpacity: 1.0).color)
-                .stroke(self.backgroundAccentHSB(minOpacity: 1.0).color, lineWidth: self.size * 0.1)
+                .fill(self.backgroundCurrent(minOpacity: 1.0).color)
+                .stroke(self.backgroundCurrentAccent(minOpacity: 1.0).color, lineWidth: self.size * 0.1)
                 .frame(width: self.size, height: self.size)
                 .clipShape   (              Circle())
                 .contentShape(              Circle())
@@ -35,7 +35,7 @@ struct Cell_editMode_ButtonInsert: View, BackgroundColorProtocol {
                         .frame(width: self.size * 0.6, height: self.size * 0.6)
                         .foregroundStyle(
                             self.isHovering ? Color.accentColor :
-                            self.backgroundAccentHSB(minOpacity: 1.0).color
+                            self.backgroundCurrentAccent(minOpacity: 1.0).color
                         )
                 }
         }

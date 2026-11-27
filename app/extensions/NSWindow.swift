@@ -77,11 +77,13 @@ extension NSWindow {
 
     static func centerWindowFrame(_ ID: String, frame: CGRect) -> CGRect {
         var result = frame
-        if (result.w.isFinite && result.h.isFinite) {
+        if (result.width.isFinite && result.height.isFinite) {
             if let window = Self.get(ID) {
                 if let screenFrame = window.screen?.visibleFrame {
-                    result.x = screenFrame.origin.x + (screenFrame.w - result.w) / 2
-                    result.y = screenFrame.origin.y + (screenFrame.h - result.h) / 2
+                    result.origin = CGPoint(
+                        x: screenFrame.origin.x + (screenFrame.width  - result.width ) / 2,
+                        y: screenFrame.origin.y + (screenFrame.height - result.height) / 2
+                    )
                 }
             }
         }

@@ -23,9 +23,9 @@ struct MainGrid_viewMode: View {
 
     private var gridSource: GridCustom.DataSource {
         var result = GridCustom.DataSource()
-        for (cellIDValue, _) in self.cells.data.flat {
-            result[cellIDValue] = Cell_viewMode(
-                ID: cellIDValue,
+        for (cellID, _) in self.cells.data {
+            result[cellID] = Cell_viewMode(
+                ID: cellID,
                 size: self.cellSize
             )
         }
@@ -54,7 +54,7 @@ struct MainGrid_viewMode: View {
 
 #Preview {
     MainGrid_viewMode(
-        cellSize: ThisApp.CELL_SIZE,
-        cellSpacing: CGFloat(ThisApp.DEFAULT_SPACING)
+        cellSize   : CGFloat(ThisApp.CELL_SIZE_DEFAULT),
+        cellSpacing: CGFloat(ThisApp.CELL_SPACING_DEFAULT)
     ).frame(width: 300)
 }

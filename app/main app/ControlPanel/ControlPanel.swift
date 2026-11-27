@@ -10,12 +10,7 @@ struct ControlPanel: View {
     @Environment(\.colorScheme)   private var colorScheme
     @Environment(\.profilesState) private var profiles
     @Environment(\.cellsState)    private var cells
-
-    @Binding private var isEditMode: Bool
-
-    init(isEditMode: Binding<Bool>) {
-        self._isEditMode = isEditMode
-    }
+    @Environment(\.isEditMode)    private var isEditMode
 
     public var body: some View {
         ProfilePanel()
@@ -38,7 +33,7 @@ struct ControlPanel: View {
             label     : { Image(systemName: "checkmark.circle") },
             foreground: { Color.ctrlPanel.buttonText },
             background: { Color.ctrlPanel.buttonBackground }
-        ) { self.isEditMode = false }
+        ) { self.isEditMode.value = false }
     }
 
 }
@@ -51,8 +46,8 @@ struct ControlPanel: View {
 
 #Preview {
     Previewer {
-        ControlPanel(
-            isEditMode: .constant(true)
-        ).frame(width: 600, height: 100, alignment: .top)
+        ControlPanel()
+            .frame(width: 600, height: 100, alignment: .top)
+            .environment(\.isEditMode, ValueState<Bool>(true))
     }
 }

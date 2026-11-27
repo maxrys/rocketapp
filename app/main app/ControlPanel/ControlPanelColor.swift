@@ -7,22 +7,22 @@ import SwiftUI
 
 extension Color {
 
-    struct CtrlPanelColorSet {
+    enum CtrlPanelColorSet {
 
-        struct StepperColorSet {
-            public let titleText        = Color("color Control Panel Stepper Title Text")
-            public let valueText        = Color("color Control Panel Stepper Value Text")
-            public let groupBackground  = Color("color Control Panel Stepper Group Background")
-            public let buttonText       = Color("color Control Panel Stepper Button Text")
-            public let buttonBackground = Color("color Control Panel Stepper Button Background")
+        enum StepperColorSet {
+            static let titleText        = Color("color Control Panel Stepper Title Text")
+            static let valueText        = Color("color Control Panel Stepper Value Text")
+            static let groupBackground  = Color("color Control Panel Stepper Group Background")
+            static let buttonText       = Color("color Control Panel Stepper Button Text")
+            static let buttonBackground = Color("color Control Panel Stepper Button Background")
         }
 
-        public let background       = Color("color Control Panel Background")
-        public let buttonText       = Color("color Control Panel Button Text")
-        public let buttonBackground = Color("color Control Panel Button Background")
-        public let stepper          = StepperColorSet()
+        static let background       = Color("color Control Panel Background")
+        static let buttonText       = Color("color Control Panel Button Text")
+        static let buttonBackground = Color("color Control Panel Button Background")
+        static let stepper          = StepperColorSet.self
     }
 
-    static let ctrlPanel = CtrlPanelColorSet()
+    static let ctrlPanel = CtrlPanelColorSet.self
 
 }

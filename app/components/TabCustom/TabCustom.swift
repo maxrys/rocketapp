@@ -112,6 +112,7 @@ fileprivate struct TabCustom_HeadTitle: View {
             HVStack(axis: self.item.axis, spacing: self.item.spacing) {
                 if let icon = self.item.icon, let iconSize = self.item.iconSize {
                     icon.resizable()
+                        .aspectRatio(contentMode: .fit)
                         .frame(
                             width : iconSize.width,
                             height: iconSize.height

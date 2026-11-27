@@ -16,8 +16,8 @@ import SwiftUI
 
     public let ID: ProfileID
     public var title: ProfileTitle           { didSet { if (oldValue != title)                 { _ = self.modelUpdate() } } }
-    public var zoom: Decimal                 { didSet { if (oldValue != zoom)                  { _ = self.modelUpdate() } } }
-    public var spacing: UInt                 { didSet { if (oldValue != spacing)               { _ = self.modelUpdate() } } }
+    public var cellSize: UInt                { didSet { if (oldValue != cellSize)              { _ = self.modelUpdate() } } }
+    public var cellSpacing: UInt             { didSet { if (oldValue != cellSpacing)           { _ = self.modelUpdate() } } }
     public var iconOnHoverZoom: Decimal      { didSet { if (oldValue != iconOnHoverZoom)       { _ = self.modelUpdate() } } }
     public var isShowIconTitle: Bool         { didSet { if (oldValue != isShowIconTitle)       { _ = self.modelUpdate() } } }
     public var isHideOnMisclick: Bool        { didSet { if (oldValue != isHideOnMisclick)      { _ = self.modelUpdate() } } }
@@ -31,26 +31,26 @@ import SwiftUI
     static var embeddedProfile: Self {
         Self(
             ID                   : ThisApp.EMBEDDED_PROFILE_ID,
-            title                : NSLocalizedString(ThisApp.DEFAULT_TITLE, comment: ""),
-            zoom                 : ThisApp.DEFAULT_ZOOM,
-            spacing              : ThisApp.DEFAULT_SPACING,
-            iconOnHoverZoom      : ThisApp.DEFAULT_ICON_ON_HOVER_ZOOM,
-            isShowIconTitle      : ThisApp.DEFAULT_IS_SHOW_ICON_TITLE,
-            isHideOnMisclick     : ThisApp.DEFAULT_IS_HIDE_ON_MISCLICK,
-            isStickyGrid         : ThisApp.DEFAULT_IS_STICKY_GRID,
-            isShowWinTitleButtons: ThisApp.DEFAULT_IS_SHOW_WINDOW_TITLE_BUTTONS,
-            background           : ThisApp.DEFAULT_BACKGROUND,
-            backgroundDark       : ThisApp.DEFAULT_BACKGROUND_DARK,
-            winFrameViewMode     : ThisApp.DEFAULT_WIN_FRAME_VIEW_MODE,
-            winFrameEditMode     : ThisApp.DEFAULT_WIN_FRAME_EDIT_MODE
+            title                : NSLocalizedString(ThisApp.TITLE_DEFAULT, comment: ""),
+            cellSize             : ThisApp.CELL_SIZE_DEFAULT,
+            cellSpacing          : ThisApp.CELL_SPACING_DEFAULT,
+            iconOnHoverZoom      : ThisApp.HOVER_ZOOM_DEFAULT,
+            isShowIconTitle      : ThisApp.IS_SHOW_ICON_TITLE_DEFAULT,
+            isHideOnMisclick     : ThisApp.IS_HIDE_ON_MISCLICK_DEFAULT,
+            isStickyGrid         : ThisApp.IS_STICKY_GRID_DEFAULT,
+            isShowWinTitleButtons: ThisApp.IS_SHOW_WINDOW_TITLE_BUTTONS_DEFAULT,
+            background           : ThisApp.WINDOW_BACKGROUND_DEFAULT,
+            backgroundDark       : ThisApp.WINDOW_BACKGROUND_DARK_DEFAULT,
+            winFrameViewMode     : ThisApp.WINDOW_FRAME_VIEW_MODE_DEFAULT,
+            winFrameEditMode     : ThisApp.WINDOW_FRAME_EDIT_MODE_DEFAULT
         )
     }
 
     init(
         ID: ProfileID,
         title: ProfileTitle,
-        zoom: Decimal,
-        spacing: UInt,
+        cellSize: UInt,
+        cellSpacing: UInt,
         iconOnHoverZoom: Decimal,
         isShowIconTitle: Bool,
         isHideOnMisclick: Bool,
@@ -63,8 +63,8 @@ import SwiftUI
     ) {
         self.ID = ID
         self.title = title
-        self.zoom = zoom
-        self.spacing = spacing
+        self.cellSize = cellSize
+        self.cellSpacing = cellSpacing
         self.iconOnHoverZoom = iconOnHoverZoom
         self.isShowIconTitle = isShowIconTitle
         self.isHideOnMisclick = isHideOnMisclick
@@ -80,24 +80,24 @@ import SwiftUI
         guard let modelProfile = ModelProfile.select(ID: ID) else { return nil }
         self.ID                    = modelProfile.id
         self.title                 = modelProfile.title
-        self.zoom                  = modelProfile.zoom
-        self.spacing               = modelProfile.spacing
+        self.cellSize              = modelProfile.cellSize
+        self.cellSpacing           = modelProfile.cellSpacing
         self.iconOnHoverZoom       = modelProfile.iconOnHoverZoom
         self.isShowIconTitle       = modelProfile.isShowIconTitle
         self.isHideOnMisclick      = modelProfile.isHideOnMisclick
         self.isStickyGrid          = modelProfile.isStickyGrid
         self.isShowWinTitleButtons = modelProfile.isShowWinTitleButtons
-        self.background            = ColorHSBValue(decode: modelProfile.background)       ?? ThisApp.DEFAULT_BACKGROUND
-        self.backgroundDark        = ColorHSBValue(decode: modelProfile.backgroundDark)   ?? ThisApp.DEFAULT_BACKGROUND_DARK
-        self.winFrameViewMode      = CGRect       (decode: modelProfile.winFrameViewMode) ?? ThisApp.DEFAULT_WIN_FRAME_VIEW_MODE
-        self.winFrameEditMode      = CGRect       (decode: modelProfile.winFrameEditMode) ?? ThisApp.DEFAULT_WIN_FRAME_EDIT_MODE
+        self.background            = ColorHSBValue(decode: modelProfile.background)       ?? ThisApp.WINDOW_BACKGROUND_DEFAULT
+        self.backgroundDark        = ColorHSBValue(decode: modelProfile.backgroundDark)   ?? ThisApp.WINDOW_BACKGROUND_DARK_DEFAULT
+        self.winFrameViewMode      = CGRect       (decode: modelProfile.winFrameViewMode) ?? ThisApp.WINDOW_FRAME_VIEW_MODE_DEFAULT
+        self.winFrameEditMode      = CGRect       (decode: modelProfile.winFrameEditMode) ?? ThisApp.WINDOW_FRAME_EDIT_MODE_DEFAULT
     }
 
     static func == (lhs: ProfileValue, rhs: ProfileValue) -> Bool {
         lhs.ID                    == rhs.ID                    &&
         lhs.title                 == rhs.title                 &&
-        lhs.zoom                  == rhs.zoom                  &&
-        lhs.spacing               == rhs.spacing               &&
+        lhs.cellSize              == rhs.cellSize              &&
+        lhs.cellSpacing           == rhs.cellSpacing           &&
         lhs.iconOnHoverZoom       == rhs.iconOnHoverZoom       &&
         lhs.isShowIconTitle       == rhs.isShowIconTitle       &&
         lhs.isHideOnMisclick      == rhs.isHideOnMisclick      &&
@@ -118,15 +118,15 @@ import SwiftUI
             ModelProfile(
                 ID                   : self.ID,
                 title                : self.title,
-                zoom                 : self.zoom,
-                spacing              : self.spacing,
+                cellSize             : self.cellSize,
+                cellSpacing          : self.cellSpacing,
                 iconOnHoverZoom      : self.iconOnHoverZoom,
                 isShowIconTitle      : self.isShowIconTitle,
                 isHideOnMisclick     : self.isHideOnMisclick,
                 isStickyGrid         : self.isStickyGrid,
                 isShowWinTitleButtons: self.isShowWinTitleButtons,
-                background           : self.background      .encode() ?? ThisApp.DEFAULT_BACKGROUND     .encode()!,
-                backgroundDark       : self.backgroundDark  .encode() ?? ThisApp.DEFAULT_BACKGROUND_DARK.encode()!,
+                background           : self.background      .encode() ?? ThisApp.WINDOW_BACKGROUND_DEFAULT     .encode()!,
+                backgroundDark       : self.backgroundDark  .encode() ?? ThisApp.WINDOW_BACKGROUND_DARK_DEFAULT.encode()!,
                 winFrameViewMode     : self.winFrameViewMode.encode(),
                 winFrameEditMode     : self.winFrameEditMode.encode()
             ), autoInsert: true
@@ -138,15 +138,15 @@ import SwiftUI
             ModelProfile(
                 ID                   : self.ID,
                 title                : self.title,
-                zoom                 : self.zoom,
-                spacing              : self.spacing,
+                cellSize             : self.cellSize,
+                cellSpacing          : self.cellSpacing,
                 iconOnHoverZoom      : self.iconOnHoverZoom,
                 isShowIconTitle      : self.isShowIconTitle,
                 isHideOnMisclick     : self.isHideOnMisclick,
                 isStickyGrid         : self.isStickyGrid,
                 isShowWinTitleButtons: self.isShowWinTitleButtons,
-                background           : self.background      .encode() ?? ThisApp.DEFAULT_BACKGROUND     .encode()!,
-                backgroundDark       : self.backgroundDark  .encode() ?? ThisApp.DEFAULT_BACKGROUND_DARK.encode()!,
+                background           : self.background      .encode() ?? ThisApp.WINDOW_BACKGROUND_DEFAULT     .encode()!,
+                backgroundDark       : self.backgroundDark  .encode() ?? ThisApp.WINDOW_BACKGROUND_DARK_DEFAULT.encode()!,
                 winFrameViewMode     : self.winFrameViewMode.encode(),
                 winFrameEditMode     : self.winFrameEditMode.encode()
             )
@@ -159,17 +159,17 @@ import SwiftUI
             result[modelProfileID] = ProfileValue(
                 ID                   : modelProfileID,
                 title                : modelProfile.title,
-                zoom                 : modelProfile.zoom,
-                spacing              : modelProfile.spacing,
+                cellSize             : modelProfile.cellSize,
+                cellSpacing          : modelProfile.cellSpacing,
                 iconOnHoverZoom      : modelProfile.iconOnHoverZoom,
                 isShowIconTitle      : modelProfile.isShowIconTitle,
                 isHideOnMisclick     : modelProfile.isHideOnMisclick,
                 isStickyGrid         : modelProfile.isStickyGrid,
                 isShowWinTitleButtons: modelProfile.isShowWinTitleButtons,
-                background           : ColorHSBValue(decode: modelProfile.background      ) ?? ThisApp.DEFAULT_BACKGROUND,
-                backgroundDark       : ColorHSBValue(decode: modelProfile.backgroundDark  ) ?? ThisApp.DEFAULT_BACKGROUND_DARK,
-                winFrameViewMode     : CGRect       (decode: modelProfile.winFrameViewMode) ?? ThisApp.DEFAULT_WIN_FRAME_VIEW_MODE,
-                winFrameEditMode     : CGRect       (decode: modelProfile.winFrameEditMode) ?? ThisApp.DEFAULT_WIN_FRAME_EDIT_MODE
+                background           : ColorHSBValue(decode: modelProfile.background      ) ?? ThisApp.WINDOW_BACKGROUND_DEFAULT,
+                backgroundDark       : ColorHSBValue(decode: modelProfile.backgroundDark  ) ?? ThisApp.WINDOW_BACKGROUND_DARK_DEFAULT,
+                winFrameViewMode     : CGRect       (decode: modelProfile.winFrameViewMode) ?? ThisApp.WINDOW_FRAME_VIEW_MODE_DEFAULT,
+                winFrameEditMode     : CGRect       (decode: modelProfile.winFrameEditMode) ?? ThisApp.WINDOW_FRAME_EDIT_MODE_DEFAULT
             )
         }
         return result

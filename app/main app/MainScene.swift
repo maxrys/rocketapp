@@ -10,38 +10,26 @@ struct MainScene: View, BackgroundColorProtocol {
     @Environment(\.colorScheme)          internal var colorScheme
     @Environment(\.windowBackground)     internal var background
     @Environment(\.windowBackgroundDark) internal var backgroundDark
-    @Environment(\.profilesState) private var profiles
-    @Environment(\.cellsState)    private var cells
+    @Environment(\.profilesState)        internal var profiles
+    @Environment(\.cellsState)           internal var cells
+    @Environment(\.isEditMode)           internal var isEditMode
 
-    @Binding private var isEditMode: Bool
     @State private var isHovering = false
 
-    private var cellSizeFinal: Double {
-        ThisApp.CELL_SIZE * self.profiles.current.zoom.double
-    }
-
-    private var cellSpacingFinal: Double {
-        Double(self.profiles.current.spacing) * self.profiles.current.zoom.double
-    }
-
-    private var frameMinSizeViewMode: Double {
-        self.cellSizeFinal + (self.cellSpacingFinal * 2)
-    }
-
-    init(isEditMode: Binding<Bool>) {
-        self._isEditMode = isEditMode
+    private var frameMinSizeViewMode: CGFloat {
+        CGFloat(self.profiles.current.cellSize) + CGFloat(self.profiles.current.cellSpacing) * 2
     }
 
     public var body: some View {
         VStack(spacing: 0) {
 
-            if (self.isEditMode == false) {
+            if (self.isEditMode.value == false) {
                 if (self.cells.isEmpty) {
                     self.NoOneAppView()
                 } else {
                     MainGrid_viewMode(
-                        cellSize: self.cellSizeFinal,
-                        cellSpacing: self.cellSpacingFinal
+                        cellSize   : CGFloat(self.profiles.current.cellSize),
+                        cellSpacing: CGFloat(self.profiles.current.cellSpacing)
                     ).onTapGesture {
                         if (self.profiles.current.isHideOnMisclick) {
                             NSWindow.hideWithAnimation(ThisApp.WINDOW_MAIN_ID)
@@ -50,24 +38,23 @@ struct MainScene: View, BackgroundColorProtocol {
                 }
             }
 
-            if (self.isEditMode) {
-                ControlPanel(
-                    isEditMode: self.$isEditMode
-                ).zIndex(1)
+            if (self.isEditMode.value) {
+                ControlPanel()
+                    .zIndex(1)
                 MainGrid_editMode(
-                    cellSize: self.cellSizeFinal,
-                    cellSpacing: self.cellSpacingFinal
+                    cellSize   : CGFloat(self.profiles.current.cellSize),
+                    cellSpacing: CGFloat(self.profiles.current.cellSpacing)
                 )
             }
 
         }
         .frame(
-            minWidth : self.isEditMode ? ThisApp.DEFAULT_WIN_FRAME_EDIT_MODE.w : self.frameMinSizeViewMode, maxWidth : .infinity,
-            minHeight: self.isEditMode ? ThisApp.DEFAULT_WIN_FRAME_EDIT_MODE.h : self.frameMinSizeViewMode, maxHeight: .infinity
+            minWidth : self.isEditMode.value ? ThisApp.WINDOW_FRAME_EDIT_MODE_DEFAULT.width  : self.frameMinSizeViewMode, maxWidth : .infinity,
+            minHeight: self.isEditMode.value ? ThisApp.WINDOW_FRAME_EDIT_MODE_DEFAULT.height : self.frameMinSizeViewMode, maxHeight: .infinity
         )
-        .background(self.backgroundHSB().color)
+        .background(self.backgroundCurrent().color)
         .overlay(alignment: .topTrailing) {
-            if (self.isEditMode == false) {
+            if (self.isEditMode.value == false) {
                 self.ButtonOpenSettingsView()
                     .padding(15)
                     .opacity(self.isHovering ? 1 : 0)
@@ -92,7 +79,7 @@ struct MainScene: View, BackgroundColorProtocol {
                     .font(.system(size: 15, weight: .bold))
                     .lineLimit(1)
                     .fixedSize(horizontal: true, vertical: false)
-                Button { self.isEditMode = true } label: {
+                Button { self.isEditMode.value = true } label: {
                     СhameleonView(shadowRadius: 3) {
                         Text(ThisApp.MESSAGE_OPEN_SETTINGS)
                             .font(.system(size: 14))
@@ -144,9 +131,9 @@ struct MainScene: View, BackgroundColorProtocol {
     @ViewBuilder fileprivate func ButtonOpenSettingsView() -> some View {
         ButtonRound(
             label     : { Image(systemName: "gearshape.circle") },
-            foreground: { self.backgroundAccentHSB(minOpacity: 0.5).color },
+            foreground: { self.backgroundCurrentAccent(minOpacity: 0.5).color },
             background: { Color.clear },
-        ) { self.isEditMode = true }
+        ) { self.isEditMode.value = true }
     }
 
 }
@@ -159,12 +146,12 @@ struct MainScene: View, BackgroundColorProtocol {
 
 #Preview {
     Previewer {
-        MainScene(
-            isEditMode: .constant(false)
-        ).ButtonOpenSettingsView().padding(10)
+        MainScene()
+            .ButtonOpenSettingsView().padding(10)
+            .environment(\.isEditMode, ValueState<Bool>(true))
 
-        MainScene(
-            isEditMode: .constant(false)
-        ).NoOneAppView()
+        MainScene()
+            .NoOneAppView()
+            .environment(\.isEditMode, ValueState<Bool>(false))
     }
 }
