@@ -77,6 +77,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private let profiles   = EnvironmentValues().profilesState
     private let cells      = EnvironmentValues().cellsState
+    private let process    = EnvironmentValues().processState
     private let isEditMode = EnvironmentValues().isEditMode
 
     init() {
@@ -116,6 +117,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         .environment(\.windowBackgroundDark, self.profiles.current.backgroundDark)
         .environment(\.profilesState       , self.profiles)
         .environment(\.cellsState          , self.cells)
+        .environment(\.processState        , self.process)
         .environment(\.isEditMode          , self.isEditMode)
         .environment(\.layoutDirection, .leftToRight)
         .onChange(of: self.profiles.current, { _, value in

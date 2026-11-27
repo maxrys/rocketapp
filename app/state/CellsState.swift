@@ -13,9 +13,6 @@ import SwiftData
 
     static public private(set) var shared: CellsState!
 
-    public private(set) var isAuditInProgress = false
-    public private(set) var auditProgress: Double = 0
-    public private(set) var auditReport: [String] = []
     public private(set) var data = CellsDataSource()
 
     private var profileID: ProfileID
@@ -123,69 +120,6 @@ import SwiftData
             }
         } else {
             self.deleteCellValue(cellID)
-        }
-    }
-
-    /* ############# */
-    /* ### audit ### */
-    /* ############# */
-
-    func audit() {
-        Task {
-            let process: () async -> Void = {
-                for await result in AuditSequence(profileID: self.profileID) {
-                    switch result.pair.cellValue {
-
-                        case .main(let appValue):
-                            self.auditReport.insert(
-                                "#\(result.pair.cellID): \(appValue.name)", at: 0
-                            )
-
-                        case .mini(let miniGrid):
-                            var appNames: [String] = []
-                            if let appValue = miniGrid.cell1 { appNames.append(appValue.name) }
-                            if let appValue = miniGrid.cell2 { appNames.append(appValue.name) }
-                            if let appValue = miniGrid.cell3 { appNames.append(appValue.name) }
-                            if let appValue = miniGrid.cell4 { appNames.append(appValue.name) }
-                            if (!appNames.isEmpty) {
-                                self.auditReport.insert(
-                                    "#\(result.pair.cellID): \(appNames.joined(separator: ", "))", at: 0
-                                )
-                            }
-
-                    }
-                    Logger.customLog(
-                        "Audit process (\(result.i) from \(result.count) | " +
-                        "\(Int(result.progress * 100))%) " +
-                        "for cell with ID = \"\(result.pair.cellID)\" was done"
-                    )
-                    await MainActor.run {
-                        self.auditProgress = result.progress
-                    }
-                }
-            }
-
-            await MainActor.run {
-                self.isAuditInProgress = true
-                self.auditProgress = 0
-                self.auditReport.removeAll()
-            }
-
-            async let processResult: Void = await process()
-            async let reliableDelay: Void = await Task.sleep(
-                nanoseconds: 2_000_000_000
-            )
-
-            let _ = try? await (
-                processResult,
-                reliableDelay
-            )
-
-            await MainActor.run {
-                self.isAuditInProgress = false
-                self.auditReport.removeAll()
-                self.reload()
-            }
         }
     }
 

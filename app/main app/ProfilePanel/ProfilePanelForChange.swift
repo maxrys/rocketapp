@@ -10,6 +10,7 @@ struct ProfilePanelForChange: View {
     @Environment(\.colorScheme)   private var colorScheme
     @Environment(\.profilesState) private var profiles
     @Environment(\.cellsState)    private var cells
+    @Environment(\.processState)  private var process
 
     @Binding private var isShowPanel: Bool
     @State private var isShowDeleteDialog = false
@@ -80,17 +81,7 @@ struct ProfilePanelForChange: View {
         VStack(spacing: 0) {
 
             HStack(spacing: self.elementSpacing) {
-
-                /* MARK: Title */
-
-                self.TitleView(
-                    NSLocalizedString("Title", comment: "")
-                )
-
-                TextFieldCustom(
-                    value: self.profiles.current.getBinding(\.title)
-                )
-
+                self.ChangeProfileView_titleConfigurator()
             }
             .padding(.horizontal, 40)
             .padding(.vertical  , 20)
@@ -99,41 +90,8 @@ struct ProfilePanelForChange: View {
             self.DelimiterView()
 
             LazyVGrid(columns: self.columnsHead, spacing: self.elementSpacing) {
-
-                /* MARK: Size configurator */
-
-                HStack(spacing: 10) {
-
-                    self.TitleView(
-                        NSLocalizedString("Size", comment: "")
-                    )
-
-                    StepperCustom(
-                        self.profiles.current.getBinding(\.cellSize),
-                        in: ThisApp.CELL_SIZE_MIN ...
-                            ThisApp.CELL_SIZE_MAX,
-                        step: ThisApp.CELL_SIZE_STEP,
-                        minWidth: 40
-                    )
-
-                }
-
-                /* MARK: Spacing configurator */
-
-                HStack(spacing: 10) {
-
-                    self.TitleView(
-                        NSLocalizedString("Spacing", comment: "")
-                    )
-
-                    StepperCustom(
-                        self.profiles.current.getBinding(\.cellSpacing),
-                        in: ThisApp.CELL_SPACING_MIN ...
-                            ThisApp.CELL_SPACING_MAX,
-                        step: ThisApp.CELL_SPACING_STEP
-                    )
-
-                }
+                self.ChangeProfileView_sizeConfigurator()
+                self.ChangeProfileView_spacingConfigurator()
             }
             .padding(.horizontal, 40)
             .padding(.vertical  , 20)
@@ -142,69 +100,11 @@ struct ProfilePanelForChange: View {
             self.DelimiterView()
 
             LazyVGrid(columns: self.columnsBody, spacing: self.elementSpacing) {
-
-                /* MARK: "Enlarge Icon on Hover" */
-
-                self.TitleView(
-                    NSLocalizedString("Enlarge Icon on Hover", comment: "")
-                )
-
-                StepperCustom(
-                    self.profiles.current.getBinding(\.iconOnHoverZoom),
-                    prefix: "x",
-                    in: ThisApp.HOVER_ZOOM_MIN ...
-                        ThisApp.HOVER_ZOOM_MAX,
-                    step: ThisApp.HOVER_ZOOM_STEP,
-                    minWidth: 40
-                )
-                .scaleEffect(0.7)
-                .padding(.horizontal, -18)
-                .padding(.vertical  , -10)
-
-                /* MARK: "Show Icon Title" */
-
-                self.TitleView(
-                    NSLocalizedString("Show Icon Title", comment: "")
-                )
-
-                ToggleCustom(
-                    isOn: self.profiles.current.getBinding(\.isShowIconTitle),
-                    isFlexible: true
-                )
-
-                /* MARK: "Hide on Misclick" */
-
-                self.TitleView(
-                    NSLocalizedString("Hide on Misclick", comment: "")
-                )
-
-                ToggleCustom(
-                    isOn: self.profiles.current.getBinding(\.isHideOnMisclick),
-                    isFlexible: true
-                )
-
-                /* MARK: "Sticky Grid" */
-
-                self.TitleView(
-                    NSLocalizedString("Sticky Grid", comment: "")
-                )
-
-                ToggleCustom(
-                    isOn: self.profiles.current.getBinding(\.isStickyGrid),
-                    isFlexible: true
-                )
-
-                /* MARK: "Show Window Title Buttons" */
-
-                self.TitleView(
-                    NSLocalizedString("Show Window Title Buttons", comment: "")
-                )
-
-                ToggleCustom(
-                    isOn: self.profiles.current.getBinding(\.isShowWinTitleButtons),
-                    isFlexible: true
-                )
-
+                self.ChangeProfileView_enlargeIconOnHoverConfigurator()
+                self.ChangeProfileView_showIconTitleConfigurator()
+                self.ChangeProfileView_hideOnMisclickConfigurator()
+                self.ChangeProfileView_stickyGridConfigurator()
+                self.ChangeProfileView_showWindowTitleButtonsConfigurator()
             }
             .padding(.horizontal, 40)
             .padding(.vertical  , 20)
@@ -213,37 +113,111 @@ struct ProfilePanelForChange: View {
             self.DelimiterView()
 
             LazyVGrid(columns: self.columnsBody, spacing: self.elementSpacing) {
-
-                /* MARK: Background */
-
-                self.TitleView(
-                    NSLocalizedString("Background", comment: "")
-                )
-
-                ColorPickerHSBO(
-                    self.profiles.current.getBinding(\.background),
-                    openerSize: .init(width: 40, height: 20),
-                    openerRadius: 10,
-                    isInstantUpdate: true
-                )
-
-                self.TitleView(
-                    NSLocalizedString("Background (Dark Scheme)", comment: "")
-                )
-
-                ColorPickerHSBO(
-                    self.profiles.current.getBinding(\.backgroundDark),
-                    openerSize: .init(width: 40, height: 20),
-                    openerRadius: 10,
-                    isInstantUpdate: true
-                )
-
+                self.ChangeProfileView_backgroundConfigurator()
+                self.ChangeProfileView_backgroundDarkConfigurator()
             }
             .padding(.horizontal, 40)
             .padding(.vertical  , 20)
             .frame(maxWidth: .infinity)
 
         }.padding(.vertical, 10)
+    }
+
+    @ViewBuilder private func ChangeProfileView_titleConfigurator() -> some View {
+        self.TitleView(NSLocalizedString("Title", comment: ""))
+        TextFieldCustom(
+            value: self.profiles.current.getBinding(\.title)
+        )
+    }
+
+    @ViewBuilder private func ChangeProfileView_sizeConfigurator() -> some View {
+        HStack(spacing: 10) {
+            self.TitleView(NSLocalizedString("Size", comment: ""))
+            StepperCustom(
+                self.profiles.current.getBinding(\.cellSize),
+                in  : ThisApp.CELL_SIZE_MIN ... ThisApp.CELL_SIZE_MAX,
+                step: ThisApp.CELL_SIZE_STEP,
+                minWidth: 40
+            )
+        }
+    }
+
+    @ViewBuilder private func ChangeProfileView_spacingConfigurator() -> some View {
+        HStack(spacing: 10) {
+            self.TitleView(NSLocalizedString("Spacing", comment: ""))
+            StepperCustom(
+                self.profiles.current.getBinding(\.cellSpacing),
+                in  : ThisApp.CELL_SPACING_MIN ... ThisApp.CELL_SPACING_MAX,
+                step: ThisApp.CELL_SPACING_STEP
+            )
+        }
+    }
+
+    @ViewBuilder private func ChangeProfileView_enlargeIconOnHoverConfigurator() -> some View {
+        self.TitleView(NSLocalizedString("Enlarge Icon on Hover", comment: ""))
+        StepperCustom(
+            self.profiles.current.getBinding(\.iconOnHoverZoom),
+            prefix: "x",
+            in: ThisApp.HOVER_ZOOM_MIN ...
+                ThisApp.HOVER_ZOOM_MAX,
+            step: ThisApp.HOVER_ZOOM_STEP,
+            minWidth: 40
+        )
+        .scaleEffect(0.7)
+        .padding(.horizontal, -18)
+        .padding(.vertical  , -10)
+    }
+
+    @ViewBuilder private func ChangeProfileView_showIconTitleConfigurator() -> some View {
+        self.TitleView(NSLocalizedString("Show Icon Title", comment: ""))
+        ToggleCustom(
+            isOn: self.profiles.current.getBinding(\.isShowIconTitle),
+            isFlexible: true
+        )
+    }
+
+    @ViewBuilder private func ChangeProfileView_hideOnMisclickConfigurator() -> some View {
+        self.TitleView(NSLocalizedString("Hide on Misclick", comment: ""))
+        ToggleCustom(
+            isOn: self.profiles.current.getBinding(\.isHideOnMisclick),
+            isFlexible: true
+        )
+    }
+
+    @ViewBuilder private func ChangeProfileView_stickyGridConfigurator() -> some View {
+        self.TitleView(NSLocalizedString("Sticky Grid", comment: ""))
+        ToggleCustom(
+            isOn: self.profiles.current.getBinding(\.isStickyGrid),
+            isFlexible: true
+        )
+    }
+
+    @ViewBuilder private func ChangeProfileView_showWindowTitleButtonsConfigurator() -> some View {
+        self.TitleView(NSLocalizedString("Show Window Title Buttons", comment: ""))
+        ToggleCustom(
+            isOn: self.profiles.current.getBinding(\.isShowWinTitleButtons),
+            isFlexible: true
+        )
+    }
+
+    @ViewBuilder private func ChangeProfileView_backgroundConfigurator() -> some View {
+        self.TitleView(NSLocalizedString("Background", comment: ""))
+        ColorPickerHSBO(
+            self.profiles.current.getBinding(\.background),
+            openerSize: .init(width: 40, height: 20),
+            openerRadius: 10,
+            isInstantUpdate: true
+        )
+    }
+
+    @ViewBuilder private func ChangeProfileView_backgroundDarkConfigurator() -> some View {
+        self.TitleView(NSLocalizedString("Background (Dark Scheme)", comment: ""))
+        ColorPickerHSBO(
+            self.profiles.current.getBinding(\.backgroundDark),
+            openerSize: .init(width: 40, height: 20),
+            openerRadius: 10,
+            isInstantUpdate: true
+        )
     }
 
     @ViewBuilder private func AuditProfileView() -> some View {
@@ -256,9 +230,9 @@ struct ProfilePanelForChange: View {
                 padding: .init(top: 10, leading: 20, bottom: 10, trailing: 20),
                 flexibility: .size(200),
                 isFlat: false,
-                onClick:         { self.isShowPanel = false; self.cells.audit() })
-            .onPressEnterOrSpace { self.isShowPanel = false; self.cells.audit() }
-            .disabled(self.cells.isAuditInProgress || self.cells.isEmpty)
+                onClick:         { self.isShowPanel = false; ProcessAudit.run() })
+            .onPressEnterOrSpace { self.isShowPanel = false; ProcessAudit.run() }
+            .disabled(self.process.inProgress || self.cells.isEmpty)
         }
         .padding(.horizontal, 40)
         .padding(.vertical  , 20)

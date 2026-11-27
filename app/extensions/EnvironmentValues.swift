@@ -15,6 +15,10 @@ struct EnvironmentKey_CellsState: EnvironmentKey {
     )
 }
 
+struct EnvironmentKey_ProcessState: EnvironmentKey {
+    static let defaultValue = ProcessState.shared
+}
+
 struct EnvironmentKey_isEditMode: EnvironmentKey {
     static let defaultValue = ValueState<Bool>(false)
 }
@@ -37,6 +41,11 @@ extension EnvironmentValues {
     var cellsState: CellsState {
         get { self[EnvironmentKey_CellsState.self] }
         set { self[EnvironmentKey_CellsState.self] = newValue }
+    }
+
+    var processState: ProcessState {
+        get { self[EnvironmentKey_ProcessState.self] }
+        set { self[EnvironmentKey_ProcessState.self] = newValue }
     }
 
     var isEditMode: ValueState<Bool> {

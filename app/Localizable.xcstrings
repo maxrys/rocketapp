@@ -103,6 +103,28 @@
         }
       }
     },
+    "cancel" : {
+      "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "адмена"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "отмена"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "відміна"
+          }
+        }
+      }
+    },
     "Cancel" : {
       "localizations" : {
         "be-BY" : {
@@ -634,6 +656,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Версія %1$@ (%2$@)"
+          }
+        }
+      }
+    },
+    "with applications" : {
+      "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "з дадаткамі"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "с приложениями"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "з додатками"
           }
         }
       }

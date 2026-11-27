@@ -8,11 +8,13 @@ import SwiftUI
 
 struct ProfilePanelForAppend: View {
 
+    @Environment(\.colorScheme)   private var colorScheme
     @Environment(\.profilesState) private var profiles
     @Environment(\.cellsState)    private var cells
 
     @Binding private var isShowPanel: Bool
     @State private var title: String = ""
+    @State private var withApps: Bool = false
 
     init(isShowPanel: Binding<Bool>) {
         self._isShowPanel = isShowPanel
@@ -20,40 +22,67 @@ struct ProfilePanelForAppend: View {
 
     public var body: some View {
         VStack(spacing: 20) {
-
-            TextFieldCustom(
-                NSLocalizedString("Title", comment: ""),
-                value: self.$title
-            ).onPressEnter { self.onAddProfile() }
-
+            self.FieldTitle()
             VStack(spacing: 10) {
-
-                ButtonCustom(
-                    NSLocalizedString("clone", comment: ""),
-                    colorStyle: .common,
-                    font: .system(size: 14, weight: .regular),
-                    padding: .init(top: 10, leading: 20, bottom: 10, trailing: 20),
-                    flexibility: .infinity,
-                    isFlat: false,
-                    onClick: { self.onCloneProfile() })
-                .disabled(self.title.isEmpty)
-
-                ButtonCustom(
-                    NSLocalizedString("add", comment: ""),
-                    colorStyle: .accent,
-                    font: .system(size: 14, weight: .regular),
-                    padding: .init(top: 10, leading: 20, bottom: 10, trailing: 20),
-                    flexibility: .infinity,
-                    isFlat: false,
-                    onClick:         { self.onAddProfile() })
-                .onPressEnterOrSpace { self.onAddProfile() }
-                .disabled(self.title.isEmpty)
-
+                self.ButtonCloneProfile()
+                self.ButtonsDelimiter()
+                self.ButtonAddNewProfile()
             }
-
         }
         .padding(20)
         .frame(width: 300)
+    }
+
+    @ViewBuilder private func FieldTitle() -> some View {
+        TextFieldCustom(
+            NSLocalizedString("Title", comment: ""),
+            value: self.$title
+        ).onPressEnter { self.onAddProfile() }
+    }
+
+    @ViewBuilder private func ButtonCloneProfile() -> some View {
+        ButtonCustom(
+            NSLocalizedString("clone", comment: ""),
+            colorStyle: .common,
+            font: .system(size: 14, weight: .regular),
+            padding: .init(top: 10, leading: 20, bottom: 10, trailing: 20),
+            flexibility: .infinity,
+            isFlat: false,
+            onClick: { self.onCloneProfile() })
+        .disabled(self.title.isEmpty)
+    }
+
+    @ViewBuilder private func ButtonsDelimiter() -> some View {
+        self.colorScheme == .dark ?
+        Color.white.frame(maxWidth: .infinity).frame(height: 1).opacity(0.2) :
+        Color.black.frame(maxWidth: .infinity).frame(height: 1).opacity(0.2)
+    }
+
+    @ViewBuilder private func ButtonAddNewProfile() -> some View {
+        VStack(spacing: 10) {
+
+            ButtonCustom(
+                NSLocalizedString("add", comment: ""),
+                colorStyle: .accent,
+                font: .system(size: 14, weight: .regular),
+                padding: .init(top: 10, leading: 20, bottom: 10, trailing: 20),
+                flexibility: .infinity,
+                isFlat: false,
+                onClick:         { self.onAddProfile() })
+            .onPressEnterOrSpace { self.onAddProfile() }
+            .disabled(self.title.isEmpty)
+
+            HStack(spacing: 10) {
+                ToggleCustom(
+                    isOn: self.$withApps,
+                    isFlexible: true
+                )
+                Text(NSLocalizedString(
+                    "with applications"
+                , comment: ""))
+            }
+
+        }
     }
 
     private func onCloneProfile() {
@@ -106,6 +135,9 @@ struct ProfilePanelForAppend: View {
             Logger.customLog("The profile (ID: \(profile.ID)) has been created.")
             if (self.profiles.setCurrent(profile.ID)) {
                 self.isShowPanel = false
+                if (self.withApps) {
+                    ProcessLoadDefault.run()
+                }
             }
         }
     }

@@ -12,6 +12,7 @@ struct MainScene: View, BackgroundColorProtocol {
     @Environment(\.windowBackgroundDark) internal var backgroundDark
     @Environment(\.profilesState)        internal var profiles
     @Environment(\.cellsState)           internal var cells
+    @Environment(\.processState)         internal var process
     @Environment(\.isEditMode)           internal var isEditMode
 
     @State private var isHovering = false
@@ -61,8 +62,8 @@ struct MainScene: View, BackgroundColorProtocol {
             }
         }
         .overlay {
-            if (self.cells.isAuditInProgress) {
-                self.AuditPanelView()
+            if (self.process.inProgress) {
+                ProcessPanel()
             }
         }
         .onHover { isHovering in
@@ -93,39 +94,6 @@ struct MainScene: View, BackgroundColorProtocol {
                 .pointerStyle(.link)
             }.padding(20)
         }.padding(20)
-    }
-
-    @ViewBuilder private func AuditPanelView() -> some View {
-        Color(self.colorScheme == .dark ? .white : .black).opacity(0.3)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .overlay {
-                VStack(spacing: 10) {
-                    ProgressCustom(value: self.cells.auditProgress)
-                        .shadow(
-                            color: .black.opacity(0.5),
-                            radius: 5.0
-                        )
-                    ScrollView {
-                        VStack(alignment: .leading, spacing: 10) {
-                            ForEach(self.cells.auditReport, id: \.self) { reportLine in
-                                Text(reportLine)
-                                    .font(.system(size: 12, design: .monospaced))
-                            }
-                        }
-                        .padding(10)
-                        .background(
-                            self.colorScheme == .dark ?
-                                .black.opacity(0.5) :
-                                .white.opacity(0.5)
-                        )
-                        .clipShape(
-                            RoundedRectangle(cornerRadius: 10)
-                        )
-                    }
-                }
-                .padding(50)
-                .padding(.top, 50)
-            }
     }
 
     @ViewBuilder fileprivate func ButtonOpenSettingsView() -> some View {
