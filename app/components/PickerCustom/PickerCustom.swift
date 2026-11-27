@@ -80,7 +80,6 @@ struct PickerCustom<Key>: View where Key: Hashable & Comparable {
                         .fill(Color.profilePanel.picker.background))
                 .contentShape(RoundedRectangle(cornerRadius: self.cornerRadius))
         }
-        .hoverBehavior(.scaleEffect(from: 1.0, to: 1.02))
         .buttonStyle(.plain)
         .pointerStyle(self.isEnabled ? .link : .default)
     }

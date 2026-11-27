@@ -103,7 +103,7 @@ struct ProfilePanelForChange: View {
                 self.ChangeProfileView_enlargeIconOnHoverConfigurator()
                 self.ChangeProfileView_showIconTitleConfigurator()
                 self.ChangeProfileView_hideOnMisclickConfigurator()
-                self.ChangeProfileView_stickyGridConfigurator()
+             // self.ChangeProfileView_stickyGridConfigurator()
                 self.ChangeProfileView_showWindowTitleButtonsConfigurator()
             }
             .padding(.horizontal, 40)

@@ -9,6 +9,15 @@ extension CGRect {
 
     static private let ENCODING_SEPARATOR = "|"
 
+    init(minX: CGFloat, minY: CGFloat, maxX: CGFloat, maxY: CGFloat) {
+        self.init(
+            x: minX,
+            y: minY,
+            width : maxX - minX,
+            height: maxY - minY
+        )
+    }
+
     init?(decode from: String) {
         let parts = from.split(separator: Self.ENCODING_SEPARATOR)
         guard parts.count == 4,

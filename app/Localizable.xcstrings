@@ -324,28 +324,6 @@
         }
       }
     },
-    "no items" : {
-      "localizations" : {
-        "be-BY" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "няма элементаў"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "нет элементов"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "немає елементів"
-          }
-        }
-      }
-    },
     "Open Main Window" : {
       "localizations" : {
         "be-BY" : {
@@ -452,6 +430,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "оновити значки"
+          }
+        }
+      }
+    },
+    "RocketApp Launcher" : {
+      "localizations" : {
+        "be-BY" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RocketApp Запускальнік"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RocketApp Запускатель"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RocketApp Запускник"
           }
         }
       }

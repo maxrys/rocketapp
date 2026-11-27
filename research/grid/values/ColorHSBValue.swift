@@ -1,0 +1,120 @@
+
+/* ############################################################# */
+/* ### Copyright © 2026 Maxim Rysevets. All rights reserved. ### */
+/* ############################################################# */
+
+import SwiftUI
+import SpriteKit
+
+struct ColorHSBValue: Equatable, Codable {
+
+    public var hue: Double
+    public var saturation: Double
+    public var brightness: Double
+    public var opacity: Double
+
+    public var isTinted: Bool {
+        self.brightness < 0.6
+    }
+
+    public var color: Color {
+        Color(
+            hue       : self.hue,
+            saturation: self.saturation,
+            brightness: self.brightness,
+            opacity   : self.opacity
+        )
+    }
+
+    public var nsColor: SKColor {
+        NSColor(
+            hue       : self.hue,
+            saturation: self.saturation,
+            brightness: self.brightness,
+            alpha     : self.opacity
+        )
+    }
+
+    public var skColor: SKColor {
+        SKColor(
+            hue       : self.hue,
+            saturation: self.saturation,
+            brightness: self.brightness,
+            alpha     : self.opacity
+        )
+    }
+
+    public var cgColor: CGColor {
+        self.nsColor.cgColor
+    }
+
+    init(_ hue: Double, _ saturation: Double, _ brightness: Double, _ opacity: Double = 1.0) {
+        self.hue = hue
+        self.saturation = saturation
+        self.brightness = brightness
+        self.opacity = opacity
+    }
+
+    init?(decode json: String) {
+        do {
+            guard let data = json.data(using: .utf8) else {
+                return nil
+            }
+            self = try JSONDecoder().decode(
+                Self.self,
+                from: data
+            )
+        } catch {
+            return nil
+        }
+    }
+
+    public func encode() -> String? {
+        guard let data = try? JSONEncoder().encode(self) else {
+            return nil
+        }
+        return String(
+            data: data,
+            encoding: .utf8
+        )
+    }
+
+    public func limitedOpacity(min: Double = 0.0, max: Double = 1.0) -> Self {
+        Self(
+            self.hue,
+            self.saturation,
+            self.brightness,
+            self.opacity.fixBounds(
+                min: min,
+                max: max
+            )
+        )
+    }
+
+    public var accentBrightness: Self {
+        Self(
+            self.hue,
+            self.saturation,
+            self.brightness < 0.5 ? 1.0 : 0.0,
+            self.opacity
+        )
+    }
+
+    public var highlighted: Self {
+        Self(
+            self.hue,
+            self.saturation,
+            self.brightness + 0.1,
+            self.opacity
+        )
+    }
+
+    static public var white: Self {
+        Self(0.0, 0.0, 1.0, 1.0)
+    }
+
+    static public var black: Self {
+        Self(0.0, 0.0, 0.0, 1.0)
+    }
+
+}

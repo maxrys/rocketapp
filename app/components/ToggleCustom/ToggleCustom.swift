@@ -106,7 +106,6 @@ fileprivate struct ToggleCustom_Switcher: View {
         }
         .buttonStyle(.plain)
         .pointerStyle(.link)
-        .hoverBehavior(.scaleEffect(from: 1.0, to: 1.1))
     }
 
 }

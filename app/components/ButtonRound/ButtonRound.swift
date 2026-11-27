@@ -42,7 +42,6 @@ struct ButtonRound<L: View, F: ShapeStyle, B: View>: View {
                     .clipShape   (              Circle())
                     .contentShape(              Circle())
                     .contentShape(.focusEffect, Circle())
-                    .hoverBehavior(.scaleEffect(from: 1.0, to: 1.1))
             } else {
                 self.label
                     .frame(width: self.size, height: self.size)
@@ -51,7 +50,6 @@ struct ButtonRound<L: View, F: ShapeStyle, B: View>: View {
                     .clipShape   (              Circle())
                     .contentShape(              Circle())
                     .contentShape(.focusEffect, Circle())
-                    .hoverBehavior(.scaleEffect(from: 1.0, to: 1.1))
             }
         }
         .buttonStyle(.plain)

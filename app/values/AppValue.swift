@@ -6,7 +6,7 @@
 import AppKit
 import UniformTypeIdentifiers
 
-nonisolated struct AppValue: Equatable, Codable {
+nonisolated struct AppValue: Equatable, Codable, Hashable {
 
     static let APP_NO_ICON = NSImage(named: "AppNoIcon")!
     static let ICON_RENDER_SIZE = CGSize(width: 200, height: 200)

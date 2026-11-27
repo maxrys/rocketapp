@@ -25,6 +25,17 @@ extension Dictionary {
         })
     }
 
+    func reducePairs<Result>(
+        into initialResult: Result,
+        _ update: (inout Result, Key, Value) throws -> Void
+    ) rethrows -> Result {
+        var result = initialResult
+        for (key, value) in self {
+            try update(&result, key, value)
+        }
+        return result
+    }
+
 }
 
 extension Dictionary where Key == CellIDValue {

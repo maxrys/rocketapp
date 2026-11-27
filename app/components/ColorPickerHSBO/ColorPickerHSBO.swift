@@ -56,7 +56,6 @@ struct ColorPickerHSBO: View {
                 .clipShape   (              RoundedRectangle(cornerRadius: self.openerRadius))
                 .contentShape(              RoundedRectangle(cornerRadius: self.openerRadius))
                 .contentShape(.focusEffect, RoundedRectangle(cornerRadius: self.openerRadius))
-                .hoverBehavior(.scaleEffect(from: 1.0, to: 1.1))
         }
         .buttonStyle(.plain)
         .pointerStyle(self.isEnabled ? .link : .default)

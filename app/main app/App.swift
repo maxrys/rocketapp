@@ -27,17 +27,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @Environment(\.openWindow) private var openWindow
 
+    static let MOCK_APP_VALUE = AppValue(
+        bundleID: "maxrys.demo",
+        name: "App",
+        path: "file:///Applications/App.app/",
+        icon: nil
+    )
+
+    static let IS_MOCK_INSERTION_ENABLED = false
     static let NOT_APPLICABLE = "—"
     static let CONTAINER_PATH = "~/Library/Containers/maxrys.rocketapp"
 
-    static let DEMO_BUNDLE_ID = "rysmax.demo"
-    static let DEMO_PATH = "file:///System/Applications/Demo Application.app/"
-    static let DEMO_NAME = "Demo Application"
-    static let DEMO_ICON = NSImage(named: "AppIcon")!
-
     static let WINDOW_ABOUT_TITLE_LOCALIZED = String(format: NSLocalizedString("About %@" , comment: ""), NSApplication.appNameLocalized)
     static let WINDOW_ABOUT_ID = "about"
-    static let WINDOW_MAIN_TITLE = "RocketApp"
+    static let WINDOW_MAIN_TITLE_LOCALIZED = NSLocalizedString("RocketApp Launcher", comment: "")
     static let WINDOW_MAIN_ID = "mainGrid"
     static let WINDOW_FRAME_VIEW_MODE_DEFAULT = CGRect(x: 0, y: 0, width: 400, height: 300)
     static let WINDOW_FRAME_EDIT_MODE_DEFAULT = CGRect(x: 0, y: 0, width: 600, height: 300)
@@ -48,7 +51,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     static let MESSAGE_OPEN_SETTINGS = NSLocalizedString("open settings", comment: "")
     static let MESSAGE_SELECT_THIS_APPLICATION = NSLocalizedString("Select this application", comment: "")
 
-    static let PREVIEW_PROFILE_ID: ProfileID = ProfileID.max
     static let EMBEDDED_PROFILE_ID: ProfileID = 0
 
     static let TITLE_DEFAULT: ProfileTitle = "My Profile"
@@ -59,6 +61,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     static let GRID_COLS: UInt8 = 45
     static let GRID_ROWS: UInt8 = 45
+    static let GRID_PADDING: UInt = 20
 
     static let CELL_SIZE_MIN: UInt = 50
     static let CELL_SIZE_MAX: UInt = 150
@@ -71,7 +74,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     static let CELL_SPACING_STEP: UInt = 5
 
     static let HOVER_ZOOM_MIN: Decimal = 1.0
-    static let HOVER_ZOOM_MAX: Decimal = 1.5
+    static let HOVER_ZOOM_MAX: Decimal = 1.3
     static let HOVER_ZOOM_DEFAULT: Decimal = 1.2
     static let HOVER_ZOOM_STEP: Decimal = 0.1
 
@@ -79,6 +82,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private let cells      = EnvironmentValues().cellsState
     private let process    = EnvironmentValues().processState
     private let isEditMode = EnvironmentValues().isEditMode
+
+    private var gridInfo: GridInfo!
 
     init() {
         if let url = ModelContainer.shared.configurations.first?.url.path(percentEncoded: false) {
@@ -88,11 +93,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             if (self.isEditMode.value) { self.profiles.current.winFrameEditMode = window.frame }
             else                       { self.profiles.current.winFrameViewMode = window.frame }
         }
+        self.gridInfo = GridInfo(
+            onClickApp          : self.onClickApp,
+            onClickAppInsert    : self.onClickAppInsert,
+            onClickAppDelete    : self.onClickAppDelete,
+            onAppDrop           : self.onAppDrop,
+            onAppDropFromOutside: self.onAppDropFromOutside
+        )
     }
 
     public var body: some Scene {
-        Window(Self.WINDOW_MAIN_TITLE, id: Self.WINDOW_MAIN_ID) {
-            MainScene()
+        Window(Self.WINDOW_MAIN_TITLE_LOCALIZED, id: Self.WINDOW_MAIN_ID) {
+            MainScene(gridInfo: self.gridInfo)
                 .ignoresSafeArea(.all)
                 .gesture(WindowDragGesture())
                 .onAppear {
@@ -161,6 +173,40 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             if (isEditMode) { window.setFrame(self.profiles.current.winFrameEditMode, display: true, animate: true) }
             else            { window.setFrame(self.profiles.current.winFrameViewMode, display: true, animate: true) }
         }
+    }
+
+    private func onClickApp(address: CellAddressValue) {
+        if let appValue = self.cells.selectAppValue(address.toCellID(), from: address.tokeyPath()) {
+            if let appURL = URL(string: appValue.path) {
+                NSWindow.hideWithAnimation(ThisApp.WINDOW_MAIN_ID)
+                NSApplication.open(appURL)
+            }
+        }
+    }
+
+    private func onClickAppInsert(address: CellAddressValue) {
+        if (Self.IS_MOCK_INSERTION_ENABLED) {
+            self.cells.insertAppValue(address.toCellID(), ThisApp.MOCK_APP_VALUE, to: address.tokeyPath())
+        } else if let appValue = AppValue.fromDialog() {
+            self.cells.insertAppValue(address.toCellID(), appValue, to: address.tokeyPath())
+        }
+    }
+
+    private func onClickAppDelete(address: CellAddressValue) {
+        self.cells.deleteAppValue(address.toCellID(), from: address.tokeyPath())
+    }
+
+    private func onAppDrop(from: CellAddressValue, to: CellAddressValue) {
+        guard (0...4).contains(from.sector) else { return }
+        guard (0...4).contains(to  .sector) else { return }
+        if let appValue = self.cells.selectAppValue(from.toCellID(), from: from.tokeyPath()) {
+            self.cells.deleteAppValue(from.toCellID(), from: from.tokeyPath())
+            self.cells.insertAppValue(to.toCellID(), appValue, to: to.tokeyPath())
+        }
+    }
+
+    private func onAppDropFromOutside(to: CellAddressValue, appValue: AppValue) {
+        self.cells.insertAppValue(to.toCellID(), appValue, to: to.tokeyPath())
     }
 
 }

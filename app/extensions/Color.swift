@@ -23,7 +23,7 @@ extension Color {
 /* ### BackgroundColorProtocol ### */
 /* ############################### */
 
-protocol BackgroundColorProtocol {
+@MainActor protocol BackgroundColorProtocol {
 
     var colorScheme   : ColorScheme   { get }
     var background    : ColorHSBValue { get }

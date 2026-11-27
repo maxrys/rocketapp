@@ -71,4 +71,8 @@ struct CellAddressValue: Equatable, Hashable {
         (Raw(self.toCellID().raw) << Index.bitWidth) | Raw(self.sector)
     }
 
+    public var encode: String {
+        "\(self.rowNum)|\(self.colNum)|\(self.sector)"
+    }
+
 }

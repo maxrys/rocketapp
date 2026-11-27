@@ -6,7 +6,7 @@
 import Foundation
 import AppKit
 
-enum CellValue {
+enum CellValue: Equatable {
 
     case main(AppValue)
     case mini(CellMiniGridValue)
