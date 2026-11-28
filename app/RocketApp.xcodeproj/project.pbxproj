@@ -50,11 +50,11 @@
 		50844E5F30B4939D00CC7716 /* VMGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50844E4F30B4939D00CC7716 /* VMGrid.swift */; };
 		50844E6030B4939D00CC7716 /* LiveScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50844E4E30B4939D00CC7716 /* LiveScene.swift */; };
 		50844E6130B4939D00CC7716 /* EMGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50844E5230B4939D00CC7716 /* EMGrid.swift */; };
-		50844E6230B4939D00CC7716 /* AddButtonSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50844E5830B4939D00CC7716 /* AddButtonSprite.swift */; };
+		50844E6230B4939D00CC7716 /* EMSpriteAddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50844E5830B4939D00CC7716 /* EMSpriteAddButton.swift */; };
 		50844E6330B4939D00CC7716 /* TestSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50844E5930B4939D00CC7716 /* TestSprite.swift */; };
-		50844E6430B4939D00CC7716 /* EmGridScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50844E5330B4939D00CC7716 /* EmGridScene.swift */; };
+		50844E6430B4939D00CC7716 /* EMGridScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50844E5330B4939D00CC7716 /* EMGridScene.swift */; };
 		50844E6530B4939D00CC7716 /* LiveSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50844E5530B4939D00CC7716 /* LiveSprite.swift */; };
-		50844E6630B4939D00CC7716 /* AppSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50844E5730B4939D00CC7716 /* AppSprite.swift */; };
+		50844E6630B4939D00CC7716 /* VMSpriteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50844E5730B4939D00CC7716 /* VMSpriteApp.swift */; };
 		50844E6730B4939D00CC7716 /* LiveRootSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50844E5630B4939D00CC7716 /* LiveRootSprite.swift */; };
 		50844E6830B4939D00CC7716 /* AppGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50844E4D30B4939D00CC7716 /* AppGrid.swift */; };
 		50844E6930B4939D00CC7716 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50844E5B30B4939D00CC7716 /* Assets.xcassets */; };
@@ -91,6 +91,7 @@
 		50E9DA4430B890E200F79D8E /* ProcessPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E9DA3E30B890E200F79D8E /* ProcessPanel.swift */; };
 		50E9DA4530B890E200F79D8E /* ProcessState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E9DA3D30B890E200F79D8E /* ProcessState.swift */; };
 		50E9DA4730B897D400F79D8E /* ProcessAudit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E9DA4630B897D400F79D8E /* ProcessAudit.swift */; };
+		50E9DA5330BAE28000F79D8E /* EMSpriteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E9DA5230BAE28000F79D8E /* EMSpriteApp.swift */; };
 		50EE8B892ECC888E002DFEA5 /* ColorPickerHSBO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8B882ECC888E002DFEA5 /* ColorPickerHSBO.swift */; };
 		50EE8B8B2ECC8953002DFEA5 /* GraphicsContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8B8A2ECC8953002DFEA5 /* GraphicsContext.swift */; };
 		50EE8B912ECC8B11002DFEA5 /* ColorHSBValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EE8B902ECC8B11002DFEA5 /* ColorHSBValue.swift */; };
@@ -159,11 +160,11 @@
 		50844E4F30B4939D00CC7716 /* VMGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMGrid.swift; sourceTree = "<group>"; };
 		50844E5030B4939D00CC7716 /* VMGridScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMGridScene.swift; sourceTree = "<group>"; };
 		50844E5230B4939D00CC7716 /* EMGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EMGrid.swift; sourceTree = "<group>"; };
-		50844E5330B4939D00CC7716 /* EmGridScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmGridScene.swift; sourceTree = "<group>"; };
+		50844E5330B4939D00CC7716 /* EMGridScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EMGridScene.swift; sourceTree = "<group>"; };
 		50844E5530B4939D00CC7716 /* LiveSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveSprite.swift; sourceTree = "<group>"; };
 		50844E5630B4939D00CC7716 /* LiveRootSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveRootSprite.swift; sourceTree = "<group>"; };
-		50844E5730B4939D00CC7716 /* AppSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSprite.swift; sourceTree = "<group>"; };
-		50844E5830B4939D00CC7716 /* AddButtonSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonSprite.swift; sourceTree = "<group>"; };
+		50844E5730B4939D00CC7716 /* VMSpriteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMSpriteApp.swift; sourceTree = "<group>"; };
+		50844E5830B4939D00CC7716 /* EMSpriteAddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EMSpriteAddButton.swift; sourceTree = "<group>"; };
 		50844E5930B4939D00CC7716 /* TestSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSprite.swift; sourceTree = "<group>"; };
 		50844E5B30B4939D00CC7716 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		508D6CEF2EA8D22400885E95 /* NSWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSWindow.swift; sourceTree = "<group>"; };
@@ -200,6 +201,7 @@
 		50E9DA3E30B890E200F79D8E /* ProcessPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessPanel.swift; sourceTree = "<group>"; };
 		50E9DA3F30B890E200F79D8E /* ProcessLoadDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessLoadDefault.swift; sourceTree = "<group>"; };
 		50E9DA4630B897D400F79D8E /* ProcessAudit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessAudit.swift; sourceTree = "<group>"; };
+		50E9DA5230BAE28000F79D8E /* EMSpriteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EMSpriteApp.swift; sourceTree = "<group>"; };
 		50EE8B882ECC888E002DFEA5 /* ColorPickerHSBO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerHSBO.swift; sourceTree = "<group>"; };
 		50EE8B8A2ECC8953002DFEA5 /* GraphicsContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsContext.swift; sourceTree = "<group>"; };
 		50EE8B902ECC8B11002DFEA5 /* ColorHSBValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHSBValue.swift; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 			children = (
 				50844E4F30B4939D00CC7716 /* VMGrid.swift */,
 				50844E5030B4939D00CC7716 /* VMGridScene.swift */,
+				50844E5730B4939D00CC7716 /* VMSpriteApp.swift */,
 			);
 			path = viewMode;
 			sourceTree = "<group>";
@@ -410,7 +413,9 @@
 			isa = PBXGroup;
 			children = (
 				50844E5230B4939D00CC7716 /* EMGrid.swift */,
-				50844E5330B4939D00CC7716 /* EmGridScene.swift */,
+				50844E5330B4939D00CC7716 /* EMGridScene.swift */,
+				50844E5830B4939D00CC7716 /* EMSpriteAddButton.swift */,
+				50E9DA5230BAE28000F79D8E /* EMSpriteApp.swift */,
 			);
 			path = editMode;
 			sourceTree = "<group>";
@@ -420,8 +425,6 @@
 			children = (
 				50844E5530B4939D00CC7716 /* LiveSprite.swift */,
 				50844E5630B4939D00CC7716 /* LiveRootSprite.swift */,
-				50844E5730B4939D00CC7716 /* AppSprite.swift */,
-				50844E5830B4939D00CC7716 /* AddButtonSprite.swift */,
 				50844E5930B4939D00CC7716 /* TestSprite.swift */,
 			);
 			path = sprites;
@@ -695,11 +698,11 @@
 				50844E5F30B4939D00CC7716 /* VMGrid.swift in Sources */,
 				50844E6030B4939D00CC7716 /* LiveScene.swift in Sources */,
 				50844E6130B4939D00CC7716 /* EMGrid.swift in Sources */,
-				50844E6230B4939D00CC7716 /* AddButtonSprite.swift in Sources */,
+				50844E6230B4939D00CC7716 /* EMSpriteAddButton.swift in Sources */,
 				50844E6330B4939D00CC7716 /* TestSprite.swift in Sources */,
-				50844E6430B4939D00CC7716 /* EmGridScene.swift in Sources */,
+				50844E6430B4939D00CC7716 /* EMGridScene.swift in Sources */,
 				50844E6530B4939D00CC7716 /* LiveSprite.swift in Sources */,
-				50844E6630B4939D00CC7716 /* AppSprite.swift in Sources */,
+				50844E6630B4939D00CC7716 /* VMSpriteApp.swift in Sources */,
 				50844E6730B4939D00CC7716 /* LiveRootSprite.swift in Sources */,
 				50844E6830B4939D00CC7716 /* AppGrid.swift in Sources */,
 				50CF30D02FB4A9F200A9319D /* Previewer.swift in Sources */,
@@ -740,6 +743,7 @@
 				50CE72382EE6B9D400FE3282 /* NSApplication.swift in Sources */,
 				505507302FC59DC8007DB93D /* ShadowLine.swift in Sources */,
 				505849642E9534BC00B9F421 /* ModelCell.swift in Sources */,
+				50E9DA5330BAE28000F79D8E /* EMSpriteApp.swift in Sources */,
 				5013DB5D2E9D092900BEDC5E /* ModelProfile.swift in Sources */,
 				50844E0B30B4872E00CC7716 /* CGSize.swift in Sources */,
 				5075014A2EF6A70300624409 /* Date.swift in Sources */,

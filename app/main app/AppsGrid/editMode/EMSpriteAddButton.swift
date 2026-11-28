@@ -6,10 +6,11 @@
 import SwiftUI
 import SpriteKit
 
-final class AddButtonSprite: LiveRootSprite,
-                             WithOnChangeCellSize,
-                             WithOnChangeCellSpacing,
-                             WithOnChangeBackground {
+final class EMSpriteAddButton:
+        LiveRootSprite,
+        WithOnChangeCellSize,
+        WithOnChangeCellSpacing,
+        WithOnChangeBackground {
 
     private static let SPRITE_NAME = "addButton"
     private static let ACTION_NAME_FOR_ON_HOVER = "addButtonOnHover"
@@ -19,7 +20,7 @@ final class AddButtonSprite: LiveRootSprite,
     public override var cursor: NSCursor { .pointingHand }
     public override var interactionShape: InteractionShape { .circle }
     public override var isDroppable: Bool { true }
-    public override var acceptTypes: [SKSpriteNode.Type] { [AppSprite.self] }
+    public override var acceptTypes: [SKSpriteNode.Type] { [EMSpriteApp.self] }
 
     private var backgroundSprite: SKSpriteNode!
 
@@ -135,7 +136,7 @@ struct AddButtonSprite_Previews: PreviewProvider {
         internal override func didMove(to view: SKView) {
             guard children.isEmpty else { return }
             view.window?.acceptsMouseMovedEvents = true
-            let addButtonSprite = AddButtonSprite(
+            let addButtonSprite = EMSpriteAddButton(
                 address: CellAddressValue(rowNum: 0, colNum: 0, sector: 0),
                 size: CGSize(width: 100, height: 100),
                 onClick: { address in }

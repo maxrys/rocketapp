@@ -7,10 +7,11 @@ import os
 import SwiftUI
 import SpriteKit
 
-final class AppSprite: LiveRootSprite,
-                       WithOnChangeCellSize,
-                       WithOnChangeCellSpacing,
-                       WithOnChangeBackground {
+final class EMSpriteApp:
+        LiveRootSprite,
+        WithOnChangeCellSize,
+        WithOnChangeCellSpacing,
+        WithOnChangeBackground {
 
     private static let SPRITE_NAME = "app"
     private static let SPRITE_NAME_FOR_DELETE_BUTTON = "deleteButton"
@@ -22,31 +23,26 @@ final class AppSprite: LiveRootSprite,
     private static let TEXTURE_FOR_TITLE_SIZE = CGSize(width: 265, height: 114)
     private static let HOVER_ZOOM_DURATION: CGFloat = 0.15
 
-    public override var cursor: NSCursor { .pointingHand }
+    public override var cursor: NSCursor { .arrow }
     public override var isDraggable: Bool { true }
 
     private var dataHash: Int = 0
-    private var isEditMode: Bool = true
-
     private var deleteButtonSprite: LiveSprite?
     private var titleSprite: SKNode!
     private var titleLabelSprite: SKLabelNode!
     private var titleBackgroundSprite: SKSpriteNode!
     private var titleShadowSprite: SKSpriteNode!
 
-    private var onClick      : (CellAddressValue) -> Void = { _ in }
     private var onClickDelete: (CellAddressValue) -> Void = { _ in }
     private var onDrop       : (CellAddressValue, CellAddressValue) -> Void = { _,_ in }
 
     public convenience init(
         gridInfo: GridInfo? = nil,
         dataHash: Int = 0,
-        isEditMode: Bool = true,
         image: NSImage,
         title: String,
         address: CellAddressValue,
         size: CGSize,
-        onClick      : @escaping (CellAddressValue) -> Void,
         onClickDelete: @escaping (CellAddressValue) -> Void,
         onDrop       : @escaping (CellAddressValue, CellAddressValue) -> Void
     ) {
@@ -54,16 +50,12 @@ final class AppSprite: LiveRootSprite,
         self.name = Self.SPRITE_NAME
         self.gridInfo = gridInfo
         self.dataHash = dataHash
-        self.isEditMode = isEditMode
         self.address = address
         self.size = size
-        self.onClick = onClick
         self.onClickDelete = onClickDelete
         self.onDrop = onDrop
-        if (isEditMode) {
-            self.deleteButtonSprite = Self.DeleteButtonSprite(address: address, parentSize: size, parents: self)
-            self.addChild(self.deleteButtonSprite!)
-        }
+        self.deleteButtonSprite = Self.DeleteButtonSprite(address: address, parentSize: size, parents: self)
+        self.addChild(self.deleteButtonSprite!)
         let (titleSprite, labelSprite, backgroundSprite, shadowSprite) = Self.TitleSprite(
             title: title,
             bckground: (self.gridInfo?.background ?? ThisApp.WINDOW_BACKGROUND_DEFAULT).limitedOpacity(min: 1.0),
@@ -278,9 +270,9 @@ final class AppSprite: LiveRootSprite,
     }
 
     internal override func onClick(sprite: LiveSprite) {
-        if (sprite.name == Self.SPRITE_NAME                  ) { self.onClick      (self.address) }
-        if (sprite.name == Self.SPRITE_NAME_FOR_TITLE        ) { self.onClick      (self.address) }
-        if (sprite.name == Self.SPRITE_NAME_FOR_DELETE_BUTTON) { self.onClickDelete(self.address) }
+        if (sprite.name == Self.SPRITE_NAME_FOR_DELETE_BUTTON) {
+            self.onClickDelete(self.address)
+        }
     }
 
     internal override func onDrop(to: LiveRootSprite) -> Void {
@@ -295,7 +287,7 @@ final class AppSprite: LiveRootSprite,
 /* ########################## PREVIEW ########################## */
 /* ############################################################# */
 
-struct AppSprite_Previews: PreviewProvider {
+struct EMSpriteApp_Previews: PreviewProvider {
 
     static private let SCENE_SIZE = CGSize(width: 200, height: 400)
 
@@ -316,7 +308,7 @@ struct AppSprite_Previews: PreviewProvider {
             guard children.isEmpty else { return }
             view.window?.acceptsMouseMovedEvents = true
 
-            let addButtonSprite = AddButtonSprite(
+            let addButtonSprite = EMSpriteAddButton(
                 address: CellAddressValue(rowNum: 0, colNum: 0, sector: 0),
                 size: CGSize(width: 50, height: 50),
                 onClick: { address in }
@@ -324,24 +316,22 @@ struct AppSprite_Previews: PreviewProvider {
             addButtonSprite.position = CGPoint(x: 100, y: 300)
             self.addChild(addButtonSprite)
 
-            let appSprite1 = AppSprite(
+            let appSprite1 = EMSpriteApp(
                 image: ThisApp.MOCK_APP_VALUE.resolvedIcon,
                 title: "Test App",
                 address: CellAddressValue(rowNum: 1, colNum: 0, sector: 0),
                 size: CGSize(width: 100, height: 100),
-                onClick      : self.onClickApp,
                 onClickDelete: self.onClickAppDelete,
                 onDrop       : self.onAppDrop
             )
             appSprite1.position = CGPoint(x: 100, y: 200)
             self.addChild(appSprite1)
 
-            let appSprite2 = AppSprite(
+            let appSprite2 = EMSpriteApp(
                 image: ThisApp.MOCK_APP_VALUE.resolvedIcon,
                 title: "Test App",
                 address: CellAddressValue(rowNum: 2, colNum: 0, sector: 0),
                 size: CGSize(width: 100, height: 100),
-                onClick      : self.onClickApp,
                 onClickDelete: self.onClickAppDelete,
                 onDrop       : self.onAppDrop
             )
@@ -353,10 +343,6 @@ struct AppSprite_Previews: PreviewProvider {
                     ThisApp.WINDOW_BACKGROUND_DEFAULT
                 )
             }
-        }
-
-        private func onClickApp(address: CellAddressValue) {
-            Logger.customLog("onClickApp on \(address.encode)")
         }
 
         private func onClickAppDelete(address: CellAddressValue) {
@@ -380,7 +366,7 @@ struct AppSprite_Previews: PreviewProvider {
 
 
 
-struct AppSprite_Title_Previews: PreviewProvider {
+struct EMSpriteApp_Title_Previews: PreviewProvider {
 
     static private let SCENE_SIZE = CGSize(width: 300, height: 200)
 
@@ -401,7 +387,7 @@ struct AppSprite_Title_Previews: PreviewProvider {
             guard children.isEmpty else { return }
             view.window?.acceptsMouseMovedEvents = true
 
-            let (title1, _, _, _) = AppSprite.TitleSprite(
+            let (title1, _, _, _) = EMSpriteApp.TitleSprite(
                 title: "Some Title",
                 bckground: ColorHSBValue(0.5, 0.5, 0.9, 1.0))
             title1.position = CGPoint(
@@ -410,7 +396,7 @@ struct AppSprite_Title_Previews: PreviewProvider {
             title1.isHidden = false
             self.addChild(title1)
 
-            let (title2, _, _, _) = AppSprite.TitleSprite(
+            let (title2, _, _, _) = EMSpriteApp.TitleSprite(
                 title: "Some Long Long Long Long Long Long Title",
                 bckground: ColorHSBValue(0.5, 0.5, 0.3, 1.0))
             title2.position = CGPoint(

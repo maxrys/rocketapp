@@ -8,7 +8,7 @@ import SpriteKit
 
 @MainActor final class VMGridScene: LiveScene {
 
-    private var appSpritesPool: [CellAddressValue: WeakValue<AppSprite>] = [:]
+    private var appSpritesPool: [CellAddressValue: WeakValue<VMSpriteApp>] = [:]
 
     private let info: GridInfo
 
@@ -34,20 +34,17 @@ import SpriteKit
     }
 
     private func appSprite_insert(_ appValue: AppValue, to address: CellAddressValue) {
-        let sprite = AppSprite(
+        let sprite = VMSpriteApp(
             gridInfo: self.info,
             dataHash: appValue.hashValue,
-            isEditMode: false,
             image: appValue.resolvedIcon,
             title: appValue.name,
             address: address,
             size: self.info.addressToSizeForAppSprite(address),
-            onClick: self.info.onClickApp,
-            onClickDelete: self.info.onClickAppDelete,
-            onDrop: self.info.onAppDrop)
+            onClick: self.info.onClickApp)
         sprite.position = self.info.addressToPoint(address)
         self.addChild(sprite)
-        self.appSpritesPool[address] = WeakValue<AppSprite>(sprite)
+        self.appSpritesPool[address] = WeakValue<VMSpriteApp>(sprite)
     }
 
     private func appSprite_delete(at address: CellAddressValue) {

@@ -8,8 +8,8 @@ import SpriteKit
 
 @MainActor final class EMGridScene: LiveScene {
 
-    private var addButtonsPool: [CellAddressValue: WeakValue<AddButtonSprite>] = [:]
-    private var appSpritesPool: [CellAddressValue: WeakValue<AppSprite>] = [:]
+    private var addButtonsPool: [CellAddressValue: WeakValue<EMSpriteAddButton>] = [:]
+    private var appSpritesPool: [CellAddressValue: WeakValue<EMSpriteApp>] = [:]
 
     private let info: GridInfo
 
@@ -39,30 +39,29 @@ import SpriteKit
     }
 
     private func addButton_insert(to address: CellAddressValue) {
-        let sprite = AddButtonSprite(
+        let sprite = EMSpriteAddButton(
             gridInfo: self.info,
             address: address,
             size: self.info.addressToSizeForAddButtonSprite(address),
             onClick: self.info.onClickAppInsert)
         sprite.position = self.info.addressToPoint(address)
         self.addChild(sprite)
-        self.addButtonsPool[address] = WeakValue<AddButtonSprite>(sprite)
+        self.addButtonsPool[address] = WeakValue<EMSpriteAddButton>(sprite)
     }
 
     private func appSprite_insert(_ appValue: AppValue, to address: CellAddressValue) {
-        let sprite = AppSprite(
+        let sprite = EMSpriteApp(
             gridInfo: self.info,
             dataHash: appValue.hashValue,
             image: appValue.resolvedIcon,
             title: appValue.name,
             address: address,
             size: self.info.addressToSizeForAppSprite(address),
-            onClick: self.info.onClickApp,
             onClickDelete: self.info.onClickAppDelete,
             onDrop: self.info.onAppDrop)
         sprite.position = self.info.addressToPoint(address)
         self.addChild(sprite)
-        self.appSpritesPool[address] = WeakValue<AppSprite>(sprite)
+        self.appSpritesPool[address] = WeakValue<EMSpriteApp>(sprite)
     }
 
     private func appSprite_delete(at address: CellAddressValue) {
